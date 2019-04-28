@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
-
-import { TranslateService } from '@ngx-translate/core';
-
 export interface Slide {
   title: string;
   description: string;
@@ -19,35 +16,25 @@ export class TutorialPage {
   showSkip = true;
   dir: string = 'ltr';
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
+  constructor(public navCtrl: NavController, public menu: MenuController, public platform: Platform) {
     this.dir = platform.dir();
-    translate.get(["TUTORIAL_SLIDE1_TITLE",
-      "TUTORIAL_SLIDE1_DESCRIPTION",
-      "TUTORIAL_SLIDE2_TITLE",
-      "TUTORIAL_SLIDE2_DESCRIPTION",
-      "TUTORIAL_SLIDE3_TITLE",
-      "TUTORIAL_SLIDE3_DESCRIPTION",
-    ]).subscribe(
-      (values) => {
-        console.log('Loaded values', values);
-        this.slides = [
-          {
-            title: values.TUTORIAL_SLIDE1_TITLE,
-            description: values.TUTORIAL_SLIDE1_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-1.png',
-          },
-          {
-            title: values.TUTORIAL_SLIDE2_TITLE,
-            description: values.TUTORIAL_SLIDE2_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-2.png',
-          },
-          {
-            title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-3.png',
-          }
-        ];
-      });
+    this.slides = [
+      {
+        title: 'Welcome to the Ionic Super Starter',
+        description: 'The <b>Ionic Super Starter</b> is a fully-featured Ionic starter with many pre-built pages and best practices.',
+        image: 'assets/img/ica-slidebox-img-1.png',
+      },
+      {
+        title: 'How to use the Super Starter',
+        description: "Assemble the various page types you want and remove the ones you don't. We've provided many common mobile app page layouts, like login and signup pages, tabs, and this tutorial page.",
+        image: 'assets/img/ica-slidebox-img-2.png',
+      },
+      {
+        title: 'Getting Started',
+        description: 'Need help? Check out the Super Starter README for a full tutorial',
+        image: 'assets/img/ica-slidebox-img-3.png',
+      }
+    ];
   }
 
   startApp() {

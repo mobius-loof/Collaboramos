@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { MenuPage } from './menu';
@@ -9,8 +8,7 @@ import { MenuPage } from './menu';
     MenuPage,
   ],
   imports: [
-    IonicPageModule.forChild(MenuPage),
-    TranslateModule.forChild()
+    IonicPageModule.forChild(MenuPage)
   ],
   exports: [
     MenuPage

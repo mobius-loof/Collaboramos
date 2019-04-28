@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Settings } from '../../providers';
@@ -29,16 +28,14 @@ export class SettingsPage {
   };
 
   page: string = 'main';
-  pageTitleKey: string = 'SETTINGS_TITLE';
-  pageTitle: string;
+  pageTitle: string = 'Settings';
 
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
     public settings: Settings,
     public formBuilder: FormBuilder,
-    public navParams: NavParams,
-    public translate: TranslateService) {
+    public navParams: NavParams) {
   }
 
   _buildForm() {
@@ -75,11 +72,7 @@ export class SettingsPage {
     this.form = this.formBuilder.group({});
 
     this.page = this.navParams.get('page') || this.page;
-    this.pageTitleKey = this.navParams.get('pageTitleKey') || this.pageTitleKey;
-
-    this.translate.get(this.pageTitleKey).subscribe((res) => {
-      this.pageTitle = res;
-    })
+    this.pageTitle = 'Settings';
 
     this.settings.load().then(() => {
       this.settingsReady = true;

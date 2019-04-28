@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers';
@@ -20,18 +19,11 @@ export class SignupPage {
     password: 'test'
   };
 
-  // Our translated text strings
-  private signupErrorString: string;
+  private signupErrorString = 'Unable to create account. Please check your account information and try again.';
 
   constructor(public navCtrl: NavController,
     public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
-
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
-  }
+    public toastCtrl: ToastController) {}
 
   doSignup() {
     // Attempt to login in through our User service

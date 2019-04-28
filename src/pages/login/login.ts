@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers';
@@ -19,18 +18,11 @@ export class LoginPage {
     password: 'test'
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
+  private loginErrorString = 'Unable to sign in. Please check your account information and try again'
 
   constructor(public navCtrl: NavController,
     public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
-
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
-  }
+    public toastCtrl: ToastController) {}
 
   // Attempt to login in through our User service
   doLogin() {
