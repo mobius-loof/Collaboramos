@@ -7,8 +7,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { firebaseConfig } from '../config';
+
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api } from '../providers';
+import { Settings, User, Api, Auth } from '../providers';
 import { MyApp } from './app.component';
 
 export function provideSettings(storage: Storage) {
@@ -34,7 +38,8 @@ export function provideSettings(storage: Storage) {
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,12 +49,14 @@ export function provideSettings(storage: Storage) {
     Api,
     Items,
     User,
+    Auth,
     Camera,
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AngularFireAuth
   ]
 })
 export class AppModule { }
