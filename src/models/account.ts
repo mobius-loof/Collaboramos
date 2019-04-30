@@ -13,12 +13,12 @@ export class Account {
 }
 
 export interface Item {
-  firstName: String,
-  lastName: String,
-  email: String,
-  phoneNumber: String,
-  projectProfiles: Project[],
+  firstName: string,
+  lastName: string,
+  email: string,
+  phoneNumber: string,
+  projectProfile: Project,
   candidateProfile: Candidate,
   profileImageURI: URL,
-  location: String
+  location: string
 }

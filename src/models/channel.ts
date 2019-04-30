@@ -5,5 +5,5 @@ export interface Channel {
     chatMemberCandidate: Candidate
     lastMessage: Message,
     recentMessagesSent: Message[],
-    sharedMedia: String[]
+    sharedMedia: string[]
 }

@@ -1,10 +1,10 @@
 import { Channel } from "./";
 
 export interface Candidate {
-    candidateName: String,
-    candidaeId: String,
-    projectImage: String,
-    isVisible: Boolean,
-    tags: String[],
-    chats: Channel[]
+    candidateName: string,
+    candidaeId: string,
+    projectImage: string,
+    isVisible: string,
+    tags: string[],
+    chats: any // id(String): Channel TODO
 }
