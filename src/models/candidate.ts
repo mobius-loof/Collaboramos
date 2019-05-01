@@ -2,7 +2,7 @@ import { Channel } from "./";
 
 export interface Candidate {
     candidateName: string,
-    candidaeId: string,
+    candidateId: string,
     projectImage: string,
     isVisible: string,
     tags: string[],
