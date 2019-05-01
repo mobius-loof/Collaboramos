@@ -6,5 +6,5 @@ export interface Candidate {
     projectImage: string,
     isVisible: string,
     tags: string[],
-    chats: any // id(String): Channel TODO
+    chats: {[id:string]:Channel}
 }

@@ -7,5 +7,5 @@ export interface Project {
     description: string,
     isVisible: boolean,
     tags: string[],
-    chats: Channel[]
+    chats: {[id:string]:Channel}
 }
