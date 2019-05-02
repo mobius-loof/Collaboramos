@@ -32,7 +32,7 @@ export class LoginPage {
   // Attempt to login in through our User service
   doLogin() {
     this.auth.login(this.credentials).then((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.setRoot(MainPage);
       let toast = this.toastCtrl.create({
         message: 'You have successfully logged in!',
         duration: 3000,
