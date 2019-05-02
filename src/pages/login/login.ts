@@ -25,6 +25,10 @@ export class LoginPage {
     public toastCtrl: ToastController,
     private auth: Auth) {}
 
+  cancel() {
+    this.navCtrl.pop()
+  }
+
   // Attempt to login in through our User service
   doLogin() {
     this.auth.login(this.credentials).then((resp) => {

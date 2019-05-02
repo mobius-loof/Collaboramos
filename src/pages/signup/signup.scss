@@ -1,3 +1,15 @@
 page-signup {
+    .content {
+        position: relative;
+    }
 
+    .btn-container {
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    button {
+        left: 0;
+    }
 }

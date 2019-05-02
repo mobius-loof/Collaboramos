@@ -1,13 +1,12 @@
 <ion-content scroll="false">
-  <div class="splash-bg"></div>
   <div class="splash-info">
-    <div class="splash-logo"></div>
+    <img src="../assets/img/icon.png"/>
     <div class="splash-intro">
-      The starting point for your next great Ionic app
+      Collaboramos
     </div>
   </div>
-  <div padding>
-    <button ion-button block (click)="signup()">Sign up</button>
-    <button ion-button block (click)="login()" class="login">Login</button>
+  <div class="button-container">
+    <button ion-button (click)="login()" class="login">LOG IN</button>
+    <button ion-button (click)="signup()" class="signup">REGISTER</button>
   </div>
 </ion-content>

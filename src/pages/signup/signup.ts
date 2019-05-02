@@ -25,6 +25,10 @@ export class SignupPage {
     public toastCtrl: ToastController,
     private auth: Auth) {}
 
+  cancel() {
+    this.navCtrl.pop()
+  }
+
   doSignup() {
     console.log(this.credentials)
     this.auth.signup(this.credentials).then((resp) => {
