@@ -6,10 +6,10 @@ import { Items } from '../../providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-search',
-  templateUrl: 'search.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
-export class SearchPage {
+export class HomePage {
 
   currentItems: any = [];
 
