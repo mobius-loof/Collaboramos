@@ -33,5 +33,17 @@ page-profile {
         border-radius: $tag-height*2;
     }
 
+    .item {
+        min-height: 3rem;
+        min-width: 3rem;
+    }
+
+    .label-md {
+        margin: 0;
+    }
+
+    .label-ios {
+        margin: 0;
+    }
 
 }
