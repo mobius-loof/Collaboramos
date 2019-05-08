@@ -33,6 +33,8 @@ export class HomePage {
   @ViewChild("website") websiteContent: any;
   @ViewChild("resume") resumeContent: any;
 
+  private element;
+
 
   cards: Array<any>;
   stackConfig: StackConfig;
@@ -118,8 +120,10 @@ export class HomePage {
       color = '#' + hexCode + 'FF' + hexCode;
     }
 
+    this.element = element;
     element.style.background = color;
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
+
   }
 
   // Connected through HTML
@@ -131,6 +135,7 @@ export class HomePage {
     } else {
       this.recentCard = 'You disliked: ' + removedCard.email;
     }
+
   }
 
   // Add new cards to our array
@@ -142,6 +147,7 @@ export class HomePage {
         this.cards.push(val);
       }
     })
+
   }
 
   // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
