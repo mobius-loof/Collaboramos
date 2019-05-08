@@ -1,0 +1,18 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\models",
+    "\\src\\pages",
+    "\\src\\pages\\settings",
+    "\\src\\pages\\signup",
+    "\\src\\pages\\tabs",
+    "\\src\\pages\\tutorial",
+    "\\src\\pages\\welcome",
+    "\\src\\providers",
+    "\\src\\providers\\auth",
+    "\\src\\providers\\settings"
+  ],
+  "SelectedNode": "\\src\\pages\\item-create\\item-create.ts",
+  "PreviewInSolutionExplorer": false
+}
