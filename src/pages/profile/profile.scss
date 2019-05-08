@@ -16,4 +16,13 @@ page-profile {
         display: block;
     }
 
+    button.tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-bottom: 0;
+        $button-ios-margin-start: 0;
+    }
+
+
+
 }
