@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, QueryList} from '@angular/core';
+import { Component, ViewChild, ViewChildren, QueryList, Renderer} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
@@ -24,13 +24,21 @@ export class HomePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
-  currentItems: any = [];
+  skillsExpanded = false;
+  websiteExpanded = false;
+  resumeExpanded = false;
+
+
+  @ViewChild("skills") skillContent: any;
+  @ViewChild("website") websiteContent: any;
+  @ViewChild("resume") resumeContent: any;
+
 
   cards: Array<any>;
   stackConfig: StackConfig;
   recentCard: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -54,9 +62,47 @@ export class HomePage {
     this.addNewCards(1);
   }
 
-
   viewMessages() {
     this.navCtrl.push('MessagePage');
+  }
+
+  toggleSkills(){
+    if(this.skillsExpanded){
+      this.renderer.setElementStyle(this.skillContent.nativeElement, "max-height", "0px");
+      this.renderer.setElementStyle(this.skillContent.nativeElement, "padding", "0px 16px");
+    }
+    else {
+      this.renderer.setElementStyle(this.skillContent.nativeElement, "max-height", "500px");
+      this.renderer.setElementStyle(this.skillContent.nativeElement, "padding", "13px 16px");
+    }
+
+    this.skillsExpanded = !this.skillsExpanded;
+  }
+
+  toggleWebsite(){
+    if(this.websiteExpanded){
+      this.renderer.setElementStyle(this.websiteContent.nativeElement, "max-height", "0px");
+      this.renderer.setElementStyle(this.websiteContent.nativeElement, "padding", "0px 16px");
+    }
+    else {
+      this.renderer.setElementStyle(this.websiteContent.nativeElement, "max-height", "500px");
+      this.renderer.setElementStyle(this.websiteContent.nativeElement, "padding", "13px 16px");
+    }
+
+    this.websiteExpanded = !this.websiteExpanded;
+  }
+
+  toggleResume(){
+    if(this.resumeExpanded){
+      this.renderer.setElementStyle(this.resumeContent.nativeElement, "max-height", "0px");
+      this.renderer.setElementStyle(this.resumeContent.nativeElement, "padding", "0px 16px");
+    }
+    else {
+      this.renderer.setElementStyle(this.resumeContent.nativeElement, "max-height", "500px");
+      this.renderer.setElementStyle(this.resumeContent.nativeElement, "padding", "13px 16px");
+    }
+
+    this.resumeExpanded = !this.resumeExpanded;
   }
 
   // Called whenever we drag an element
@@ -108,6 +154,7 @@ export class HomePage {
     }
 
     return hex;
+
   }
 
 }
