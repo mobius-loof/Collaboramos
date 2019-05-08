@@ -1,4 +1,5 @@
 page-profile {
+    $tag-height:20px;
     .title-row {
         position: relative;
     }
@@ -23,6 +24,14 @@ page-profile {
         $button-ios-margin-start: 0;
     }
 
+    .item-ios [item-left], .item-ios [item-start] {
+        margin: 0;
+    }
+
+    .tag{
+        height: $tag-height;
+        border-radius: $tag-height*2;
+    }
 
 
 }
