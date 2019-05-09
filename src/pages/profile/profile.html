@@ -46,18 +46,26 @@
 
     <ion-row>
       <ion-col>
-          <p><b>Required SKill</b></p>
+          <p><b>Required Skills</b></p>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-4>
-        <ion-item class="tag" no-lines no-padding no-margin color="secondary" round>
+      <div class="tag-container">
+        <ion-item class="tag" no-lines no-padding color="secondary" round>
             <button class="tag-btn" ion-button item-left clear round>
                 <ion-icon name="close-circle"></ion-icon>
             </button>
-            <p>first tag</p>
+            <p class="tag-content">first tag</p>
         </ion-item>
-      </ion-col>
+      </div>
+      <div class="tag-container">
+        <ion-item class="tag" no-lines no-padding color="secondary" round>
+            <button class="tag-btn" ion-button item-left clear round>
+                <ion-icon name="close-circle"></ion-icon>
+            </button>
+            <p class="tag-content">second tag</p>
+        </ion-item>
+      </div>
     </ion-row>
 
     <ion-row>
@@ -65,14 +73,14 @@
     </ion-row>
 
     <ion-row>
-      <ion-col col-6>
-          <ion-item class="tag" no-lines no-padding no-margin color="secondary" round>
-              <button class="tag-btn" ion-button item-left clear round>
-                  <ion-icon name="close-circle"></ion-icon>
-              </button>
-              <p>first framework</p>
-          </ion-item>
-      </ion-col>
+      <div class="tag-container">
+        <ion-item class="tag" no-lines no-padding color="secondary" round>
+           <button class="tag-btn" ion-button item-left clear round>
+                <ion-icon name="close-circle"></ion-icon>
+            </button> 
+            <p class="tag-content">tester</p>
+        </ion-item>
+      </div>
     </ion-row>
 
     <ion-row>
