@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
-
+import { CreateProjectPage } from '../create-project/create-project';
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
 
@@ -37,8 +37,8 @@ export class ListMasterPage {
     addModal.present();
   }
 
-  addCandidateProfile() {
-    this.navCtrl.push('CreateCandidatePage');
+  createProject() {
+    this.navCtrl.push('CreateProjectPage');
   }
 
   /**
