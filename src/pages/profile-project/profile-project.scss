@@ -1,0 +1,63 @@
+page-profile-project {
+    $tag-height:20px;
+
+    .title-row {
+        position: relative;
+    }
+
+    .project-detail-col {
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .project-img {
+        border-radius: 50%;
+        margin: auto;
+        display: block;
+    }
+
+    button.tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-bottom: 0;
+        $button-ios-margin-start: 0;
+    }
+
+    .item-ios [item-left], .item-ios [item-start] {
+        margin: 0;
+    }
+
+    .tag{
+        height: $tag-height;
+        border-radius: $tag-height*2;
+    }
+
+    .item {
+        min-height: 3rem;
+        min-width: 3rem;
+    }
+
+    .label-md {
+        margin: 0;
+    }
+
+    .label-ios {
+        margin: 0;
+    }
+
+    .tag-container {
+        margin-right: 2px;
+        padding: 2px;
+    }
+
+    .tag-content-w-btn {
+        margin-left: 0px;
+    }
+    
+    .tag-content-wo-btn {
+        margin-left: 0px;
+    }
+
+}
