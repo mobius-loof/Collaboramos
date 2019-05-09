@@ -8,10 +8,10 @@
   <ion-navbar text-center>
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button (click)="setIsEdit(true)">
         <ion-icon name="create" color="primary"></ion-icon>
       </button>
-      <button ion-button>
+      <button ion-button (click)="setIsEdit(false)">
         <ion-icon name="checkmark" color="secondary"></ion-icon>
       </button>
       <button ion-button>
@@ -29,15 +29,15 @@
         <img class="candidate-img" src="../assets/img/advance-card-bttf.png">
       </ion-col>
       <ion-col>
-        <div class="project-detail-col">
-          <h3>Candidate Name</h3>
+        <div *ngIf="!isEdit" class="project-detail-col">
+          <h3>Project Name</h3>
           <button ion-button icon-start small>
             <ion-icon name="globe"></ion-icon>
             WEBSITE
           </button>
         </div>
 
-        <div class="project-detail-col">
+        <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
             <ion-input value="project name"></ion-input>
           </ion-item>
@@ -49,8 +49,8 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <p>The description of the project will replace this text which will be a short paragraph that concisely describe the project, provided by the project manager. </p>
-        <ion-textarea value="this is good?"></ion-textarea>
+        <p *ngIf="!isEdit">The description of the project will replace this text which will be a short paragraph that concisely describe the project, provided by the project manager. </p>
+        <ion-textarea *ngIf="isEdit" value="this is good?"></ion-textarea>
       </ion-col>
     </ion-row>
 
@@ -62,7 +62,7 @@
     <ion-row>
       <div class="tag-container">
         <ion-item class="tag" no-lines no-padding color="secondary" round>
-            <button class="tag-btn" ion-button item-left clear round>
+            <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round>
                 <ion-icon name="close-circle"></ion-icon>
             </button>
             <p class="tag-content">first tag</p>
@@ -70,7 +70,7 @@
       </div>
       <div class="tag-container">
         <ion-item class="tag" no-lines no-padding color="secondary" round>
-            <button class="tag-btn" ion-button item-left clear round>
+            <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round>
                 <ion-icon name="close-circle"></ion-icon>
             </button>
             <p class="tag-content">second tag</p>
@@ -83,8 +83,8 @@
           <p><b>Phone</b></p>
       </ion-col>
       <ion-col>
-        <ion-label>email.com</ion-label>
-        <ion-input placeholder="your phone number" type="tel"></ion-input>
+        <ion-label *ngIf="!isEdit">email.com</ion-label>
+        <ion-input *ngIf="isEdit" placeholder="your phone number" type="tel"></ion-input>
       </ion-col>
     </ion-row>
 
@@ -93,8 +93,8 @@
           <p><b>Email</b></p>
       </ion-col>
       <ion-col>
-        <ion-label>email.com</ion-label>
-        <ion-input placeholder="email" type="email"></ion-input>
+        <ion-label *ngIf="!isEdit">email.com</ion-label>
+        <ion-input *ngIf="isEdit" placeholder="email" type="email"></ion-input>
       </ion-col>
     </ion-row>
 
@@ -103,8 +103,8 @@
         <p><b>Address</b></p>
       </ion-col>
       <ion-col>
-        <ion-label>address weoifjwoiejf woif</ion-label>
-        <ion-input placeholder="address"></ion-input>
+        <ion-label *ngIf="!isEdit">address weoifjwoiejf woif</ion-label>
+        <ion-input *ngIf="isEdit" placeholder="address"></ion-input>
       </ion-col>
     </ion-row>
   </ion-grid>
