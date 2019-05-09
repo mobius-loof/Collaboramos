@@ -6,10 +6,38 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>create-candidate</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
 
+
+<ion-content center text-center>
+<div class="bar bar-header bar-light">
+    <h1 class="title">Candidate Profile</h1>
+
+  </div>
+
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
+      <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
+      <div class="profile-image-wrapper" (click)="getPicture()">
+        <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+          <ion-icon name="add"></ion-icon>
+          <div>
+            Add Image
+          </div>
+        </div>
+        <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+      </div>
+      <ion-list>
+        <ion-item>
+          <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="About" formControlName="about"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
 </ion-content>
+
+
