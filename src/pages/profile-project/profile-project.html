@@ -84,7 +84,9 @@
       </ion-col>
       <ion-col>
         <ion-label *ngIf="!isEdit">email.com</ion-label>
-        <ion-input *ngIf="isEdit" placeholder="your phone number" type="tel"></ion-input>
+        <ion-item *ngIf="isEdit">
+          <ion-input placeholder="your phone number" type="tel"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
 
@@ -94,7 +96,9 @@
       </ion-col>
       <ion-col>
         <ion-label *ngIf="!isEdit">email.com</ion-label>
-        <ion-input *ngIf="isEdit" placeholder="email" type="email"></ion-input>
+        <ion-item *ngIf="isEdit">
+          <ion-input placeholder="email" type="email"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
 
@@ -104,7 +108,9 @@
       </ion-col>
       <ion-col>
         <ion-label *ngIf="!isEdit">address weoifjwoiejf woif</ion-label>
-        <ion-input *ngIf="isEdit" placeholder="address"></ion-input>
+        <ion-item *ngIf="isEdit">
+          <ion-input placeholder="address"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
