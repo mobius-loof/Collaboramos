@@ -8,14 +8,16 @@
   <ion-navbar text-center>
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="setIsEdit(true)">
-        <ion-icon name="create" color="primary"></ion-icon>
-      </button>
-      <button ion-button (click)="setIsEdit(false)">
-        <ion-icon name="checkmark" color="secondary"></ion-icon>
+
+      <button ion-button>
+        <ion-icon name="create" color="primary" class="top-icon" (click)="setIsEdit(true)"></ion-icon>
       </button>
       <button ion-button>
-        <ion-icon name="close" color="danger"></ion-icon>
+        <ion-icon name="checkmark" color="secondary" class="top-icon" (click)="setIsEdit(false)"></ion-icon>
+
+      </button>
+      <button ion-button>
+        <ion-icon name="close" color="danger" class="top-icon"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -83,8 +85,13 @@
           <p><b>Phone</b></p>
       </ion-col>
       <ion-col>
+<<<<<<< HEAD
         <ion-label *ngIf="!isEdit">email.com</ion-label>
         <ion-input *ngIf="isEdit" placeholder="your phone number" type="tel"></ion-input>
+=======
+        <ion-label>phohe nunber</ion-label>
+        <ion-input placeholder="your phone number" type="tel"></ion-input>
+>>>>>>> added border to text area
       </ion-col>
     </ion-row>
 
