@@ -15,11 +15,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfileProjectPage {
 
+  isEdit: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.isEdit = false;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfileProjectPage');
+  }
+
+  setIsEdit(isEdit: boolean) {
+    this.isEdit = isEdit;
   }
 
 }
