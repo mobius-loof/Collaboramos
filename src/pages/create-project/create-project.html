@@ -1,31 +1,15 @@
-<ion-content class="content">
-  <form (submit)="doCreateProject()" class="form">
-    <ion-list>
-      <ion-item>
-        <ion-label fixed>Project Name</ion-label>
-        <ion-input type="project-name" [(ngModel)]="credentials.email" name="email"></ion-input>
-      </ion-item>
+<!--
+  Generated template for the CreateProjectPage page.
 
-      <ion-item>
-        <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
-      </ion-item>
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>create-project</ion-title>
+  </ion-navbar>
+</ion-header>
 
-      <ion-item>
-        <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
-      </ion-item>
+<ion-content padding>
 
-      <ion-item>
-        <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
-      </ion-item>
-    </ion-list>
-    <div class="btn-container">
-      <button ion-button color="primary" type="submit" size="large" full class="login-btn">Login</button>
-      <button ion-button color="light" type="button" size="large" full class="cancel-btn" (click)="cancel()">Cancel</button>
-    </div>
-  </form>
-
-  <ion-content padding>
-  </ion-content>
+</ion-content>

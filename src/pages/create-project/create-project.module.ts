@@ -7,10 +7,7 @@ import { CreateProjectPage } from './create-project';
     CreateProjectPage,
   ],
   imports: [
-    IonicPageModule.forChild(CreateProjectPage)
+    IonicPageModule.forChild(CreateProjectPage),
   ],
-  exports: [
-    CreateProjectPage
-  ]
 })
-export class CreateProjectPageModule { }
+export class CreateProjectPageModule {}
