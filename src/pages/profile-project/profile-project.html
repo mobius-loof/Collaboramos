@@ -8,13 +8,13 @@
   <ion-navbar text-center>
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="setIsEdit(true)">
+      <button ion-button *ngIf="!isEdit" (click)="setIsEdit(true, false)">
         <ion-icon name="create" color="primary" class="top-icon"></ion-icon>
       </button>
-      <button ion-button (click)="setIsEdit(false)">
+      <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, false)">
         <ion-icon name="checkmark" color="secondary" class="top-icon"></ion-icon>
       </button>
-      <button ion-button>
+      <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, true)">
         <ion-icon name="close" color="danger" class="top-icon"></ion-icon>
       </button>
     </ion-buttons>
@@ -49,7 +49,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <p *ngIf="!isEdit">The description of the project will replace this text which will be a short paragraph that concisely describe the project, provided by the project manager. </p>
+        <p *ngIf="!isEdit">this is good?</p>
         <ion-textarea *ngIf="isEdit" value="this is good?"></ion-textarea>
       </ion-col>
     </ion-row>
@@ -79,35 +79,50 @@
     </ion-row>
 
     <ion-row>
+        <p><b>Frameworks</b></p>
+    </ion-row>
+
+    <ion-row>
+      <div class="tag-container">
+        <ion-item class="tag" no-lines no-padding color="secondary" round>
+           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round>
+                <ion-icon name="close-circle"></ion-icon>
+            </button> 
+            <p class="tag-content">tester</p>
+        </ion-item>
+      </div>
+    </ion-row>
+
+    <ion-row class="info-row">
       <ion-col col-3>
           <p><b>Phone</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit">email.com</ion-label>
-        <ion-item *ngIf="isEdit">
+        <ion-label *ngIf="!isEdit" class="info-label">email.com</ion-label>
+        <ion-item *ngIf="isEdit" >
           <ion-input placeholder="your phone number" type="tel"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="info-row">
       <ion-col col-3>
           <p><b>Email</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit">email.com</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">email.com</ion-label>
         <ion-item *ngIf="isEdit">
           <ion-input placeholder="email" type="email"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="info-row">
       <ion-col col-3>
         <p><b>Address</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit">address weoifjwoiejf woif</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">address weoifjwoiejf woif</ion-label>
         <ion-item *ngIf="isEdit">
           <ion-input placeholder="address"></ion-input>
         </ion-item>
