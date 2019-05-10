@@ -1,3 +1,30 @@
-page-create-project {
+$create-color: #518DC7;
+$cancel-color: #DDDDDD;
 
+page-create-project {
+  background-color: white;
+
+  .create {
+    background-color: $create-color;
+    height: 50px;
+  }
+
+  .cancel {
+    color: black;
+    height: 50px;
+    background-color: $cancel-color;
+  }
+
+  .resume {
+    justify-content: center;
+    height: 180px;
+    border: 1px solid gray;
+    width: 140px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+  }
+
+  .title {
+    color: gray;
+  }
 }

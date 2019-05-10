@@ -10,31 +10,42 @@
     </ion-navbar>
   </ion-header>
 
-<ion-content>
-  <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
-  <div class="profile-image-wrapper" (click)="getPicture()">
-    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
-      <ion-icon name="add"></ion-icon>
-      <div>
-        Add Image
+    <ion-content center text-center>
+      <div class="bar bar-header bar-light">
+        <h1 class="title">Project Profile</h1>
       </div>
-    </div>
-    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
-  </div>
-  <ion-list>
-    <ion-item>
-      <ion-input type="text" placeholder="Name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Description"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Tags"></ion-input>
-    </ion-item>
-  </ion-list>
-  <div class="btn-container">
-    <button ion-button color="primary" type="submit" size="large" full class="submit-btn">Submit</button>
-    <button ion-button color="light" type="button" size="large" full class="cancel-btn" (click)="cancel()">Cancel</button>
-  </div>
-</ion-content>
+      <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
+      <div class="profile-image-wrapper" (click)="getPicture()">
+        <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+
+          <ion-grid class="resume">
+            <ion-row>
+              <ion-col>
+                <ion-icon name="add"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </div>
+
+
+        <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+      </div>
+      <ion-list>
+        <ion-item>
+          <ion-input type="text" placeholder="Name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="Description"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="Tags"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-footer>
+      <button ion-button type="submit" size="large" full class="create">Create</button>
+      <button ion-button type="button" size="large" full class="cancel" (click) ="return()">Cancel</button>
+    </ion-footer>
 

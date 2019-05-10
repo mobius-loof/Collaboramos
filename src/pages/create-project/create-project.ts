@@ -1,7 +1,6 @@
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Project } from '../../models/project';
 import { Channel } from '../../models/channel';
-import { MainPage } from '../';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
@@ -86,8 +85,8 @@ export class CreateProjectPage implements Project{
   /**
    * The user cancelled, so we dismiss without sending data back.
    */
-  cancel() {
-    this.viewCtrl.dismiss();
+  return() {
+    this.navCtrl.pop();
   }
 
   /**

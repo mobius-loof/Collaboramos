@@ -64,5 +64,9 @@ export class CreateCandidatePage {
   getProfileImageStyle() {
     return 'url(' + this.form.controls['profilePic'].value + ')'
   }
+
+  return() {
+    this.navCtrl.pop();
+  }
 }
 
