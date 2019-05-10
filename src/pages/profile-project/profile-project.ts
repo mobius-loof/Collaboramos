@@ -25,7 +25,7 @@ export class ProfileProjectPage {
     console.log('ionViewDidLoad ProfileProjectPage');
   }
 
-  setIsEdit(isEdit: boolean) {
+  setIsEdit(isEdit: boolean, discard: boolean) {
     this.isEdit = isEdit;
   }
 

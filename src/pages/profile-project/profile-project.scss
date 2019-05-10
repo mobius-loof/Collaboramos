@@ -23,6 +23,7 @@ page-profile-project {
         $button-ios-margin-end: 0;
         $button-ios-margin-bottom: 0;
         $button-ios-margin-start: 0;
+        padding: 0;
     }
 
     .item-ios [item-left], .item-ios [item-start] {
@@ -39,6 +40,11 @@ page-profile-project {
         min-width: 3rem;
     }
 
+    .item-ios .item-button {
+        padding: 0;
+        padding-left: 0.5rem;
+    }
+
     .label-md {
         margin: 0;
     }
@@ -52,14 +58,10 @@ page-profile-project {
         padding: 2px;
     }
 
-    .tag-content-w-btn {
-        margin-left: 0px;
+    .tag-content {
+        padding-left: 0.7rem;
     }
-    
-    .tag-content-wo-btn {
-        margin-left: 0px;
-    }
-
+ 
     .top-icon {
         font-size: 30px;
     }
@@ -72,6 +74,16 @@ page-profile-project {
 
     .text-input-ios{
         margin: 11px 8px 11px 8px;
+    }
+
+    .info-row {
+        position: relative;
+    }
+
+    .info-label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
 }
