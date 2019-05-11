@@ -15,6 +15,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfileProjectPage {
 
+  tags = ['tag1', 'tag2']
+
   isEdit: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -28,5 +30,18 @@ export class ProfileProjectPage {
   setIsEdit(isEdit: boolean, discard: boolean) {
     this.isEdit = isEdit;
   }
+
+  deleteTag(t: string){
+    var newTags=[]
+    for(var i=0;i<this.tags.length;i++){
+      if(this.tags[i] != t){
+        newTags.push(this.tags[i])
+      }
+    }
+    this.tags = newTags
+    console.log(this.tags.length)
+  }
+
+
 
 }
