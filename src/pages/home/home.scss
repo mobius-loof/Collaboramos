@@ -9,8 +9,8 @@ page-home {
   }
 
   #card-stack {
-    width: auto;
-    height: auto;
+    width: 90%;
+    height: 90%;
     background: #047915;
     border: 10px solid #4cb338;
     margin: 100px auto 0;
@@ -27,5 +27,9 @@ page-home {
 
   ion-list {
     display: block;
+  }
+
+  ion-card {
+    margin-bottom: 500px;
   }
 }
