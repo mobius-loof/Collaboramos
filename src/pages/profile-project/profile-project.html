@@ -47,12 +47,15 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="!isEdit">
       <ion-col>
-        <p *ngIf="!isEdit">this is good?</p>
-        <div *ngIf="isEdit" class="text-area-container">
-          <textarea #textarea id="textarea" (keyup)="resize()">this is good?</textarea>
-        </div>
+        <p>this is good?</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isEdit" class="text-area-container">
+      <ion-col>
+        <textarea class="textarea">this is good?</textarea>
       </ion-col>
     </ion-row>
 
