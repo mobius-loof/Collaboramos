@@ -9,7 +9,7 @@
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
       <button ion-button *ngIf="!isEdit" (click)="setIsEdit(true, false)">
-        <ion-icon name="create" color="primary" class="top-icon"></ion-icon>
+        <ion-icon name="create" color="primary" class="top-icon-edit"></ion-icon>
       </button>
       <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, false)">
         <ion-icon name="checkmark" color="secondary" class="top-icon"></ion-icon>
@@ -39,10 +39,10 @@
 
         <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
-            <ion-input value="project name"></ion-input>
+            <ion-input class="input-from-label" value="project name"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input value="website.com"></ion-input>
+            <ion-input class="input-from-label" value="website.com"></ion-input>
           </ion-item>
         </div>
       </ion-col>
@@ -50,14 +50,14 @@
     <ion-row>
       <ion-col>
         <p *ngIf="!isEdit">this is good?</p>
-        <ion-textarea *ngIf="isEdit" value="this is good?"></ion-textarea>
+        <div *ngIf="isEdit" class="text-area-container">
+          <textarea #textarea id="textarea" (keyup)="resize()">this is good?</textarea>
+        </div>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
-          <p><b>Required Skills</b></p>
-      </ion-col>
+      <p><b>Required Skills</b></p>
     </ion-row>
     <ion-row>
       <div class="tag-container" *ngFor="let t of tags">
@@ -92,7 +92,7 @@
       <ion-col>
         <ion-label *ngIf="!isEdit" class="info-label">email.com</ion-label>
         <ion-item *ngIf="isEdit" >
-          <ion-input placeholder="your phone number" type="tel"></ion-input>
+          <ion-input class="input-from-label" placeholder="your phone number" type="tel"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -104,7 +104,7 @@
       <ion-col>
         <ion-label *ngIf="!isEdit" class="info-label">email.com</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input placeholder="email" type="email"></ion-input>
+          <ion-input class="input-from-label" placeholder="email" type="email"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -116,7 +116,7 @@
       <ion-col>
         <ion-label *ngIf="!isEdit" class="info-label">address weoifjwoiejf woif</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input placeholder="address"></ion-input>
+          <ion-input class="input-from-label" placeholder="address"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

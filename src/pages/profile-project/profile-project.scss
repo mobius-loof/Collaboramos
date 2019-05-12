@@ -30,6 +30,14 @@ page-profile-project {
         margin: 0;
     }
 
+    .item-ios {
+        padding-left: 0;
+    }
+
+    .text-input-ios {
+        margin-left: 0;
+    }
+
     .tag{
         height: $tag-height;
         border-radius: $tag-height*2;
@@ -63,17 +71,22 @@ page-profile-project {
     }
  
     .top-icon {
+        font-size: 40px;
+    }
+
+    .top-icon-edit {
         font-size: 30px;
     }
 
     ion-row{
-        ion-textarea{
-           border: solid 1px lightgrey;
+        textarea{
+           height: calc(100% - 22px);
+           padding: 11px 8px;
         }
     }
 
-    .text-input-ios{
-        margin: 11px 8px 11px 8px;
+    .text-area-container {
+        border: solid 1px lightgrey;
     }
 
     .info-row {
