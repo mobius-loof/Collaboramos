@@ -80,12 +80,14 @@ page-profile-project {
 
     ion-row{
         textarea{
-           height: calc(100% - 22px);
-           padding: 11px 8px;
+            width: 100%;
+            padding-left: 0px;
+            border-width: 0px;
         }
     }
 
     .text-area-container {
+        padding-top: 3px;
         border: solid 1px lightgrey;
     }
 
