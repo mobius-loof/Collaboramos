@@ -9,10 +9,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { firebaseConfig } from '../config';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api, Auth } from '../providers';
+import { Settings, User, Api, Auth, Firestore } from '../providers';
 import { MyApp } from './app.component';
 
 export function provideSettings(storage: Storage) {
@@ -39,7 +40,7 @@ export function provideSettings(storage: Storage) {
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,13 +51,15 @@ export function provideSettings(storage: Storage) {
     Items,
     User,
     Auth,
+    Firestore,
     Camera,
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AngularFireAuth
+    AngularFireAuth,
+    AngularFirestore
   ]
 })
 export class AppModule { }

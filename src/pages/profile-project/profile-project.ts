@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Firestore } from '../../providers'
 
 /**
  * Generated class for the ProfilePage page.
@@ -19,12 +20,13 @@ export class ProfileProjectPage {
 
   isEdit: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firestore: Firestore) {
     this.isEdit = false;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfileProjectPage');
+    this.firestore.getCandidateProfile();
   }
 
   setIsEdit(isEdit: boolean, discard: boolean) {
