@@ -101,4 +101,16 @@ page-profile-project {
         transform: translateY(-50%);
     }
 
+    .add-tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-start: 0;
+        $button-ios-margin-bottom: 0;
+        padding: 0;
+    }
+
+    .button-ios.add-tag-btn{
+        height: 1.5em;
+    }
+
 }

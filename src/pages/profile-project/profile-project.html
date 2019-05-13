@@ -71,6 +71,9 @@
             <p class="tag-content">{{t}}</p>
         </ion-item>
       </div>
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addTag()">
+        <ion-icon name="add-circle"></ion-icon>
+    </button>
     </ion-row>
 
     <ion-row>
