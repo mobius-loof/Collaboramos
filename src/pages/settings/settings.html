@@ -2,6 +2,11 @@
 
   <ion-navbar>
     <ion-title>{{ pageTitle }}</ion-title>
+    <ion-buttons left>
+        <button ion-button icon-only (click)="returnHome()">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +21,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Option 2</ion-label>
+        <ion-label>Change Password</ion-label>
         <ion-input formControlName="option2"></ion-input>
       </ion-item>
 

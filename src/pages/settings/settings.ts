@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { Settings } from '../../providers';
 
@@ -35,7 +35,8 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
     public settings: Settings,
     public formBuilder: FormBuilder,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public menuCtrl: MenuController) {
   }
 
   _buildForm() {
@@ -80,6 +81,11 @@ export class SettingsPage {
 
       this._buildForm();
     });
+  }
+
+  returnHome() {
+    this.navCtrl.setRoot('TabsPage');
+    this.menuCtrl.open();
   }
 
   ngOnChanges() {
