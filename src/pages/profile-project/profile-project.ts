@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-
+import { ImagePicker } from '@ionic-native/image-picker/ngx'
 
 /**
  * Generated class for the ProfilePage page.
@@ -21,7 +21,10 @@ export class ProfileProjectPage {
   newTag = ""
   isEdit: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private alertCtrl: AlertController,
+              private imagePicker: ImagePicker) {
     this.isEdit = false;
   }
 
