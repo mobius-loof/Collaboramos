@@ -26,7 +26,7 @@
   <ion-grid>
     <ion-row class="title-row">
       <ion-col col-5>
-        <img class="project-img" src="../assets/img/marty-avatar.png">
+        <img class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
       </ion-col>
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">

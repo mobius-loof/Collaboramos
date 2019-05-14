@@ -14,6 +14,7 @@ import { firebaseConfig } from '../config';
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api, Auth } from '../providers';
 import { MyApp } from './app.component';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 export function provideSettings(storage: Storage) {
   /**
@@ -56,7 +57,8 @@ export function provideSettings(storage: Storage) {
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AngularFireAuth
+    AngularFireAuth,
+    ImagePicker
   ]
 })
 export class AppModule { }

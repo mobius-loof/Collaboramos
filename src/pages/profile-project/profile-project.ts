@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { ImagePicker } from '@ionic-native/image-picker/ngx'
+import { ImagePicker } from '@ionic-native/image-picker'
 
 /**
  * Generated class for the ProfilePage page.
@@ -49,6 +49,21 @@ export class ProfileProjectPage {
 
   addTag(){
     this.presentPrompt()
+  }
+
+  pickImage() {
+    let options = {
+      maximumImagesCount: 1,
+      outputType: 0,
+      width: 800,
+      height: 800
+    }
+
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        console.log(results[i]);
+      }
+    })
   }
 
   presentPrompt(){
