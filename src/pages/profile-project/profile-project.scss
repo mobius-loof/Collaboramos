@@ -12,10 +12,21 @@ page-profile-project {
         transform: translateY(-50%);
     }
 
+    .project-img-container {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        padding: 0px;
+    }
+
     .project-img {
         border-radius: 50%;
-        margin: auto;
-        display: block;
+        width: 100%;
+        z-index: 0;
+        position: absolute;
+        display: inline-block;
     }
 
     button.tag-btn {
@@ -111,6 +122,19 @@ page-profile-project {
 
     .button-ios.add-tag-btn{
         height: 1.5em;
+    }
+
+    .photo-edit {
+        height: 26%;
+        z-index: 10;
+        position: absolute;
+        background-color: grey;
+        opacity: 0.8;
+        color: white;
+        margin: auto;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
     }
 
 }

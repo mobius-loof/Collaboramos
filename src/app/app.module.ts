@@ -14,7 +14,7 @@ import { firebaseConfig } from '../config';
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api, Auth } from '../providers';
 import { MyApp } from './app.component';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/';
 
 export function provideSettings(storage: Storage) {
   /**
