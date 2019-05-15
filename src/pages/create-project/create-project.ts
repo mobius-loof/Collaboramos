@@ -38,7 +38,7 @@ export class CreateProjectPage{
       image: '',
       description: '',
       isVisible: true,
-      tags: '',
+      tags: [],
       chats: {}
     };
 
@@ -46,7 +46,6 @@ export class CreateProjectPage{
 
   isReadyToSave: boolean;
   hasPicture: boolean;
-  item: any;
   //form: FormGroup;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {

@@ -1,31 +1,39 @@
 $create-color: #518DC7;
 $cancel-color: #DDDDDD;
 
-page-create-candidate{
-    background-color:white;
-.create{
-    background-color: $create-color;
-    height: 50px; 
-}
+page-create-candidate {
+  background-color: white;
 
-.cancel{
+  .create {
+    background-color: $create-color;
+    height: 50px;
+  }
+
+  .cancel {
     color: black;
     height: 50px;
     background-color: $cancel-color;
-}
+  }
 
-.resume{
-    
+  .candidate-pic {
     justify-content: center;
     height: 180px;
-    
     border: 1px solid gray;
     width: 140px;
     margin-bottom: 30px;
     margin-top: -10px;
-    
-}
-.addresume{
+  }
+
+  .profile-image {
+    //justify-content: center;
+    height: 180px;
+    border: 1px solid gray;
+    width: 140px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+  }
+
+  .addresume {
     vertical-align: middle;
     justify-content: center;
     height: 40px;
@@ -33,13 +41,12 @@ page-create-candidate{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1.4em;
     border: 1px solid $create-color;
-    width: 350px; 
+    width: 350px;
     margin-bottom: 10px;
-}
+  }
 
-.title{
+  .title {
     color: gray;
-}
-
+  }
 }
 
