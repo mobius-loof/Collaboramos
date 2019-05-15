@@ -1,0 +1,127 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar text-center>
+    <ion-title>My Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="!isEdit" (click)="setIsEdit(true, false)">
+        <ion-icon name="create" color="primary" class="top-icon-edit"></ion-icon>
+      </button>
+      <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, false)">
+        <ion-icon name="checkmark" color="secondary" class="top-icon"></ion-icon>
+      </button>
+      <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, true)">
+        <ion-icon name="close" color="danger" class="top-icon"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row class="title-row">
+      <ion-col col-5>
+        <img class="project-img" src="../assets/img/marty-avatar.png">
+      </ion-col>
+      <ion-col>
+        <div *ngIf="!isEdit" class="project-detail-col">
+          <h3>Project Name</h3>
+          <button ion-button icon-start small>
+            <ion-icon name="globe"></ion-icon>
+            WEBSITE
+          </button>
+        </div>
+
+        <div *ngIf="isEdit" class="project-detail-col">
+          <ion-item>
+            <ion-input class="input-from-label" value="project name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input class="input-from-label" value="website.com"></ion-input>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!isEdit">
+      <ion-col>
+        <p>this is good?</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isEdit" class="text-area-container">
+      <ion-col>
+        <textarea class="textarea">this is good?</textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <p><b>Required Skills</b></p>
+    </ion-row>
+    <ion-row>
+      <div class="tag-container" *ngFor="let t of tags">
+        <ion-item class="tag" no-lines no-padding color="secondary" round>
+            <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteTag(t)">
+                <ion-icon name="close-circle"></ion-icon>
+            </button>
+            <p class="tag-content">{{t}}</p>
+        </ion-item>
+      </div>
+    </ion-row>
+
+    <ion-row>
+        <p><b>Frameworks</b></p>
+    </ion-row>
+
+    <ion-row>
+      <div class="tag-container">
+        <ion-item class="tag" no-lines no-padding color="secondary" round>
+           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round>
+                <ion-icon name="close-circle"></ion-icon>
+            </button> 
+            <p class="tag-content">tester</p>
+        </ion-item>
+      </div>
+    </ion-row>
+
+    <ion-row class="info-row">
+      <ion-col col-3>
+          <p><b>Phone</b></p>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="!isEdit" class="info-label">email.com</ion-label>
+        <ion-item *ngIf="isEdit" >
+          <ion-input class="input-from-label" placeholder="your phone number" type="tel"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="info-row">
+      <ion-col col-3>
+          <p><b>Email</b></p>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="!isEdit" class="info-label">email.com</ion-label>
+        <ion-item *ngIf="isEdit">
+          <ion-input class="input-from-label" placeholder="email" type="email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="info-row">
+      <ion-col col-3>
+        <p><b>Address</b></p>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="!isEdit" class="info-label">address weoifjwoiejf woif</ion-label>
+        <ion-item *ngIf="isEdit">
+          <ion-input class="input-from-label" placeholder="address"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
