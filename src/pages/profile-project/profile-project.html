@@ -35,7 +35,7 @@
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">
           <h3>Project Name</h3>
-          <button ion-button icon-start small>
+          <button ion-button icon-start small (click)="presentWebsite()">
             <ion-icon name="globe"></ion-icon>
             WEBSITE
           </button>

@@ -15,6 +15,7 @@ import { Items } from '../mocks/providers/items';
 import { Settings, User, Api, Auth } from '../providers';
 import { MyApp } from './app.component';
 import { ImagePicker } from '@ionic-native/image-picker/';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 export function provideSettings(storage: Storage) {
   /**
@@ -58,7 +59,8 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AngularFireAuth,
-    ImagePicker
+    ImagePicker,
+    InAppBrowser
   ]
 })
 export class AppModule { }

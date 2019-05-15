@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { ImagePicker } from '@ionic-native/image-picker'
+import { ImagePicker } from '@ionic-native/image-picker';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /**
  * Generated class for the ProfilePage page.
@@ -24,7 +25,8 @@ export class ProfileProjectPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private alertCtrl: AlertController,
-              private imagePicker: ImagePicker) {
+              private imagePicker: ImagePicker,
+              private inAppBrowser: InAppBrowser) {
     this.isEdit = false;
   }
 
@@ -64,6 +66,11 @@ export class ProfileProjectPage {
         console.log(results[i]);
       }
     })
+  }
+
+  presentWebsite() {
+    let target = "_system";
+    this.inAppBrowser.create("http://www.google.com");
   }
 
   presentPrompt(){
