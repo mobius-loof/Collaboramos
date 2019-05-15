@@ -17,24 +17,41 @@ import { Camera } from '@ionic-native/camera';
   selector: 'page-create-project',
   templateUrl: 'create-project.html',
 })
-export class CreateProjectPage implements Project{
+export class CreateProjectPage{
 
-    name: string;
-    id: string;
-    image: string;
-    description: string;
-    isVisible: boolean;
-    tags: string[];
-    chats: { [id: string]: Channel };
+  /*
+  project: {
+    name: string, id: string, image: string, description: string,
+    isVisible: boolean, tags: string, chats: { [id: string]: Channel }} = { 
+      name: '',
+      id: '',
+      image: '',
+      description: '',
+      isVisible: true,
+      tags: '',
+      chats: {}
+    };
+  */
+  project: Project = {
+      name: '',
+      id: '',
+      image: '',
+      description: '',
+      isVisible: true,
+      tags: '',
+      chats: {}
+    };
+
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
-
+  hasPicture: boolean;
   item: any;
-
-  form: FormGroup;
+  //form: FormGroup;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+    
+    /*
     this.form = formBuilder.group({
       profilePic: [''],
       name: ['', Validators.required],
@@ -45,12 +62,15 @@ export class CreateProjectPage implements Project{
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+    */
+    this.hasPicture = false;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateProjectPage');
   }
 
+  
   getPicture() {
     if (Camera['installed']()) {
       this.camera.getPicture({
@@ -58,7 +78,8 @@ export class CreateProjectPage implements Project{
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+        this.project.image = 'data:image/jpg;base64,' + data;
+        //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');
       })
@@ -72,30 +93,34 @@ export class CreateProjectPage implements Project{
     reader.onload = (readerEvent) => {
 
       let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
+      this.project.image = imageData;
+      this.hasPicture = true;
+      //this.form.patchValue({ 'profilePic': imageData });
     };
 
     reader.readAsDataURL(event.target.files[0]);
   }
+  
 
   getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
+    //return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.project.image + ')'
   }
 
   /**
    * The user cancelled, so we dismiss without sending data back.
    */
   return() {
-    this.navCtrl.pop();
+    this.navCtrl.setRoot("ListMasterPage");
   }
 
   /**
-   * The user is done and wants to create the item, so return it
-   * back to the presenter.
-   */
-  done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
+  * The user submited, so we return the data object back
+  */
+  submit() {
+    this.navCtrl.setRoot("ListMasterPage")
+    return this.project;
   }
+
 
 }

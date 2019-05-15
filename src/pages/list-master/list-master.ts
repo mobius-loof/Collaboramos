@@ -37,11 +37,11 @@ export class ListMasterPage {
   }
 
   createProject() {
-    this.navCtrl.push('CreateProjectPage');
+    this.navCtrl.setRoot('CreateProjectPage');
   }
 
   createCandidate() {
-    this.navCtrl.push('CreateCandidatePage');
+    this.navCtrl.setRoot('CreateCandidatePage');
   }
 
   /**

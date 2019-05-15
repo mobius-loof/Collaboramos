@@ -15,7 +15,7 @@ page-create-project {
     background-color: $cancel-color;
   }
 
-  .resume {
+  .project-pic {
     justify-content: center;
     height: 180px;
     border: 1px solid gray;
@@ -24,6 +24,15 @@ page-create-project {
     margin-top: -10px;
   }
 
+  .profile-image{
+    //justify-content: center;
+    height: 180px;
+    border: 1px solid gray;
+    width: 140px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+  }
+  
   .title {
     color: gray;
   }
