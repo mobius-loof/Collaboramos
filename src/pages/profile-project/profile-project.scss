@@ -1,0 +1,104 @@
+page-profile-project {
+    $tag-height:20px;
+
+    .title-row {
+        position: relative;
+    }
+
+    .project-detail-col {
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .project-img {
+        border-radius: 50%;
+        margin: auto;
+        display: block;
+    }
+
+    button.tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-bottom: 0;
+        $button-ios-margin-start: 0;
+        padding: 0;
+    }
+
+    .item-ios [item-left], .item-ios [item-start] {
+        margin: 0;
+    }
+
+    .item-ios {
+        padding-left: 0;
+    }
+
+    .text-input-ios {
+        margin-left: 0;
+    }
+
+    .tag{
+        height: $tag-height;
+        border-radius: $tag-height*2;
+    }
+
+    .item {
+        min-height: 3rem;
+        min-width: 3rem;
+    }
+
+    .item-ios .item-button {
+        padding: 0;
+        padding-left: 0.5rem;
+    }
+
+    .label-md {
+        margin: 0;
+    }
+
+    .label-ios {
+        margin: 0;
+    }
+
+    .tag-container {
+        margin-right: 2px;
+        padding: 2px;
+    }
+
+    .tag-content {
+        padding-left: 0.7rem;
+    }
+ 
+    .top-icon {
+        font-size: 40px;
+    }
+
+    .top-icon-edit {
+        font-size: 30px;
+    }
+
+    ion-row{
+        textarea{
+            width: 100%;
+            padding-left: 0px;
+            border-width: 0px;
+        }
+    }
+
+    .text-area-container {
+        padding-top: 3px;
+        border: solid 1px lightgrey;
+    }
+
+    .info-row {
+        position: relative;
+    }
+
+    .info-label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+}

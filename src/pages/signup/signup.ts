@@ -25,10 +25,14 @@ export class SignupPage {
     public toastCtrl: ToastController,
     private auth: Auth) {}
 
+  cancel() {
+    this.navCtrl.pop()
+  }
+
   doSignup() {
     console.log(this.credentials)
     this.auth.signup(this.credentials).then((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.setRoot(MainPage);
       let toast = this.toastCtrl.create({
         message: 'You have successfully signed up!',
         duration: 3000,
