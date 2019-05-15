@@ -78,7 +78,7 @@
       </div>
       <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addTag()">
         <ion-icon name="add-circle"></ion-icon>
-    </button>
+      </button>
     </ion-row>
 
     <ion-row>
@@ -86,14 +86,17 @@
     </ion-row>
 
     <ion-row>
-      <div class="tag-container">
+      <div class="tag-container" *ngFor="let f of frameworks">
         <ion-item class="tag" no-lines no-padding color="secondary" round>
-           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round>
+           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
                 <ion-icon name="close-circle"></ion-icon>
             </button> 
-            <p class="tag-content">tester</p>
+            <p class="tag-content">{{f}}</p>
         </ion-item>
       </div>
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addFramework()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
     </ion-row>
 
     <ion-row class="info-row">

@@ -18,8 +18,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 })
 export class ProfileProjectPage {
 
-  tags = ['tag1', 'tag2']
-  newTag = ""
+  tags = ['tag1', 'tag2'];
+  frameworks = ['f1', 'f2'];
   isEdit: boolean;
 
   constructor(public navCtrl: NavController, 
@@ -31,7 +31,7 @@ export class ProfileProjectPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileProjectPage');
+    console.log(this.frameworks);
   }
 
   setIsEdit(isEdit: boolean, discard: boolean) {
@@ -46,10 +46,23 @@ export class ProfileProjectPage {
       }
     }
     this.tags = newTags
-    console.log(this.tags.length)
+  }
+
+  deleteFramework(f: string){
+    var newTags=[]
+    for(var i=0;i<this.frameworks.length;i++){
+      if(this.frameworks[i] != f){
+        newTags.push(this.frameworks[i])
+      }
+    }
+    this.frameworks = newTags
   }
 
   addTag(){
+    this.presentPrompt()
+  }
+
+  addFramework() {
     this.presentPrompt()
   }
 
@@ -88,16 +101,12 @@ export class ProfileProjectPage {
           text: 'Cancel',
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
           }
         },
         {
           text: 'Ok',
           handler: data => {
-            console.log(this.newTag = data.tag)
-            this.tags.push(this.newTag)
-            console.log(data.tag)
-            console.log(myString)
+            this.tags.push(data.tag)
           }
         }
       ]
