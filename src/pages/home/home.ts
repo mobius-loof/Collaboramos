@@ -24,14 +24,8 @@ export class HomePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
-  skillsExpanded = false;
-  websiteExpanded = false;
-  resumeExpanded = false;
-
-
-  @ViewChild("skills") skillContent: any;
-  @ViewChild("website") websiteContent: any;
-  @ViewChild("resume") resumeContent: any;
+  skillsExpanded = true;
+  descExpanded = true;
 
   private element;
 
@@ -43,7 +37,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
-        return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
+        return Math.min(Math.abs(offsetX) / (element.offsetWidth/4), 1);
       },
       transform: (element, x, y, r) => {
         this.onItemMove(element, x, y, r);
@@ -69,42 +63,11 @@ export class HomePage {
   }
 
   toggleSkills(){
-    if(this.skillsExpanded){
-      this.renderer.setElementStyle(this.skillContent.nativeElement, "max-height", "0px");
-      this.renderer.setElementStyle(this.skillContent.nativeElement, "padding", "0px 16px");
-    }
-    else {
-      this.renderer.setElementStyle(this.skillContent.nativeElement, "max-height", "500px");
-      this.renderer.setElementStyle(this.skillContent.nativeElement, "padding", "13px 16px");
-    }
-
     this.skillsExpanded = !this.skillsExpanded;
   }
 
-  toggleWebsite(){
-    if(this.websiteExpanded){
-      this.renderer.setElementStyle(this.websiteContent.nativeElement, "max-height", "0px");
-      this.renderer.setElementStyle(this.websiteContent.nativeElement, "padding", "0px 16px");
-    }
-    else {
-      this.renderer.setElementStyle(this.websiteContent.nativeElement, "max-height", "500px");
-      this.renderer.setElementStyle(this.websiteContent.nativeElement, "padding", "13px 16px");
-    }
-
-    this.websiteExpanded = !this.websiteExpanded;
-  }
-
-  toggleResume(){
-    if(this.resumeExpanded){
-      this.renderer.setElementStyle(this.resumeContent.nativeElement, "max-height", "0px");
-      this.renderer.setElementStyle(this.resumeContent.nativeElement, "padding", "0px 16px");
-    }
-    else {
-      this.renderer.setElementStyle(this.resumeContent.nativeElement, "max-height", "500px");
-      this.renderer.setElementStyle(this.resumeContent.nativeElement, "padding", "13px 16px");
-    }
-
-    this.resumeExpanded = !this.resumeExpanded;
+  toggleDesc(){
+    this.descExpanded = !this.descExpanded;
   }
 
   // Called whenever we drag an element
