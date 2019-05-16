@@ -58,14 +58,6 @@ export class ProfileProjectPage {
     this.frameworks = newTags
   }
 
-  addTag(){
-    this.presentPrompt()
-  }
-
-  addFramework() {
-    this.presentPrompt()
-  }
-
   pickImage() {
     let options = {
       maximumImagesCount: 1,
@@ -86,12 +78,13 @@ export class ProfileProjectPage {
     this.inAppBrowser.create("http://www.google.com");
   }
 
-  presentPrompt(){
+  presentPrompt(type: string){
     let myString: string = ""
     let alert = this.alertCtrl.create({
       title: 'Add Tag',
       inputs: [
         {
+          //TODO dynamic change skill vs framework
           name: 'tag',
           placeholder: 'short tag description'
         }
@@ -100,13 +93,16 @@ export class ProfileProjectPage {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: data => {
-          }
+          handler: () => {}
         },
         {
           text: 'Ok',
           handler: data => {
-            this.tags.push(data.tag)
+            if (type === "skills") {
+              this.tags.push(data.tag);
+            } else if (type === "frameworks") {
+              this.frameworks.push(data.tag);
+            }
           }
         }
       ]
