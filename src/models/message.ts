@@ -5,7 +5,7 @@ export interface Message {
     senderId: string,
     receiverName: string,
     receiverId: string,
-    channel: Channel,
+    channelId: Channel,
     date: number, // # of ms since UNIX epoch, number returned by Date.now() in JS
     isText: boolean, 
     media: string, 

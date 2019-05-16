@@ -1,4 +1,4 @@
-import { Project, Candidate} from './'
+import { Project, Candidate } from './'
 
 /**
  * The Account service manages creating instances of Item, so go ahead and rename
@@ -20,6 +20,6 @@ export interface Account {
   phoneNumber: string,
   projectProfile: Project,
   candidateProfile: Candidate,
-  profileImageURI: URL,
+  profileImageURI: string,
   location: string
 }
