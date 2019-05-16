@@ -26,12 +26,16 @@
   <ion-grid>
     <ion-row class="title-row">
       <ion-col col-5>
-        <img class="project-img" src="../assets/img/marty-avatar.png">
+        <div class="project-img-container">
+          <img class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+          <div id="circle"></div>
+          <h6 *ngIf="isEdit" class="photo-edit">Edit</h6>
+        </div>
       </ion-col>
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">
           <h3>Project Name</h3>
-          <button ion-button icon-start small>
+          <button ion-button icon-start small (click)="presentWebsite()">
             <ion-icon name="globe"></ion-icon>
             WEBSITE
           </button>
@@ -47,7 +51,8 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="!isEdit">
+
+    <ion-row *ngIf="!isEdit" class="description-container">
       <ion-col>
         <p>this is good?</p>
       </ion-col>
@@ -71,6 +76,9 @@
             <p class="tag-content">{{t}}</p>
         </ion-item>
       </div>
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addTag()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
     </ion-row>
 
     <ion-row>
@@ -78,14 +86,17 @@
     </ion-row>
 
     <ion-row>
-      <div class="tag-container">
+      <div class="tag-container" *ngFor="let f of frameworks">
         <ion-item class="tag" no-lines no-padding color="secondary" round>
-           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round>
+           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
                 <ion-icon name="close-circle"></ion-icon>
             </button> 
-            <p class="tag-content">tester</p>
+            <p class="tag-content">{{f}}</p>
         </ion-item>
       </div>
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addFramework()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
     </ion-row>
 
     <ion-row class="info-row">

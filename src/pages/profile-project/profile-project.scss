@@ -12,10 +12,21 @@ page-profile-project {
         transform: translateY(-50%);
     }
 
+    .project-img-container {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        padding: 0px;
+    }
+
     .project-img {
         border-radius: 50%;
-        margin: auto;
-        display: block;
+        width: 100%;
+        z-index: 0;
+        position: absolute;
+        display: inline-block;
     }
 
     button.tag-btn {
@@ -89,6 +100,11 @@ page-profile-project {
     .text-area-container {
         padding-top: 3px;
         border: solid 1px lightgrey;
+        height: 75px;
+    }
+
+    .description-container {
+        height: 75px;
     }
 
     .info-row {
@@ -99,6 +115,31 @@ page-profile-project {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+    }
+
+    .add-tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-start: 0;
+        $button-ios-margin-bottom: 0;
+        padding: 0;
+    }
+
+    .button-ios.add-tag-btn{
+        height: 1.5em;
+    }
+
+    .photo-edit {
+        height: 26%;
+        z-index: 10;
+        position: absolute;
+        background-color: grey;
+        opacity: 0.8;
+        color: white;
+        margin: auto;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
     }
 
 }
