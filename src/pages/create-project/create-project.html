@@ -20,7 +20,7 @@
           <ion-col no-padding>
             <div class="profile-image-wrapper" (click)="getPicture()">
               <div class="profile-image-placeholder" *ngIf="!hasPicture">
-                      <ion-icon name="add"></ion-icon>
+                 <ion-icon name="add"></ion-icon>
               </div>
               <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="hasPicture">
               </div>

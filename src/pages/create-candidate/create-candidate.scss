@@ -7,15 +7,26 @@ page-create-candidate {
   .create {
     background-color: $create-color;
     height: 50px;
+    margin-bottom: -4px;
   }
 
   .cancel {
     color: black;
     height: 50px;
     background-color: $cancel-color;
+    margin-bottom: 0px;
   }
 
   .candidate-pic {
+    justify-content: center;
+    height: 180px;
+    border: 1px solid gray;
+    width: 140px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+  }
+
+  .project-image-wrapper {
     justify-content: center;
     height: 180px;
     border: 1px solid gray;
@@ -29,7 +40,8 @@ page-create-candidate {
     height: 180px;
     border: 1px solid gray;
     width: 140px;
-    margin-bottom: 30px;
+    margin-bottom: -10px;
+    margin-left: -1px;
     margin-top: -10px;
   }
 

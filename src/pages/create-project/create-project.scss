@@ -7,12 +7,14 @@ page-create-project {
   .create {
     background-color: $create-color;
     height: 50px;
+    margin-bottom: -4px;
   }
 
   .cancel {
     color: black;
     height: 50px;
     background-color: $cancel-color;
+    margin-bottom: -0px;
   }
 
   .project-pic {
@@ -33,14 +35,18 @@ page-create-project {
     margin-top: -10px;
   }
 
-  .profile-image{
+  .profile-image {
     //justify-content: center;
     height: 180px;
+    border: 1px solid gray;
     width: 140px;
     margin-bottom: 0px;
+    margin-left: -1px;
     margin-top: 0px;
+    max-height: 100%;
+    max-width: 100%;
   }
-  
+
   .title {
     color: gray;
   }
