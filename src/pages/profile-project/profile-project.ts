@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Firestore } from '../../providers/firestore/firestore'
 
 /**
  * Generated class for the ProfilePage page.
@@ -16,7 +17,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   selector: 'page-profile-project',
   templateUrl: 'profile-project.html',
 })
-export class ProfileProjectPage {
+export class ProfileProjectPage implements OnInit {
 
   tags = ['tag1', 'tag2'];
   frameworks = ['f1', 'f2'];
@@ -26,8 +27,13 @@ export class ProfileProjectPage {
               public navParams: NavParams, 
               private alertCtrl: AlertController,
               private imagePicker: ImagePicker,
-              private inAppBrowser: InAppBrowser) {
+              private inAppBrowser: InAppBrowser,
+              private firestore: Firestore) {
     this.isEdit = false;
+  }
+
+  ngOnInit() {
+    var temp = this.firestore.getCandidateProfile('kgchjTGLVQGAdjzkvtCy');
   }
 
   ionViewDidLoad() {

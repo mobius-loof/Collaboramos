@@ -8,8 +8,12 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
+import { Firestore } from '../providers/firestore/firestore'
 
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api, Auth } from '../providers';
@@ -41,7 +45,10 @@ export function provideSettings(storage: Storage) {
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +67,8 @@ export function provideSettings(storage: Storage) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AngularFireAuth,
     ImagePicker,
-    InAppBrowser
+    InAppBrowser,
+    Firestore
   ]
 })
 export class AppModule { }
