@@ -12,10 +12,21 @@ page-profile-candidate {
         transform: translateY(-50%);
     }
 
+    .project-img-container {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        padding: 0px;
+    }
+
     .project-img {
         border-radius: 50%;
-        margin: auto;
-        display: block;
+        width: 100%;
+        z-index: 0;
+        position: absolute;
+        display: inline-block;
     }
 
     button.tag-btn {
@@ -23,10 +34,19 @@ page-profile-candidate {
         $button-ios-margin-end: 0;
         $button-ios-margin-bottom: 0;
         $button-ios-margin-start: 0;
+        padding: 0;
     }
 
     .item-ios [item-left], .item-ios [item-start] {
         margin: 0;
+    }
+
+    .item-ios {
+        padding-left: 0;
+    }
+
+    .text-input-ios {
+        margin-left: 0;
     }
 
     .tag{
@@ -37,6 +57,11 @@ page-profile-candidate {
     .item {
         min-height: 3rem;
         min-width: 3rem;
+    }
+
+    .item-ios .item-button {
+        padding: 0;
+        padding-left: 0.5rem;
     }
 
     .label-md {
@@ -52,12 +77,69 @@ page-profile-candidate {
         padding: 2px;
     }
 
-    .tag-content-w-btn {
-        margin-left: 0px;
+    .tag-content {
+        padding-left: 0.7rem;
     }
-    
-    .tag-content-wo-btn {
-        margin-left: 0px;
+ 
+    .top-icon {
+        font-size: 40px;
+    }
+
+    .top-icon-edit {
+        font-size: 30px;
+    }
+
+    ion-row{
+        textarea{
+            width: 100%;
+            padding-left: 0px;
+            border-width: 0px;
+        }
+    }
+
+    .text-area-container {
+        padding-top: 3px;
+        border: solid 1px lightgrey;
+        height: 75px;
+    }
+
+    .description-container {
+        height: 75px;
+    }
+
+    .info-row {
+        position: relative;
+    }
+
+    .info-label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .add-tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-start: 0;
+        $button-ios-margin-bottom: 0;
+        padding: 0;
+    }
+
+    .button-ios.add-tag-btn{
+        height: 1.5em;
+    }
+
+    .photo-edit {
+        height: 26%;
+        z-index: 10;
+        position: absolute;
+        background-color: grey;
+        opacity: 0.8;
+        color: white;
+        margin: auto;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
     }
 
 }
