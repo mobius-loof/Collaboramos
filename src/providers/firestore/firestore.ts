@@ -17,15 +17,13 @@ export class Firestore {
 
   getCandidateProfile(id: string): Candidate {
     var docRef = this.firestore.collection('accounts').doc(id);
-    docRef.get().then(function(doc) {
+    docRef.get().subscribe(function(doc) {
       if(!(doc.exists)) {
         console.log('It don;t exist');
       } else {
         console.log(doc.data());
       }
-    }).catch(function(err) {
-      console.log(err);
-    });
+    })
 
     // console.log(docRef.candidate_id);
     // this.firestore.collection('accounts').doc(id).get().then(function(doc) {

@@ -33,6 +33,7 @@ export class ProfileProjectPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("hello from ngOnInit of profile-project");
     var temp = this.firestore.getCandidateProfile('kgchjTGLVQGAdjzkvtCy');
   }
 
