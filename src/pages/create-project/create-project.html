@@ -15,21 +15,19 @@
       <h1 class="title">Project Profile</h1>
     </div>
     <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
-    <div class="profile-image-wrapper" (click)="getPicture()">
-      <div class="profile-image-placeholder" *ngIf="!hasPicture">
-        <ion-grid class="project-pic">
-          <ion-row>
-            <ion-col>
-              <ion-icon name="add"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="hasPicture">
-        <ion-grid class="project-pic">
-        </ion-grid>
-      </div>
-    </div>
+    <ion-grid class="project-pic" no-padding>
+      <ion-row>
+          <ion-col no-padding>
+            <div class="profile-image-wrapper" (click)="getPicture()">
+              <div class="profile-image-placeholder" *ngIf="!hasPicture">
+                      <ion-icon name="add"></ion-icon>
+              </div>
+              <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="hasPicture">
+              </div>
+            </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-list>
       <ion-item>
         <ion-input type="text" placeholder="Name" [(ngModel)]="project.name"></ion-input>
