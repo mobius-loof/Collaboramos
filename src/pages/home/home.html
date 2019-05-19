@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="text-align: center;">
   <div
     swing-stack
     #myswing1
@@ -17,6 +17,7 @@
     (throwoutleft)="voteUp(false)"
     (throwoutright)="voteUp(true)"
     id="card-stack"
+    style="background-color: white; max-height: 500px"
   >
     <ion-card
       #mycards1
@@ -26,89 +27,87 @@
       swing-card=""
       style="background-color: #E6E6EA"
     >
-      <ion-avatar item-start>
-        <img [src]="" />
-      </ion-avatar>
-      <ion-item
-        class="infoDisplay"
-        (click)="toggleSkills()"
-        style="background-color: yellow; height: 35%"
-      >
-        <div style="text-align: center">
-          <h1>
-            Skills
-          </h1>
-          <div
-            *ngIf="skillsExpanded"
-            style="background-color: grey; height: 80%"
-          >
-            <p>Something goes here</p>
-          </div>
-        </div>
-      </ion-item>
-      <ion-item
-        class="infoDisplay"
-        (click)="toggleDesc()"
-        style="background-color: greenyellow; height: 35%"
-      >
-        <div style="text-align: center">
-          <h1>
-            Desc
-          </h1>
-          <div *ngIf="descExpanded" style="background-color: grey; height: 80%">
-            <p>Something goes here</p>
-          </div>
-        </div>
-      </ion-item>
-      <ion-item
-        class="infoDisplay"
-        style="background-color: royalblue; height: 10%"
-      >
-        <div style="text-align: center">
-          <h1 style="height: 75%">
-            Resume
-          </h1>
-        </div>
-      </ion-item>
-      <ion-item class="infoDisplay" style="background-color: red; height: 10%">
-        <div style="text-align: center">
-          <ion-card-title>Website</ion-card-title>
-        </div>
-      </ion-item>
-      <ion-row class="infoDisplay" style="height: 10%" justify-content-center>
-        <ion-col>
-          <button
-          ion-button
-          clear
-          large
-          icon-left
-          color="primary"
-          (click)="voteUp(false)"
-          style="float: left"
-          col-9
-          offset-1
-          >
-            <ion-icon name="thumbs-down"></ion-icon>
-            No
-          </button>
+      <ion-row style="height: 30%">
+        <ion-col col-6>
+          <ion-avatar item-start>
+            <img class="img" src="../assets/img/advance-card-bttf.png" />
+          </ion-avatar>
         </ion-col>
-        <ion-col>
-          <button
-            ion-button
-            clear
-            large
-            icon-left
-            color="primary"
-            (click)="voteUp(true)"
-            col-9
+        <ion-col col-6>
+          <ion-row
+            style="margin-top: 10px; background-color: rgb(129, 129, 180)"
           >
-            <ion-icon name="thumbs-up"></ion-icon>
-            Yes
-          </button>
+            <h1>
+              Resume
+            </h1>
+          </ion-row>
+          <ion-row style="margin-top: 10px; background-color:  lavender">
+            <h1>
+              Website
+            </h1>
+          </ion-row>
         </ion-col>
+      </ion-row>
+
+      <ion-row (click)="toggleSkills()" style="text-align: center; background-color: white; height: 35%">
+        <h1 class="expanding-tabs">Skills</h1>
+        <ion-item
+        class="infoDisplay"
+        *ngIf="skillsExpanded"
+        >
+          <div class="tag-container" *ngFor="let t of tags">
+            <ion-item class="tag" no-lines no-padding color="secondary" round>
+              <button class="tag-btn" ion-button item-left clear round>
+                <ion-icon name="close-circle"></ion-icon>
+              </button>
+              <p class="tag-content">{{ t }}</p>
+            </ion-item>
+          </div>
+        </ion-item>
+      </ion-row>
+
+      <ion-row class="expanding-tabs" (click)="toggleDesc()" style="text-align: center; background-color: white; height: 35%">
+        <h1 class="expanding-tabs">Description</h1>
+        <ion-item
+        class="infoDisplay"
+        style="text-align: center; background-color: white;"
+        *ngIf="descExpanded"
+        >
+        <p>Something goes here</p>
+      </ion-item>
       </ion-row>
     </ion-card>
   </div>
 
-  <h1 style="text-align: center; width: 100%;">{{ recentCard }}</h1>
+  <p class="statusBar">{{ recentCard }}</p>
+
+  <ion-row class="likeDislikeButton">
+    <ion-col class="col" col-6>
+      <button
+        ion-button
+        clear
+        medium
+        icon-right
+        expand="full"
+        color="primary"
+        (click)="voteUp(false)"
+      >
+        <ion-icon name="thumbs-down"></ion-icon>
+        No
+      </button>
+    </ion-col>
+    <ion-col class="col" col-6>
+      <button
+        ion-button
+        clear
+        medium
+        icon-left
+        color="primary"
+        (click)="voteUp(true)"
+      >
+        <ion-icon name="thumbs-up"></ion-icon>
+        Yes
+      </button>
+    </ion-col>
+  </ion-row>
 </ion-content>

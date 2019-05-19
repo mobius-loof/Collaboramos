@@ -11,8 +11,9 @@ page-home {
   #card-stack {
     width: 90%;
     height: 90%;
-    margin: 100px auto 0;
+    margin: 0px auto 0;
     position: relative;
+    z-index: 1;
   }
 
   #card-stack ion-card {
@@ -29,5 +30,43 @@ page-home {
 
   ion-card {
     margin-bottom: 500px;
+  }
+
+  .img {
+    border-radius: 5%;
+    margin: auto;
+    display: block;
+
+  }
+
+  .likeDislikeButton {
+    height: 10%;
+    margin-top: -20px;
+  }
+
+  .col {
+    text-align: center;
+    line-height: 50%;
+    position: relative;
+    justify-content: center;
+  }
+
+  .scroll-content {
+    overflow-y: hidden !important;
+  }
+
+  .statusBar {
+    text-align: center;
+    position: relative;
+  }
+
+  .tag-container {
+    margin-right: 2px;
+    padding: 10px;
+  }
+
+  .tag {
+    height: 10px;
+    border-radius: 20px;
   }
 }

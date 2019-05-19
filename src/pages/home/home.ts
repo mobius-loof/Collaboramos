@@ -34,6 +34,8 @@ export class HomePage {
   stackConfig: StackConfig;
   recentCard: string = '';
 
+  tags = ['scss', 'ts', 'html'];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
@@ -92,7 +94,9 @@ export class HomePage {
   // Connected through HTML
   voteUp(like: boolean) {
     let removedCard = this.cards.pop();
-    this.addNewCards(1);
+    if(this.cards.length <= 2) {
+      this.addNewCards(5);
+    }
     if (like) {
       this.recentCard = 'You liked: ' + removedCard.email;
     } else {
