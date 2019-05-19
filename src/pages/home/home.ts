@@ -48,6 +48,10 @@ export class HomePage {
         return 800;
       }
     };
+
+
+    this.addNewCards(2);
+
   }
 
   ngAfterViewInit() {

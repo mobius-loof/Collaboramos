@@ -25,9 +25,9 @@
       *ngFor="let c of cards"
       class="td-card card card-md"
       swing-card=""
-      style="background-color: #E6E6EA"
+      style="background-color: white"
     >
-      <ion-row style="height: 30%">
+      <ion-row style="height: 30%; background: white">
         <ion-col col-6>
           <ion-avatar item-start>
             <img class="img" src="../assets/img/advance-card-bttf.png" />
@@ -35,47 +35,49 @@
         </ion-col>
         <ion-col col-6>
           <ion-row
-            style="margin-top: 10px; background-color: rgb(129, 129, 180)"
+            style="margin-top: 10px; background-color: rgb(129, 129, 180); border-radius: 5px"
           >
-            <h1>
+            <h1 style="margin-left: 5px">
               Resume
             </h1>
           </ion-row>
-          <ion-row style="margin-top: 10px; background-color:  lavender">
-            <h1>
+          <ion-row style="margin-top: 10px; background-color:  lavender; border-radius: 5px">
+            <h1 style="margin-left: 5px">
               Website
             </h1>
           </ion-row>
         </ion-col>
       </ion-row>
 
-      <ion-row (click)="toggleSkills()" style="text-align: center; background-color: white; height: 35%">
+      <div
+        (click)="toggleSkills()"
+        style="text-align: left; background-color: white;"
+      >
         <h1 class="expanding-tabs">Skills</h1>
-        <ion-item
-        class="infoDisplay"
-        *ngIf="skillsExpanded"
-        >
-          <div class="tag-container" *ngFor="let t of tags">
-            <ion-item class="tag" no-lines no-padding color="secondary" round>
-              <button class="tag-btn" ion-button item-left clear round>
-                <ion-icon name="close-circle"></ion-icon>
-              </button>
-              <p class="tag-content">{{ t }}</p>
-            </ion-item>
-          </div>
-        </ion-item>
-      </ion-row>
+      </div>
+      <ion-item class="infoDisplay" *ngIf="skillsExpanded">
+        <div class="tag-container" *ngFor="let t of tags">
+          <ion-item class="tag" no-lines no-padding color="secondary" round>
+            <button class="tag-btn" ion-button item-left clear round>
+            </button>
+            <p class="tag-content">{{ t }}</p>
+          </ion-item>
+        </div>
+      </ion-item>
 
-      <ion-row class="expanding-tabs" (click)="toggleDesc()" style="text-align: center; background-color: white; height: 35%">
+      <ion-row
+        class="expanding-tabs"
+        (click)="toggleDesc()"
+        style="text-align: center; background-color: white; margin-top: -5px;"
+      >
         <h1 class="expanding-tabs">Description</h1>
-        <ion-item
+      </ion-row>
+      <ion-item
         class="infoDisplay"
-        style="text-align: center; background-color: white;"
         *ngIf="descExpanded"
-        >
+      >
         <p>Something goes here</p>
       </ion-item>
-      </ion-row>
     </ion-card>
   </div>
 
