@@ -1,38 +1,29 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <!--<ion-title>Pages</ion-title>-->
+      <button ion-button float-right small clear (click) = "toggleProfileSettings()">
+        {{editButton}}
+      </button>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <!--
-      
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-      break up into the individual buttons to make easier
-
-      
-      <button ion-item *ngFor="let item of pages" (click) = "makeProfile(item)">
-        {{item.title}}
-      </button>
-    -->
-      <button ion-item (click) = "makeProfile(pages[0])">
+    <ion-list no-lines inset>
+      <button id = "project" ion-button text-center block color = "{{this.projectColor}}" (click) = "createProject()">
         {{pages[0].title}}
       </button>
-      <button ion-item (click) = "makeProfile(pages[1])">
+
+      <button id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "createCandidate()">
         {{pages[1].title}}
       </button>
       <ion-item>
         <ion-label>{{pages[2].title}}</ion-label>
-        <ion-toggle checked="false" [(ngModel)]="isToggled" (ionChange)="notify()"></ion-toggle>
+        <ion-toggle checked="{{this.checked}}" [(ngModel)]="isToggled" (ionChange)="notify(this.checked)"></ion-toggle>
       </ion-item>
-      <button ion-item (click) = "makeProfile(pages[3])">
+      <button ion-item detail-none (click) = "makeProfile(pages[3])">
         {{pages[3].title}}
       </button>
-      <button ion-item (click) = "makeProfile(pages[4])">
+      <button ion-item detail-none (click) = "makeProfile(pages[4])">
         {{pages[4].title}}
       </button>
     </ion-list>

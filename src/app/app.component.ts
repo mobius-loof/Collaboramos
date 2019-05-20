@@ -14,27 +14,38 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
+  //title pages and where to send the navCtrl to; some are placeholders
   pages: any[] = [
-    /*{ title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' }*/
-    {title: 'Toggle Project Here', component: ''},
-    {title: 'Toggle Candidate Here', component: ''},
-    {title: 'Toggle Invisible Here', component: ''},
-    {title: 'Account Settings Here', component: 'SettingsPage'},
-    {title: 'Logout Here', component: 'WelcomePage'},
+    {title: 'Create Project', component: ''},
+    {title: 'Create Candidate', component: ''},
+    {title: 'Invisible', component: ''},
+    {title: 'Account Settings', component: 'SettingsPage'},
+    {title: 'Logout', component: 'WelcomePage'},
     {title: 'Todo: Change Password screen, other', component: ''}
   ]
 
-  public isToggled: boolean;
+  //boolean value for ion-toggle to set
+  private isToggled: boolean;
+
+  //variables related to project profile
+  private isProject: boolean;
+  private projectVis: boolean;
+  private projectColor: string = 'nop';
+
+  //variables related to candidate profile
+  private isCandidate: boolean;
+  private candidateVis: boolean;
+  private candidateColor: string = 'nop';
+
+  //boolean value to check if ion-toggle is set
+  private checked: boolean;
+
+  //variables related to edit button status
+  private editButton: string = 'Edit';
+  private editMode: boolean = false;
+
+  //variable to tell what was last profile
+  private lastProf: string;
 
   constructor(platform: Platform, settings: Settings, private statusBar: StatusBar, private splashScreen: SplashScreen, public menuCtrl: MenuController) {
     platform.ready().then(() => {
@@ -46,8 +57,16 @@ export class MyApp {
     });
   }
 
-  public notify() {
-    console.log("Toggled: "+ this.isToggled); 
+  public notify(check: boolean) {
+    //need to interface with Firebase for this to remember last toggled setting
+    console.log("Toggled: "+ this.isToggled);
+    check = !check
+
+    if(this.isCandidate) {
+      //check candidateVis
+    } else if(this.isProject) {
+      //check projectVis
+    }
   }
 
   openPage(page) {
@@ -57,13 +76,61 @@ export class MyApp {
   }
 
   closeMenu() {
+    //closes the left side menu
     this.menuCtrl.close();
+
+    if(this.editMode) {
+      this.toggleProfileSettings();
+    }
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
+  }
+
+  /*
+   * Setter for the edit button name
+   */
+  setEdit(editName: string) {
+    this.editButton = editName;
+  }
+
+  isEdit() {
+    return this.editMode;
+  }
+
+  toggleProfileSettings() {
+    //change the editMode boolean, meaning pressed button
+    this.editMode = !this.editMode;
+
+    //if in edit mode, then change the profile tabs to red indicating delete
+    if(this.editMode) {
+      this.projectColor = 'danger';
+      this.candidateColor = 'danger';
+
+      this.editButton = 'Cancel';
+
+    //otherwise if hit cancel, then set the profile to last one used
+    } else if(!this.editMode) {
+      this.editButton = 'Edit';
+
+      if(this.lastProf === 'project') {
+        this.projectColor = 'project';
+        this.candidateColor = 'baby_powder';
+      } else if(this.lastProf === 'candidate') {
+        this.projectColor = 'baby_powder';
+        this.candidateColor = 'candidate';
+
+      //if profiles have not been created yet, set to grey color indicating need to create
+      } else {
+        this.projectColor = 'nop';
+        this.candidateColor = 'nop';
+      }
+    }
   }
 
   makeProfile(item) {
-    // if no profile, create button is present
-
-    // once created, then will be a toggle to switch to either profile
+    //just placeholder for setting the navCtrl to move to different pages
     if(item.component == '') {
       console.log('Toggles Here');
     } else {
@@ -71,8 +138,44 @@ export class MyApp {
       this.closeMenu();
     }
   }
+
+  createProject() {
+    //set the defaults for the project profile once it is created
+    if(!this.editMode) {
+      this.lastProf = 'project';
+      this.projectColor = 'project';
+      this.checked = false;
+      this.projectVis = true;
+      this.isProject = true;
+      this.isCandidate = false;
+      this.pages[0].title = 'Collaboramos';
+
+      if(this.candidateColor !== 'nop') {
+        this.candidateColor = 'baby_powder';
+      }
+    }
+  }
+
+  createCandidate() {
+    //set defaults for candidate profile once it has been created
+    if(!this.editMode) {
+      this.lastProf = 'candidate';
+      this.candidateColor = 'candidate';
+      this.checked = false;
+      this.candidateVis = true;
+      this.isCandidate = true;
+      this.isProject = false;
+      this.pages[1].title = 'Gary G.';
+
+      if(this.projectColor !== 'nop') {
+        this.projectColor = 'baby_powder';
+      }
+    }
+  }
 }
 
 // can wrap things in ion item; put button and text
 
 //ionic toggle for profile visibility and ionic modal for settings page
+//use firebase isVisible flag for toggle and profile visibility settings
+//  learn firebase

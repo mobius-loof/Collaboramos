@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
 
 import { Settings } from '../../providers';
+import { ChangePassPage } from '../change-pass/change-pass';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -28,7 +29,7 @@ export class SettingsPage {
   };
 
   page: string = 'main';
-  pageTitle: string = 'Settings';
+  pageTitle: string = 'Account Settings';
 
   subSettings: any = SettingsPage;
 
@@ -86,6 +87,11 @@ export class SettingsPage {
   returnHome() {
     this.navCtrl.setRoot('TabsPage');
     this.menuCtrl.open();
+  }
+
+  changePass() {
+    console.log("yes");
+    this.navCtrl.push("ChangePassPage");
   }
 
   ngOnChanges() {

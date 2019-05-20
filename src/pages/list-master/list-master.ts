@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, MenuController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
+import { MyApp } from '../../app/app.component'
 
 @IonicPage()
 @Component({
@@ -12,8 +13,10 @@ import { Items } from '../../providers';
 export class ListMasterPage {
   currentItems: Item[];
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public menuCtrl: MenuController,
+              public appCom: MyApp) {
     this.currentItems = this.items.query();
+    this.menuCtrl.swipeEnable(false);
   }
 
   /**
@@ -50,5 +53,13 @@ export class ListMasterPage {
     this.navCtrl.push('ItemDetailPage', {
       item: item
     });
+  }
+
+  openMenu() {
+    //have a variable that checks if edit was tapped; if was then would want to undo and reset colors
+    if(!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
+      this.appCom.toggleProfileSettings();
+    }
+    this.menuCtrl.open();
   }
 }
