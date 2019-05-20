@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 // import { Account } from '../models/account'
 // import { Project } from '../models/project'
-import { Candidate } from '../../models/candidate'
+import { Candidate, Project, Account } from '../../models'
+import { async } from 'rxjs/internal/scheduler/async';
+import { Subscribable, Subscription } from 'rxjs';
+import { SelectPopover } from 'ionic-angular';
+import { Observable } from 'rxjs';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -13,45 +17,28 @@ import { Candidate } from '../../models/candidate'
 @Injectable()
 export class Firestore {
 
+  public project_profile: Observable<Project>;
   constructor(public firestore: AngularFirestore) { }
+  // Account CRUD
+  getAccount(id: string): AngularFirestoreDocument<Account> {
+    return this.firestore.collection('accounts').doc(id);
+  }
 
-  getCandidateProfile(id: string): Candidate {
-    var docRef = this.firestore.collection('accounts').doc(id);
-    docRef.get().subscribe(function(doc) {
-      if(!(doc.exists)) {
-        console.log('It don;t exist');
-      } else {
-        console.log(doc.data());
-      }
-    })
+  // Candidate Profile CRUD
+  getCandidateProfile(id: string): AngularFirestoreDocument<Candidate> {
+    return this.firestore.collection('candidate_profiles').doc(id);
+  }
 
-    // console.log(docRef.candidate_id);
-    // this.firestore.collection('accounts').doc(id).get().then(function(doc) {
-    //   console.log(doc.data());
-    // });
-
-    // var candidate = account.candidate_id;
-    // var name = account.first_name.concat(" ", account.last_name);
-
-    // console.log(name);
-
-    // const candy: Candidate = {
-    //   id: candidate.select('id').get(),
-    //   name: name,
-    //   image: null,
-    //   resumeURL: null,
-    //   isVisible: candidate.select('is_visible').get(),
-    //   tags: candidate.select('tags').get(),
-    //   chats: null,
-    //   interests: null,
-    //   matches: null,
-    //   waitlist: null
-    // }
-
-    // console.log(candy);
-
-    // return candy;
+  updateCandidateProfile(id: string): Promise<Candidate> {
     return null;
   }
 
+  // Project Profile CRUD
+  getProjectProfile(id: string): AngularFirestoreDocument<Project> {
+    //var tempProject: Observable<Project>;
+    this.project_profile = this.firestore.collection('project_profiles').doc(id).valueChanges();
+    console.log(this.project_profile.description);
+
+    return this.firestore.collection('project_profiles').doc(id);
+  }
 }

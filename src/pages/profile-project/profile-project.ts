@@ -4,6 +4,8 @@ import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Firestore } from '../../providers/firestore/firestore'
+import { Observable } from 'rxjs';
+import { Project, Account } from '../../models';
 
 /**
  * Generated class for the ProfilePage page.
@@ -18,6 +20,8 @@ import { Firestore } from '../../providers/firestore/firestore'
   templateUrl: 'profile-project.html',
 })
 export class ProfileProjectPage implements OnInit {
+  public project_profile: Observable<Project>;
+  public account: Observable<Account>
 
   tags = ['tag1', 'tag2'];
   frameworks = ['f1', 'f2'];
@@ -34,7 +38,8 @@ export class ProfileProjectPage implements OnInit {
 
   ngOnInit() {
     console.log("hello from ngOnInit of profile-project");
-    var temp = this.firestore.getCandidateProfile('kgchjTGLVQGAdjzkvtCy');
+    this.project_profile = this.firestore.getProjectProfile('qbt1YubEFPK64xMGOCuu').valueChanges();
+    this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').valueChanges();
   }
 
   ionViewDidLoad() {
@@ -120,6 +125,4 @@ export class ProfileProjectPage implements OnInit {
     });
     alert.present();
   }
-
-
 }

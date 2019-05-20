@@ -14,12 +14,12 @@ export class Account {
 
 export interface Account {
   id: string,
-  firstName: string,
-  lastName: string,
+  first_name: string,
+  last_name: string,
   email: string,
-  phoneNumber: string,
-  projectProfile: Project,
-  candidateProfile: Candidate,
+  phone_number: string,
+  project_id: Project,
+  candidate_id: Candidate,
   profileImageURI: string,
-  location: string
+  address: string
 }

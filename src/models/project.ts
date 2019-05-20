@@ -2,7 +2,7 @@ import { Channel, Candidate } from "./";
 
 export interface Project {
     id: string,
-    name: string,
+    proj_name: string,
     image: string,
     description: string,
     isVisible: boolean,
