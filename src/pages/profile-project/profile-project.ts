@@ -5,6 +5,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Firestore } from '../../providers/firestore/firestore'
 
+import { Observable } from 'rxjs';
+
 /**
  * Generated class for the ProfilePage page.
  *
@@ -34,7 +36,9 @@ export class ProfileProjectPage implements OnInit {
 
   ngOnInit() {
     console.log("hello from ngOnInit of profile-project");
-    var temp = this.firestore.getCandidateProfile('kgchjTGLVQGAdjzkvtCy');
+    this.firestore.getCandidateProfile('kgchjTGLVQGAdjzkvtCy').then(temp => {
+      console.log(temp.address);
+    });
   }
 
   ionViewDidLoad() {
