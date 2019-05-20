@@ -20,8 +20,7 @@ export class MyApp {
     {title: 'Create Candidate', component: ''},
     {title: 'Invisible', component: ''},
     {title: 'Account Settings', component: 'SettingsPage'},
-    {title: 'Logout', component: 'WelcomePage'},
-    {title: 'Todo: Change Password screen, other', component: ''}
+    {title: 'Logout', component: 'WelcomePage'}
   ]
 
   //boolean value for ion-toggle to set
