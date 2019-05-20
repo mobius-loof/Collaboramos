@@ -43,7 +43,7 @@ $pastel_red: rgba(255, 107, 108, 1);
 for the rest use light fonts color and edit button
 use $baby_powder,*/
 
-$ham_bg: #B8B8D1; //background of hamburger
+$ham_bg: #AAABDC; //background of hamburger
 $project_button: #FF8F90; //button of project when seleted
 $candy_button: #FFD88B; //button of candy when selected
 $unselect_icon: #FFFFFB; //button of either when unselected
@@ -65,14 +65,16 @@ $project_background: #FEBDBE;
 
 /* 3) ----- Home/Swipe ----- */
 
-//background of project card, also use for home tab button 
-$card_project : #FF6364;
-//background of candy card, also use for home tab button
-$card_candy : #FFC145;
+//background of banner for top banner 
+$home_main_banner : #9191D7;
+//background of banner for bottom banner
+$home_2nd_banner : #BCBCFF;
 //font color for name of profile on card
-$card_name_font : #000000;  
-// background color for the bar that contains 3 tab 
-$tab_bar : #FDFDFD; 
+$home_fw_skills_font : #6100FF;
+//font color of description 
+$home_description_font : #757575;
+//color for banner of tab icons (at bottom)
+$home_bottom_banner : #FDFDFD;
 
 // the gray background for home tab
 $home_background : $E7E7E7;
