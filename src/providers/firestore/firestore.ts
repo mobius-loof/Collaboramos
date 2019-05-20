@@ -17,7 +17,6 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class Firestore {
 
-  public project_profile: Observable<Project>;
   constructor(public firestore: AngularFirestore) { }
   // Account CRUD
   getAccount(id: string): AngularFirestoreDocument<Account> {
@@ -34,11 +33,43 @@ export class Firestore {
   }
 
   // Project Profile CRUD
-  getProjectProfile(id: string): AngularFirestoreDocument<Project> {
-    //var tempProject: Observable<Project>;
-    this.project_profile = this.firestore.collection('project_profiles').doc(id).valueChanges();
-    console.log(this.project_profile.description);
 
+  // Create Profile
+  createProjectProfile(model: Project): Promise<void> {
+    const id = this.firestore.createId(); // generate an ID
+
+    // Returns promise of success/failure for creating the project document on Firestore
+    return this.firestore.doc(`project_profiles/${id}`).set({
+      description: model.description,
+      images: model.images,
+      is_visible: model.is_visible,
+      proj_name: model.proj_name,
+      tags: model.tags
+    });
+
+  }
+
+  // Read Profile
+  getProjectProfile(id: string): AngularFirestoreDocument<Project> {
+    // Returns reference of the document to read
     return this.firestore.collection('project_profiles').doc(id);
+  }
+
+  // Update Profile
+  updateProjectProfile(id: string, model: Project): Promise<void> {
+    // Returns promise of success/failure for updating the project document on Firestore
+    return this.firestore.doc(`project_profiles/${id}`).update({
+      description: model.description,
+      images: model.images,
+      is_visible: model.is_visible,
+      proj_name: model.proj_name,
+      tags: model.tags
+    });
+  }
+
+  // Delete Profile
+  deleteProjectProfile(id: string): Promise<void> {
+    // Returns promise of success/failure for deleting the project document on Firestore
+    return this.firestore.doc(`project_profiles/${id}`).delete();
   }
 }

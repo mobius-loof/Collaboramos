@@ -40,6 +40,14 @@ export class ProfileProjectPage implements OnInit {
     console.log("hello from ngOnInit of profile-project");
     this.project_profile = this.firestore.getProjectProfile('qbt1YubEFPK64xMGOCuu').valueChanges();
     this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').valueChanges();
+
+    /*var tempProject: Project;
+
+    this.project_profile.subscribe(data => {
+      tempProject = data;
+    });
+
+    console.log(tempProject);*/
   }
 
   ionViewDidLoad() {
