@@ -75,4 +75,13 @@ page-home {
     background-color: white;
     margin-top: -10px;
   }
+
+  p {
+    width: 150px;
+  }
+
+  .description{
+    display: inline-block;
+    word-wrap: break-word;
+  }
 }
