@@ -1,4 +1,5 @@
 import { Project, Candidate } from './'
+import { DocumentReference } from 'angularfire2/firestore';
 
 /**
  * The Account service manages creating instances of Item, so go ahead and rename
@@ -18,8 +19,8 @@ export interface Account {
   last_name: string,
   email: string,
   phone_number: string,
-  project_id: Project,
-  candidate_id: Candidate,
+  project_id: DocumentReference,
+  candidate_id: DocumentReference,
   profileImageURI: string,
   address: string
 }

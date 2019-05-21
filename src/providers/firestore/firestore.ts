@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, Reference, DocumentReference } from 'angularfire2/firestore';
 // import { Account } from '../models/account'
 // import { Project } from '../models/project'
 import { Candidate, Project, Account } from '../../models'
@@ -19,8 +19,21 @@ export class Firestore {
 
   constructor(public firestore: AngularFirestore) { }
   // Account CRUD
-  getAccount(id: string): AngularFirestoreDocument<Account> {
-    return this.firestore.collection('accounts').doc(id);
+
+  // Create account
+  /*createAccount(model: Account): Promise<void> {
+    const id = this.firestore.createId(); // generate an ID
+
+    // create the account in Firestoer
+    return this.firestore.doc(`accounts/${id}`).set({
+      address: model.address,
+      candidate_id: can
+    })
+  }*/
+  getAccount(id: string): Promise<any> {
+    return this.firestore.collection('accounts').doc(id).ref.get().then(doc => {
+      return doc.data();
+    });
   }
 
   // Candidate Profile CRUD
@@ -53,6 +66,12 @@ export class Firestore {
   getProjectProfile(id: string): AngularFirestoreDocument<Project> {
     // Returns reference of the document to read
     return this.firestore.collection('project_profiles').doc(id);
+  }
+
+  getProjectProfile(ref: DocumentReference): Promise<any> {
+    return ref.get().then(doc=> {
+      return doc.data();
+    });
   }
 
   // Update Profile
