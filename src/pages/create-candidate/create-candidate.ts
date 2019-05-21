@@ -11,6 +11,7 @@ import { IonicPage, NavController, ViewController } from 'ionic-angular';
 })
 export class CreateCandidatePage {
   @ViewChild('fileInput') fileInput;
+  @ViewChild('imageInput') imageInput;
 
 
   candidate: Candidate = {
@@ -51,6 +52,7 @@ export class CreateCandidatePage {
   }
 
   getPicture() {
+    console.log("getting picture");
     if (Camera['installed']()) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
@@ -63,29 +65,31 @@ export class CreateCandidatePage {
         alert('Unable to take photo');
       })
     } else {
-      this.fileInput.nativeElement.click();
+      this.imageInput.nativeElement.click();
     }
   }
 
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-
       let imageData = (readerEvent.target as any).result;
-      //this.form.patchValue({ 'profilePic': imageData });
       this.candidate.candidateImage = imageData;
-      this.hasPicture = true;
+      console.log("Received Picture");
     };
-
     reader.readAsDataURL(event.target.files[0]);
+    this.hasPicture = true;
   }
 
   getProfileImageStyle() {
-    //return 'url(' + this.form.controls['profilePic'].value + ')'
     return 'url(' + this.candidate.candidateImage + ')'
   }
 
+  getSize() {
+    return '180px 140px'
+  }
+
   getFile() {
+    console.log("getting file");
     this.fileInput.nativeElement.click();
   }
 
@@ -96,6 +100,8 @@ export class CreateCandidatePage {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
       this.candidate.resume = fileData;
+      console.log("Received Resume");
+      console.log(fileData);
       this.hasFile = true;
     };
 

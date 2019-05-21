@@ -42,7 +42,7 @@ export class CreateProjectPage{
       chats: {}
     };
 
-  @ViewChild('fileInput') fileInput;
+  @ViewChild('imageInput') imageInput;
 
   isReadyToSave: boolean;
   hasPicture: boolean;
@@ -83,7 +83,7 @@ export class CreateProjectPage{
         alert('Unable to take photo');
       })
     } else {
-      this.fileInput.nativeElement.click();
+      this.imageInput.nativeElement.click();
     }
   }
 
@@ -99,7 +99,10 @@ export class CreateProjectPage{
 
     reader.readAsDataURL(event.target.files[0]);
   }
-  
+
+  getSize() {
+    return '180px 140px'
+  }
 
   getProfileImageStyle() {
     //return 'url(' + this.form.controls['profilePic'].value + ')'

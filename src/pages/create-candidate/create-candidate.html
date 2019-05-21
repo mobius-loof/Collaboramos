@@ -18,48 +18,36 @@
   </div>
 
   <!--ADD PICTURE-->
-  <input type="file" #fileInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
 
   <ion-grid class="candidate-pic" no-padding>
     <ion-row>
       <ion-col no-padding>
-        <div class="profile-image-wrapper" (click)="getPicture()">
-          <div class="profile-image-placeholder" *ngIf="!this.hasPicture">
-            <ion-icon name="add"></ion-icon>
-          </div>
-          <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="hasPicture">
-          </div>
+        <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
+        <div class="profile-image-placeholder" *ngIf="!this.hasPicture" (click)="getPicture()">
+          <ion-icon name="add"></ion-icon>
+        </div>
+        <div class="profile-image" *ngIf="this.hasPicture" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()" (click)="getPicture()">
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-
   <!--ADD RESUME-->
-  <input type="file" #fileInput style="visibility: hidden; " name="files[]" (change)="processWebFile($event)" />
-  <div class="profile-file-wrapper" (click)="getFile()">
-    <div class="profile-file-placeholder" *ngIf="!this.hasFile">
-      <ion-grid class="addresume">
-        <ion-row>
-          <ion-col>
-            <ion-icon name="copy"></ion-icon>
-            RESUME
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-    <div class="profile-file" [style.backgroundImage]="getProfileFileStyle()" *ngIf="this.hasFile">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-icon name="copy"></ion-icon>
-            Success!
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </div>
-
+  <ion-grid class="resume" no-padding>
+    <ion-row>
+      <ion-col no-padding>
+        <input type="file" #fileInput style="visibility: hidden; " name="files[]" (change)="processWebFile($event)" />
+        <div class="resume-text" *ngIf="!this.hasFile" (click)="getFile()">
+          <ion-icon name="copy"></ion-icon>
+          RESUME
+        </div>
+        <div class="resume-text" *ngIf="this.hasFile" (click)="getFile()">
+          <ion-icon name="copy"></ion-icon>
+          SUCCESS!
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-list>
     <ion-item>
