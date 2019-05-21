@@ -32,7 +32,7 @@ export class HomePage {
 
   cards: Array<any>;
   stackConfig: StackConfig;
-  recentCard: string = '';
+  recentCard: string = '     ';
 
   tags = ['scss', 'ts', 'html'];
 
@@ -49,8 +49,8 @@ export class HomePage {
       }
     };
 
-
-    this.addNewCards(2);
+    this.cards = [];
+    this.addNewCards(1);
 
   }
 
@@ -60,20 +60,10 @@ export class HomePage {
       event.target.style.background = '#ffffff';
     });
 
-    this.cards = [{email: ''}];
-    this.addNewCards(1);
   }
 
   viewMessages() {
     this.navCtrl.push('MessagePage');
-  }
-
-  toggleSkills(){
-    this.skillsExpanded = !this.skillsExpanded;
-  }
-
-  toggleDesc(){
-    this.descExpanded = !this.descExpanded;
   }
 
   // Called whenever we drag an element
@@ -106,7 +96,6 @@ export class HomePage {
     } else {
       this.recentCard = 'You disliked: ' + removedCard.email;
     }
-
   }
 
   // Add new cards to our array

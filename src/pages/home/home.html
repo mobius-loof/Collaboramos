@@ -17,65 +17,66 @@
     (throwoutleft)="voteUp(false)"
     (throwoutright)="voteUp(true)"
     id="card-stack"
-    style="background-color: white; max-height: 500px"
+    style="background-color: white; height: 80%;"
   >
     <ion-card
       #mycards1
       swing-card
-      *ngFor="let c of cards"
-      class="td-card card card-md"
+      *ngFor="let c of cards; let i = index"
+      [class]="'td-card + card card-md ' + 'card-title'+(i)"
       swing-card=""
-      style="background-color: white"
+      style="background-color: white;"
     >
       <ion-grid>
         <ion-row style="height: 30%; background: white">
-
-          <ion-col col-6 >
+          <ion-col col-6>
+            <ion-row class="img-row" style="background-color: white;">
+              <h1 class="img-row-info">
+                Gary G.
+              </h1>
+              <p class="img-row-info" style="font-size: 70%">Software Developer</p>
+            </ion-row>
             <ion-row
-              style="margin-top: 10px; width: 210%; background-color: rgb(129, 129, 180); border-radius: 5px;"
+              class="img-row"
+              style="background-color: rgb(129, 129, 180);"
             >
-              <h1 style="margin-left: 50%">
+              <h1 class="img-row-info">
                 Resume
               </h1>
             </ion-row>
-            <ion-row
-              style="margin-top: 10px; width: 210%; background-color:  lavender; border-radius: 5px;"
-            >
-              <h1 style="margin-left: 50%">
+            <ion-row class="img-row" style="background-color:  #BCBCFF;">
+              <h1 class="img-row-info">
                 Website
               </h1>
             </ion-row>
           </ion-col>
 
-          <ion-col col-6 style = "margin-left: -50%;">
+          <ion-col col-6 style="margin-left: -50%;">
             <ion-avatar item-start>
-              <img class="img" src="../assets/img/dio.png"/>
+              <img class="img" src="../assets/img/dio.png" />
             </ion-avatar>
           </ion-col>
-
         </ion-row>
 
         <ion-row
-          class="expanding-tabs"
-          (click)="toggleDesc()"
-          style="text-align: center; background-color: white; margin-top: -5px;"
+          style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%"
         >
-          <h1 class="expanding-tabs">Description</h1>
+          <p>
+            Description with some long text that is overly exaggeratedly long
+            and makes no sense whatsoever with no punctuation just for the sake
+            of testing how this element would look like if the paragraph
+            description ever becomes too long and how we should look into
+            limiting its character count.
+          </p>
         </ion-row>
-        <ion-item class="infoDisplay" *ngIf="descExpanded">
-          <p>Something goes here</p>
-        </ion-item>
 
         <ion-row>
           <div
-            (click)="toggleSkills()"
-            style="text-align: left; background-color: white;"
+            style="text-align: center; background-color: white;"
           >
-            <h1 class="expanding-tabs">Skills</h1>
+            <h1 style="text-align: center; justify-content: center;  position: absolute">Skills</h1>
           </div>
         </ion-row>
-
-
       </ion-grid>
     </ion-card>
   </div>
@@ -87,7 +88,7 @@
       <button
         ion-button
         clear
-        medium
+        default
         icon-right
         expand="full"
         color="primary"
@@ -101,7 +102,7 @@
       <button
         ion-button
         clear
-        medium
+        default
         icon-left
         color="primary"
         (click)="voteUp(true)"
