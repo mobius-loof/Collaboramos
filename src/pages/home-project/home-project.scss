@@ -1,4 +1,4 @@
-page-home {
+page-home-project {
 
   ion-content {
     text-align: center;
@@ -13,7 +13,7 @@ page-home {
     height: 90%;
     margin: 0px auto 0;
     position: relative;
-    z-index: 1;
+
   }
 
   #card-stack ion-card {
@@ -32,34 +32,18 @@ page-home {
     margin-bottom: 500px;
   }
 
-  .card-title0 {
+  .card-title1 {
     box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.5);
     max-height: 10000px;
   }
 
-  .card-title1 {
-    max-height: 0px;
-  }
-
-  .card-title2 {
-    max-height: 0px;
-  }
-
-  .card-title3 {
-    max-height: 0px;
-  }
-
-  .card-title4 {
-    max-height: 0px;
-  }
-
-  .card-title5 {
+  .card-title0 {
     max-height: 0px;
   }
 
   .img {
     border-radius: 5%;
-    box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 5px 3px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: block;
     margin-top: 10%;
 

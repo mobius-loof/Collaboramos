@@ -17,10 +17,10 @@ import { Items } from '../../providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home2.html'
+  selector: 'page-home-candidate',
+  templateUrl: 'home-candidate.html'
 })
-export class HomePage {
+export class HomeCandidatePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
@@ -123,5 +123,4 @@ export class HomePage {
     return hex;
 
   }
-
 }
