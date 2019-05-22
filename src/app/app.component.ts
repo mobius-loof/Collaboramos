@@ -25,7 +25,8 @@ export class MyApp {
     { title: 'Master Detail', component: 'ListMasterPage' },
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Home', component: 'HomePage' }
+    { title: 'HomeProject', component: 'HomeProjectPage' },
+    { title: 'HomeCandidate', component: 'HomeCandidatePage' }
   ]
 
   constructor(platform: Platform, settings: Settings, private statusBar: StatusBar, private splashScreen: SplashScreen) {

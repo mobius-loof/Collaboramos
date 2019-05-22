@@ -17,10 +17,10 @@ import { Items } from '../../providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-home-project',
+  templateUrl: 'home-project.html'
 })
-export class HomePage {
+export class HomeProjectPage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
@@ -50,7 +50,7 @@ export class HomePage {
     };
 
     this.cards = [];
-    this.addNewCards(1);
+    this.addNewCards(3);
 
   }
 
@@ -100,6 +100,7 @@ export class HomePage {
 
   // Add new cards to our array
   addNewCards(count: number) {
+
     this.http.get('https://randomuser.me/api/?results=' + count)
     .map(data => data.json().results)
     .subscribe(result => {
