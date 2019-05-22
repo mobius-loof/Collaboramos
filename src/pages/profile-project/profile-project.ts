@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Firestore } from '../../providers/firestore/firestore'
+import { Observable } from 'rxjs';
+import { Project, Account } from '../../models';
 
 /**
  * Generated class for the ProfilePage page.
@@ -13,18 +19,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-profile-project',
   templateUrl: 'profile-project.html',
 })
-export class ProfileProjectPage {
+export class ProfileProjectPage implements OnInit {
+  public project_profile: Promise<any>;
+  public account: Promise<any>
 
-  tags = ['tag1', 'tag2']
-
+  tags = ['tag1', 'tag2'];
+  frameworks = ['f1', 'f2'];
   isEdit: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private alertCtrl: AlertController,
+              private imagePicker: ImagePicker,
+              private inAppBrowser: InAppBrowser,
+              private firestore: Firestore) {
     this.isEdit = false;
   }
 
+  ngOnInit() {
+    console.log("hello from ngOnInit of profile-project");
+    
+    this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy');
+   
+    this.project_profile = this.account.then(data=> {
+      return this.firestore.getProjectProfile(data.project_id);
+    });
+
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileProjectPage');
+    console.log(this.frameworks);
   }
 
   setIsEdit(isEdit: boolean, discard: boolean) {
@@ -39,9 +63,71 @@ export class ProfileProjectPage {
       }
     }
     this.tags = newTags
-    console.log(this.tags.length)
   }
 
+  deleteFramework(f: string){
+    var newTags=[]
+    for(var i=0;i<this.frameworks.length;i++){
+      if(this.frameworks[i] != f){
+        newTags.push(this.frameworks[i])
+      }
+    }
+    this.frameworks = newTags
+  }
 
+  addTag(){
+    this.presentPrompt()
+  }
 
+  addFramework() {
+    this.presentPrompt()
+  }
+
+  pickImage() {
+    let options = {
+      maximumImagesCount: 1,
+      outputType: 0,
+      width: 800,
+      height: 800
+    }
+
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        console.log(results[i]);
+      }
+    })
+  }
+
+  presentWebsite() {
+    let target = "_system";
+    this.inAppBrowser.create("http://www.google.com");
+  }
+
+  presentPrompt(){
+    let myString: string = ""
+    let alert = this.alertCtrl.create({
+      title: 'Add Tag',
+      inputs: [
+        {
+          name: 'tag',
+          placeholder: 'short tag description'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.tags.push(data.tag)
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

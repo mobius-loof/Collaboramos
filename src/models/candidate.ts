@@ -1,10 +1,14 @@
-import { Channel } from "./";
+import { Channel, Project } from "./";
 
 export interface Candidate {
-    candidateName: string,
-    candidateId: string,
-    projectImage: string,
+    id: string,
+    name: string,
+    image: string,
+    resumeURL: string,
     isVisible: string,
     tags: string[],
-    chats: {[id:string]:Channel}
+    chats: {[id: string]: Channel},
+    interests: {[id: string]: Project},
+    matches: {[id: string]: Project},
+    waitlist: Project[]
 }
