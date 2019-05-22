@@ -110,4 +110,13 @@ page-home {
     font-weight: normal;
     font-variant: small-caps;
   }
+
+  p {
+    width: 150px;
+  }
+
+  .description{
+    display: inline-block;
+    word-wrap: break-word;
+  }
 }

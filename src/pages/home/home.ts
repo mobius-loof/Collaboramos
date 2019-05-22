@@ -18,7 +18,7 @@ import { Items } from '../../providers';
 @IonicPage()
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home2.html'
 })
 export class HomePage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
@@ -26,6 +26,7 @@ export class HomePage {
 
   skillsExpanded = true;
   descExpanded = true;
+  frameworksExpanded = true;
 
   private element;
 
