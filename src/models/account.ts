@@ -21,6 +21,8 @@ export interface Account {
   phone_number: string,
   project_id: DocumentReference,
   candidate_id: DocumentReference,
-  profileImageURI: string,
+  project: Project,
+  candidate: Candidate,
+  profile_image: string,
   address: string
 }

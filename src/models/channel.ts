@@ -1,9 +1,13 @@
 import { Project, Candidate, Message } from "./";
+import { DocumentReference } from "angularfire2/firestore";
 
 export interface Channel {
-    chatMemberProject: Project
-    chatMemberCandidate: Candidate
-    lastMessage: Message,
+    chatMemberProject: Project,
+    chatMemberCandidate: Candidate,
+    chat_member_project: DocumentReference,
+    chat_member_candidate: DocumentReference,
+    lastMessageSent: Message,
+    last_message_sent: DocumentReference,
     recentMessagesSent: Message[],
-    sharedMedia: string[]
+    media: string[]
 }
