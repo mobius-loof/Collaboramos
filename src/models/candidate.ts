@@ -5,10 +5,13 @@ export interface Candidate {
     name: string,
     image: string,
     resumeURL: string,
-    isVisible: string,
+    is_visible: boolean,
     tags: string[],
     chats: {[id: string]: Channel},
     interests: {[id: string]: Project},
     matches: {[id: string]: Project},
-    waitlist: Project[]
+    waitlist: Project[],
+    phone: string,
+    address: string,
+    skills: string[]
 }

@@ -33,13 +33,19 @@ export class CreateProjectPage{
     };
   */
   project: Project = {
-      name: '',
-      id: '',
-      image: '',
-      description: '',
-      isVisible: true,
+      id: "",
+      proj_name: "",
+      images:[],
+      description: "",
+      is_visible: true,
       tags: [],
-      chats: {}
+      chats: {},
+      interests: {},
+      matches: {},
+      waitlist: [],
+      address: "",
+      email: "",
+      website: "",
     };
 
   @ViewChild('imageInput') imageInput;
@@ -77,7 +83,7 @@ export class CreateProjectPage{
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        this.project.image = 'data:image/jpg;base64,' + data;
+        this.project.images.push('data:image/jpg;base64,' + data);
         //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');
@@ -92,7 +98,7 @@ export class CreateProjectPage{
     reader.onload = (readerEvent) => {
 
       let imageData = (readerEvent.target as any).result;
-      this.project.image = imageData;
+      this.project.images[0] = imageData;
       this.hasPicture = true;
       //this.form.patchValue({ 'profilePic': imageData });
     };
@@ -101,12 +107,12 @@ export class CreateProjectPage{
   }
 
   getSize() {
-    return '180px 140px'
+    return '100px 100px'
   }
 
   getProfileImageStyle() {
     //return 'url(' + this.form.controls['profilePic'].value + ')'
-    return 'url(' + this.project.image + ')'
+    return 'url(' + this.project.images[this.project.images.length-1] + ')'
   }
 
   /**

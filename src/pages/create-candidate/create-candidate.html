@@ -23,10 +23,12 @@
     <ion-row>
       <ion-col no-padding>
         <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
-        <div class="profile-image-placeholder" *ngIf="!this.hasPicture" (click)="getPicture()">
-          <ion-icon name="add"></ion-icon>
-        </div>
-        <div class="profile-image" *ngIf="this.hasPicture" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()" (click)="getPicture()">
+        <div class="candidate-img-container" (click)="getPicture()">
+          <div class="profile-image-placeholder" *ngIf="!this.hasPicture">
+            <ion-icon class="add-icon" name="add"></ion-icon>
+          </div>
+          <div class="profile-image" *ngIf="this.hasPicture" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+          </div>
         </div>
       </ion-col>
     </ion-row>
@@ -54,10 +56,19 @@
       <ion-input type="text" placeholder="Name" [(ngModel)]="candidate.name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Description" [(ngModel)]="candidate.description"></ion-input>
+      <ion-input type="text" placeholder="Tags" [(ngModel)]="candidate.tags"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Tags" [(ngModel)]="candidate.tags"></ion-input>
+      <ion-input type="text" placeholder="Phone" [(ngModel)]="candidate.phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Address" [(ngModel)]="candidate.address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Skills" [(ngModel)]="candidate.skills"></ion-input>
+    </ion-item>
+    <ion-item>
+      <textarea class="text-area" type="text" placeholder="Description" [(ngModel)]="candidate.description"></textarea>
     </ion-item>
   </ion-list>
 </ion-content>

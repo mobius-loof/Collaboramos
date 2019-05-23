@@ -19,18 +19,8 @@ page-create-candidate {
 
   .candidate-pic {
     justify-content: center;
-    height: 180px;
-    border: 1px solid gray;
-    width: 140px;
-    margin-bottom: 30px;
-    margin-top: -10px;
-  }
-
-  .candidate-image-wrapper {
-    justify-content: center;
-    height: 180px;
-    border: 1px solid gray;
-    width: 140px;
+    height: 100px;
+    width: 100px;
     margin-bottom: 30px;
     margin-top: -10px;
   }
@@ -38,7 +28,6 @@ page-create-candidate {
   .profile-image {
     justify-content: center;
     height: 180px;
-    border: 1px solid gray;
     width: 140px;
     //margin-bottom: -10px;
     margin-left: -1px;
@@ -57,8 +46,28 @@ page-create-candidate {
     margin-bottom: 10px;
   }
 
+  .candidate-img-container {
+    position: relative;
+    border: 1px solid gray;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 0px;
+  }
+
   .resume-text {
     margin-bottom: 30px;
+  }
+
+  .text-area {
+    width: 100%;
+    height: 100px;
+  }
+
+  .add-icon {
+    margin-top: 40px;
+    justify-content: center;
   }
 
   .title {

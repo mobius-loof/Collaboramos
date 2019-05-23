@@ -68,11 +68,13 @@ export class Firestore {
     return this.firestore.collection('project_profiles').doc(id);
   }
 
+  /*
   getProjectProfile(ref: DocumentReference): Promise<any> {
     return ref.get().then(doc=> {
       return doc.data();
     });
   }
+  */
 
   // Update Profile
   updateProjectProfile(id: string, model: Project): Promise<void> {
