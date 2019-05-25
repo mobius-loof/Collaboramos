@@ -10,6 +10,7 @@ import { Candidate, Project, Account, Channel } from '../../models'
 */
 @Injectable()
 export class Firestore {
+  account;
 
   constructor(public firestore: AngularFirestore) { }
   // Account CRUD

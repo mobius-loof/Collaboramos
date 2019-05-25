@@ -7,6 +7,8 @@ import { Firestore } from '../../providers/firestore/firestore'
 import { Observable } from 'rxjs';
 import { Project, Account } from '../../models';
 
+import { Observable } from 'rxjs';
+
 /**
  * Generated class for the ProfilePage page.
  *
