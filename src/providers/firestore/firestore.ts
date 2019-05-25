@@ -130,7 +130,6 @@ export class Firestore {
       return doc.data();
     });
   }
-
   // Read Profile via Reference
   getProjectProfile(ref: DocumentReference): Promise<any> {
     return ref.get().then(doc=> {

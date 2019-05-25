@@ -11,5 +11,8 @@ export interface Candidate {
     chats: {[id: string]: Channel},
     interests: {[id: string]: Project},
     matches: {[id: string]: Project},
-    waitlist: Project[]
+    waitlist: Project[],
+    phone: string,
+    address: string,
+    skills: string[]
 }

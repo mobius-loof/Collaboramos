@@ -1,0 +1,78 @@
+$create-color: #518DC7;
+$cancel-color: #DDDDDD;
+
+page-create-candidate {
+  background-color: white;
+
+  .create {
+    background-color: $create-color;
+    height: 50px;
+    margin-bottom: -4px;
+  }
+
+  .cancel {
+    color: black;
+    height: 50px;
+    background-color: $cancel-color;
+    margin-bottom: 0px;
+  }
+
+  .candidate-pic {
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+  }
+
+  .profile-image {
+    justify-content: center;
+    height: 180px;
+    width: 140px;
+    //margin-bottom: -10px;
+    margin-left: -1px;
+    margin-top: -23px;
+  }
+
+  .resume {
+    vertical-align: middle;
+    justify-content: center;
+    height: 40px;
+    color: $create-color;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.4em;
+    border: 1px solid $create-color;
+    width: 350px;
+    margin-bottom: 10px;
+  }
+
+  .candidate-img-container {
+    position: relative;
+    border: 1px solid gray;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 0px;
+  }
+
+  .resume-text {
+    margin-bottom: 30px;
+  }
+
+  .text-area {
+    width: 100%;
+    height: 100px;
+  }
+
+  .add-icon {
+    margin-top: 40px;
+    justify-content: center;
+  }
+
+  .title {
+    color: gray;
+    margin-bottom: 30px;
+  }
+}
+

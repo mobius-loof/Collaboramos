@@ -10,5 +10,8 @@ export interface Project {
     chats: {[id: string]: Channel},
     interests: {[id: string]: Candidate},
     matches: {[id: string]: Candidate},
-    waitlist: Candidate[]
+    waitlist: Candidate[],
+    address: string,
+    email: string,
+    website: string
 }
