@@ -76,7 +76,7 @@
             <p class="tag-content">{{t}}</p>
         </ion-item>
       </div>
-      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addTag()">
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-row>
@@ -94,7 +94,7 @@
             <p class="tag-content">{{f}}</p>
         </ion-item>
       </div>
-      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="addFramework()">
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('frameworks')">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-row>
