@@ -23,7 +23,7 @@
       #mycards1
       swing-card
       *ngFor="let c of cards; let i = index"
-      [class]="'td-card card card-md ' + 'card-title'+(i)"
+      [class]="'td-card card card-md ' + 'card-title' + i"
       swing-card=""
       style="background-color: white;"
     >
@@ -34,7 +34,9 @@
               <h1 class="img-row-info">
                 Gary G.
               </h1>
-              <p class="img-row-info" style="font-size: 70%">Software Developer</p>
+              <p class="img-row-info" style="font-size: 70%">
+                Software Developer
+              </p>
             </ion-row>
             <ion-row
               class="img-row"
@@ -61,7 +63,7 @@
         <ion-row
           style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%"
         >
-          <p>
+          <p style="margin: 15px 15px 15px;">
             Description with some long text that is overly exaggeratedly long
             and makes no sense whatsoever with no punctuation just for the sake
             of testing how this element would look like if the paragraph
@@ -71,11 +73,11 @@
         </ion-row>
 
         <ion-row>
-          <div
-            style="text-align: center; background-color: white;"
-          >
-            <h1 style="text-align: center; justify-content: center;  position: absolute">Skills</h1>
-          </div>
+          <ion-col align-self-center>
+            <div style="background-color: white; text-align: center;">
+              <h1 style="text-align: center;">Skills</h1>
+            </div>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
@@ -83,8 +85,8 @@
 
   <p class="statusBar">{{ recentCard }}</p>
 
-  <ion-row class="likeDislikeButton">
-    <ion-col class="col" col-6>
+  <ion-row class="likeDislikeRow">
+    <ion-col class="likeDislikeButton" col-6>
       <button
         ion-button
         clear
@@ -98,7 +100,7 @@
         No
       </button>
     </ion-col>
-    <ion-col class="col" col-6>
+    <ion-col class="likeDislikeButton" col-6>
       <button
         ion-button
         clear

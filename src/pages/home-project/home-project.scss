@@ -49,9 +49,14 @@ page-home-project {
 
   }
 
-  .likeDislikeButton {
+  .likeDislikeRow {
     height: 10%;
     margin-top: -20px;
+    z-index: -1;
+  }
+
+  .likeDislikeButton {
+    z-index: 0;
   }
 
   .col {
@@ -68,7 +73,7 @@ page-home-project {
   .statusBar {
     text-align: center;
     position: relative;
-
+    z-index: -1;
   }
 
   .tag-container {
