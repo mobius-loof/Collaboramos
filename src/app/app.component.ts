@@ -27,12 +27,12 @@ export class MyApp {
   private isToggled: boolean;
 
   //variables related to project profile
-  private isProject: boolean;
+  private projectCreated: boolean;
   private projectVis: boolean;
   private projectColor: string = 'nop';
 
   //variables related to candidate profile
-  private isCandidate: boolean;
+  private candidateCreated: boolean;
   private candidateVis: boolean;
   private candidateColor: string = 'nop';
 
@@ -61,9 +61,9 @@ export class MyApp {
     console.log("Toggled: "+ this.isToggled);
     check = !check
 
-    if(this.isCandidate) {
+    if(this.candidateCreated) {
       //check candidateVis
-    } else if(this.isProject) {
+    } else if(this.projectCreated) {
       //check projectVis
     }
   }
@@ -115,10 +115,20 @@ export class MyApp {
 
       if(this.lastProf === 'project') {
         this.projectColor = 'project';
-        this.candidateColor = 'baby_powder';
+
+        if(this.candidateCreated) {
+          this.candidateColor = 'baby_powder';
+        } else {
+          this.candidateColor = 'nop';
+        }
       } else if(this.lastProf === 'candidate') {
-        this.projectColor = 'baby_powder';
         this.candidateColor = 'candidate';
+
+        if(this.projectCreated) {
+          this.projectColor = 'baby_powder';
+        } else {
+          this.projectColor = 'nop';
+        }
 
       //if profiles have not been created yet, set to grey color indicating need to create
       } else {
@@ -145,8 +155,7 @@ export class MyApp {
       this.projectColor = 'project';
       this.checked = false;
       this.projectVis = true;
-      this.isProject = true;
-      this.isCandidate = false;
+      this.projectCreated = true;
       this.pages[0].title = 'Collaboramos';
 
       if(this.candidateColor !== 'nop') {
@@ -162,8 +171,7 @@ export class MyApp {
       this.candidateColor = 'candidate';
       this.checked = false;
       this.candidateVis = true;
-      this.isCandidate = true;
-      this.isProject = false;
+      this.candidateCreated = true;
       this.pages[1].title = 'Gary G.';
 
       if(this.projectColor !== 'nop') {
