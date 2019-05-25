@@ -34,7 +34,9 @@ export class MyApp {
     {title: 'Create Candidate', component: ''},
     {title: 'Invisible', component: ''},
     {title: 'Account Settings', component: 'SettingsPage'},
-    {title: 'Logout', component: 'WelcomePage'}
+    {title: 'Logout', component: 'WelcomePage'},
+    {title: 'ProfileProject', component: 'ProfileProjectPage'},
+    {title: 'ProfileCandidate', component: 'ProfileCandidatePage'},
   ]
 
   //boolean value for ion-toggle to set

@@ -4,10 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Firestore } from '../../providers/firestore/firestore'
-import { Observable } from 'rxjs';
 import { Project, Account } from '../../models';
-
-import { Observable } from 'rxjs';
 
 /**
  * Generated class for the ProfilePage page.
@@ -39,8 +36,6 @@ export class ProfileProjectPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("hello from ngOnInit of profile-project");
-    
     this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy');
    
     this.project_profile = this.account.then(data=> {
@@ -93,12 +88,10 @@ export class ProfileProjectPage implements OnInit {
   }
 
   presentWebsite() {
-    let target = "_system";
     this.inAppBrowser.create("http://www.google.com");
   }
 
   presentPrompt(type: string){
-    let myString: string = ""
     let alert = this.alertCtrl.create({
       title: 'Add Tag',
       inputs: [
