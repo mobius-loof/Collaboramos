@@ -17,7 +17,9 @@ export class CreateCandidatePage {
   candidate: Candidate = {
     id: "",
     name: "",
-    image: "",
+    files: [],
+    images: [],
+    description: "",
     resumeURL: "",
     is_visible: true,
     tags: [],
@@ -65,7 +67,7 @@ export class CreateCandidatePage {
         targetHeight: 96
       }).then((data) => {
         //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-        this.candidate.image = 'data:image/jpg;base64,' + data;
+        this.candidate.images.push('data:image/jpg;base64,' + data);
       }, (err) => {
         alert('Unable to take photo');
       })
@@ -78,7 +80,7 @@ export class CreateCandidatePage {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
-      this.candidate.image = imageData;
+      this.candidate.images.push(imageData);
       console.log("Received Picture");
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -86,7 +88,7 @@ export class CreateCandidatePage {
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.candidate.image + ')'
+    return 'url(' + this.candidate.images[0] + ')'
   }
 
   getSize() {
