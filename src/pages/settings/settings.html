@@ -1,7 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
+    <ion-title>Account Settings</ion-title>
+    <ion-buttons left>
+        <button ion-button icon-only (click)="returnHome()">
+          <ion-icon name="arrow-back"></ion-icon>
+          <ion-label>Back</ion-label>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -9,35 +15,11 @@
 <ion-content>
 
   <form [formGroup]="form" *ngIf="settingsReady">
-    <ion-list *ngIf="page == 'main'">
+    <ion-list no-lines *ngIf="page == 'main'">
       <ion-item>
-        <ion-label>Option 1</ion-label>
-        <ion-toggle formControlName="option1"></ion-toggle>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Option 2</ion-label>
-        <ion-input formControlName="option2"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Option 3</ion-label>
-        <ion-select formControlName="option3">
-          <ion-option value="1" checked="true">1</ion-option>
-          <ion-option value="2">2</ion-option>
-          <ion-option value="3">3</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
-        Edit Profile
-      </button>
-    </ion-list>
-
-    <ion-list *ngIf="page == 'profile'">
-      <ion-item>
-        <ion-label>Option 4</ion-label>
-        <ion-input formControlName="option4"></ion-input>
+        <button ion-item (click) = "changePass()">
+          Change Password
+        </button>
       </ion-item>
     </ion-list>
   </form>
