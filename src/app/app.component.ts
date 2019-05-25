@@ -26,7 +26,9 @@ export class MyApp {
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' },
-    { title: 'CreateProject', component: 'CreateProjectPage' }
+    { title: 'CreateProject', component: 'CreateProjectPage' },
+    { title: 'HomeProject', component: 'HomeProjectPage' },
+    { title: 'HomeCandidate', component: 'HomeCandidatePage' }
   ]
 
   constructor(platform: Platform, settings: Settings, private statusBar: StatusBar, private splashScreen: SplashScreen) {

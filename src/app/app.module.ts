@@ -18,6 +18,8 @@ import { Firestore } from '../providers/firestore/firestore'
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api, Auth } from '../providers';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
+import { SwingModule } from 'angular2-swing';
 import { ImagePicker } from '@ionic-native/image-picker/';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -42,6 +44,8 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    SwingModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
