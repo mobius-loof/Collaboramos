@@ -76,14 +76,14 @@ export class Firestore {
   }
 
   // Read Candidate via ID
-  getCandidateProfile(id: string): Promise<any> {
+  getCandidateProfileFromID(id: string): Promise<any> {
     return this.firestore.collection('candidate_profiles').doc(id).ref.get().then(doc=> {
       return doc.data();
     });
   }
 
   // Read Candidate via Reference
-  getCandidateProfile(ref: DocumentReference): Promise<any> {
+  getCandidateProfileFromRef(ref: DocumentReference): Promise<any> {
     return ref.get().then(doc => {
       return doc.data();
     })
@@ -124,14 +124,14 @@ export class Firestore {
   }
 
   // Read Profile via ID
-  getProjectProfile(id: string): Promise<any> {
+  getProjectProfileFromID(id: string): Promise<any> {
     // Returns reference of the document to read
     return this.firestore.collection('project_profiles').doc(id).ref.get().then(doc => {
       return doc.data();
     });
   }
   // Read Profile via Reference
-  getProjectProfile(ref: DocumentReference): Promise<any> {
+  getProjectProfileFromRef(ref: DocumentReference): Promise<any> {
     return ref.get().then(doc=> {
       return doc.data();
     });
