@@ -68,7 +68,7 @@
       <p><b>Required Skills</b></p>
     </ion-row>
     <ion-row>
-      <div class="tag-container" *ngFor="let t of (project_profile | async)?.tags">
+      <div class="tag-container" *ngFor="let t of (project_profile | async)?.skills">
         <ion-item class="tag" no-lines no-padding color="secondary" round>
             <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteTag(t)">
                 <ion-icon name="close-circle"></ion-icon>
@@ -86,7 +86,7 @@
     </ion-row>
 
     <ion-row>
-      <div class="tag-container" *ngFor="let f of frameworks">
+      <div class="tag-container" *ngFor="let f of (project_profile | async)?.frameworks">
         <ion-item class="tag" no-lines no-padding color="secondary" round>
            <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
                 <ion-icon name="close-circle"></ion-icon>

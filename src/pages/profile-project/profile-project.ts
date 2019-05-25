@@ -39,7 +39,7 @@ export class ProfileProjectPage implements OnInit {
     this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy');
    
     this.project_profile = this.account.then(data=> {
-      return this.firestore.getProjectProfile(data.project_id);
+      return this.firestore.getProjectProfileFromID(data.project_id.id);
     });
 
   }
