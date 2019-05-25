@@ -22,8 +22,8 @@ import { Observable } from 'rxjs';
   templateUrl: 'profile-project.html',
 })
 export class ProfileProjectPage implements OnInit {
-  public project_profile: Observable<Project>;
-  public account: Observable<Account>
+  public project_profile: Promise<any>;
+  public account: Promise<any>
 
   tags = ['tag1', 'tag2'];
   frameworks = ['f1', 'f2'];
@@ -40,16 +40,13 @@ export class ProfileProjectPage implements OnInit {
 
   ngOnInit() {
     console.log("hello from ngOnInit of profile-project");
-    this.project_profile = this.firestore.getProjectProfile('qbt1YubEFPK64xMGOCuu').valueChanges();
-    this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').valueChanges();
-
-    /*var tempProject: Project;
-
-    this.project_profile.subscribe(data => {
-      tempProject = data;
+    
+    this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy');
+   
+    this.project_profile = this.account.then(data=> {
+      return this.firestore.getProjectProfile(data.project_id);
     });
 
-    console.log(tempProject);*/
   }
 
   ionViewDidLoad() {
