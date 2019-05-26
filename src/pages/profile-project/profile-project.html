@@ -44,10 +44,10 @@
 
         <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
-            <ion-input class="input-from-label" value="{{profile.proj_name}}"></ion-input>
+            <ion-input class="input-from-label" value="{{tempProfile.proj_name}}"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input class="input-from-label" value="{{profile.website}}"></ion-input>
+            <ion-input class="input-from-label" value="{{tempProfile.website}}"></ion-input>
           </ion-item>
         </div>
       </ion-col>
@@ -61,7 +61,7 @@
 
     <ion-row *ngIf="isEdit" class="text-area-container">
       <ion-col>
-        <textarea class="textarea">{{ profile.description }}</textarea>
+        <textarea class="textarea">{{ tempProfile.description }}</textarea>
       </ion-col>
     </ion-row>
 
@@ -69,13 +69,23 @@
       <p><b>Required Skills</b></p>
     </ion-row>
     <ion-row>
-      <div class="tag-container" *ngFor="let t of profile.skills">
-        <ion-item class="tag" no-lines no-padding color="secondary" round>
-            <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteSkill(t)">
-                <ion-icon name="close-circle"></ion-icon>
-            </button>
-            <p class="tag-content">{{t}}</p>
-        </ion-item>
+      <div class="tag-row-container" *ngIf="!isEdit">
+        <div class="tag-container" *ngFor="let t of profile.skills">
+          <ion-item class="tag" no-lines no-padding color="secondary" round>
+              <p class="tag-content">{{t}}</p>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="tag-row-container" *ngIf="isEdit">
+        <div class="tag-container" *ngFor="let t of tempProfile.skills">
+          <ion-item class="tag" no-lines no-padding color="secondary" round>
+              <button class="tag-btn" ion-button item-left clear round (click)="deleteSkill(t)">
+                  <ion-icon name="close-circle"></ion-icon>
+              </button>
+              <p class="tag-content">{{t}}</p>
+          </ion-item>
+        </div>
       </div>
       <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
         <ion-icon name="add-circle"></ion-icon>
@@ -87,13 +97,22 @@
     </ion-row>
 
     <ion-row>
-      <div class="tag-container" *ngFor="let f of profile.frameworks">
-        <ion-item class="tag" no-lines no-padding color="secondary" round>
-           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
-                <ion-icon name="close-circle"></ion-icon>
-            </button> 
-            <p class="tag-content">{{f}}</p>
-        </ion-item>
+      <div class="tag-row-container" *ngIf="!isEdit">
+          <div class="tag-container" *ngFor="let f of profile.frameworks">
+            <ion-item class="tag" no-lines no-padding color="secondary" round>
+                <p class="tag-content">{{f}}</p>
+            </ion-item>
+          </div>
+      </div>
+      <div class="tag-row-container" *ngIf="isEdit">
+        <div class="tag-container" *ngFor="let f of tempProfile.frameworks">
+          <ion-item class="tag" no-lines no-padding color="secondary" round>
+            <button class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
+                  <ion-icon name="close-circle"></ion-icon>
+              </button> 
+              <p class="tag-content">{{f}}</p>
+          </ion-item>
+        </div>
       </div>
       <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('frameworks')">
         <ion-icon name="add-circle"></ion-icon>

@@ -96,7 +96,7 @@ export class Firestore {
       files: model.files,
       images: model.images,
       is_visible: model.is_visible,
-      tags: model.tags
+      skills: model.skills
     });
   }
 
@@ -118,7 +118,8 @@ export class Firestore {
       images: model.images,
       is_visible: model.is_visible,
       proj_name: model.proj_name,
-      tags: model.tags
+      skills: model.skills,
+      frameworks: model.frameworks
     });
 
   }

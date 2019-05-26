@@ -75,6 +75,11 @@ page-profile-project {
     .tag-container {
         margin-right: 2px;
         padding: 2px;
+        display: inline-flex;
+    }
+
+    .tag-row-container {
+        display: inline-flex;
     }
 
     .tag-content {
@@ -123,6 +128,7 @@ page-profile-project {
         $button-ios-margin-start: 0;
         $button-ios-margin-bottom: 0;
         padding: 0;
+        display: inline-flex;
     }
 
     .button-ios.add-tag-btn{

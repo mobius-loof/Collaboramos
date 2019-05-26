@@ -22,6 +22,7 @@ export class ProfileProjectPage {
 
   private account: Account;
   private profile: Project;
+  private tempProfile: Project;
 
   private isEdit: boolean;
 
@@ -40,7 +41,8 @@ export class ProfileProjectPage {
       this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').then(account => {
         this.account = account;
         return this.firestore.getProjectProfileFromID(account.project_id.id).then(profile => {
-          this.profile = profile;
+          this.profile = this.copyProjectProfile(profile);
+          this.tempProfile = this.copyProjectProfile(profile);
         });
       }).then(_ => {
         resolve(true);
@@ -48,28 +50,55 @@ export class ProfileProjectPage {
     });
   }
 
+  copyProjectProfile(profile: Project): Project {
+    return {
+      id: profile.id,
+      proj_name: profile.proj_name,
+      images: Object.assign([], profile.images),
+      description: profile.description,
+      is_visible: profile.is_visible,
+      frameworks: Object.assign([], profile.frameworks),
+      skills: Object.assign([], profile.skills),
+      chats: profile.chats,
+      interests: profile.interests,
+      matches: profile.matches,
+      waitlist: Object.assign([], profile.waitlist),
+      address: profile.address,
+      email: profile.email,
+      website: profile.website
+    };
+  }
+
   setIsEdit(isEdit: boolean, discard: boolean) {
     this.isEdit = isEdit;
+    if (!isEdit) {
+      if (!discard){
+        // actually upload stuff
+        this.profile = this.copyProjectProfile(this.tempProfile);
+      } else {
+        this.tempProfile = this.copyProjectProfile(this.profile);
+      }
+    }
   }
 
   deleteSkill(skill: string){
     var newSkills=[];
-    for(var i=0;i<this.profile.skills.length;i++){
-      if(this.profile.skills[i] != skill){
-        newSkills.push(this.profile.skills[i]);
+    for(var i=0;i<this.tempProfile.skills.length;i++){
+      if(this.tempProfile.skills[i] != skill){
+        newSkills.push(this.tempProfile.skills[i]);
       }
     }
-    this.profile.skills = newSkills;
+    this.tempProfile.skills = newSkills;
   }
 
   deleteFramework(framework: string){
     var newFrameworks=[];
-    for(var i=0;i<this.profile.frameworks.length;i++){
-      if(this.profile.frameworks[i] != framework){
-        newFrameworks.push(this.profile.frameworks[i]);
+    for(var i=0;i<this.tempProfile.frameworks.length;i++){
+      if(this.tempProfile.frameworks[i] != framework){
+        newFrameworks.push(this.tempProfile.frameworks[i]);
       }
     }
-    this.profile.frameworks = newFrameworks;
+    this.tempProfile.frameworks = newFrameworks;
   }
 
   pickImage() {
@@ -111,9 +140,9 @@ export class ProfileProjectPage {
           text: 'Ok',
           handler: data => {
             if (type === "skills") {
-              this.profile.skills.push(data.tag);
+              this.tempProfile.skills.push(data.tag);
             } else if (type === "frameworks") {
-              this.profile.frameworks.push(data.tag);
+              this.tempProfile.frameworks.push(data.tag);
             }
           }
         }
