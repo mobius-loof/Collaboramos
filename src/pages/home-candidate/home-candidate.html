@@ -17,15 +17,15 @@
     (throwoutleft)="voteUp(false)"
     (throwoutright)="voteUp(true)"
     id="card-stack"
-    style="background-color: white; max-height: 500px"
+    style="background-color: white; max-height: 80%"
   >
     <ion-card
       #mycards1
       swing-card
-      *ngFor="let c of cards"
-      class="td-card card card-md"
+      *ngFor="let c of cards; let i = index"
+      [class]="'td-card card card-md ' + 'card-title' + i"
       swing-card=""
-      style="background-color: white"
+      style="background-color: white;"
     >
       <ion-grid>
         <ion-row style="height: 30%; background: white">
@@ -34,14 +34,14 @@
             <ion-row
               style="margin-top: 10px; width: 210%; border-radius: 5px;"
             >
-              <h1 style="margin-left: 50%">
+              <h1 style="margin-left: 40%; text-align: center;">
                 Project Name
               </h1>
             </ion-row>
             <ion-row
-              style="margin-top: 10px; width: 210%; height: 30%; background-color: rgb(129, 129, 180); border-radius: 5px;"
+              style="margin-top: 10px; margin-left: -10%; width: 230%; height: 50%; background-color: rgb(129, 129, 180); border-radius: 5px;"
             >
-              <p style="margin-top: 1%; margin-left: 50%; color: white;">
+              <p style="margin-top: 3%; margin-left: 55%; color: white;">
                 website
               </p>
             </ion-row>
@@ -49,7 +49,7 @@
 
           <ion-col col-6 style = "margin-left: -50%;">
             <ion-avatar item-start>
-              <img class="img" src="../assets/img/dio.png" style="width: 100px; height: 100px; border-radius: 50%;"/>
+              <img class="img" src="../assets/img/dio.png" style="margin-top: -3%; margin-left: 4%; width: 85px; height: 85px; border-radius: 50%;"/>
             </ion-avatar>
           </ion-col>
 
@@ -63,7 +63,7 @@
           <h1 class="expanding-tabs">Description</h1>
         </ion-row> -->
         <ion-row>
-          <p style="width: 200%; text-align: left">
+          <p style="width: 200%; text-align: left; padding-left: 10px; padding-right: 10px; padding-top: 12px; padding-bottom: 10px;">
             The description of the project will replace this text which will be a short paragraph that concisely describe the project, provided by the project manager.
           </p>
         </ion-row>
@@ -73,7 +73,7 @@
             (click)="toggleSkills()"
             style="text-align: left; background-color: white;"
           >
-            <h1 class="expanding-tabs">skills</h1>
+            <h1 class="expanding-tabs" style = "padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">skills</h1>
           </div>
         </ion-row>
 
@@ -82,7 +82,7 @@
             (click)="toggleFrameworks()"
             style="text-align: left; background-color: white;"
           >
-            <h1 class="expanding-tabs">frameworks</h1>
+            <h1 class="expanding-tabs" style = "padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">frameworks</h1>
           </div>
         </ion-row>
 
