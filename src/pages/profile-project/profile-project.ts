@@ -18,13 +18,12 @@ import { Project, Account } from '../../models';
   selector: 'page-profile-project',
   templateUrl: 'profile-project.html',
 })
-export class ProfileProjectPage implements OnInit {
-  public project_profile: Promise<any>;
-  public account: Promise<any>
+export class ProfileProjectPage {
 
-  tags = ['tag1', 'tag2'];
-  frameworks = ['f1', 'f2'];
-  isEdit: boolean;
+  private account: Account;
+  private profile: Project;
+
+  private isEdit: boolean;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -35,41 +34,42 @@ export class ProfileProjectPage implements OnInit {
     this.isEdit = false;
   }
 
-  ngOnInit() {
-    this.account = this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy');
-   
-    this.project_profile = this.account.then(data=> {
-      return this.firestore.getProjectProfileFromID(data.project_id.id);
+  // Lifecycle method that guards html from loading before profile and account are loaded
+  ionViewCanEnter(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').then(account => {
+        this.account = account;
+        return this.firestore.getProjectProfileFromID(account.project_id.id).then(profile => {
+          this.profile = profile;
+        });
+      }).then(_ => {
+        resolve(true);
+      });
     });
-
-  }
-
-  ionViewDidLoad() {
-    console.log(this.frameworks);
   }
 
   setIsEdit(isEdit: boolean, discard: boolean) {
     this.isEdit = isEdit;
   }
 
-  deleteTag(t: string){
-    var newTags=[]
-    for(var i=0;i<this.tags.length;i++){
-      if(this.tags[i] != t){
-        newTags.push(this.tags[i])
+  deleteSkill(skill: string){
+    var newSkills=[];
+    for(var i=0;i<this.profile.skills.length;i++){
+      if(this.profile.skills[i] != skill){
+        newSkills.push(this.profile.skills[i]);
       }
     }
-    this.tags = newTags
+    this.profile.skills = newSkills;
   }
 
-  deleteFramework(f: string){
-    var newTags=[]
-    for(var i=0;i<this.frameworks.length;i++){
-      if(this.frameworks[i] != f){
-        newTags.push(this.frameworks[i])
+  deleteFramework(framework: string){
+    var newFrameworks=[];
+    for(var i=0;i<this.profile.frameworks.length;i++){
+      if(this.profile.frameworks[i] != framework){
+        newFrameworks.push(this.profile.frameworks[i]);
       }
     }
-    this.frameworks = newTags
+    this.profile.frameworks = newFrameworks;
   }
 
   pickImage() {
@@ -88,7 +88,7 @@ export class ProfileProjectPage implements OnInit {
   }
 
   presentWebsite() {
-    this.inAppBrowser.create("http://www.google.com");
+    this.inAppBrowser.create(this.profile.website);
   }
 
   presentPrompt(type: string){
@@ -111,9 +111,9 @@ export class ProfileProjectPage implements OnInit {
           text: 'Ok',
           handler: data => {
             if (type === "skills") {
-              this.tags.push(data.tag);
+              this.profile.skills.push(data.tag);
             } else if (type === "frameworks") {
-              this.frameworks.push(data.tag);
+              this.profile.frameworks.push(data.tag);
             }
           }
         }
