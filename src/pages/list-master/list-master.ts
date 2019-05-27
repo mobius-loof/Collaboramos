@@ -3,7 +3,7 @@ import { IonicPage, ModalController, NavController, MenuController } from 'ionic
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
-import { MyApp } from '../../app/app.component'
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({

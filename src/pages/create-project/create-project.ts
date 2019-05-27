@@ -39,6 +39,8 @@ export class CreateProjectPage{
       description: "",
       is_visible: true,
       tags: [],
+      skills: [],
+      frameworks: [],
       chats: {},
       interests: {},
       matches: {},

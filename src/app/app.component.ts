@@ -16,7 +16,7 @@ export class MyApp {
 
   //title pages and where to send the navCtrl to; some are placeholders
   pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
+    /*{ title: 'Tutorial', component: 'TutorialPage' },
     { title: 'Welcome', component: 'WelcomePage' },
     { title: 'Tabs', component: 'TabsPage' },
     { title: 'Cards', component: 'CardsPage' },
@@ -26,10 +26,7 @@ export class MyApp {
     { title: 'Master Detail', component: 'ListMasterPage' },
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' },
-    { title: 'CreateProject', component: 'CreateProjectPage' },
-    { title: 'HomeProject', component: 'HomeProjectPage' },
-    { title: 'HomeCandidate', component: 'HomeCandidatePage' },
+    { title: 'Search', component: 'SearchPage' },*/
     {title: 'Create Project', component: ''},
     {title: 'Create Candidate', component: ''},
     {title: 'Invisible', component: ''},
@@ -37,6 +34,9 @@ export class MyApp {
     {title: 'Logout', component: 'WelcomePage'},
     {title: 'ProfileProject', component: 'ProfileProjectPage'},
     {title: 'ProfileCandidate', component: 'ProfileCandidatePage'},
+    { title: 'CreateProject', component: 'CreateProjectPage' },
+    { title: 'HomeProject', component: 'HomeProjectPage' },
+    { title: 'HomeCandidate', component: 'HomeCandidatePage' },
   ]
 
   //boolean value for ion-toggle to set
@@ -62,13 +62,17 @@ export class MyApp {
   //variable to tell what was last profile
   private lastProf: string;
 
-  constructor(platform: Platform, settings: Settings, private statusBar: StatusBar, private splashScreen: SplashScreen, public menuCtrl: MenuController) {
+  private PROJECT_COLOR: string = 'project_button';
+  private CANDIDATE_COLOR: string = 'candy_button';
+
+  constructor(private platform: Platform, settings: Settings, private statusBar: StatusBar, private splashScreen: SplashScreen, public menuCtrl: MenuController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.isToggled = false;
+      this.editMode = false;
     });
   }
 
@@ -130,7 +134,7 @@ export class MyApp {
       this.editButton = 'Edit';
 
       if(this.lastProf === 'project') {
-        this.projectColor = 'project';
+        this.projectColor = this.PROJECT_COLOR;
 
         if(this.candidateCreated) {
           this.candidateColor = 'baby_powder';
@@ -138,7 +142,7 @@ export class MyApp {
           this.candidateColor = 'nop';
         }
       } else if(this.lastProf === 'candidate') {
-        this.candidateColor = 'candidate';
+        this.candidateColor = this.CANDIDATE_COLOR;
 
         if(this.projectCreated) {
           this.projectColor = 'baby_powder';
@@ -167,11 +171,15 @@ export class MyApp {
   createProject() {
     //set the defaults for the project profile once it is created
     if(!this.editMode) {
+      if(!this.projectCreated) {
+        this.nav.push('CreateProjectPage');
+        this.projectCreated = true;
+        this.closeMenu();
+      }
       this.lastProf = 'project';
-      this.projectColor = 'project';
+      this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
       this.projectVis = true;
-      this.projectCreated = true;
       this.pages[0].title = 'Collaboramos';
 
       if(this.candidateColor !== 'nop') {
@@ -183,11 +191,15 @@ export class MyApp {
   createCandidate() {
     //set defaults for candidate profile once it has been created
     if(!this.editMode) {
+      if(!this.candidateCreated) {
+        this.nav.push('CreateCandidatePage');
+        this.candidateCreated = true;
+        this.closeMenu();
+      }
       this.lastProf = 'candidate';
-      this.candidateColor = 'candidate';
+      this.candidateColor = this.CANDIDATE_COLOR;
       this.checked = false;
       this.candidateVis = true;
-      this.candidateCreated = true;
       this.pages[1].title = 'Gary G.';
 
       if(this.projectColor !== 'nop') {
