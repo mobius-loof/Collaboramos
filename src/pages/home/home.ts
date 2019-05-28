@@ -17,14 +17,22 @@ import { Items } from '../../providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-home-project',
-  templateUrl: 'home-project.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
-export class HomeProjectPage {
+export class HomePage {
+  mode = "candidate";
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
     };
 
   viewMessages() {
     this.navCtrl.push('MessagePage');
+  }
+
+  /**
+   * Test function for dynamic display
+   */
+  switchMode() {
+    this.mode = this.mode==="candidate" ? "project" : "candidate";
   }
 }

@@ -68,10 +68,6 @@ export class HomeProjectComponent {
   
     }
   
-    viewMessages() {
-      this.navCtrl.push('MessagePage');
-    }
-  
     // Called whenever we drag an element
     onItemMove(element, x, y, r) {
       var color = '';
