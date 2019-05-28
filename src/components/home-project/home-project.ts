@@ -25,6 +25,7 @@ import { Items } from '../../providers';
 })
 export class HomeProjectComponent {
 
+
     @ViewChild('myswing1') swingStack: SwingStackComponent;
     @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
   
@@ -39,7 +40,8 @@ export class HomeProjectComponent {
     recentCard: string = '     ';
   
     tags = ['scss', 'ts', 'html'];
-  
+    frameworks = ['f1', 'f2'];
+    
     constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
       this.stackConfig = {
         throwOutConfidence: (offsetX, offsetY, element) => {

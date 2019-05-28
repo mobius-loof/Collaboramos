@@ -76,13 +76,13 @@ home-project {
     }
     
     .tag-container {
+        margin-top: -15px;
         margin-right: 2px;
-        padding: 10px;
+        padding-right: 2px;
     }
-    
-    .tag {
-        height: 10px;
-        border-radius: 20px;
+
+    .tag-content {
+        padding-left: 0.7rem;
     }
     
     .img-row {

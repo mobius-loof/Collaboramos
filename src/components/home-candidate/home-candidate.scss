@@ -78,12 +78,18 @@ home-candidate {
     
     .tag-container {
         margin-right: 2px;
-        padding: 10px;
+        padding-right: 5px;
     }
     
     .tag {
-        height: 10px;
-        border-radius: 20px;
+        height: 5px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .tag-content {
+      padding-left: 0.7rem;
+      text-align: center;
     }
     
     .img-row {

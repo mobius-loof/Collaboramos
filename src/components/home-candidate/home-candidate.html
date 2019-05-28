@@ -62,7 +62,6 @@
 
       <ion-row>
         <div
-          (click)="toggleSkills()"
           style="text-align: left; background-color: white;"
         >
           <h1
@@ -73,10 +72,16 @@
           </h1>
         </div>
       </ion-row>
+      <ion-row>
+        <div class="tag-container" *ngFor="let t of tags">
+          <ion-item class="tag" no-lines no-padding color="secondary" round>
+              <p class="tag-content">{{t}}</p>
+          </ion-item>
+        </div>
+      </ion-row>
 
       <ion-row>
         <div
-          (click)="toggleFrameworks()"
           style="text-align: left; background-color: white;"
         >
           <h1
@@ -85,6 +90,13 @@
           >
             frameworks
           </h1>
+        </div>
+      </ion-row>
+      <ion-row>
+        <div class="tag-container" *ngFor="let f of frameworks">
+          <ion-item class="tag" no-lines no-padding color="secondary" round>
+              <p class="tag-content">{{f}}</p>
+          </ion-item>
         </div>
       </ion-row>
     </ion-grid>

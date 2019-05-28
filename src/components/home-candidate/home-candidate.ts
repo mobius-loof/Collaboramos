@@ -39,7 +39,8 @@ export class HomeCandidateComponent {
   stackConfig: StackConfig;
   recentCard: string = '     ';
 
-  tags = ['scss', 'ts', 'html'];
+  tags = ['tag1', 'tag2'];
+  frameworks = ['f1', 'f2'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
     this.stackConfig = {
