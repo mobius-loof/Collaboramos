@@ -19,33 +19,21 @@ import { Camera } from '@ionic-native/camera';
 })
 export class CreateProjectPage{
 
-  /*
-  project: {
-    name: string, id: string, image: string, description: string,
-    isVisible: boolean, tags: string, chats: { [id: string]: Channel }} = { 
-      name: '',
-      id: '',
-      image: '',
-      description: '',
-      isVisible: true,
-      tags: '',
-      chats: {}
-    };
-  */
   project: Project = {
       id: "",
       proj_name: "",
       images:[],
       description: "",
       is_visible: true,
-      tags: [],
+      skills: [],
+      frameworks: [],
       chats: {},
       interests: {},
       matches: {},
       waitlist: [],
       address: "",
       email: "",
-      website: "",
+      website: ""
     };
 
   @ViewChild('imageInput') imageInput;
@@ -55,19 +43,6 @@ export class CreateProjectPage{
   //form: FormGroup;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    
-    /*
-    this.form = formBuilder.group({
-      profilePic: [''],
-      name: ['', Validators.required],
-      about: ['']
-    });
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-    */
     this.hasPicture = false;
   }
 
@@ -93,14 +68,14 @@ export class CreateProjectPage{
     }
   }
 
+
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
 
       let imageData = (readerEvent.target as any).result;
-      this.project.images[0] = imageData;
+      this.project.images.push(imageData);
       this.hasPicture = true;
-      //this.form.patchValue({ 'profilePic': imageData });
     };
 
     reader.readAsDataURL(event.target.files[0]);
@@ -111,7 +86,6 @@ export class CreateProjectPage{
   }
 
   getProfileImageStyle() {
-    //return 'url(' + this.form.controls['profilePic'].value + ')'
     return 'url(' + this.project.images[this.project.images.length-1] + ')'
   }
 
@@ -119,14 +93,14 @@ export class CreateProjectPage{
    * The user cancelled, so we dismiss without sending data back.
    */
   return() {
-    this.navCtrl.setRoot("ListMasterPage");
+    this.navCtrl.setRoot("TabsPage");
   }
 
   /**
   * The user submited, so we return the data object back
   */
   submit() {
-    this.navCtrl.setRoot("ListMasterPage")
+    this.navCtrl.setRoot("TabsPage")
     return this.project;
   }
 

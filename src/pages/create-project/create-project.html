@@ -6,17 +6,13 @@
 -->
   <ion-header>
     <ion-navbar>
-      <ion-title></ion-title>
+        <ion-title class="title">Create Project Profile</ion-title>
     </ion-navbar>
   </ion-header>
 
   <ion-content center text-center>
 
-    <div class="bar bar-header bar-light">
-      <h1 class="title">Project Profile</h1>
-    </div>
     <!--ADD PICTURE-->
-
     <ion-grid class="project-pic" no-padding>
       <ion-row>
         <ion-col no-padding>
@@ -37,7 +33,10 @@
         <ion-input type="text" placeholder="Project Name" [(ngModel)]="project.name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Tags" [(ngModel)]="project.tags"></ion-input>
+        <ion-input type="text" placeholder="Skills" [(ngModel)]="project.skills"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Frameworks" [(ngModel)]="project.frameworks"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="text" placeholder="Website" [(ngModel)]="project.website"></ion-input>
@@ -49,7 +48,7 @@
         <ion-input type="text" placeholder="Email" [(ngModel)]="project.email"></ion-input>
       </ion-item>
       <ion-item>
-        <textarea class="text-area" type="text" placeholder="Description" [(ngModel)]="project.description"></textarea>
+        <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="project.description"></textarea>
       </ion-item>
     </ion-list>
   </ion-content>
