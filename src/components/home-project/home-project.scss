@@ -1,0 +1,103 @@
+home-project {
+    ion-content {
+        text-align: center;
+    }
+    
+    ion-card-content {
+        background-color: #F4F4F8;
+    }
+    
+    #card-stack {
+        width: 90%;
+        height: 90%;
+        margin: 0px auto 0;
+        position: relative;
+    
+    }
+    
+    #card-stack ion-card {
+        border-radius: 5px;
+        position: absolute;
+        text-align: center;
+        top: 3%;
+        height: 90%;
+    }
+    
+    ion-list {
+        display: block;
+    }
+    
+    ion-card {
+        margin-bottom: 500px;
+    }
+    
+    .card-title1 {
+        box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.5);
+        max-height: 10000px;
+    }
+    
+    .card-title0 {
+        max-height: 0px;
+    }
+    
+    .img {
+        border-radius: 5%;
+        box-shadow: 0 5px 3px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        display: block;
+        margin-top: 10%;
+    
+    }
+    
+    .likeDislikeRow {
+        height: 10%;
+        margin-top: -20px;
+        z-index: -1;
+    }
+    
+    .likeDislikeButton {
+        z-index: 0;
+    }
+    
+    .col {
+        text-align: center;
+        line-height: 50%;
+        position: relative;
+        justify-content: center;
+    }
+    
+    .scroll-content {
+        overflow-y: hidden !important;
+    }
+    
+    .statusBar {
+        text-align: center;
+        position: relative;
+        z-index: -1;
+    }
+    
+    .tag-container {
+        margin-top: -15px;
+        margin-right: 2px;
+        padding-right: 2px;
+    }
+
+    .tag-content {
+        padding-left: 0.7rem;
+    }
+    
+    .img-row {
+        width: 230%;
+        margin-left: -10%;
+        border-radius: 5px;
+    }
+    
+    .img-row-info {
+        margin-left: 65%;
+        font-family: 'PT Sans Caption';
+        font-style: normal;
+        font-weight: normal;
+        font-variant: small-caps;
+    }
+    
+    
+}
