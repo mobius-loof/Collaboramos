@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewChildren, QueryList, Renderer} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
 
@@ -12,7 +12,6 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 
-import { Item } from '../../models/item';
 import { Items } from '../../providers';
 /**
  * Generated class for the HomeProjectComponent component.
