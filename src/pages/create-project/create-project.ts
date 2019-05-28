@@ -32,7 +32,7 @@ export class CreateProjectPage{
       chats: {}
     };
   */
-  project: Project = {
+  project = {
       id: "",
       proj_name: "",
       images:[],

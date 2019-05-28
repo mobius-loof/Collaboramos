@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="text-align: center">Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="viewMessages()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="text-align: center;">
+  <div
+    swing-stack
+    #myswing1
+    [stackConfig]="stackConfig"
+    (throwoutleft)="voteUp(false)"
+    (throwoutright)="voteUp(true)"
+    id="card-stack"
+    style="background-color: white; max-height: 500px"
+  >
+    <ion-card
+      #mycards1
+      swing-card
+      *ngFor="let c of cards"
+      class="td-card card card-md"
+      swing-card=""
+      style="background-color: white"
+    >
+      <ion-grid>
+        <ion-row style="height: 30%; background: white">
+
+          <ion-col col-6 >
+            <ion-row
+              style="margin-top: 10px; width: 210%; background-color: rgb(129, 129, 180); border-radius: 5px;"
+            >
+              <h1 style="margin-left: 50%">
+                Resume
+              </h1>
+            </ion-row>
+            <ion-row
+              style="margin-top: 10px; width: 210%; background-color:  lavender; border-radius: 5px;"
+            >
+              <h1 style="margin-left: 50%">
+                Website
+              </h1>
+            </ion-row>
+          </ion-col>
+
+          <ion-col col-6 style = "margin-left: -50%;">
+            <ion-avatar item-start>
+              <img class="img" src="../assets/img/dio.png"/>
+            </ion-avatar>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row
+          class="expanding-tabs"
+          (click)="toggleDesc()"
+          style="text-align: center; background-color: white; margin-top: -5px;"
+        >
+          <h1 class="expanding-tabs">Description</h1>
+        </ion-row>
+        <ion-item class="infoDisplay" *ngIf="descExpanded">
+          <p>Something goes here</p>
+        </ion-item>
+
+        <ion-row>
+          <div
+            (click)="toggleSkills()"
+            style="text-align: left; background-color: white;"
+          >
+            <h1 class="expanding-tabs">Skills</h1>
+          </div>
+        </ion-row>
+
+
+      </ion-grid>
+    </ion-card>
+  </div>
+
+  <p class="statusBar">{{ recentCard }}</p>
+
+  <ion-row class="likeDislikeButton">
+    <ion-col class="col" col-6>
+      <button
+        ion-button
+        clear
+        medium
+        icon-right
+        expand="full"
+        color="primary"
+        (click)="voteUp(false)"
+      >
+        <ion-icon name="thumbs-down"></ion-icon>
+        No
+      </button>
+    </ion-col>
+    <ion-col class="col" col-6>
+      <button
+        ion-button
+        clear
+        medium
+        icon-left
+        color="primary"
+        (click)="voteUp(true)"
+      >
+        <ion-icon name="thumbs-up"></ion-icon>
+        Yes
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>
