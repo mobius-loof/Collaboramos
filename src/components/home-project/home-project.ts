@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewChildren, QueryList, Renderer} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
 
@@ -12,7 +12,6 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 
-import { Item } from '../../models/item';
 import { Items } from '../../providers';
 /**
  * Generated class for the HomeProjectComponent component.
@@ -25,6 +24,7 @@ import { Items } from '../../providers';
   templateUrl: 'home-project.html'
 })
 export class HomeProjectComponent {
+
 
     @ViewChild('myswing1') swingStack: SwingStackComponent;
     @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
@@ -40,7 +40,8 @@ export class HomeProjectComponent {
     recentCard: string = '     ';
   
     tags = ['scss', 'ts', 'html'];
-  
+    frameworks = ['f1', 'f2'];
+    
     constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
       this.stackConfig = {
         throwOutConfidence: (offsetX, offsetY, element) => {
@@ -65,10 +66,6 @@ export class HomeProjectComponent {
         event.target.style.background = '#ffffff';
       });
   
-    }
-  
-    viewMessages() {
-      this.navCtrl.push('MessagePage');
     }
   
     // Called whenever we drag an element

@@ -1,4 +1,5 @@
-home-project {
+page-home {
+
     ion-content {
         text-align: center;
     }
@@ -76,13 +77,13 @@ home-project {
     }
     
     .tag-container {
-        margin-top: -15px;
         margin-right: 2px;
-        padding-right: 2px;
+        padding: 10px;
     }
-
-    .tag-content {
-        padding-left: 0.7rem;
+    
+    .tag {
+        height: 10px;
+        border-radius: 20px;
     }
     
     .img-row {
@@ -98,6 +99,6 @@ home-project {
         font-weight: normal;
         font-variant: small-caps;
     }
-    
+
     
 }

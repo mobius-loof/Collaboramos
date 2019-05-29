@@ -4,10 +4,11 @@ import { IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { SwingModule } from 'angular2-swing';
 import { HomeProjectComponent } from './home-project/home-project';
+import { HomeCandidateComponent } from './home-candidate/home-candidate';
 
 @NgModule({
 	declarations: [
-        HomeProjectComponent
+        HomeCandidateComponent,
     ],
 	imports: [
         IonicModule,
@@ -15,7 +16,24 @@ import { HomeProjectComponent } from './home-project/home-project';
         HttpModule,
     ],
 	exports: [
-        HomeProjectComponent
+        HomeCandidateComponent,
     ]
 })
-export class HomeProjectModule {}
+export class HomeCandidateModule{}
+
+@NgModule({
+	declarations: [
+        HomeProjectComponent,
+    ],
+	imports: [
+        IonicModule,
+        SwingModule,
+        HttpModule,
+    ],
+	exports: [
+        HomeProjectComponent,
+    ]
+})
+export class HomeProjectModule{}
+
+
