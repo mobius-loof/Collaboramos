@@ -69,6 +69,7 @@ export class Firestore {
       id: id,
       description: model.description,
       images: model.images,
+      resumeURL: model.resumeURL,
       is_visible: model.is_visible,
       tags: model.tags
     });
@@ -93,6 +94,7 @@ export class Firestore {
     return this.firestore.doc(`candidate_profiles/${id}`).update({
       description: model.description,
       images: model.images,
+      resumeURL: model.resumeURL,
       is_visible: model.is_visible,
       tags: model.tags
     });

@@ -12,7 +12,7 @@
 
 
 
-<ion-content center text-center>
+<ion-content padding center text-center>
 
   <!--ADD PICTURE-->
 
@@ -56,24 +56,50 @@
   </ion-grid>
 
   <ion-list>
-    <ion-item>
-      <ion-input type="text" placeholder="Name" [(ngModel)]="candidate.name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Phone" [(ngModel)]="candidate.phone"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Address" [(ngModel)]="candidate.address"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Skills" [(ngModel)]="candidate.skills"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Tags" [(ngModel)]="candidate.tags"></ion-input>
-    </ion-item>
-    <ion-item>
-      <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="candidate.description"></textarea>
-    </ion-item>
+      <ion-item>
+          <ion-input placeholder="Name" [(ngModel)]="candidate.name"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-input placeholder="Phone" [(ngModel)]="candidate.phone"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-input placeholder="Address" [(ngModel)]="candidate.address"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-row>
+              <div class="tag-container" *ngFor="let t of candidate.skills">
+                  <ion-item class="tag" no-lines no-padding color="secondary" round>
+                      <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'skills')">
+                          <ion-icon name="close-circle"></ion-icon>
+                      </button>
+                      <p class="tag-content">{{t}}</p>
+                  </ion-item>
+              </div>
+              <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
+                  <ion-icon name="add-circle"></ion-icon>
+              </button>
+          </ion-row>
+      </ion-item>
+
+      <ion-item>
+          <ion-row>
+              <div class="tag-container" *ngFor="let t of candidate.tags">
+                  <ion-item class="tag" no-lines no-padding color="secondary" round>
+                      <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'tags')">
+                          <ion-icon name="close-circle"></ion-icon>
+                      </button>
+                      <p class="tag-content">{{t}}</p>
+                  </ion-item>
+              </div>
+              <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('tags')">
+                  <ion-icon name="add-circle"></ion-icon>
+              </button>
+          </ion-row>
+      </ion-item>
+
+      <ion-item>
+          <textarea class="text-area" maxlength="150" placeholder="Description (Max: 150 Characters)" [(ngModel)]="candidate.description"></textarea>
+      </ion-item>
   </ion-list>
 </ion-content>
 

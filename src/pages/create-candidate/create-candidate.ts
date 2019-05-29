@@ -22,14 +22,14 @@ export class CreateCandidatePage {
     description: "",
     resumeURL: "",
     is_visible: true,
-    tags: [],
+    tags: ["Lit"],
     chats: {},
     interests: {},
     matches: {},
     waitlist: [],
     phone: "",
     address: "",
-    skills: []
+    skills: ["js","python"]
   };
 
   isReadyToSave: boolean;
@@ -134,6 +134,60 @@ export class CreateCandidatePage {
       this.firestore.createCandidate(this.candidate);
       this.navCtrl.setRoot("TabsPage")
       return this.candidate;
-  }
+    }
+
+    /**
+    * 
+    *Tag
+   **/
+    deleteTag(t: string, type: string) {
+        var newTags = []
+        if (type === "skills") {
+            for (var i = 0; i < this.candidate.skills.length; i++) {
+                if (this.candidate.skills[i] != t) {
+                    newTags.push(this.candidate.skills[i]);
+                }
+            }
+            this.candidate.skills = newTags;
+        } else if (type === "tags") {
+            for (var i = 0; i < this.candidate.tags.length; i++) {
+                if (this.candidate.tags[i] != t) {
+                    newTags.push(this.candidate.tags[i]);
+                }
+            }
+            this.candidate.tags = newTags;
+        }
+
+    }
+
+    presentPrompt(type: string) {
+        let alert = this.alertController.create({
+            title: 'Add ' + type.substring(0, type.length),
+            inputs: [
+                {
+                    name: 'tag',
+                    placeholder: 'Add a new ' + type.substring(0, type.length - 1)
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => { }
+                },
+                {
+                    text: 'Ok',
+                    handler: data => {
+                        if (type === "skills") {
+                            this.candidate.skills.push(data.tag);
+                        } else if (type === "tags") {
+                            this.candidate.tags.push(data.tag);
+                        }
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
 }
 

@@ -32,7 +32,15 @@
       <ion-item>
         <ion-input type="text" placeholder="Project Name" [(ngModel)]="project.proj_name"></ion-input>
       </ion-item>
-
+      <ion-item>
+        <ion-input placeholder="Website" [(ngModel)]="project.website"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Address" [(ngModel)]="project.address"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Email" [(ngModel)]="project.email"></ion-input>
+      </ion-item>
       <ion-item>
           <ion-row>
               <div class="tag-container" *ngFor="let t of project.skills">
@@ -63,16 +71,6 @@
               <ion-icon name="add-circle"></ion-icon>
             </button>
           </ion-row>
-      </ion-item>
-
-      <ion-item>
-        <ion-input placeholder="Website" [(ngModel)]="project.website"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Address" [(ngModel)]="project.address"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Email" [(ngModel)]="project.email"></ion-input>
       </ion-item>
       <ion-item>
         <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="project.description"></textarea>
