@@ -10,7 +10,7 @@
     </ion-navbar>
   </ion-header>
 
-  <ion-content center text-center>
+  <ion-content padding center text-center>
 
     <!--ADD PICTURE-->
     <ion-grid class="project-pic" no-padding>
@@ -30,22 +30,49 @@
 
     <ion-list>
       <ion-item>
-        <ion-input type="text" placeholder="Project Name" [(ngModel)]="project.name"></ion-input>
+        <ion-input type="text" placeholder="Project Name" [(ngModel)]="project.proj_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-row>
+              <div class="tag-container" *ngFor="let t of project.skills">
+                  <ion-item class="tag" no-lines no-padding color="secondary" round>
+                      <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'skills')">
+                          <ion-icon name="close-circle"></ion-icon>
+                      </button>
+                      <p class="tag-content">{{t}}</p>
+                  </ion-item>
+              </div>
+              <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
+                  <ion-icon name="add-circle"></ion-icon>
+              </button>
+           </ion-row>
+      </ion-item>
+
+      <ion-item>
+          <ion-row>
+            <div class="tag-container" *ngFor="let t of project.frameworks">
+              <ion-item class="tag" no-lines no-padding color="secondary" round>
+                  <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'frameworks')">
+                      <ion-icon name="close-circle"></ion-icon>
+                  </button>
+                  <p class="tag-content">{{t}}</p>
+              </ion-item>
+            </div>
+            <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('frameworks')">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-input placeholder="Website" [(ngModel)]="project.website"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Skills" [(ngModel)]="project.skills"></ion-input>
+        <ion-input placeholder="Address" [(ngModel)]="project.address"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Frameworks" [(ngModel)]="project.frameworks"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="text" placeholder="Website" [(ngModel)]="project.website"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="text" placeholder="Address" [(ngModel)]="project.address"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="text" placeholder="Email" [(ngModel)]="project.email"></ion-input>
+        <ion-input placeholder="Email" [(ngModel)]="project.email"></ion-input>
       </ion-item>
       <ion-item>
         <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="project.description"></textarea>

@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Firestore } from '../../providers/firestore/firestore';
 import { Candidate } from '../../models/candidate';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
@@ -15,9 +16,8 @@ export class CreateCandidatePage {
 
 
   candidate: Candidate = {
-    id: "",
+    id: null,
     name: "",
-    files: [],
     images: [],
     description: "",
     resumeURL: "",
@@ -36,7 +36,7 @@ export class CreateCandidatePage {
   hasPicture: boolean;
   hasFile: boolean;
 
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, public camera: Camera) {
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, public camera: Camera, private firestore: Firestore) {
     this.hasPicture = false;
     this.hasFile = false;
   }
@@ -131,8 +131,9 @@ export class CreateCandidatePage {
   * The user submited, so we return the data object back
   */
   submit() {
-    this.navCtrl.setRoot("TabsPage")
-    return this.candidate;
+      this.firestore.createCandidate(this.candidate);
+      this.navCtrl.setRoot("TabsPage")
+      return this.candidate;
   }
 }
 
