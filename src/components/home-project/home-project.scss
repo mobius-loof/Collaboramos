@@ -22,6 +22,11 @@ home-project {
         top: 3%;
         height: 90%;
     }
+
+    .skills {
+        margin-top: -30px;
+        margin-bottom: 10px;
+    }
     
     ion-list {
         display: block;
@@ -77,7 +82,8 @@ home-project {
     
     .tag-container {
         margin-top: -15px;
-        margin-right: 2px;
+        margin-right: 10px;
+        margin-left: 10px;
         padding-right: 2px;
     }
 
