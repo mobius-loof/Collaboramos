@@ -157,8 +157,12 @@ page-create-candidate {
         textarea {
             width: 100%;
             padding-left: 0px;
-            border-width: 2px;
+            border-width: 1px;
         }
+    }
+
+    .label{
+        text-align: left;
     }
 }
 

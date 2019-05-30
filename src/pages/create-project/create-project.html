@@ -10,7 +10,7 @@
     </ion-navbar>
   </ion-header>
 
-  <ion-content padding-right center text-center>
+  <ion-content padding center text-center>
 
       <!--ADD PICTURE-->
       <ion-grid class="project-pic" no-padding>
@@ -29,7 +29,7 @@
       </ion-grid>
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Project Name</b></p>
           </ion-col>
           <ion-col>
@@ -40,7 +40,7 @@
       </ion-row>
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Website</b></p>
           </ion-col>
           <ion-col>
@@ -51,7 +51,7 @@
       </ion-row>
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Address</b></p>
           </ion-col>
           <ion-col>
@@ -62,7 +62,7 @@
       </ion-row>
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Email</b></p>
           </ion-col>
           <ion-col>
@@ -74,11 +74,11 @@
 
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Skills</b></p>
           </ion-col>
       </ion-row>
-      <ion-row padding-left padding-right>
+      <ion-row>
           <div class="tag-container" *ngFor="let t of project.skills">
               <ion-item class="tag" no-lines no-padding color="secondary" round>
                   <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'skills')">
@@ -93,11 +93,11 @@
       </ion-row>
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Frameworks</b></p>
           </ion-col>
       </ion-row>
-      <ion-row padding-left padding-right>
+      <ion-row>
           <div class="tag-container" *ngFor="let t of project.frameworks">
               <ion-item class="tag" no-lines no-padding color="secondary" round>
                   <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'frameworks')">
@@ -112,11 +112,11 @@
       </ion-row>
 
       <ion-row>
-          <ion-col col-4>
+          <ion-col class="label" col-4>
               <p><b>Description</b></p>
           </ion-col>
       </ion-row>
-      <ion-row padding-left>
+      <ion-row>
           <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="project.description"></textarea>
       </ion-row>
 

@@ -56,7 +56,7 @@
     </ion-grid>
 
     <ion-row>
-        <ion-col col-3>
+        <ion-col class="label" col-3>
             <p><b>Name</b></p>
         </ion-col>
         <ion-col>
@@ -67,7 +67,7 @@
     </ion-row>
 
     <ion-row>
-        <ion-col col-3>
+        <ion-col class="label" col-3>
             <p><b>Phone</b></p>
         </ion-col>
         <ion-col>
@@ -78,7 +78,7 @@
     </ion-row>
 
     <ion-row>
-        <ion-col col-3>
+        <ion-col class="label" col-3>
             <p><b>Address</b></p>
         </ion-col>
         <ion-col>
@@ -89,7 +89,7 @@
     </ion-row>
 
     <ion-row>
-        <ion-col col-3>
+        <ion-col class="label" col-3>
             <p><b>Skills</b></p>
         </ion-col>
     </ion-row>
@@ -106,28 +106,29 @@
             <ion-icon name="add-circle"></ion-icon>
         </button>
     </ion-row>
-    <ion-row>
-        <ion-col col-3>
-            <p><b>Tags</b></p>
-        </ion-col>
-    </ion-row>
-    <ion-row>
-        <div class="tag-container" *ngFor="let t of candidate.tags">
-            <ion-item class="tag" no-lines no-padding color="secondary" round>
-                <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'tags')">
-                    <ion-icon name="close-circle"></ion-icon>
-                </button>
-                <p class="tag-content">{{t}}</p>
-            </ion-item>
-        </div>
-        <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('tags')">
-            <ion-icon name="add-circle"></ion-icon>
-        </button>
-    </ion-row>
+    <!--
+        <ion-row>
+            <ion-col class="label" col-3>
+                <p><b>Tags</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <div class="tag-container" *ngFor="let t of candidate.tags">
+                <ion-item class="tag" no-lines no-padding color="secondary" round>
+                    <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'tags')">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </button>
+                    <p class="tag-content">{{t}}</p>
+                </ion-item>
+            </div>
+            <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('tags')">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-row>
+    -->
 
-
     <ion-row>
-        <ion-col col-3>
+        <ion-col class="label" col-3>
             <p><b>Description</b></p>
         </ion-col>
     </ion-row>
