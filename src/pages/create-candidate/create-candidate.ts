@@ -22,7 +22,7 @@ export class CreateCandidatePage {
     description: "",
     resumeURL: "",
     is_visible: true,
-    tags: ["Lit"],
+    tags: ["UCSD"],
     chats: {},
     interests: {},
     matches: {},

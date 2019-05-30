@@ -123,4 +123,12 @@ page-create-project {
     ion-input {
         font-size: 20px;
     }
+
+    ion-row {
+        textarea {
+            width: 90%;
+            padding-right: 0px;
+            border-width: 2px;
+        }
+    }
 }

@@ -29,11 +29,12 @@ page-create-candidate {
 
     .profile-image {
         justify-content: center;
-        height: 180px;
-        width: 140px;
+        height: 140px;
+        width: 180px;
         //margin-bottom: -10px;
-        margin-right: 10px;
-        margin-top: -23px;
+        //margin-right: 10px;
+        margin-left: -30px;
+        margin-top: -15px;
     }
 
     .success {
@@ -150,6 +151,14 @@ page-create-candidate {
 
     ion-input {
         font-size: 20px;
+    }
+
+    ion-row {
+        textarea {
+            width: 100%;
+            padding-left: 0px;
+            border-width: 2px;
+        }
     }
 }
 
