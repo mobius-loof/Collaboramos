@@ -10,13 +10,13 @@ import { IonicPage, NavController, Content } from 'ionic-angular';
 export class MessagesPage {
   toUser = {
     _id: '534b8e5aaa5e7afc1b23e69b',
-    pic: 'assets/img/avatar/ian-avatar.png',
+    pic: 'assets/img/ian-avatar.png',
     username: 'Venkman',
   };
 
   user = {
     _id: '534b8fb2aa5e7afc1b23e69c',
-    pic: 'assets/img/avatar/marty-avatar.png',
+    pic: 'assets/img/marty-avatar.png',
     username: 'Marty',
   };
 

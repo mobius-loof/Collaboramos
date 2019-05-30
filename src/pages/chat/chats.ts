@@ -9,20 +9,20 @@ import { NavController, IonicPage } from 'ionic-angular';
 export class ChatsPage {
 
   chats = [{
-    imageUrl: 'assets/img/avatar/marty-avatar.png',
+    imageUrl: 'assets/img/marty-avatar.png',
     title: 'McFly',
     lastMessage: 'Hey, what happened yesterday?',
     timestamp: new Date()
   },
   {
-    imageUrl: 'assets/img/avatar/ian-avatar.png',
+    imageUrl: 'assets/img/ian-avatar.png',
     title: 'Venkman',
     lastMessage: 'Sup, dude',
     timestamp: new Date()
   }
   ,
   {
-    imageUrl: 'assets/img/avatar/sarah-avatar.jpg',
+    imageUrl: 'assets/img/sarah-avatar.png.jpeg',
     title: 'Sarah Mcconnor',
     lastMessage: 'You still ow me that pizza.',
     timestamp: new Date()
