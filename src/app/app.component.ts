@@ -37,6 +37,8 @@ export class MyApp {
     {title: 'Logout', component: 'WelcomePage'},
     {title: 'ProfileProject', component: 'ProfileProjectPage'},
     {title: 'ProfileCandidate', component: 'ProfileCandidatePage'},
+    {title: 'Chats', component: 'ChatsPage'},
+    {title: 'Messages', component: 'MessagesPage'}
   ]
 
   //boolean value for ion-toggle to set
