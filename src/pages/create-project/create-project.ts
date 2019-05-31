@@ -38,6 +38,8 @@ export class CreateProjectPage{
       images:[],
       description: "",
       is_visible: true,
+      frameworks: [],
+      skills: [],
       chats: {},
       interests: {},
       matches: {},

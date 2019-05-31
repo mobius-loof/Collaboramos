@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, DocumentData } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
 
 /*
@@ -207,7 +207,16 @@ export class Firestore {
       else
         return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId')
                                       .orderBy('id', 'asc').limit(amount)).ref.get();
-    });
-    
+    }).then(snapshot => {
+      if (snapshot.empty) {
+        console.log('No Matching Documents');
+        return;
+      }
+
+      var cards = new Map();
+      snapshot.forEach(doc => {
+        cards.set(doc.id, doc.data());
+      })
+    })
   }
 }
