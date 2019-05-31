@@ -13,27 +13,19 @@
 <ion-content>
   <ion-list inset>
 
-    <ion-item>Enter New Password</ion-item>
-
     <ion-item>
-      <ion-input type="new pass" [(ngModel)]="credentials.newPass" name="new pass"></ion-input>
+      <ion-input type="password" placeholder = "Enter New Password" [(ngModel)]="credentials.newPass" name="new pass"></ion-input>
     </ion-item>
 
-    <ion-item>Confirm New Password</ion-item>
-
     <ion-item>
-      <ion-input type="confirm new pass" [(ngModel)]="credentials.confirmNewPass" name="confirm new pass"></ion-input>
+      <ion-input type="password" placeholder = "Confirm New Password" [(ngModel)]="credentials.confirmNewPass" name="confirm new pass"></ion-input>
     </ion-item>
 
-    <ion-item>Enter Current Password</ion-item>
-
     <ion-item>
-      <ion-input type="curr pass" [(ngModel)]="credentials.currPass" name="curr pass"></ion-input>
+      <ion-input type="password" placeholder = "Enter Current Password" [(ngModel)]="credentials.currPass" name="curr pass"></ion-input>
     </ion-item>
 
-    <div class="btn-container">
-        <button ion-button color="primary" type="submit" block>Submit</button>
-      </div>
+    <button ion-button color="primary" type="submit" block>Submit</button>
   </ion-list>
 
 </ion-content>

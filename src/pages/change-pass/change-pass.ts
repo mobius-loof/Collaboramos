@@ -27,4 +27,7 @@ export class ChangePassPage {
     console.log('ionViewDidLoad ChangePassPage');
   }
 
+  validate() {
+    console.log(this.credentials.newPass + ", " + this.credentials.confirmNewPass + ", " + this.credentials.currPass);
+  }
 }

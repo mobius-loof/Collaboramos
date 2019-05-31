@@ -6,6 +6,9 @@
 -->
 <ion-header>
   <ion-navbar text-center>
+    <button ion-button float-left clear (click) = "openMenu()">
+        <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
       <button ion-button *ngIf="!isEdit" (click)="setIsEdit(true, false)">

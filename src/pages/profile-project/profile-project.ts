@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Firestore } from '../../providers/firestore/firestore'
 import { Project, Account } from '../../models';
+import { MyApp } from '../../app/app.component';
 
 /**
  * Generated class for the ProfilePage page.
@@ -31,8 +32,11 @@ export class ProfileProjectPage implements OnInit {
               private alertCtrl: AlertController,
               private imagePicker: ImagePicker,
               private inAppBrowser: InAppBrowser,
-              private firestore: Firestore) {
+              private firestore: Firestore,
+              private menuCtrl: MenuController,
+              public appCom: MyApp) {
     this.isEdit = false;
+    this.menuCtrl.swipeEnable(false);
   }
 
   ngOnInit() {
@@ -120,5 +124,13 @@ export class ProfileProjectPage implements OnInit {
       ]
     });
     alert.present();
+  }
+
+  openMenu() {
+    //have a variable that checks if edit was tapped; if was then would want to undo and reset colors
+    if(!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
+      this.appCom.toggleProfileSettings();
+    }
+    this.menuCtrl.open();
   }
 }
