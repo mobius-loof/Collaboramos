@@ -45,6 +45,13 @@ export class SignupPage {
       return this.firestore.createAccount(a).then((_) => {
         this.navCtrl.pop();
       });
+    }).catch((e) => {
+      let toast = this.toastCtrl.create({
+        message: e.message,
+        duration: 2000,
+        position: 'bottom'
+      });
+      toast.present();
     });
   }
 }
