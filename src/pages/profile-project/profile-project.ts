@@ -122,14 +122,25 @@ export class ProfileProjectPage {
   }
 
   presentPrompt(type: string){
+    let input: any
+    if (type === "skills") {
+      input = {
+        name: 'Skill',
+        placeholder: 'e.g. Webscraping, iOS Dev'
+      }
+    } else {
+      input = {
+        name: 'Framework',
+        placeholder: 'e.g. Ionic, React'
+      }
+    }
+
+    let title_str: string
+    title_str = (type === "skills") ? 'Add Skill' : 'Add Framework';
     let alert = this.alertCtrl.create({
-      title: 'Add Tag',
+      title: title_str,
       inputs: [
-        {
-          //TODO dynamic change skill vs framework
-          name: 'tag',
-          placeholder: 'short tag description'
-        }
+        input
       ],
       buttons: [
         {
