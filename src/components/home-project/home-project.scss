@@ -92,7 +92,7 @@ home-project {
     }
     
     .img-row {
-        width: 230%;
+        width: 300%;
         margin-left: -30%;
         border-radius: 5px;
     }
@@ -102,8 +102,16 @@ home-project {
         font-style: normal;
         font-weight: normal;
         font-variant: small-caps;
-        font-size: 20px;
+        font-size: 150%;
+        height: 20%;
+
     }
-    
-    
+
+    .img-row-buttons {
+        box-shadow: -3px 0px 2px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .buttons {
+        box-shadow: 3px 3px 2px 2px rgba(0, 0, 0, 0.2);
+    }
 }

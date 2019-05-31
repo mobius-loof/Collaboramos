@@ -90,6 +90,15 @@ export class HomeProjectComponent {
 
     }
 
+    clickResume() {
+        console.log("resume")
+        
+    }
+
+    clickWebsite() {
+        console.log("website")
+    }
+
     // Called whenever we drag an element
     onItemMove(element, x, y, r) {
         var color = '';
