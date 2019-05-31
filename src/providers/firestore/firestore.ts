@@ -47,7 +47,6 @@ export class Firestore {
       first_name: model.first_name,
       last_name: model.last_name,
       phone_number: model.phone_number,
-      profile_img: model.profile_image,
       project_id: model.project_id
     });
   }

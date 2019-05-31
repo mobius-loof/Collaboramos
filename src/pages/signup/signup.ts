@@ -55,7 +55,7 @@ export class SignupPage {
     let toast = this.toastCtrl.create({
       message: 'You have successfully signed up!',
       duration: 3000,
-      position: 'top'
+      position: 'bottom'
     });
     toast.present();
   }

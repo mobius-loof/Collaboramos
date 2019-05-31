@@ -13,12 +13,10 @@ export class LoginPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  credentials: { email: string, password: string } = {
+  private credentials: { email: string, password: string } = {
     email: '',
     password: ''
   };
-
-  private loginErrorString = 'Unable to sign in. Please check your account information and try again'
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -45,6 +43,8 @@ export class LoginPage {
       return this.firestore.getAccount(user.user.uid);
     }).then( acc => {
       params['account'] = acc;
+      params['candidateProfileRef'] = acc.candidate_id;
+      params['projectProfileRef'] = acc.project_id;
       if (acc.project_id == null) {
         return null;
       } else {
