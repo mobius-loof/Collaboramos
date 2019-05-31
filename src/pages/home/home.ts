@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewChildren, QueryList, Renderer} from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { MyApp } from '../../app/app.component';
 import 'rxjs/Rx';
@@ -23,20 +23,23 @@ import { Items } from '../../providers';
 })
 export class HomePage {
   mode = "candidate";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, public appCom: MyApp, private menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public items: Items, 
+              private http: Http, 
+              public renderer: Renderer, 
+              public appCom: MyApp, 
+              private menuCtrl: MenuController,
+              private events: Events) {
     this.menuCtrl.swipeEnable(false);   
+
+    events.subscribe('lastProf', project => {
+        this.mode = project;
+    })
   };
 
   viewMessages() {
     this.navCtrl.push('MessagePage');
-  }
-
-  /**
-   * Test function for dynamic display
-   */
-  switchMode() {
-    this.mode = this.mode==="candidate" ? "project" : "candidate";
-    console.log(this.mode)
   }
 
   openMenu() {

@@ -120,14 +120,14 @@ export class CreateProjectPage{
    * The user cancelled, so we dismiss without sending data back.
    */
   return() {
-    this.navCtrl.setRoot("ListMasterPage");
+    this.navCtrl.setRoot("TabsPage");
   }
 
   /**
   * The user submited, so we return the data object back
   */
   submit() {
-    this.navCtrl.setRoot("ListMasterPage")
+    this.navCtrl.setRoot("TabsPage")
     return this.project;
   }
 

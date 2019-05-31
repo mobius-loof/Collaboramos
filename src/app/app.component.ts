@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Nav, Platform, MenuController, AlertController } from 'ionic-angular';
+import { Nav, Platform, MenuController, AlertController, Events } from 'ionic-angular';
 
 import { FirstRunPage, Tab1Root, Tab2Root, Tab3Root } from '../pages';
 import { Settings } from '../providers';
@@ -29,34 +29,34 @@ export class MyApp {
     { title: 'HomeCandidate', component: 'HomeCandidatePage' },
   ]
 
-  private PROJECT = 'project';
-  private CANDIDATE = 'candidate';
+  protected PROJECT = 'project';
+  protected CANDIDATE = 'candidate';
 
   //boolean value for ion-toggle to set
-  private isToggled: boolean;
+  protected isToggled: boolean;
 
   //variables related to project profile
-  private projectCreated: boolean;
-  private projectVis: boolean;
-  private projectColor: string = 'nop';
+  protected projectCreated: boolean;
+  protected projectVis: boolean;
+  protected projectColor: string = 'nop';
 
   //variables related to candidate profile
-  private candidateCreated: boolean;
-  private candidateVis: boolean;
-  private candidateColor: string = 'nop';
+  protected candidateCreated: boolean;
+  protected candidateVis: boolean;
+  protected candidateColor: string = 'nop';
 
   //boolean value to check if ion-toggle is set
-  private checked: boolean;
+  protected checked: boolean;
 
   //variables related to edit button status
-  private editButton: string = 'Edit';
-  private editMode: boolean = false;
+  protected editButton: string = 'Edit';
+  protected editMode: boolean = false;
 
   //variable to tell what was last profile
-  private lastProf: string;
+  protected lastProf: string;
 
-  private PROJECT_COLOR: string = 'project_button';
-  private CANDIDATE_COLOR: string = 'candy_button';
+  protected PROJECT_COLOR: string = 'project_button';
+  protected CANDIDATE_COLOR: string = 'candy_button';
 
   constructor(private platform: Platform,
               settings: Settings,
@@ -64,7 +64,8 @@ export class MyApp {
               private splashScreen: SplashScreen,
               private menuCtrl: MenuController,
               private alertCtrl: AlertController,
-              private firestore: Firestore) {
+              private firestore: Firestore,
+              private events: Events) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -215,6 +216,8 @@ export class MyApp {
       this.checked = false;
       this.projectVis = true;
 
+      this.events.publish('lastProf', 'project')
+
       if(this.candidateColor !== 'nop') {
         this.candidateColor = 'baby_powder';
       }
@@ -228,6 +231,8 @@ export class MyApp {
       this.candidateColor = this.CANDIDATE_COLOR;
       this.checked = false;
       this.candidateVis = true;
+
+      this.events.publish('lastProf', 'candidate')
 
       if(this.projectColor !== 'nop') {
         this.projectColor = 'baby_powder';
