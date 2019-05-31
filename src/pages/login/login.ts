@@ -32,18 +32,35 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   doLogin() {
+    let params = {};
+
     this.auth.login(this.credentials).then((user) => {
-      return this.firestore.getAccount(user.user.uid).then( acc => {
-
-        if (acc.project == null && acc.candidate_id == null) {
-          // take them to the profile creation page
-        }
-
-        let params = {account: acc};
+      return this.firestore.getAccount(user.user.uid);
+    }).then( acc => {
+      params['account'] = acc;
+      if (acc.project_id == null) {
+        return null;
+      } else {
+        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+      }
+    }).then( projectProfile => {
+      params['projectProfile'] = projectProfile;
+      let acc = params['account'];
+      if (acc.candidate_id == null) {
+        return null;
+      } else {
+        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+      }
+    }).then ( candidateProfile => {
+      params['candidateProfile'] = candidateProfile;
+    }).then( _ => {
+      if (params['candidateProfile'] == null && params['projectProfile'] == null) {
+        // take them to the profile creation page
+        // TODO early exit from promise
+      } else {
         this.navCtrl.setRoot(MainPage, params);
-
-        this.showLoginSuccess();
-      });
+        this.showLoginSuccess();     
+      }
     }).catch((err) => {
       this.showLoginFailure(err.message);
     });

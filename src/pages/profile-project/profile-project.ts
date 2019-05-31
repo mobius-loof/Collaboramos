@@ -32,24 +32,29 @@ export class ProfileProjectPage {
               private imagePicker: ImagePicker,
               private inAppBrowser: InAppBrowser,
               private firestore: Firestore) {
-    this.isEdit = false;
     console.log(navParams.get('account'));
+    this.isEdit = false;
+    this.account = navParams.get('account');
+    this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
+    this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
+    console.log(navParams.get('account'));
+    console.log(this.profile);
   }
 
   // Lifecycle method that guards html from loading before profile and account are loaded
-  ionViewCanEnter(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').then(account => {
-        this.account = account;
-        return this.firestore.getProjectProfileFromID(account.project_id.id).then(profile => {
-          this.profile = this.copyProjectProfile(profile);
-          this.tempProfile = this.copyProjectProfile(profile);
-        });
-      }).then(_ => {
-        resolve(true);
-      });
-    });
-  }
+  // ionViewCanEnter(): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').then(account => {
+  //       this.account = account;
+  //       return this.firestore.getProjectProfileFromID(account.project_id.id).then(profile => {
+  //         this.profile = this.copyProjectProfile(profile);
+  //         this.tempProfile = this.copyProjectProfile(profile);
+  //       });
+  //     }).then(_ => {
+  //       resolve(true);
+  //     });
+  //   });
+  // }
 
   copyProjectProfile(profile: Project): Project {
     return {
@@ -66,7 +71,8 @@ export class ProfileProjectPage {
       waitlist: Object.assign([], profile.waitlist),
       address: profile.address,
       email: profile.email,
-      website: profile.website
+      website: profile.website,
+      phone_number: profile.phone_number
     };
   }
 

@@ -44,10 +44,10 @@
 
         <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
-            <ion-input class="input-from-label" value="{{tempProfile.proj_name}}"></ion-input>
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.proj_name"></ion-input> 
           </ion-item>
           <ion-item>
-            <ion-input class="input-from-label" value="{{tempProfile.website}}"></ion-input>
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>
           </ion-item>
         </div>
       </ion-col>
@@ -61,7 +61,7 @@
 
     <ion-row *ngIf="isEdit" class="text-area-container">
       <ion-col>
-        <textarea class="textarea">{{ tempProfile.description }}</textarea>
+        <textarea class="textarea" [(ngModel)] = "tempProfile.description"></textarea>
       </ion-col>
     </ion-row>
 
