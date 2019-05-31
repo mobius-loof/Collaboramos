@@ -59,7 +59,8 @@ export class CreateProjectPage{
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        this.project.images.push('data:image/jpg;base64,' + data);
+          this.project.images.push('data:image/jpg;base64,' + data);
+          this.hasPicture = true;
         //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');

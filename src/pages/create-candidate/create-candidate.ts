@@ -54,7 +54,8 @@ export class CreateCandidatePage {
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        this.candidate.images.push('data:image/jpg;base64,' + data);
+          this.candidate.images.push('data:image/jpg;base64,' + data);
+          this.hasPicture = true;
       }, (err) => {
         alert('Unable to take photo');
       })
