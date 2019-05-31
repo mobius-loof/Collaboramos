@@ -124,7 +124,7 @@ export class CreateCandidatePage {
   * The user cancelled, so we dismiss without sending data back.
   */
   return() {
-    this.navCtrl.setRoot("TabsPage");
+      this.navCtrl.setRoot("CreateProfilePage");
   }
 
   /**
