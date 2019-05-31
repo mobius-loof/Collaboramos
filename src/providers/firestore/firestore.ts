@@ -68,8 +68,8 @@ export class Firestore {
     return this.firestore.doc(`candidate_profiles/${id}`).set({
       id: id,
       description: model.description,
-      files: model.files,
       images: model.images,
+      resumeURL: model.resumeURL,
       is_visible: model.is_visible,
       tags: model.tags
     });
@@ -93,8 +93,8 @@ export class Firestore {
   updateCandidateProfile(id: string, model: Candidate): Promise<void> {
     return this.firestore.doc(`candidate_profiles/${id}`).update({
       description: model.description,
-      files: model.files,
       images: model.images,
+      resumeURL: model.resumeURL,
       is_visible: model.is_visible,
       tags: model.tags
     });
