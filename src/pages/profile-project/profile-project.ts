@@ -37,24 +37,11 @@ export class ProfileProjectPage {
     this.account = navParams.get('account');
     this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
+    this.populateProfileFromAccount(this.profile, this.account);
+    this.populateProfileFromAccount(this.tempProfile, this.account);
     console.log(navParams.get('account'));
     console.log(this.profile);
   }
-
-  // Lifecycle method that guards html from loading before profile and account are loaded
-  // ionViewCanEnter(): Promise<any> {
-  //   return new Promise((resolve, reject) => {
-  //     this.firestore.getAccount('kgchjTGLVQGAdjzkvtCy').then(account => {
-  //       this.account = account;
-  //       return this.firestore.getProjectProfileFromID(account.project_id.id).then(profile => {
-  //         this.profile = this.copyProjectProfile(profile);
-  //         this.tempProfile = this.copyProjectProfile(profile);
-  //       });
-  //     }).then(_ => {
-  //       resolve(true);
-  //     });
-  //   });
-  // }
 
   copyProjectProfile(profile: Project): Project {
     return {
@@ -74,6 +61,12 @@ export class ProfileProjectPage {
       website: profile.website,
       phone_number: profile.phone_number
     };
+  }
+
+  populateProfileFromAccount(profile: Project, account: Account) {
+    profile.email = account.email;
+    profile.phone_number = account.phone_number;
+    profile.address = account.address;
   }
 
   setIsEdit(isEdit: boolean, discard: boolean) {

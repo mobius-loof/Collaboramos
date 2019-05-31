@@ -45,6 +45,8 @@ export class CreateProjectPage{
       address: "",
       email: "",
       website: "",
+      frameworks: [],
+      skills: []
     };
 
   @ViewChild('imageInput') imageInput;

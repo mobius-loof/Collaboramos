@@ -124,9 +124,9 @@
           <p><b>Phone</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit" class="info-label">{{ account.phone_number }}</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.phone_number }}</ion-label>
         <ion-item *ngIf="isEdit" >
-          <ion-input class="input-from-label" placeholder="your phone number" value="{{account.phone_number}}" type="tel"></ion-input>
+          <ion-input class="input-from-label" placeholder="your phone number" [(ngModel)]="tempProfile.phone_number" type="tel"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -136,9 +136,9 @@
           <p><b>Email</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit" class="info-label">{{ account.email }}</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.email }}</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input class="input-from-label" placeholder="email" value="{{account.email}}" type="email"></ion-input>
+          <ion-input class="input-from-label" placeholder="email" [(ngModel)]="tempProfile.email" type="email"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -148,9 +148,9 @@
         <p><b>Address</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit" class="info-label">{{ account.address }}</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.address }}</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input class="input-from-label" placeholder="address" value="{{account.address}}"></ion-input>
+          <ion-input class="input-from-label" placeholder="address" [(ngModel)]="tempProfile.address"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
