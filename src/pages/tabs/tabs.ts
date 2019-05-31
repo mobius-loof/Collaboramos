@@ -17,8 +17,11 @@ export class TabsPage {
   tab2Title = 'Home';
   tab3Title = 'Settings';
 
+  params: any
+
   constructor(public navCtrl: NavController,
               private navParams: NavParams) {
     console.log(navParams.get('account'));
+    this.params = navParams;
   }
 }

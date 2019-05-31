@@ -33,6 +33,7 @@ export class ProfileProjectPage {
               private inAppBrowser: InAppBrowser,
               private firestore: Firestore) {
     this.isEdit = false;
+    console.log(navParams.get('account'));
   }
 
   // Lifecycle method that guards html from loading before profile and account are loaded
