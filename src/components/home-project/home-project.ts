@@ -12,7 +12,7 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 
-import { Items } from '../../providers';
+import { Items, Firestore } from '../../providers';
 /**
  * Generated class for the HomeProjectComponent component.
  *
@@ -36,13 +36,14 @@ export class HomeProjectComponent {
   
   
     cards: Array<any>;
+    topCard;
     stackConfig: StackConfig;
     recentCard: string = '     ';
   
     tags = ['scss', 'ts', 'html'];
     frameworks = ['f1', 'f2'];
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, private firestore: Firestore) {
       this.stackConfig = {
         throwOutConfidence: (offsetX, offsetY, element) => {
           return Math.min(Math.abs(offsetX) / (element.offsetWidth/4), 1);
@@ -56,8 +57,20 @@ export class HomeProjectComponent {
       };
   
       this.cards = [];
-      this.addNewCards(3);
-  
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      //this.addNewCards(3);
+
     }
   
     ngAfterViewInit() {
@@ -89,27 +102,26 @@ export class HomeProjectComponent {
   
     // Connected through HTML
     voteUp(like: boolean) {
-      let removedCard = this.cards.pop();
-      if(this.cards.length <= 2) {
-        this.addNewCards(5);
-      }
-      if (like) {
-        this.recentCard = 'You liked: ' + removedCard.email;
-      } else {
-        this.recentCard = 'You disliked: ' + removedCard.email;
-      }
+      let removedCard;
+      this.cards.pop().then(card => {
+        removedCard = card
+        if(this.cards.length <= 2) {
+          this.addNewCards(5);
+        }
+        if (like) {
+          this.recentCard = 'You liked: ' + removedCard.proj_name;
+        } else {
+          this.recentCard = 'You disliked: ' + removedCard.proj_name;
+        }
+      })
     }
   
     // Add new cards to our array
     addNewCards(count: number) {
   
-      this.http.get('https://randomuser.me/api/?results=' + count)
-      .map(data => data.json().results)
-      .subscribe(result => {
-        for (let val of result) {
-          this.cards.push(val);
-        }
-      })
+      for(let i = 0; i < count; i++) {
+        this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      }
   
     }
   
