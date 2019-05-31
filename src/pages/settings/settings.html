@@ -17,6 +17,10 @@
   <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list no-lines *ngIf="page == 'main'">
       <ion-item>
+        <button ion-item (click) = "changeEmail()">
+          Change Email
+        </button>
+
         <button ion-item (click) = "changePass()">
           Change Password
         </button>

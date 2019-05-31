@@ -9,26 +9,28 @@
 
   <ion-content>
     <ion-list no-lines inset>
-      <button id = "project" ion-button text-center block color = "{{this.projectColor}}" (click) = "createProject()">
+
+      <button id = "project" ion-button text-center block color = "{{this.projectColor}}" (click) = "makeProfile(this.PROJECT)">
         {{pages[0].title}}
       </button>
 
-      <button id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "createCandidate()">
+      <button id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "makeProfile(this.CANDIDATE)">
         {{pages[1].title}}
       </button>
+
       <ion-item>
-        <ion-label>{{pages[2].title}}</ion-label>
+        <ion-label>Invisible</ion-label>
         <ion-toggle checked="{{this.checked}}" [(ngModel)]="isToggled" (ionChange)="notify(this.checked)"></ion-toggle>
       </ion-item>
-      <button ion-item detail-none (click) = "makeProfile(pages[3])">
+
+      <button ion-item detail-none (click) = "changePage(pages[2])">
+        {{pages[2].title}}
+      </button>
+
+      <button ion-item detail-none (click) = "changePage(pages[3])">
         {{pages[3].title}}
       </button>
-      <button ion-item detail-none (click) = "makeProfile(pages[4])">
-        {{pages[4].title}}
-      </button>
-      <button ion-item *ngFor = "let p of pages">
-          {{p.title}}
-      </button>
+
     </ion-list>
   </ion-content>
 

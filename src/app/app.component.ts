@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform, MenuController, AlertController } from 'ionic-angular';
 
 import { FirstRunPage, Tab1Root, Tab2Root, Tab3Root } from '../pages';
 import { Settings } from '../providers';
+
+import { Firestore } from '../providers/firestore/firestore';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,28 +18,19 @@ export class MyApp {
 
   //title pages and where to send the navCtrl to; some are placeholders
   pages: any[] = [
-    /*{ title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' },*/
-    {title: 'Create Project', component: ''},
-    {title: 'Create Candidate', component: ''},
-    {title: 'Invisible', component: ''},
+    {title: 'Create Project', component: 'CreateProjectPage'},
+    {title: 'Create Candidate', component: 'CreateCandidatePage'},
     {title: 'Account Settings', component: 'SettingsPage'},
     {title: 'Logout', component: 'WelcomePage'},
+
     {title: 'ProfileProject', component: 'ProfileProjectPage'},
     {title: 'ProfileCandidate', component: 'ProfileCandidatePage'},
-    { title: 'CreateProject', component: 'CreateProjectPage' },
     { title: 'HomeProject', component: 'HomeProjectPage' },
     { title: 'HomeCandidate', component: 'HomeCandidatePage' },
   ]
+
+  private PROJECT = 'project';
+  private CANDIDATE = 'candidate';
 
   //boolean value for ion-toggle to set
   private isToggled: boolean;
@@ -65,14 +58,19 @@ export class MyApp {
   private PROJECT_COLOR: string = 'project_button';
   private CANDIDATE_COLOR: string = 'candy_button';
 
-  constructor(private platform: Platform, settings: Settings, private statusBar: StatusBar, private splashScreen: SplashScreen, public menuCtrl: MenuController) {
+  constructor(private platform: Platform,
+              settings: Settings,
+              private statusBar: StatusBar,
+              private splashScreen: SplashScreen,
+              private menuCtrl: MenuController,
+              private alertCtrl: AlertController,
+              private firestore: Firestore) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.isToggled = false;
-      this.editMode = false;
+      //this.isToggled = false;
     });
   }
 
@@ -104,6 +102,7 @@ export class MyApp {
   }
 
   openMenu() {
+    //open the menu
     this.menuCtrl.open();
   }
 
@@ -115,6 +114,7 @@ export class MyApp {
   }
 
   isEdit() {
+    //return the status of the editMode
     return this.editMode;
   }
 
@@ -158,29 +158,62 @@ export class MyApp {
     }
   }
 
-  makeProfile(item) {
-    //just placeholder for setting the navCtrl to move to different pages
-    if(item.component == '') {
-      console.log('Toggles Here');
-    } else {
-      this.nav.setRoot(item.component);
+  makeProfile(profileType) {
+    //if project button tapped, then create/delete settings
+    if(profileType === this.PROJECT) {
+      this.projectCreate();
+      this.projectSettings();
+
+      if(this.editMode && this.projectCreated) {
+        this.promptDelete(this.PROJECT);
+      }
+
+    //if candidate button tapped, then create/delete settings
+    } else if(profileType === this.CANDIDATE) {
+      this.candidateCreate();
+      this.candidateSettings();
+
+      if(this.editMode && this.candidateCreated) {
+        this.promptDelete(this.CANDIDATE);
+      }
+    }
+  }
+
+  changePage(item) {
+    //change page and close menu for certain menu actions
+    this.nav.setRoot(item.component);
+    this.closeMenu();
+  }
+
+  projectCreate() {
+    if(!this.projectCreated && !this.editMode) {
+      this.nav.setRoot('CreateProjectPage');
+      this.projectCreated = true;
+
+      //CHANGE THE NAME BASED ON FIRESTORE
+      this.pages[0].title = 'Collaboramos';
       this.closeMenu();
     }
   }
 
-  createProject() {
+  candidateCreate() {
+    if(!this.candidateCreated && !this.editMode) {
+      this.nav.setRoot('CreateCandidatePage');
+      this.candidateCreated = true;
+
+      //CHANGE THE NAME BASED ON FIRESTORE
+      this.pages[1].title = 'Gary G.';
+      this.closeMenu();
+    }
+  }
+
+  projectSettings() {
     //set the defaults for the project profile once it is created
     if(!this.editMode) {
-      if(!this.projectCreated) {
-        this.nav.push('CreateProjectPage');
-        this.projectCreated = true;
-        this.closeMenu();
-      }
       this.lastProf = 'project';
       this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
       this.projectVis = true;
-      this.pages[0].title = 'Collaboramos';
 
       if(this.candidateColor !== 'nop') {
         this.candidateColor = 'baby_powder';
@@ -188,24 +221,69 @@ export class MyApp {
     }
   }
 
-  createCandidate() {
+  candidateSettings() {
     //set defaults for candidate profile once it has been created
     if(!this.editMode) {
-      if(!this.candidateCreated) {
-        this.nav.push('CreateCandidatePage');
-        this.candidateCreated = true;
-        this.closeMenu();
-      }
       this.lastProf = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
       this.checked = false;
       this.candidateVis = true;
-      this.pages[1].title = 'Gary G.';
 
       if(this.projectColor !== 'nop') {
         this.projectColor = 'baby_powder';
       }
     }
+  }
+
+  profileDelete(profileType) {
+    //if tap delete on prompt for project profile, then delete
+    if(profileType === this.PROJECT) {
+      this.projectCreated = false;
+      this.pages[0].title = 'Create Project';
+      this.projectVis = false;
+
+      if(this.candidateCreated) {
+        this.lastProf = 'candidate';
+      } else {
+        this.lastProf = '';
+      }
+
+    //if tap delete on prompt for candidate profile, then delete
+    } else if(profileType === this.CANDIDATE) {
+      this.candidateCreated = false;
+      this.pages[1].title = 'Create Candidate';
+      this.candidateVis = false;
+
+      if(this.projectCreated) {
+        this.lastProf = 'project';
+      } else {
+        this.lastProf = '';
+      }
+    }
+  }
+
+  promptDelete(profileType) {
+    //bring up a prompt to delete profile
+    let alert = this.alertCtrl.create({
+      title: 'Delete Profile',
+      message: 'Do you want to delete this profile?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.profileDelete(profileType);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -27,7 +27,7 @@ export class ProfileProjectPage implements OnInit {
   frameworks = ['f1', 'f2'];
   isEdit: boolean;
 
-  constructor(//public navCtrl: NavController, 
+  constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private alertCtrl: AlertController,
               private imagePicker: ImagePicker,
@@ -36,6 +36,7 @@ export class ProfileProjectPage implements OnInit {
               private menuCtrl: MenuController,
               public appCom: MyApp) {
     this.isEdit = false;
+    this.menuCtrl.swipeEnable(false);
   }
 
   ngOnInit() {

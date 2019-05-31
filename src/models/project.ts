@@ -6,7 +6,6 @@ export interface Project {
     images: string[],
     description: string,
     is_visible: boolean,
-    tags: string[],
     frameworks: string[],
     skills: string[],
     chats: {[id: string]: Channel},
