@@ -3,10 +3,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Nav, Platform, MenuController, AlertController } from 'ionic-angular';
 
-import { FirstRunPage, Tab1Root, Tab2Root, Tab3Root } from '../pages';
+import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
 
 import { Firestore } from '../providers/firestore/firestore';
+//import { CreateProjectPage } from '../pages/create-project/create-project';
 
 @Component({
   templateUrl: 'app.html'
@@ -65,24 +66,22 @@ export class MyApp {
               private menuCtrl: MenuController,
               private alertCtrl: AlertController,
               private firestore: Firestore) {
+              //private projectPage: CreateProjectPage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.isToggled = false;
+      //this.projectVis = projectPage.getProject().is_visible;
     });
   }
 
   public notify(check: boolean) {
     //need to interface with Firebase for this to remember last toggled setting
-    console.log("Toggled: "+ this.isToggled);
-    check = !check
-
-    if(this.candidateCreated) {
-      //check candidateVis
-    } else if(this.projectCreated) {
-      //check projectVis
+    if(this.lastProf === this.PROJECT) {
+      this.isToggled = this.projectVis;
+    } else if(this.lastProf === this.CANDIDATE) {
+      this.isToggled = false;
     }
   }
 
@@ -213,7 +212,7 @@ export class MyApp {
       this.lastProf = 'project';
       this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
-      this.projectVis = true;
+      //this.projectVis = true;
 
       if(this.candidateColor !== 'nop') {
         this.candidateColor = 'baby_powder';
@@ -227,7 +226,7 @@ export class MyApp {
       this.lastProf = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
       this.checked = false;
-      this.candidateVis = true;
+      //this.candidateVis = true;
 
       if(this.projectColor !== 'nop') {
         this.projectColor = 'baby_powder';
@@ -240,7 +239,7 @@ export class MyApp {
     if(profileType === this.PROJECT) {
       this.projectCreated = false;
       this.pages[0].title = 'Create Project';
-      this.projectVis = false;
+      //this.projectVis = false;
 
       if(this.candidateCreated) {
         this.lastProf = 'candidate';
@@ -252,7 +251,7 @@ export class MyApp {
     } else if(profileType === this.CANDIDATE) {
       this.candidateCreated = false;
       this.pages[1].title = 'Create Candidate';
-      this.candidateVis = false;
+      //this.candidateVis = false;
 
       if(this.projectCreated) {
         this.lastProf = 'project';
