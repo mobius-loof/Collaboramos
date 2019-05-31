@@ -53,6 +53,7 @@ export class CreateProjectPage{
 
   
   getPicture() {
+    /*
     if (Camera['installed']()) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
@@ -66,8 +67,9 @@ export class CreateProjectPage{
         alert('Unable to take photo');
       })
     } else {
+      */
       this.imageInput.nativeElement.click();
-    }
+    //}
   }
 
 
@@ -80,7 +82,7 @@ export class CreateProjectPage{
       this.hasPicture = true;
     };
 
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
   getSize() {

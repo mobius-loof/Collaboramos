@@ -47,6 +47,7 @@ export class CreateCandidatePage {
 
 // Picture upload functions
   getPicture() {
+    /*
     console.log("getting picture");
     if (Camera['installed']()) {
       this.camera.getPicture({
@@ -60,8 +61,9 @@ export class CreateCandidatePage {
         alert('Unable to take photo');
       })
     } else {
+      */
       this.imageInput.nativeElement.click();
-    }
+    //}
   }
 
   processWebImage(event) {
@@ -71,7 +73,7 @@ export class CreateCandidatePage {
       this.candidate.images.push(imageData);
       console.log("Received Picture");
     };
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(event.target.files[event.target.files.length-1]);
     this.hasPicture = true;
   }
 
