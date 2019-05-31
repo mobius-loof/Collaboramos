@@ -12,7 +12,7 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 
-import { Items } from '../../providers';
+import { Items, Firestore } from '../../providers';
 /**
  * Generated class for the HomeProjectComponent component.
  *
@@ -34,7 +34,7 @@ export class HomeProjectComponent {
   
     private element;
   
-  
+    
     cards: Array<any>;
     stackConfig: StackConfig;
     recentCard: string = '     ';
@@ -42,7 +42,9 @@ export class HomeProjectComponent {
     tags = ['scss', 'ts', 'html'];
     frameworks = ['f1', 'f2'];
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
+    public account: Promise<any>;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, private firestore: Firestore) {
       this.stackConfig = {
         throwOutConfidence: (offsetX, offsetY, element) => {
           return Math.min(Math.abs(offsetX) / (element.offsetWidth/4), 1);
@@ -102,15 +104,9 @@ export class HomeProjectComponent {
   
     // Add new cards to our array
     addNewCards(count: number) {
-  
-      this.http.get('https://randomuser.me/api/?results=' + count)
-      .map(data => data.json().results)
-      .subscribe(result => {
-        for (let val of result) {
-          this.cards.push(val);
+        for(let i = 0; i < count; i++) {
+            this.cards.push(this.firestore.getAccount("32kul1tAw9FJRUC98hhg"));
         }
-      })
-  
     }
   
     // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
