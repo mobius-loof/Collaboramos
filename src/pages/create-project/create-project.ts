@@ -38,7 +38,6 @@ export class CreateProjectPage{
       images:[],
       description: "",
       is_visible: true,
-      tags: [],
       chats: {},
       interests: {},
       matches: {},

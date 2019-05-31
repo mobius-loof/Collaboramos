@@ -146,7 +146,6 @@ export class Firestore {
       images: model.images,
       is_visible: model.is_visible,
       proj_name: model.proj_name,
-      tags: model.tags
     });
   }
 
