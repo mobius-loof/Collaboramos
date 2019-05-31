@@ -191,4 +191,23 @@ export class Firestore {
   deleteChannel(id: string): Promise<void> {
     return this.firestore.collection('channels').doc(id).delete();
   }
+
+  // Get Project Cards
+  getCards(id: string, amount: number): Promise<any> {
+    return this.firestore.collection('match_queries').doc(id).ref.get().then(doc=> {
+      return doc.data();
+    }).then(data => {
+      var list: string[];
+      list = data.queried_list;
+      list.sort;
+      var greatestId = list[list.length - 1];
+      if (data.list_type == "project")
+        return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId')
+                                      .orderBy('id', 'asc').limit(amount)).ref.get();
+      else
+        return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId')
+                                      .orderBy('id', 'asc').limit(amount)).ref.get();
+    });
+    
+  }
 }
