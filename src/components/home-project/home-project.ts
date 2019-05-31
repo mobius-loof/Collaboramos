@@ -36,6 +36,7 @@ export class HomeProjectComponent {
   
     
     cards: Array<any>;
+    topCard;
     stackConfig: StackConfig;
     recentCard: string = '     ';
   
@@ -58,8 +59,20 @@ export class HomeProjectComponent {
       };
   
       this.cards = [];
-      this.addNewCards(3);
-  
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
+      this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
+      //this.addNewCards(3);
+
     }
   
     ngAfterViewInit() {
@@ -91,22 +104,27 @@ export class HomeProjectComponent {
   
     // Connected through HTML
     voteUp(like: boolean) {
-      let removedCard = this.cards.pop();
-      if(this.cards.length <= 2) {
-        this.addNewCards(5);
-      }
-      if (like) {
-        this.recentCard = 'You liked: ' + removedCard.email;
-      } else {
-        this.recentCard = 'You disliked: ' + removedCard.email;
-      }
+      let removedCard;
+      this.cards.pop().then(card => {
+        removedCard = card
+        if(this.cards.length <= 2) {
+          this.addNewCards(5);
+        }
+        if (like) {
+          this.recentCard = 'You liked: ' + removedCard.proj_name;
+        } else {
+          this.recentCard = 'You disliked: ' + removedCard.proj_name;
+        }
+      })
     }
   
     // Add new cards to our array
     addNewCards(count: number) {
-        for(let i = 0; i < count; i++) {
-            this.cards.push(this.firestore.getAccount("32kul1tAw9FJRUC98hhg"));
-        }
+  
+      for(let i = 0; i < count; i++) {
+        this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
+      }
+  
     }
   
     // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript

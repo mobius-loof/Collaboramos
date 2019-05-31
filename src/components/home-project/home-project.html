@@ -21,7 +21,7 @@
             <ion-col col-6>
               <ion-row class="img-row" style="background-color: white;">
                 <h1 class="img-row-info">
-                  Gary G.
+                  {{(cards[i] | async)?.proj_name}}
                 </h1>
                 <p class="img-row-info" style="font-size: 70%">
                   Software Developer
@@ -64,7 +64,7 @@
           <ion-row>
             <ion-col align-self-center>
               <div style="background-color: white; text-align: center;">
-                <h1 style="text-align: center;">Skills</h1>
+                <h1 class="skills">Skills</h1>
               </div>
             </ion-col>
           </ion-row>

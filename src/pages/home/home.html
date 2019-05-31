@@ -6,16 +6,12 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>home</ion-title>
-  </ion-navbar>
-</ion-header>
+    <button ion-button float-left clear (click)="openMenu()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-<ion-content padding>
+    <ion-title>Home</ion-title>
 
-</ion-content>
-<ion-header>
-  <ion-navbar>
-    <ion-title style="text-align: center">Home</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="viewMessages()">
         <ion-icon name="add"></ion-icon>
@@ -26,7 +22,7 @@
   <button ion-button (click)="switchMode()"></button>
 </ion-header>
 
-<ion-content style="text-align: center;" ng-switch on="mode">
-  <home-candidate ng-switch-when="candidate"></home-candidate>
-  <home-project ng-switch-when="project"></home-project>
+<ion-content style="text-align: center;">
+  <home-candidate *ngIf="mode == 'candidate'"></home-candidate>
+  <home-project *ngIf="mode == 'project'"></home-project>
 </ion-content>
