@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
-import { User, Auth } from '../../providers';
+import { User, Auth, Firestore } from '../../providers';
 import { MainPage } from '../';
 
 @IonicPage()
@@ -23,7 +23,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    private auth: Auth) {}
+    private auth: Auth,
+    private firestore: Firestore) {}
 
   cancel() {
     this.navCtrl.pop()
@@ -31,22 +32,39 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   doLogin() {
-    this.auth.login(this.credentials).then((resp) => {
-      this.navCtrl.setRoot(MainPage);
-      let toast = this.toastCtrl.create({
-        message: 'You have successfully logged in!',
-        duration: 3000,
-        position: 'bottom'
+    this.auth.login(this.credentials).then((user) => {
+      return this.firestore.getAccount(user.user.uid).then( acc => {
+
+        if (acc.project == null && acc.candidate_id == null) {
+          // take them to the profile creation page
+        }
+
+        let params = {account: acc};
+        this.navCtrl.setRoot(MainPage, params);
+
+        this.showLoginSuccess();
       });
-      toast.present();
     }).catch((err) => {
-      // Unable to sign up
+      this.showLoginFailure(err.message);
+    });
+  }
+
+  showLoginSuccess() {
+    let toast = this.toastCtrl.create({
+      message: 'You have successfully logged in!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  showLoginFailure(error_msg) {
+    // Unable to sign up
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: error_msg,
         duration: 3000,
         position: 'top'
       });
       toast.present();
-    });
   }
 }

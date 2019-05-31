@@ -17,17 +17,14 @@ export class Firestore {
 
   // Create Account
   createAccount(model: Account): Promise<void> {
-    const id = this.firestore.createId(); // generate an ID
-
     // create the account in Firestoer
-    return this.firestore.doc(`accounts/${id}`).set({
+    return this.firestore.doc(`accounts/${model.id}`).set({
       address: model.address,
       candidate_id: model.candidate_id,
       email: model.email,
       first_name: model.first_name,
       last_name: model.last_name,
       phone_number: model.phone_number,
-      profile_img: model.profile_image,
       project_id: model.project_id
     });
   }
@@ -35,6 +32,7 @@ export class Firestore {
   // Read Account
   getAccount(id: string): Promise<any> {
     return this.firestore.collection('accounts').doc(id).ref.get().then(doc => {
+      console.log(doc);
       return doc.data();
     });
   }

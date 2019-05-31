@@ -43,15 +43,29 @@ export class SignupPage {
         address: "my home"
       }
       return this.firestore.createAccount(a).then((_) => {
+        this.showSignupSuccess();
         this.navCtrl.pop();
       });
-    }).catch((e) => {
-      let toast = this.toastCtrl.create({
-        message: e.message,
-        duration: 2000,
-        position: 'bottom'
-      });
-      toast.present();
+    }).catch((err) => {
+      this.showSignupFailure(err.message)
     });
+  }
+
+  showSignupSuccess() {
+    let toast = this.toastCtrl.create({
+      message: 'You have successfully signed up!',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  showSignupFailure(error_msg) {
+    let toast = this.toastCtrl.create({
+      message: error_msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }
