@@ -88,7 +88,7 @@ export class LoginPage {
       let toast = this.toastCtrl.create({
         message: error_msg,
         duration: 3000,
-        position: 'top'
+        position: 'bottom'
       });
       toast.present();
   }
