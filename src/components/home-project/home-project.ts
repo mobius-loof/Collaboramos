@@ -41,7 +41,7 @@ export class HomeProjectComponent {
     stackConfig: StackConfig;
     recentCard: string = '     ';
 
-    tags = ['scss', 'ts', 'html'];
+    tags = [];
     frameworks = ['f1', 'f2'];
 
     public account: Promise<any>;
@@ -66,19 +66,7 @@ export class HomeProjectComponent {
         };
 
         this.cards = [];
-        this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
-        this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
-        this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
-        this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
-        this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
-        this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
-        this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
-        this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
-        this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
-        this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
-        this.cards.push(this.firestore.getProjectProfileFromID("DPcX9Wai4CBI3yWAhDr7"))
-        this.cards.push(this.firestore.getProjectProfileFromID("qbt1YubEFPK64xMGOCuu"))
-        //this.addNewCards(3);
+        this.addNewCards(3);
 
     }
 
@@ -120,26 +108,31 @@ export class HomeProjectComponent {
 
     // Connected through HTML
     voteUp(like: boolean) {
-        let removedCard;
-        this.cards.pop().then(card => {
-            removedCard = card
-            if (this.cards.length <= 2) {
-                this.addNewCards(5);
-            }
-            if (like) {
-                this.recentCard = 'You liked: ' + removedCard.proj_name;
-            } else {
-                this.recentCard = 'You disliked: ' + removedCard.proj_name;
-            }
-        })
+        let removedCard = this.cards.pop();
+
+        if (this.cards.length <= 2) {
+            this.addNewCards(5);
+        }
+        if (like) {
+            this.recentCard = 'You liked: ' + removedCard.proj_name;
+        } else {
+            this.recentCard = 'You disliked: ' + removedCard.proj_name;
+        }
+
     }
 
     // Add new cards to our array
     addNewCards(count: number) {
 
-        for (let i = 0; i < count; i++) {
-            this.cards.push(this.firestore.getProjectProfileFromID("99lG2EHMUeOecxLYl1uM"))
-        }
+        this.firestore.getCards("candidate_id_1", count).then(map => {
+            console.log(map.entries())
+            map.forEach((value: any, key: id) => {
+                this.cards.push(value)
+                this.tags.push(value.skills)
+                console.log(value)
+
+            })
+        })
 
     }
 

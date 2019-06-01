@@ -194,16 +194,20 @@ export class Firestore {
 
   // Get Project Cards
   getCards(id: string, amount: number): Promise<any> {
+      //console.log("Hello");
     return this.firestore.collection('match_queries').doc(id).ref.get().then(doc=> {
+        //console.log("Hello from inside");
+        //console.log("Hello data" + doc.data());
       return doc.data();
     }).then(data => {
       var list: string[];
       list = data.queried_list;
       list.sort;
       var greatestId = list[list.length - 1];
-      if (data.list_type == "project")
+      if (data.list_type == "project") {
+          console.log("Hello");
         return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId')
-                                      .orderBy('id', 'asc').limit(amount)).ref.get();
+                                      .orderBy('id', 'asc').limit(amount)).ref.get();}
       else
         return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId')
                                       .orderBy('id', 'asc').limit(amount)).ref.get();
@@ -217,6 +221,8 @@ export class Firestore {
       snapshot.forEach(doc => {
         cards.set(doc.id, doc.data());
       })
+      
+      return cards;
     })
   }
 }
