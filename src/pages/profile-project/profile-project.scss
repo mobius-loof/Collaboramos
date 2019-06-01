@@ -1,6 +1,26 @@
 page-profile-project {
     $tag-height:20px;
 
+    .toolbar-background {
+        background-color: $project_banner;
+    }
+
+    .content {
+        background-color: $project_background;
+    }
+
+    .item-ios {
+        background-color: transparent;
+    }
+
+    .item-ios.tag {
+        background-color: map-get($colors, secondary);
+    }
+
+    textarea {
+        background-color: transparent;
+    }
+
     .title-row {
         position: relative;
     }

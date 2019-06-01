@@ -1,6 +1,26 @@
 page-profile-candidate {
     $tag-height:20px;
 
+    .toolbar-background {
+        background-color: $candy_banner;
+    }
+
+    .content {
+        background-color: $candy_background;
+    }
+
+    .item-ios {
+        background-color: transparent;
+    }
+
+    .item-ios.tag {
+        background-color: map-get($colors, secondary);
+    }
+
+    textarea {
+        background-color: transparent;
+    }
+
     .title-row {
         position: relative;
     }

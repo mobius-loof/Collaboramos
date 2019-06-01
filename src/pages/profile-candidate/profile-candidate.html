@@ -9,7 +9,7 @@
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
       <button ion-button *ngIf="!isEdit" (click)="setIsEdit(true, false)">
-        <ion-icon name="create" color="primary" class="top-icon-edit"></ion-icon>
+        <ion-icon name="create" color="white" class="top-icon-edit"></ion-icon>
       </button>
       <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, false)">
         <ion-icon name="checkmark" color="secondary" class="top-icon"></ion-icon>
@@ -22,7 +22,7 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="content">
   <ion-grid>
     <ion-row class="title-row">
       <ion-col col-5>
