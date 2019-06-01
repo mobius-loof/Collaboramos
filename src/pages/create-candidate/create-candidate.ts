@@ -104,7 +104,7 @@ export class CreateCandidatePage {
       this.hasFile = true;
     };
 
-    reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[event.target.files.length-1]);
     }
 
 // Alert upload success
@@ -119,7 +119,6 @@ export class CreateCandidatePage {
                 }
             ]
         });
-
         await alert.present();
     }
 

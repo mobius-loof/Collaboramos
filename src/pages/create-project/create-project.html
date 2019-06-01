@@ -4,123 +4,122 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-  <ion-header>
-    <ion-navbar>
-        <ion-title class="title">Create Project Profile</ion-title>
-    </ion-navbar>
-  </ion-header>
+    <ion-header>
+        <ion-navbar>
+            <ion-title class="title">Create Project Profile</ion-title>
+        </ion-navbar>
+    </ion-header>
 
-  <ion-content padding center text-center>
+    <ion-content padding center text-center>
+        <!--ADD PICTURE-->
+        <ion-grid class="project-pic" no-padding>
+            <ion-row>
+                <ion-col no-padding>
+                    <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
+                    <div class="project-img-container" (click)="getPicture()">
+                        <div class="profile-image-placeholder" *ngIf="!this.hasPicture">
+                            <ion-icon class="add-icon" name="add"></ion-icon>
+                        </div>
+                        <div class="profile-image" *ngIf="this.hasPicture" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
 
-      <!--ADD PICTURE-->
-      <ion-grid class="project-pic" no-padding>
-          <ion-row>
-              <ion-col no-padding>
-                  <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
-                  <div class="project-img-container" (click)="getPicture()">
-                      <div class="profile-image-placeholder" *ngIf="!this.hasPicture">
-                          <ion-icon class="add-icon" name="add"></ion-icon>
-                      </div>
-                      <div class="profile-image" *ngIf="this.hasPicture" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
-                      </div>
-                  </div>
-              </ion-col>
-          </ion-row>
-      </ion-grid>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Project Name</b></p>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-input placeholder="Project Name" [(ngModel)]="project.proj_name"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Project Name</b></p>
-          </ion-col>
-          <ion-col>
-              <ion-item>
-                  <ion-input placeholder="Project Name" [(ngModel)]="project.proj_name"></ion-input>
-              </ion-item>
-          </ion-col>
-      </ion-row>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Website</b></p>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-input placeholder="Website" [(ngModel)]="project.website"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Website</b></p>
-          </ion-col>
-          <ion-col>
-              <ion-item>
-                  <ion-input placeholder="Website" [(ngModel)]="project.website"></ion-input>
-              </ion-item>
-          </ion-col>
-      </ion-row>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Address</b></p>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-input placeholder="Address" [(ngModel)]="project.address"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Address</b></p>
-          </ion-col>
-          <ion-col>
-              <ion-item>
-                  <ion-input placeholder="Address" [(ngModel)]="project.address"></ion-input>
-              </ion-item>
-          </ion-col>
-      </ion-row>
-
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Email</b></p>
-          </ion-col>
-          <ion-col>
-              <ion-item>
-                  <ion-input placeholder="Email" [(ngModel)]="project.email"></ion-input>
-              </ion-item>
-          </ion-col>
-      </ion-row>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Email</b></p>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-input placeholder="Email" [(ngModel)]="project.email"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
 
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Skills</b></p>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <div class="tag-container" *ngFor="let t of project.skills">
-              <ion-item class="tag" no-lines no-padding color="secondary" round>
-                  <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'skills')">
-                      <ion-icon name="close-circle"></ion-icon>
-                  </button>
-                  <p class="tag-content">{{t}}</p>
-              </ion-item>
-          </div>
-          <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
-              <ion-icon name="add-circle"></ion-icon>
-          </button>
-      </ion-row>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Skills</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <div class="tag-container" *ngFor="let t of project.skills">
+                <ion-item class="tag" no-lines no-padding color="secondary" round>
+                    <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'skills')">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </button>
+                    <p class="tag-content">{{t}}</p>
+                </ion-item>
+            </div>
+            <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-row>
 
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Frameworks</b></p>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <div class="tag-container" *ngFor="let t of project.frameworks">
-              <ion-item class="tag" no-lines no-padding color="secondary" round>
-                  <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'frameworks')">
-                      <ion-icon name="close-circle"></ion-icon>
-                  </button>
-                  <p class="tag-content">{{t}}</p>
-              </ion-item>
-          </div>
-          <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('frameworks')">
-              <ion-icon name="add-circle"></ion-icon>
-          </button>
-      </ion-row>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Frameworks</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <div class="tag-container" *ngFor="let t of project.frameworks">
+                <ion-item class="tag" no-lines no-padding color="secondary" round>
+                    <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(t, 'frameworks')">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </button>
+                    <p class="tag-content">{{t}}</p>
+                </ion-item>
+            </div>
+            <button class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('frameworks')">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-row>
 
-      <ion-row>
-          <ion-col class="label" col-4>
-              <p><b>Description</b></p>
-          </ion-col>
-      </ion-row>
-      <ion-row>
-          <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="project.description"></textarea>
-      </ion-row>
+        <ion-row>
+            <ion-col class="label" col-4>
+                <p><b>Description</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <textarea class="text-area" maxlength="150" type="text" placeholder="Description (Max: 150 Characters)" [(ngModel)]="project.description"></textarea>
+        </ion-row>
 
-  </ion-content>
+    </ion-content>
 
   <ion-footer>
     <button ion-button type="submit" size="large" full class="create" (click) ="submit()">Create</button>
