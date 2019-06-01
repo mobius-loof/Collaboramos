@@ -104,7 +104,7 @@ export class CreateProjectPage{
   * The user submited, so we return the data object back
   */
   submit() {
-    this.firestore.createProjectProfile(this.project);
+    //this.firestore.createProjectProfile(this.project);
     this.navCtrl.setRoot("TabsPage")
     return this.project;
     }

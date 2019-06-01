@@ -7,6 +7,8 @@ import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
 
 import { Firestore } from '../providers/firestore/firestore';
+import { Project } from '../models';
+import { Subscription } from 'rxjs';
 //import { CreateProjectPage } from '../pages/create-project/create-project';
 
 // SET SIDEBAR STATE TO WAIT FOR ACCOUNT
@@ -64,6 +66,7 @@ export class MyApp {
 
   private PROJECT_COLOR: string = 'project_button';
   private CANDIDATE_COLOR: string = 'candy_button';
+  //private projProf: Project;
 
   constructor(private platform: Platform,
               settings: Settings,
@@ -219,7 +222,12 @@ export class MyApp {
       this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
       //this.projectVis = true;
-      this.firestore.getProjectProfileReference('GHhA9rhXgDisR0qm0IEh').valueChanges();
+      this.firestore.getProjectProfileReference('GHhA9rhXgDisR0qm0IEh').valueChanges().subscribe(myData => {
+        console.log("FK " + myData.description);
+        this.projectVis = myData.is_visible;
+      });
+
+      var projProf: Project;
 
       this.event.publish('lastProf', 'project');
 
