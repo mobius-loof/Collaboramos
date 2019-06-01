@@ -1,12 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Nav, Platform, MenuController, AlertController } from 'ionic-angular';
+import { Nav, Platform, MenuController, AlertController, Events } from 'ionic-angular';
 
 import { FirstRunPage, Tab1Root, Tab2Root, Tab3Root } from '../pages';
 import { Settings } from '../providers';
 
 import { Firestore } from '../providers/firestore/firestore';
+
+// SET SIDEBAR STATE TO WAIT FOR ACCOUNT
+  // account only exists after login
+
+// Oberservable and Listener to get the is_visible boolean from Firestore
+  // listen for changes from Firestore; get tutorial from Thomas
 
 @Component({
   templateUrl: 'app.html'
@@ -64,7 +70,8 @@ export class MyApp {
               private splashScreen: SplashScreen,
               private menuCtrl: MenuController,
               private alertCtrl: AlertController,
-              private firestore: Firestore) {
+              private firestore: Firestore,
+              private event: Events) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -213,7 +220,9 @@ export class MyApp {
       this.lastProf = 'project';
       this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
-      this.projectVis = true;
+      //this.projectVis = true;
+
+      this.event.publish('lastProf', 'project');
 
       if(this.candidateColor !== 'nop') {
         this.candidateColor = 'baby_powder';
@@ -227,7 +236,9 @@ export class MyApp {
       this.lastProf = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
       this.checked = false;
-      this.candidateVis = true;
+      //this.candidateVis = true;
+
+      this.event.publish('lastProf', 'candidate');
 
       if(this.projectColor !== 'nop') {
         this.projectColor = 'baby_powder';
