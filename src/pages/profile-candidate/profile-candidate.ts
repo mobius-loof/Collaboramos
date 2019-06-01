@@ -45,17 +45,15 @@ export class ProfileCandidatePage {
     return {
       id: profile.id,
       name: profile.name,
-      files: Object.assign([], profile.files),
-      images: Object.assign([], profile.images),
-      resumeURL: profile.resumeURL,
+      image: profile.image,
+      resume_URL: profile.resume_URL,
       is_visible: profile.is_visible,
-      tags: Object.assign([], profile.tags),
       description: profile.description,
       chats: profile.chats,
       interests: profile.interests,
       matches: profile.matches,
       waitlist: Object.assign([], profile.waitlist),
-      phone: profile.phone,
+      phone_number: profile.phone_number,
       address: profile.address,
       skills: Object.assign([], profile.skills),
       email: profile.email,
@@ -65,7 +63,7 @@ export class ProfileCandidatePage {
 
   populateProfileFromAccount(profile: Candidate, account: Account) {
     profile.email = account.email;
-    profile.phone = account.phone_number;
+    profile.phone_number = account.phone_number;
     profile.address = account.address;
   }
 

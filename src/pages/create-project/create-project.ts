@@ -1,9 +1,8 @@
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { Project } from '../../models/project';
+import { Firestore } from '../../providers/firestore/firestore';
 import { Channel } from '../../models/channel';
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera } from '@ionic-native/camera';
 
 /**
  * Generated class for the CreateProjectPage page.
@@ -19,19 +18,9 @@ import { Camera } from '@ionic-native/camera';
 })
 export class CreateProjectPage{
 
-  /*
-  project: {
-    name: string, id: string, image: string, description: string,
-    isVisible: boolean, tags: string, chats: { [id: string]: Channel }} = { 
-      name: '',
-      id: '',
-      image: '',
-      description: '',
-      isVisible: true,
-      tags: '',
-      chats: {}
-    };
-  */
+
+    image = "";
+
   project: Project = {
       id: "",
       name: "",
@@ -56,20 +45,7 @@ export class CreateProjectPage{
   hasPicture: boolean;
   //form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    
-    /*
-    this.form = formBuilder.group({
-      profilePic: [''],
-      name: ['', Validators.required],
-      about: ['']
-    });
-
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-    */
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore) {
     this.hasPicture = false;
   }
 
@@ -79,33 +55,36 @@ export class CreateProjectPage{
 
   
   getPicture() {
+    /*
     if (Camera['installed']()) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        this.project.image = ('data:image/jpg;base64,' + data);
+          this.project.images.push('data:image/jpg;base64,' + data);
+          this.hasPicture = true;
         //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');
       })
     } else {
+      */
       this.imageInput.nativeElement.click();
-    }
+    //}
   }
+
 
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-
-      let imageData = (readerEvent.target as any).result;
-      this.project.image = imageData;
+      let imageData = (readerEvent.target as any).result;  
+      this.image = imageData;
       this.hasPicture = true;
-      //this.form.patchValue({ 'profilePic': imageData });
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
+      };
+    let imageD = event.target.files[event.target.files.length - 1];
+    this.project.image = imageD;
+    reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
   getSize() {
@@ -113,24 +92,77 @@ export class CreateProjectPage{
   }
 
   getProfileImageStyle() {
-    //return 'url(' + this.form.controls['profilePic'].value + ')'
-    return 'url(' + this.project.image + ')';
+    return 'url(' + this.image + ')'
   }
 
   /**
    * The user cancelled, so we dismiss without sending data back.
    */
   return() {
-    this.navCtrl.setRoot("ListMasterPage");
+    this.navCtrl.setRoot("CreateProfilePage");
   }
 
   /**
   * The user submited, so we return the data object back
   */
   submit() {
-    this.navCtrl.setRoot("ListMasterPage")
+    this.firestore.createProjectProfile(this.project);
+    this.navCtrl.setRoot("TabsPage")
     return this.project;
-  }
+    }
 
+    /**
+     * 
+     *Tag
+    **/
+    deleteTag(t: string, type:string) {
+        var newTags = []
+        if (type === "skills") {
+            for (var i = 0; i < this.project.skills.length; i++) {
+                if (this.project.skills[i] != t) {
+                    newTags.push(this.project.skills[i]);
+                }
+            }
+            this.project.skills = newTags;
+        } else if (type === "frameworks") {
+            for (var i = 0; i < this.project.frameworks.length; i++) {
+                if (this.project.frameworks[i] != t) {
+                    newTags.push(this.project.frameworks[i]);
+                }
+            }
+            this.project.frameworks = newTags;
+        }
+        
+    }
+
+    presentPrompt(type: string) {
+        let alert = this.alertController.create({
+            title: 'Add ' + type.substring(0, type.length),
+            inputs: [
+                {
+                    name: 'tag',
+                    placeholder: 'Add a new ' + type.substring(0, type.length-1)
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => { }
+                },
+                {
+                    text: 'Ok',
+                    handler: data => {
+                        if (type === "skills") {
+                            this.project.skills.push(data.tag);
+                        } else if (type === "frameworks") {
+                            this.project.frameworks.push(data.tag);
+                        }
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
 
 }
