@@ -3,8 +3,6 @@ import { Project } from '../../models/project';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Channel } from '../../models/channel';
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera } from '@ionic-native/camera';
 
 /**
  * Generated class for the CreateProjectPage page.
@@ -26,11 +24,11 @@ export class CreateProjectPage{
   project: Project = {
       id: null,
       proj_name: "",
-      images:[],
+      image:"",
       description: "",
       is_visible: true,
-      skills: ["C++", "Java"],
-      frameworks: ["Github","Bitbucket"],
+      skills: [],
+      frameworks: [],
       chats: {},
       interests: {},
       matches: {},

@@ -125,5 +125,31 @@ $matches_background : #E5EEF6;
 @import "ionic.ionicons";
 // Fonts
 // --------------------------------------------------
-@import "roboto";
-@import "noto-sans";
+// @import "roboto";
+// @import "noto-sans";
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/Quicksand-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: bold;
+  src: url("../assets/fonts/Quicksand-Bold.ttf");
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: italic;
+  font-weight: normal;
+  src: url("../assets/fonts/Quicksand-Light.ttf");
+}
+
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
