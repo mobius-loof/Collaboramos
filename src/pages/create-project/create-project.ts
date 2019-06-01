@@ -76,12 +76,10 @@ export class CreateProjectPage{
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-
       let imageData = (readerEvent.target as any).result;
       this.project.images.push(imageData);
       this.hasPicture = true;
     };
-
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 

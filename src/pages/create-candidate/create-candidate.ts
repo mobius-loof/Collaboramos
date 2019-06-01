@@ -100,7 +100,7 @@ export class CreateCandidatePage {
       this.candidate.resumeURL = fileData;
       console.log("Received Resume");
       console.log(fileData);
-      this.presentAlert()
+      this.presentAlert();
       this.hasFile = true;
     };
 
