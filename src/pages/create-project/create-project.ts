@@ -38,16 +38,15 @@ export class CreateProjectPage{
       images:[],
       description: "",
       is_visible: true,
-      // tags: [],
+      skills: [],
+      frameworks: [],
       chats: {},
       interests: {},
       matches: {},
       waitlist: [],
       address: "",
       email: "",
-      website: "",
-      frameworks: [],
-      skills: []
+      website: ""
     };
 
   @ViewChild('imageInput') imageInput;
