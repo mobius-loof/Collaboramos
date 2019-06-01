@@ -46,7 +46,7 @@ export class CreateProjectPage{
       waitlist: [],
       address: "",
       email: "",
-      website: "",
+      website: ""
     };
 
   @ViewChild('imageInput') imageInput;

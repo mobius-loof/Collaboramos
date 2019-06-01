@@ -1,13 +1,13 @@
 import { Channel } from './'
 
 export interface Message {
-    senderName: string, // idk whether this is sender or receiver?
-    senderId: string,
-    receiverName: string,
-    receiverId: string,
-    channelId: Channel,
+    sender_name: string, // idk whether this is sender or receiver?
+    sender_id: string,
+    receiver_name: string,
+    receiver_id: string,
+    channel_id: Channel,
     date: number, // # of ms since UNIX epoch, number returned by Date.now() in JS
-    isText: boolean, 
+    is_text: boolean, 
     media: string, 
     text: string
 }
