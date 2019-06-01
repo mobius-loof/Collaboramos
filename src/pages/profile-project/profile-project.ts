@@ -32,15 +32,12 @@ export class ProfileProjectPage {
               private imagePicker: ImagePicker,
               private inAppBrowser: InAppBrowser,
               private firestore: Firestore) {
-    console.log(navParams.get('account'));
     this.isEdit = false;
     this.account = navParams.get('account');
     this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.populateProfileFromAccount(this.profile, this.account);
     this.populateProfileFromAccount(this.tempProfile, this.account);
-    console.log(navParams.get('account'));
-    console.log(this.profile);
   }
 
   copyProjectProfile(profile: Project): Project {

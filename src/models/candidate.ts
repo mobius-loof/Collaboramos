@@ -15,5 +15,7 @@ export interface Candidate {
     waitlist: Project[],
     phone: string,
     address: string,
-    skills: string[]
+    skills: string[],
+    email: string,
+    website: string
 }

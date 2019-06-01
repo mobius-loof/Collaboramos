@@ -61,7 +61,7 @@
 
     <ion-row *ngIf="isEdit" class="text-area-container">
       <ion-col>
-        <textarea class="textarea" [(ngModel)] = "tempProfile.description"></textarea>
+        <textarea class="textarea" [(ngModel)]="tempProfile.description"></textarea>
       </ion-col>
     </ion-row>
 
@@ -70,20 +70,20 @@
     </ion-row>
     <ion-row>
       <div class="tag-row-container" *ngIf="!isEdit">
-        <div class="tag-container" *ngFor="let t of profile.skills">
+        <div class="tag-container" *ngFor="let skill of profile.skills">
           <ion-item class="tag" no-lines no-padding color="secondary" round>
-              <p class="tag-content">{{t}}</p>
+              <p class="tag-content">{{skill}}</p>
           </ion-item>
         </div>
       </div>
 
       <div class="tag-row-container" *ngIf="isEdit">
-        <div class="tag-container" *ngFor="let t of tempProfile.skills">
+        <div class="tag-container" *ngFor="let skill of tempProfile.skills">
           <ion-item class="tag" no-lines no-padding color="secondary" round>
-              <button class="tag-btn" ion-button item-left clear round (click)="deleteSkill(t)">
+              <button class="tag-btn" ion-button item-left clear round (click)="deleteSkill(skill)">
                   <ion-icon name="close-circle"></ion-icon>
               </button>
-              <p class="tag-content">{{t}}</p>
+              <p class="tag-content">{{skill}}</p>
           </ion-item>
         </div>
       </div>
@@ -98,19 +98,19 @@
 
     <ion-row>
       <div class="tag-row-container" *ngIf="!isEdit">
-          <div class="tag-container" *ngFor="let f of profile.frameworks">
+          <div class="tag-container" *ngFor="let framework of profile.frameworks">
             <ion-item class="tag" no-lines no-padding color="secondary" round>
-                <p class="tag-content">{{f}}</p>
+                <p class="tag-content">{{framework}}</p>
             </ion-item>
           </div>
       </div>
       <div class="tag-row-container" *ngIf="isEdit">
-        <div class="tag-container" *ngFor="let f of tempProfile.frameworks">
+        <div class="tag-container" *ngFor="let framework of tempProfile.frameworks">
           <ion-item class="tag" no-lines no-padding color="secondary" round>
-            <button class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
+            <button class="tag-btn" ion-button item-left clear round (click)="deleteFramework(framework)">
                   <ion-icon name="close-circle"></ion-icon>
               </button> 
-              <p class="tag-content">{{f}}</p>
+              <p class="tag-content">{{framework}}</p>
           </ion-item>
         </div>
       </div>
@@ -126,7 +126,7 @@
       <ion-col>
         <ion-label *ngIf="!isEdit" class="info-label">{{ profile.phone_number }}</ion-label>
         <ion-item *ngIf="isEdit" >
-          <ion-input class="input-from-label" placeholder="your phone number" [(ngModel)]="tempProfile.phone_number" type="tel"></ion-input>
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.phone_number" type="tel"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -138,7 +138,7 @@
       <ion-col>
         <ion-label *ngIf="!isEdit" class="info-label">{{ profile.email }}</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input class="input-from-label" placeholder="email" [(ngModel)]="tempProfile.email" type="email"></ion-input>
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.email" type="email"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -150,7 +150,7 @@
       <ion-col>
         <ion-label *ngIf="!isEdit" class="info-label">{{ profile.address }}</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input class="input-from-label" placeholder="address" [(ngModel)]="tempProfile.address"></ion-input>
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.address"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

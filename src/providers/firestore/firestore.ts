@@ -93,7 +93,8 @@ export class Firestore {
       files: model.files,
       images: model.images,
       is_visible: model.is_visible,
-      skills: model.skills
+      skills: model.skills,
+      name: model.name,
     });
   }
 

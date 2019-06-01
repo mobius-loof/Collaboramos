@@ -29,7 +29,9 @@ export class CreateCandidatePage {
     waitlist: [],
     phone: "",
     address: "",
-    skills: []
+    skills: [],
+    email: "",
+    website: ""
   };
 
   isReadyToSave: boolean;

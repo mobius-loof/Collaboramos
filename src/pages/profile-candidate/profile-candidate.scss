@@ -17,12 +17,10 @@ page-profile-candidate {
         height: 100px;
         width: 100px;
         overflow: hidden;
-        border-radius: 50%;
         padding: 0px;
     }
 
     .project-img {
-        border-radius: 50%;
         width: 100%;
         z-index: 0;
         position: absolute;
@@ -75,6 +73,10 @@ page-profile-candidate {
     .tag-container {
         margin-right: 2px;
         padding: 2px;
+    }
+
+    .tag-row-container {
+        display: inline-flex;
     }
 
     .tag-content {

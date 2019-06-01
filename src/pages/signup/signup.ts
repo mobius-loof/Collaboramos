@@ -18,8 +18,6 @@ export class SignupPage {
     password: ''
   };
 
-  private signupErrorString = 'Unable to create account. Please check your account information and try again.';
-
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
