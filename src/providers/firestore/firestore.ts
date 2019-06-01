@@ -134,7 +134,6 @@ export class Firestore {
       email: model.email,
       address: model.address
     });
-
   }
 
   // Read Profile via ID

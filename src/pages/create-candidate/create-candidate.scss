@@ -4,166 +4,191 @@ $colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4
 
 page-create-candidate {
 
-    $tag-height: 10px;
+  $tag-height: 10px;
+
+  .toolbar-background {
+    background-color: $candy_banner;
+  }
+
+  .toolbar-title-ios {
+    color: white;
+  }
+
+  .content {
+    background-color: $candy_background;
+  }
+
+  .create {
+    background-color: $candy_banner;
+    height: 50px;
+    margin-bottom: -4px;
+  }
+
+  .cancel {
+    height: 50px;
+    background-color: #DDDDDD;
+    margin-bottom: 0px;
+  }
+
+  .candidate-pic {
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+
+  .profile-image {
+    justify-content: center;
+    height: 140px;
+    width: 180px;
+    //margin-bottom: -10px;
+    //margin-right: 10px;
+    margin-left: -30px;
+    margin-top: -15px;
+  }
+
+  .success {
+    vertical-align: middle;
+    justify-content: center;
+    height: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.4em;
+    color: map-get($colors, secondary);
+    border: 1px solid map-get($colors, secondary);
+    width: 350px;
+    margin-bottom: 10px;
+  }
+
+  .resume {
+    vertical-align: middle;
+    justify-content: center;
+    height: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.4em;
+    color: $candy_banner;
+    border: 1px solid $candy_banner;
+    width: 340px;
+    margin-bottom: 10px;
+  }
+
+  .candidate-img-container {
+    position: relative;
     background-color: white;
+    border: 1px solid gray;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 0px;
+  }
 
-    .create {
-        background-color: map-get($colors, primary);
-        height: 50px;
-        margin-bottom: -4px;
-    }
+  .resume-text {
+    margin-bottom: 30px;
+    margin-top: -20px;
+  }
 
-    .cancel {
-        height: 50px;
-        background-color: map-get($colors, danger);
-        margin-bottom: 0px;
-    }
+  .text-area {
+    width: 100%;
+    height: 100px;
+  }
 
-    .candidate-pic {
-        justify-content: center;
-        height: 100px;
-        width: 100px;
-        margin-bottom: 30px;
-        margin-top: 10px;
-    }
+  .add-icon {
+    margin-top: 40px;
+    justify-content: center;
+  }
 
-    .profile-image {
-        justify-content: center;
-        height: 140px;
-        width: 180px;
-        //margin-bottom: -10px;
-        //margin-right: 10px;
-        margin-left: -30px;
-        margin-top: -15px;
-    }
+  .title {
+    color: map-get($colors, primary);
+  }
 
-    .success {
-        vertical-align: middle;
-        justify-content: center;
-        height: 40px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-size: 1.4em;
-        color: map-get($colors, secondary);
-        border: 1px solid map-get($colors, secondary);
-        width: 350px;
-        margin-bottom: 10px;
-    }
+  .tag-container {
+    margin-right: 2px;
+    padding: 2px;
+  }
 
-    .resume {
-        vertical-align: middle;
-        justify-content: center;
-        height: 40px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-size: 1.4em;
-        color: map-get($colors, primary);
-        border: 1px solid map-get($colors, primary);
-        width: 340px;
-        margin-bottom: 10px;
-    }
+  .tag-content {
+    padding-left: 0.7rem;
+  }
 
-    .candidate-img-container {
-        position: relative;
-        border: 1px solid gray;
-        height: 100px;
-        width: 100px;
-        overflow: hidden;
-        border-radius: 50%;
-        padding: 0px;
-    }
+  .tag {
+    height: $tag-height;
+    border-radius: $tag-height*2;
+    background-color: $candy_banner !important;
+    color: white;
+  }
 
-    .resume-text {
-        margin-bottom: 30px;
-        margin-top: -20px;
-    }
+  button.tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-bottom: 0;
+    $button-ios-margin-start: 0;
+    color: white;
+    padding: 0;
+  }
 
-    .text-area {
-        width: 100%;
-        height: 100px;
-    }
+  .add-tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-start: 0;
+    $button-ios-margin-bottom: 0;
+    color: $candy_banner;
+    padding: 0;
+  }
 
-    .add-icon {
-        margin-top: 40px;
-        justify-content: center;
-    }
+  .button-ios.add-tag-btn {
+    height: 1.5em;
+  }
 
-    .title {
-        color: map-get($colors, primary);
-    }
+  .item-ios [item-left], .item-ios [item-start] {
+    margin: 0;
+  }
 
-    .tag-container {
-        margin-right: 2px;
-        padding: 2px;
-    }
+  .item-ios {
+    padding-left: 0;
+  }
 
-    .tag-content {
-        padding-left: 0.7rem;
-    }
+  .item {
+    min-height: 3rem;
+    min-width: 3rem;
+  }
 
-    .tag {
-        height: $tag-height;
-        border-radius: $tag-height*2;
-    }
+  .item-ios .item-button {
+    padding: 0;
+    padding-left: 0.5rem;
+  }
 
-    button.tag-btn {
-        $button-ios-margin-top: 0;
-        $button-ios-margin-end: 0;
-        $button-ios-margin-bottom: 0;
-        $button-ios-margin-start: 0;
-        padding: 0;
-    }
+  .item-ios p {
+    color: white;
+  }
 
-    .add-tag-btn {
-        $button-ios-margin-top: 0;
-        $button-ios-margin-end: 0;
-        $button-ios-margin-start: 0;
-        $button-ios-margin-bottom: 0;
-        padding: 0;
-    }
+  .label-md {
+    margin: 0;
+  }
 
-    .button-ios.add-tag-btn {
-        height: 1.5em;
-    }
+  .label-ios {
+    margin: 0;
+  }
 
-    .item-ios [item-left], .item-ios [item-start] {
-        margin: 0;
-    }
+  ion-input {
+    font-size: 20px;
+  }
 
-    .item-ios {
-        padding-left: 0;
+  ion-row {
+    textarea {
+      width: 100%;
+      padding-left: 0px;
+      border-width: 1px;
     }
+  }
 
-    .item {
-        min-height: 3rem;
-        min-width: 3rem;
-    }
+  ion-item {
+    background-color: transparent !important;
+  }
 
-    .item-ios .item-button {
-        padding: 0;
-        padding-left: 0.5rem;
-    }
 
-    .label-md {
-        margin: 0;
-    }
-
-    .label-ios {
-        margin: 0;
-    }
-
-    ion-input {
-        font-size: 20px;
-    }
-
-    ion-row {
-        textarea {
-            width: 100%;
-            padding-left: 0px;
-            border-width: 1px;
-        }
-    }
-
-    .label {
-        text-align: left;
-    }
+  .label {
+    text-align: left;
+  }
 }
 

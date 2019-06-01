@@ -1,29 +1,44 @@
 $colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4f4f4, dark : #222);
 
 page-create-profile {
-    .center {
-        position: absolute;
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .center {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .btn-container-1 {
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .btn-container-1 {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .btn-container-2 {
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .btn-container-2 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .btn{
-        width: 300px;
-        coclor: map-get($colors, primary);
-    }
+  .btn-1 {
+    width: 300px;
+    background-color: $project_banner;
+  }
+
+  .btn-1:active .btn-1:focus .btn-container-1:active .btn-container-1:focus {
+    width: 300px;
+    background-color: $project_background;
+  }
+
+  .btn-2 {
+    width: 300px;
+    background-color: $candy_banner;
+  }
+
+  .btn-2:active .btn-2:focus .btn-container-1:active.btn-container-1:focus {
+    width: 300px;
+    background-color: $candy_background;
+  }
 }

@@ -1,139 +1,162 @@
 $colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4f4f4, dark : #222);
 
 page-create-project {
-    $tag-height: 10px;
+  $tag-height: 10px;
 
+  .toolbar-background {
+    background-color: $project_banner;
+  }
 
+  .toolbar-title-ios {
+    color: white;
+  }
+
+  .content {
+    background-color: $project_background;
+  }
+
+  ion-item {
+    background-color: transparent !important;
+  }
+
+  .create {
+    background-color: $project_banner;
+    height: 50px;
+    margin-bottom: -4px;
+  }
+
+  .cancel {
+    height: 50px;
+    background-color: #DDDDDD;
+    margin-bottom: 0px;
+  }
+
+  .project-pic {
+    justify-content: center;
+    height: 140px;
+    width: 180px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+
+  .profile-image {
+    justify-content: center;
+    height: 140px;
+    border: 1px solid gray;
+    width: 180px;
+    //margin-bottom: -10px;
+    //margin-left: -1px;
+    //margin-top: -23px;
+  }
+
+  .title {
+    color: #488aff;
+    margin-bottom: 30px;
+  }
+
+  .add-icon {
+    margin-top: 60px;
+    justify-content: center;
+  }
+
+  .project-img-container {
     background-color: white;
+    justify-content: center;
+    border: 1px solid gray;
+    height: 140px;
+    width: 180px;
+    overflow: hidden;
+    padding: 0px;
+  }
 
-    .create {
-        background-color: map-get($colors, primary);
-        height: 50px;
-        margin-bottom: -4px;
+  .text-area {
+    width: 100%;
+    height: 100px;
+  }
+
+
+  .tag-container {
+    margin-right: 2px;
+    padding: 2px;
+  }
+
+  .tag-content {
+    padding-left: 0.7rem;
+  }
+
+  .tag {
+    height: $tag-height;
+    border-radius: $tag-height*2;
+    background-color: $project_banner !important;
+    color: white;
+  }
+
+  button.tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-bottom: 0;
+    $button-ios-margin-start: 0;
+    color: white;
+    padding: 0;
+  }
+
+  .add-tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-start: 0;
+    $button-ios-margin-bottom: 0;
+    color: $project_banner;
+    padding: 0;
+  }
+
+  .button-ios.add-tag-btn {
+    height: 1.5em;
+  }
+
+  .item-ios [item-left], .item-ios [item-start] {
+    margin: 0;
+  }
+
+  .item-ios {
+    padding-left: 0;
+  }
+
+  .item-ios p {
+    color: white;
+  }
+
+
+  .item {
+    min-height: 3rem;
+    min-width: 3rem;
+  }
+
+  .item-ios .item-button {
+    padding: 0;
+    padding-left: 0.5rem;
+  }
+
+  .label-md {
+    margin: 0;
+  }
+
+  .label-ios {
+    margin: 0;
+  }
+
+  ion-input {
+    font-size: 20px;
+  }
+
+  ion-row {
+    textarea {
+      width: 90%;
+      padding-right: 0px;
+      border-width: 1px;
     }
+  }
 
-    .cancel {
-        height: 50px;
-        background-color: map-get($colors, danger);
-        margin-bottom: 0px;
-    }
-
-    .project-pic {
-        justify-content: center;
-        height: 140px;
-        width: 180px;
-        margin-bottom: 30px;
-        margin-top: 10px;
-    }
-
-    .profile-image {
-        justify-content: center;
-        height: 140px;
-        border: 1px solid gray;
-        width: 180px;
-        //margin-bottom: -10px;
-        //margin-left: -1px;
-        //margin-top: -23px;
-    }
-
-    .title {
-        color: #488aff;
-        margin-bottom: 30px;
-    }
-
-    .add-icon {
-        margin-top: 60px;
-        justify-content: center;
-    }
-
-    .project-img-container {
-        justify-content: center;
-        border: 1px solid gray;
-        height: 140px;
-        width: 180px;
-        overflow: hidden;
-        padding: 0px;
-    }
-
-    .text-area {
-        width: 100%;
-        height: 100px;
-    }
-
-
-    .tag-container {
-        margin-right: 2px;
-        padding: 2px;
-    }
-
-    .tag-content {
-        padding-left: 0.7rem;
-    }
-
-    .tag {
-        height: $tag-height;
-        border-radius: $tag-height*2;
-    }
-
-    button.tag-btn {
-        $button-ios-margin-top: 0;
-        $button-ios-margin-end: 0;
-        $button-ios-margin-bottom: 0;
-        $button-ios-margin-start: 0;
-        padding: 0;
-    }
-
-    .add-tag-btn {
-        $button-ios-margin-top: 0;
-        $button-ios-margin-end: 0;
-        $button-ios-margin-start: 0;
-        $button-ios-margin-bottom: 0;
-        padding: 0;
-    }
-
-    .button-ios.add-tag-btn {
-        height: 1.5em;
-    }
-
-    .item-ios [item-left], .item-ios [item-start] {
-        margin: 0;
-    }
-
-    .item-ios {
-        padding-left: 0;
-    }
-
-    .item {
-        min-height: 3rem;
-        min-width: 3rem;
-    }
-
-    .item-ios .item-button {
-        padding: 0;
-        padding-left: 0.5rem;
-    }
-
-    .label-md {
-        margin: 0;
-    }
-
-    .label-ios {
-        margin: 0;
-    }
-
-    ion-input {
-        font-size: 20px;
-    }
-
-    ion-row {
-        textarea {
-            width: 90%;
-            padding-right: 0px;
-            border-width: 1px;
-        }
-    }
-
-    .label {
-        text-align: left;
-    }
+  .label {
+    text-align: left;
+  }
 }
