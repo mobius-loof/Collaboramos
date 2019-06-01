@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Candidate, Project, Account, Channel, Message } from '../../models'
-import { Observable, Subscribable } from 'rxjs';
+import * as firebase from 'firebase';
+import { Candidate, Project, Account, Channel, Message } from '../../models';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -194,7 +194,27 @@ export class Firestore {
   }
 
   // Get Messages in Chat
-  getMessagesForChannel(id: string): AngularFirestoreCollection<Message> {
+  getMessagesForChannel(id: string): AngularFirestoreCollection {
     return this.firestore.collection('messages', ref => ref.where('channel_id', '==', id));
+  }
+
+  // CR for Messages
+  createMessage(model: Message): Promise<void> {
+    var id = this.firestore.createId(); // create new id
+    var dateFromFirestore = firebase.firestore.FieldValue.serverTimestamp(); // get time at server
+
+    // update last message sent for the channel
+    this.firestore.collection('channels').doc(model.channel_id).update({
+      last_message_sent: model.message
+    });
+
+    // create new message and push to firestore
+    return this.firestore.doc(`messages/${id}`).set({
+      channel_id: model.channel_id,
+      sender_id: model.sender_id,
+      sender_name: model.sender_name,
+      message: model.message,
+      message_date: dateFromFirestore
+    });
   }
 }
