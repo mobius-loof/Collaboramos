@@ -19,12 +19,12 @@ import { Component, ViewChild } from '@angular/core';
 export class CreateProjectPage{
 
 
-    images = []
+    image = "";
 
   project: Project = {
       id: null,
       proj_name: "",
-      image:"",
+      image: "",
       description: "",
       is_visible: true,
       skills: [],
@@ -35,7 +35,8 @@ export class CreateProjectPage{
       waitlist: [],
       address: "",
       email: "",
-      website: ""
+      website: "",
+      phone: ""
     };
 
   @ViewChild('imageInput') imageInput;
@@ -44,7 +45,7 @@ export class CreateProjectPage{
   hasPicture: boolean;
   //form: FormGroup;
 
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, public camera: Camera, private firestore: Firestore) {
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore) {
     this.hasPicture = false;
   }
 
@@ -78,11 +79,11 @@ export class CreateProjectPage{
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;  
-      this.images.push(imageData);
+      this.image = imageData;
       this.hasPicture = true;
       };
-      let image = event.target.files[event.target.files.length - 1];
-      this.project.images.push(image);
+    let imageD = event.target.files[event.target.files.length - 1];
+    this.project.image = imageD;
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
@@ -91,7 +92,7 @@ export class CreateProjectPage{
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.images[this.images.length-1] + ')'
+    return 'url(' + this.image + ')'
   }
 
   /**

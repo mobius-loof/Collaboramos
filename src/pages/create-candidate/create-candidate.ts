@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Candidate } from '../../models/candidate';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController, AlertController } from 'ionic-angular';
 
 @IonicPage()
@@ -15,30 +14,31 @@ export class CreateCandidatePage {
   @ViewChild('imageInput') imageInput;
 
 
-    images = []
+    image = ""
+
 
   candidate: Candidate = {
     id: null,
     name: "",
-    images: [],
+    image: "",
+    email: "",
     description: "",
     resumeURL: "",
     is_visible: true,
-    tags: ["UCSD"],
     chats: {},
     interests: {},
     matches: {},
     waitlist: [],
     phone: "",
     address: "",
-    skills: ["js","python"]
+    skills: []
   };
 
   isReadyToSave: boolean;
   hasPicture: boolean;
   hasFile: boolean;
 
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, public camera: Camera, private firestore: Firestore) {
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore) {
     this.hasPicture = false;
     this.hasFile = false;
   }
@@ -72,15 +72,17 @@ export class CreateCandidatePage {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
-      this.candidate.images.push(imageData);
+      this.image = imageData;
       console.log("Received Picture");
     };
+    let imageD = event.target.files[event.target.files.length - 1];
+    this.candidate.image = imageD;
     reader.readAsDataURL(event.target.files[event.target.files.length-1]);
     this.hasPicture = true;
   }
 
   getProfileImageStyle() {
-      return 'url(' + this.candidate.images[this.candidate.images.length - 1] + ')'
+      return 'url(' + this.image + ')'
   }
 
 // Get size for picture
@@ -146,21 +148,12 @@ export class CreateCandidatePage {
    **/
     deleteTag(t: string, type: string) {
         var newTags = []
-        if (type === "skills") {
-            for (var i = 0; i < this.candidate.skills.length; i++) {
-                if (this.candidate.skills[i] != t) {
-                    newTags.push(this.candidate.skills[i]);
-                }
+        for (var i = 0; i < this.candidate.skills.length; i++) {
+            if (this.candidate.skills[i] != t) {
+                newTags.push(this.candidate.skills[i]);
             }
-            this.candidate.skills = newTags;
-        } else if (type === "tags") {
-            for (var i = 0; i < this.candidate.tags.length; i++) {
-                if (this.candidate.tags[i] != t) {
-                    newTags.push(this.candidate.tags[i]);
-                }
-            }
-            this.candidate.tags = newTags;
         }
+        this.candidate.skills = newTags;
 
     }
 
@@ -185,7 +178,6 @@ export class CreateCandidatePage {
                         if (type === "skills") {
                             this.candidate.skills.push(data.tag);
                         } else if (type === "tags") {
-                            this.candidate.tags.push(data.tag);
                         }
                     }
                 }
