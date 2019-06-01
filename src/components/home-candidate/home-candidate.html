@@ -1,5 +1,20 @@
-<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" style="background-color: white; max-height: 80%">
-  <ion-card #mycards1 swing-card *ngFor="let c of cards; let i = index" [class]="'td-card card card-md ' + 'card-title' + i" swing-card="" style="background-color: white;">
+<div
+  swing-stack
+  #myswing1
+  [stackConfig]="stackConfig"
+  (throwoutleft)="voteUp(false)"
+  (throwoutright)="voteUp(true)"
+  id="card-stack"
+  style="background-color: white; max-height: 80%"
+>
+  <ion-card
+    #mycards1
+    swing-card
+    *ngFor="let c of cards; let i = index"
+    [class]="'td-card card card-md ' + 'card-title' + i"
+    swing-card=""
+    style="background-color: white;"
+  >
     <ion-grid>
       <ion-row style="height: 30%; background: white">
         <ion-col col-6>
@@ -8,7 +23,9 @@
               {{cards[i].name}}
             </h1>
           </ion-row>
-          <ion-row style="margin-top: 10px; margin-left: -10%; width: 230%; height: 50%; background-color: rgb(129, 129, 180);">
+          <ion-row
+            style="margin-top: 10px; margin-left: -10%; width: 230%; height: 50%; background-color: rgb(129, 129, 180);"
+          >
             <p class="card-headers" style="margin-top: 3%; margin-left: 55%; color: white;">
               website
             </p>
@@ -17,20 +34,38 @@
 
         <ion-col col-6 style="margin-left: -50%;">
           <ion-avatar item-start>
-            <img class="img" src="../assets/img/dio.png" style="margin-top: -3%; margin-left: 4%; width: 85px; height: 85px; border-radius: 50%;"/>
+            <img
+              class="img"
+              src="../assets/img/dio.png"
+              style="margin-top: -3%; margin-left: 4%; width: 85px; height: 85px; border-radius: 50%;"
+            />
           </ion-avatar>
         </ion-col>
       </ion-row>
 
+      <!-- <ion-row
+      class="expanding-tabs"
+      (click)="toggleDesc()"
+      style="text-align: center; background-color: white; margin-top: -5px;"
+    >
+      <h1 class="expanding-tabs">Description</h1>
+    </ion-row> -->
       <ion-row>
-        <p style="width: 200%; text-align: left; padding-left: 10px; padding-right: 10px; padding-top: 12px; padding-bottom: 10px;">
+        <p
+          style="width: 200%; text-align: left; padding-left: 10px; padding-right: 10px; padding-top: 12px; padding-bottom: 10px;"
+        >
           {{cards[i].description}}
         </p>
       </ion-row>
 
       <ion-row>
-        <div style="text-align: left; background-color: white;">
-          <h1 class="expanding-tabs" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+        <div
+          style="text-align: left; background-color: white;"
+        >
+          <h1
+            class="expanding-tabs"
+            style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;"
+          >
             Skills
           </h1>
         </div>
@@ -44,8 +79,13 @@
       </ion-row>
 
       <ion-row>
-        <div style="text-align: left; background-color: white;">
-          <h1 class="expanding-tabs" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+        <div
+          style="text-align: left; background-color: white;"
+        >
+          <h1
+            class="expanding-tabs"
+            style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;"
+          >
             Frameworks
           </h1>
         </div>
@@ -61,15 +101,32 @@
   </ion-card>
 </div>
 
+<!--<p class="statusBar">{{ recentCard }}</p>-->
+
 <ion-row class="likeDislikeButton">
   <ion-col class="col" col-6>
-    <button ion-button clear medium icon-right expand="full" color="primary" (click)="voteUp(false)">
+    <button
+      ion-button
+      clear
+      medium
+      icon-right
+      expand="full"
+      color="primary"
+      (click)="voteUp(false)"
+    >
       <ion-icon name="thumbs-down"></ion-icon>
       No
     </button>
   </ion-col>
   <ion-col class="col" col-6>
-    <button ion-button clear medium icon-left color="primary" (click)="voteUp(true)">
+    <button
+      ion-button
+      clear
+      medium
+      icon-left
+      color="primary"
+      (click)="voteUp(true)"
+    >
       <ion-icon name="thumbs-up"></ion-icon>
       Yes
     </button>

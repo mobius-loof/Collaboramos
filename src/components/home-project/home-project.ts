@@ -126,7 +126,7 @@ export class HomeProjectComponent {
 
         this.firestore.getCards("candidate_id_1", count).then(map => {
             console.log(map.entries())
-            map.forEach((value: any) => {
+            map.forEach((value: any, key: id) => {
                 this.cards.push(value)
                 this.tags.push(value.skills)
                 console.log(value)

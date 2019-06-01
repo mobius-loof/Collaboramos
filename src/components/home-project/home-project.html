@@ -1,21 +1,55 @@
-<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack">
-  <ion-card #mycards1 swing-card *ngFor="let c of cards; let i = index" [class]="'td-card card card-md ' + 'card-title' + i" swing-card="">
+<div
+  swing-stack
+  #myswing1
+  [stackConfig]="stackConfig"
+  (throwoutleft)="voteUp(false)"
+  (throwoutright)="voteUp(true)"
+  id="card-stack"
+  style="background-color: white; height: 80%;"
+>
+  <ion-card
+    #mycards1
+    swing-card
+    *ngFor="let c of cards; let i = index"
+    [class]="'td-card card card-md ' + 'card-title' + i"
+    swing-card=""
+    style="background-color: white; z-index: 100;"
+  >
     <ion-grid>
-      <ion-row>
+      <ion-row style="height: 30%; background: white">
         <ion-col col-6>
-          <ion-row class="img-row">
+          <ion-row class="img-row" style="background-color: white;">
             <h1 class="img-row-info">
               {{ cards[i].proj_name }}
             </h1>
-            <!-- <p class="img-row-info" style="font-size: 70%">
+            <p class="img-row-info" style="font-size: 70%">
               Software Developer
-            </p> -->
+            </p>
           </ion-row>
-          <ion-row class="img-row" style="background-color: rgb(129, 129, 180);" >
-            <button ion-button expand="block" size="small" class="img-row-info img-row-buttons" (click)="clickResume()" style="background-color: rgb(129, 129, 180);">
+          <ion-row
+            class="img-row"
+            style="background-color: rgb(129, 129, 180);"
+          >
+            <button
+              ion-button
+              expand="block"
+              size="small"
+              class="img-row-info img-row-buttons"
+              (click)="clickResume()"
+              style="background-color: rgb(129, 129, 180);"
+            >
               Resume
             </button>
-            <button ion-button expand="block" size="small" class="img-row-info img-row-buttons" (click)="clickWebsite()" style="background-color:  #BCBCFF;">
+          </ion-row>
+          <ion-row class="img-row" style="background-color:  #BCBCFF;">
+            <button
+              ion-button
+              expand="block"
+              size="small"
+              class="img-row-info img-row-buttons"
+              (click)="clickWebsite()"
+              style="background-color:  #BCBCFF;"
+            >
               Website
             </button>
           </ion-row>
@@ -23,12 +57,14 @@
 
         <ion-col col-6 style="margin-left: -50%;">
           <ion-avatar item-start>
-            <img class="img" src="../assets/img/dio.png"/>
+            <img class="img" src="../assets/img/dio.png" />
           </ion-avatar>
         </ion-col>
       </ion-row>
 
-      <ion-row style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%" >
+      <ion-row
+        style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%"
+      >
         <p style="margin: 15px 15px 15px;">
           {{cards[i].description}}
         </p>
@@ -56,13 +92,30 @@
 
 <ion-row class="likeDislikeRow">
   <ion-col class="likeDislikeButton" col-6>
-    <button ion-button clear default icon-right expand="full" color="primary" (click)="voteUp(false)" class="buttons">
+    <button
+      ion-button
+      clear
+      default
+      icon-right
+      expand="full"
+      color="primary"
+      (click)="voteUp(false)"
+      class="buttons"
+    >
       <ion-icon name="thumbs-down"></ion-icon>
       No
     </button>
   </ion-col>
   <ion-col class="likeDislikeButton" col-6>
-    <button ion-button clear default icon-left color="primary" (click)="voteUp(true)" class="buttons">
+    <button
+      ion-button
+      clear
+      default
+      icon-left
+      color="primary"
+      (click)="voteUp(true)"
+      class="buttons"
+    >
       <ion-icon name="thumbs-up"></ion-icon>
       Yes
     </button>
