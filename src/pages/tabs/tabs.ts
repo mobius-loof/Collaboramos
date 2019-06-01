@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Tab1Root, Tab2Root, Tab3Root } from '../';
 
@@ -17,5 +17,11 @@ export class TabsPage {
   tab2Title = 'Home';
   tab3Title = 'Settings';
 
-  constructor(public navCtrl: NavController) {}
+  params: any
+
+  constructor(public navCtrl: NavController,
+              private navParams: NavParams) {
+    console.log(navParams);
+    this.params = navParams;
+  }
 }

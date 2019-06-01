@@ -22,7 +22,7 @@ export class CreateProjectPage{
 
   project: Project = {
       id: null,
-      proj_name: "",
+      name: "",
       image: "",
       description: "",
       is_visible: true,
@@ -33,9 +33,9 @@ export class CreateProjectPage{
       matches: {},
       waitlist: [],
       address: "",
-      phone: "",
       email: "",
-      website: ""
+      website: "",
+      phone_number: ""
     };
 
   @ViewChild('imageInput') imageInput;
@@ -61,8 +61,7 @@ export class CreateProjectPage{
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-          this.project.images.push('data:image/jpg;base64,' + data);
-          this.hasPicture = true;
+        this.project.image = ('data:image/jpg;base64,' + data);
         //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');
@@ -91,6 +90,7 @@ export class CreateProjectPage{
   }
 
   getProfileImageStyle() {
+    //return 'url(' + this.form.controls['profilePic'].value + ')'
     return 'url(' + this.project.image + ')';
   }
 

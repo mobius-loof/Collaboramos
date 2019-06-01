@@ -23,6 +23,5 @@ export interface Account {
   candidate_ref: DocumentReference,
   project: Project,
   candidate: Candidate,
-  profile_image: string,
   address: string
 }

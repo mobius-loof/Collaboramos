@@ -18,9 +18,13 @@ export class CreateCandidatePage {
   candidate: Candidate = {
     id: null,
     name: "",
+<<<<<<< HEAD
     images: [],
+=======
+    image: "",
+>>>>>>> origin/master
     description: "",
-    resumeURL: "",
+    resume_URL: "",
     is_visible: true,
     tags: ["UCSD"],
     chats: {},
@@ -29,7 +33,13 @@ export class CreateCandidatePage {
     waitlist: [],
     phone: "",
     address: "",
+<<<<<<< HEAD
     skills: ["js","python"]
+=======
+    skills: [],
+    email: "",
+    website: ""
+>>>>>>> origin/master
   };
 
   isReadyToSave: boolean;
@@ -55,8 +65,13 @@ export class CreateCandidatePage {
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
+<<<<<<< HEAD
           this.candidate.images.push('data:image/jpg;base64,' + data);
           this.hasPicture = true;
+=======
+        //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+        this.candidate.image = ('data:image/jpg;base64,' + data);
+>>>>>>> origin/master
       }, (err) => {
         alert('Unable to take photo');
       })
@@ -70,7 +85,7 @@ export class CreateCandidatePage {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
-      this.candidate.images.push(imageData);
+      this.candidate.image = imageData;
       console.log("Received Picture");
     };
     reader.readAsDataURL(event.target.files[event.target.files.length-1]);
@@ -78,7 +93,11 @@ export class CreateCandidatePage {
   }
 
   getProfileImageStyle() {
+<<<<<<< HEAD
       return 'url(' + this.candidate.images[this.candidate.images.length - 1] + ')'
+=======
+    return 'url(' + this.candidate.image+ ')'
+>>>>>>> origin/master
   }
 
 // Get size for picture
@@ -97,7 +116,7 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
-      this.candidate.resumeURL = fileData;
+      this.candidate.resume_URL = fileData;
       console.log("Received Resume");
       console.log(fileData);
       this.presentAlert()

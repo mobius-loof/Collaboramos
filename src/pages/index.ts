@@ -1,5 +1,9 @@
 // The page the user lands on after opening the app and without a session
+<<<<<<< HEAD
 export const FirstRunPage = 'CreateProfilePage';
+=======
+export const FirstRunPage = 'WelcomePage';
+>>>>>>> origin/master
 
 // The main page the user will see as they use the app over a long period of time.
 // Change this if not using tabs

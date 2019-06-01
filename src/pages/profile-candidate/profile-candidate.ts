@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { FirebaseApp } from 'angularfire2';
+import { Firestore } from '../../providers/firestore/firestore'
+import { Candidate, Account } from '../../models';
 
 /**
  * Generated class for the ProfilePage page.
@@ -18,44 +21,74 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 })
 export class ProfileCandidatePage {
 
-  tags = ['tag1', 'tag2'];
-  frameworks = ['f1', 'f2'];
-  isEdit: boolean;
+  private account: Account;
+  private profile: Candidate;
+  private tempProfile: Candidate;
+
+  private isEdit: boolean;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private alertCtrl: AlertController,
               private imagePicker: ImagePicker,
-              private inAppBrowser: InAppBrowser) {
+              private inAppBrowser: InAppBrowser,
+              private firestore: Firestore) {
     this.isEdit = false;
+    this.account = navParams.get('account');
+    this.profile = this.copyCandidateProfile(navParams.get('candidateProfile'));
+    this.tempProfile = this.copyCandidateProfile(navParams.get('candidateProfile'));
+    this.populateProfileFromAccount(this.profile, this.account);
+    this.populateProfileFromAccount(this.tempProfile, this.account);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileProjectPage');
+  copyCandidateProfile(profile: Candidate): Candidate {
+    return {
+      id: profile.id,
+      name: profile.name,
+      files: Object.assign([], profile.files),
+      images: Object.assign([], profile.images),
+      resumeURL: profile.resumeURL,
+      is_visible: profile.is_visible,
+      tags: Object.assign([], profile.tags),
+      description: profile.description,
+      chats: profile.chats,
+      interests: profile.interests,
+      matches: profile.matches,
+      waitlist: Object.assign([], profile.waitlist),
+      phone: profile.phone,
+      address: profile.address,
+      skills: Object.assign([], profile.skills),
+      email: profile.email,
+      website: profile.website
+    };
+  }
+
+  populateProfileFromAccount(profile: Candidate, account: Account) {
+    profile.email = account.email;
+    profile.phone = account.phone_number;
+    profile.address = account.address;
   }
 
   setIsEdit(isEdit: boolean, discard: boolean) {
     this.isEdit = isEdit;
-  }
-
-  deleteTag(t: string){
-    var newTags=[]
-    for(var i=0;i<this.tags.length;i++){
-      if(this.tags[i] != t){
-        newTags.push(this.tags[i])
+    if (!isEdit) {
+      if (!discard){
+        this.profile = this.copyCandidateProfile(this.tempProfile);
+        this.firestore.updateCandidateProfile(this.profile);
+      } else {
+        this.tempProfile = this.copyCandidateProfile(this.profile);
       }
     }
-    this.tags = newTags
   }
 
-  deleteFramework(f: string){
-    var newTags=[]
-    for(var i=0;i<this.frameworks.length;i++){
-      if(this.frameworks[i] != f){
-        newTags.push(this.frameworks[i])
+  deleteSkill(skill: string){
+    var newSkills=[];
+    for(var i=0;i<this.tempProfile.skills.length;i++){
+      if(this.tempProfile.skills[i] != skill){
+        newSkills.push(this.tempProfile.skills[i]);
       }
     }
-    this.frameworks = newTags
+    this.tempProfile.skills = newSkills;
   }
 
   pickImage() {
@@ -74,23 +107,21 @@ export class ProfileCandidatePage {
   }
 
   presentWebsite() {
-    let target = "_system";
-    this.inAppBrowser.create("http://www.google.com");
+    this.inAppBrowser.create(this.profile.website);
   }
 
   presentResume() { 
 
   }
 
-  presentPrompt(type: string){
+  presentPrompt(){
     let myString: string = ""
     let alert = this.alertCtrl.create({
-      title: 'Add Tag',
+      title: 'Add Skill',
       inputs: [
         {
-          //TODO dynamic change skill vs framework
-          name: 'tag',
-          placeholder: 'short tag description'
+          name: 'skill',
+          placeholder: 'e.g. Webscraping, Python'
         }
       ],
       buttons: [
@@ -102,11 +133,7 @@ export class ProfileCandidatePage {
         {
           text: 'Ok',
           handler: data => {
-            if (type === "skills") {
-              this.tags.push(data.tag);
-            } else if (type === "frameworks") {
-              this.frameworks.push(data.tag);
-            }
+            this.tempProfile.skills.push(data.skill);
           }
         }
       ]
