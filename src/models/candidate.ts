@@ -13,7 +13,7 @@ export interface Candidate {
     interests: {[id: string]: Project},
     matches: {[id: string]: Project},
     waitlist: Project[],
-    phone: string,
+    phone_number: string,
     email: string,
     address: string
 }
