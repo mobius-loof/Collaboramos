@@ -9,6 +9,18 @@ page-profile-candidate {
         background-color: $candy_banner;
     }
 
+    .resume-button {
+        background-color: white;
+        color: $candy_banner;
+        border-color: $candy_banner;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .resume-icon {
+        color: $candy_banner;
+    }
+
     .toolbar-background {
         background-color: $candy_banner;
     }
@@ -57,6 +69,7 @@ page-profile-candidate {
         $button-ios-margin-bottom: 0;
         $button-ios-margin-start: 0;
         padding: 0;
+        color: white;
     }
 
     .item-ios [item-left], .item-ios [item-start] {
@@ -155,7 +168,7 @@ page-profile-candidate {
         $button-ios-margin-start: 0;
         $button-ios-margin-bottom: 0;
         padding: 0;
-        color: white;
+        color: $candy_banner;
     }
 
     .button-ios.add-tag-btn{
