@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
+import { Observable, Subscribable } from 'rxjs';
 
 /*
   Generated class for the FirestoreProvider provider.

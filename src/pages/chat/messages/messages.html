@@ -4,13 +4,21 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-	<div *ngFor="let message of messages" class="message-wrapper" on-hold="onMessageHold($event, $index, message)">
+
+	<ul>
+		<li *ngFor="let message of messages | async">
+			{{message.message}}
+		</li>
+	</ul>
+
+	<div *ngFor="let message of messages | async" class="message-wrapper" on-hold="onMessageHold($event, $index, message)">
 		<div *ngIf="user._id !== message.userId">
 			<img (click)="viewProfile(message)" class="profile-pic left" [src]="toUser.pic" onerror="onProfilePicError(this)" />
 			<!--  wave-->
 			<div class="chat-bubble left slide-left">
 
-				<div class="message" [innerHTML]="message.text" autolinker>
+				<div class="message" autolinker>
+					{{message.message}}
 				</div>
 
 				<div class="message-detail">
@@ -27,7 +35,8 @@
 
 			<div class="chat-bubble right slide-right">
 
-				<div class="message" [innerHTML]="message.text" autolinker>
+				<div class="message" autolinker>
+					{{message.message}}
 				</div>
 
 				<div class="message-detail">

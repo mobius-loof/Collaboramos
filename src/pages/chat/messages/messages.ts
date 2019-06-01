@@ -1,6 +1,9 @@
 import { FormControl, FormBuilder } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Content } from 'ionic-angular';
+import { Firestore } from '../../../providers/firestore/firestore'
+import { Message } from '../../../models/message'
+import { Observable } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -22,7 +25,7 @@ export class MessagesPage {
 
   doneLoading = false;
 
-  messages = [
+  /*messages = [
     {
       _id: 1,
       date: new Date(),
@@ -71,18 +74,23 @@ export class MessagesPage {
       pic: this.toUser.pic,
       text: 'yes!'
     }
-  ];
+  ];*/
+  messages: Observable<Message[]>;
+  
+  //.valueChanges().subscribe(data => {console.log(data)});
 
   @ViewChild(Content) content: Content;
 
   public messageForm: any;
   chatBox: any;
 
-  constructor(public navCtrl: NavController, public formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
+    private firestore: Firestore) {
     this.messageForm = formBuilder.group({
       message: new FormControl('')
     });
     this.chatBox = '';
+    this.messages = this.firestore.getMessagesForChannel("mW9tYce7xxIgg9jwqsmp").valueChanges();
 
   }
 
@@ -101,10 +109,10 @@ export class MessagesPage {
           text: message
         };
 
-      this.messages.push(messageData);
+      //this.messages.push(messageData);
       this.scrollToBottom();
 
-      setTimeout(() => {
+      /*setTimeout(() => {
         const replyData =
           {
             toId: this.toUser._id,
@@ -117,7 +125,7 @@ export class MessagesPage {
           };
         this.messages.push(replyData);
         this.scrollToBottom();
-      }, 1000);
+      }, 1000);*/
     }
     this.chatBox = '';
   }
