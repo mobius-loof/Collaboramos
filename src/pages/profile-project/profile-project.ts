@@ -125,12 +125,12 @@ export class ProfileProjectPage {
     let input: any
     if (type === "skills") {
       input = {
-        name: 'Skill',
+        name: 'skill',
         placeholder: 'e.g. Webscraping, iOS Dev'
       }
     } else {
       input = {
-        name: 'Framework',
+        name: 'framework',
         placeholder: 'e.g. Ionic, React'
       }
     }
@@ -152,9 +152,9 @@ export class ProfileProjectPage {
           text: 'Ok',
           handler: data => {
             if (type === "skills") {
-              this.tempProfile.skills.push(data.tag);
+              this.tempProfile.skills.push(data.skill);
             } else if (type === "frameworks") {
-              this.tempProfile.frameworks.push(data.tag);
+              this.tempProfile.frameworks.push(data.framework);
             }
           }
         }
