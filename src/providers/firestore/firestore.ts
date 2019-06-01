@@ -87,8 +87,8 @@ export class Firestore {
   }
 
   // Update Candidate
-  updateCandidateProfile(id: string, model: Candidate): Promise<void> {
-    return this.firestore.doc(`candidate_profiles/${id}`).update({
+  updateCandidateProfile(model: Candidate): Promise<void> {
+    return this.firestore.doc(`candidate_profiles/${model.id}`).update({
       description: model.description,
       files: model.files,
       images: model.images,
@@ -136,9 +136,9 @@ export class Firestore {
   }
 
   // Update Profile
-  updateProjectProfile(id: string, model: Project): Promise<void> {
+  updateProjectProfile(model: Project): Promise<void> {
     // Returns promise of success/failure for updating the project document on Firestore
-    return this.firestore.doc(`project_profiles/${id}`).update({
+    return this.firestore.doc(`project_profiles/${model.id}`).update({
       description: model.description,
       images: model.images,
       is_visible: model.is_visible,
