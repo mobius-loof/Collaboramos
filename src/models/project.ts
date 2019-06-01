@@ -3,7 +3,7 @@ import { Channel, Candidate } from "./";
 export interface Project {
     id: string,
     proj_name: string,
-    images: string[],
+    image: string,
     description: string,
     is_visible: boolean,
     frameworks: string[],
@@ -13,6 +13,7 @@ export interface Project {
     matches: {[id: string]: Candidate},
     waitlist: Candidate[],
     address: string,
+    phone: string,
     email: string,
     website: string
 }

@@ -23,7 +23,7 @@ export class CreateProjectPage{
   project: Project = {
       id: null,
       proj_name: "",
-      images:[],
+      image: "",
       description: "",
       is_visible: true,
       skills: ["C++", "Java"],
@@ -33,6 +33,7 @@ export class CreateProjectPage{
       matches: {},
       waitlist: [],
       address: "",
+      phone: "",
       email: "",
       website: ""
     };
@@ -78,7 +79,7 @@ export class CreateProjectPage{
     reader.onload = (readerEvent) => {
 
       let imageData = (readerEvent.target as any).result;
-      this.project.images.push(imageData);
+      this.project.image = imageData;
       this.hasPicture = true;
     };
 
@@ -90,7 +91,7 @@ export class CreateProjectPage{
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.project.images[this.project.images.length-1] + ')'
+    return 'url(' + this.project.image + ')';
   }
 
   /**
