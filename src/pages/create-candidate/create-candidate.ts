@@ -88,7 +88,7 @@ export class CreateCandidatePage {
 
 // Get size for picture
   getSize() {
-    return '180px 140px'
+    return '140px 180px'
   }
 
 // Upload file functinos

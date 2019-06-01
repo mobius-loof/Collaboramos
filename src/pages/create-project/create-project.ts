@@ -88,7 +88,7 @@ export class CreateProjectPage{
   }
 
   getSize() {
-    return '180px 140px'
+    return '100px 100px'
   }
 
   getProfileImageStyle() {
