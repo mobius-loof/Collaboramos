@@ -23,15 +23,16 @@ export class CreateCandidatePage {
     image: "",
     email: "",
     description: "",
-    resumeURL: "",
+    resume_URL: "",
     is_visible: true,
     chats: {},
     interests: {},
     matches: {},
     waitlist: [],
-    phone: "",
+    phone_number: "",
     address: "",
-    skills: []
+      skills: [],
+    website: ""
   };
 
   isReadyToSave: boolean;
@@ -101,7 +102,7 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
-      this.candidate.resumeURL = fileData;
+      this.candidate.resume_URL = fileData;
       console.log("Received Resume");
       console.log(fileData);
       this.presentAlert();

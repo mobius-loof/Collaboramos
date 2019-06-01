@@ -4,7 +4,8 @@ export interface Candidate {
     id: string,
     name: string,
     image: string,
-    resumeURL: string,
+    website: string,
+    resume_URL: string,
     is_visible: boolean,
     skills: string[],
     description: string,
@@ -12,7 +13,7 @@ export interface Candidate {
     interests: {[id: string]: Project},
     matches: {[id: string]: Project},
     waitlist: Project[],
-    phone: string,
+    phone_number: string,
     email: string,
     address: string
 }

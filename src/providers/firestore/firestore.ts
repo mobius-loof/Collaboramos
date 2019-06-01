@@ -21,14 +21,14 @@ export class Firestore {
 
     // create the account in Firestoer
     return this.firestore.doc(`accounts/${id}`).set({
-      address: model.address,
-      candidate_id: model.candidate_id,
-      email: model.email,
+      id: model.id,
       first_name: model.first_name,
       last_name: model.last_name,
+      email: model.email,
       phone_number: model.phone_number,
-      profile_img: model.profile_image,
-      project_id: model.project_id
+      project_ref: model.project_ref,
+      candidate_ref: model.candidate_ref,
+      address: model.address
     });
   }
 
@@ -43,14 +43,13 @@ export class Firestore {
   updateAccount(id: string, model: Account): Promise<void> {
     
     return this.firestore.collection('accounts').doc(id).update({
-      address: model.address,
-      candidate_id: model.candidate_id,
-      email: model.email,
       first_name: model.first_name,
       last_name: model.last_name,
+      email: model.email,
       phone_number: model.phone_number,
-      profile_img: model.profile_image,
-      project_id: model.project_id
+      project_ref: model.project_ref,
+      candidate_ref: model.candidate_ref,
+      address: model.address
     });
   }
 
@@ -67,11 +66,16 @@ export class Firestore {
 
     return this.firestore.doc(`candidate_profiles/${id}`).set({
       id: id,
-      description: model.description,
-      images: model.images,
-      resumeURL: model.resumeURL,
+      name: model.name,
+      image: model.image,
+      website: model.website,
+      resumeURL: model.resume_URL,
       is_visible: model.is_visible,
-      tags: model.tags
+      skills: model.skills,
+      description: model.description,
+      phone_number: model.phone_number,
+      email: model.email,
+      address: model.address
     });
   }
 
@@ -92,11 +96,16 @@ export class Firestore {
   // Update Candidate
   updateCandidateProfile(id: string, model: Candidate): Promise<void> {
     return this.firestore.doc(`candidate_profiles/${id}`).update({
-      description: model.description,
-      images: model.images,
-      resumeURL: model.resumeURL,
+      name: model.name,
+      image: model.image,
+      website: model.website,
+      resumeURL: model.resume_URL,
       is_visible: model.is_visible,
-      tags: model.tags
+      skills: model.skills,
+      description: model.description,
+      phone_number: model.phone_number,
+      email: model.email,
+      address: model.address
     });
   }
 
@@ -113,13 +122,17 @@ export class Firestore {
 
     // Returns promise of success/failure for creating the project document on Firestore
     return this.firestore.doc(`project_profiles/${id}`).set({
-      description: model.description,
       id: id,
-      images: model.images,
+      name: model.name,
+      image: model.image,
+      website: model.website,
       is_visible: model.is_visible,
-      proj_name: model.proj_name,
       frameworks: model.frameworks,
-      skills: model.skills
+      skills: model.skills,
+      description: model.description,
+      phone_number: model.phone_number,
+      email: model.email,
+      address: model.address
     });
 
   }
@@ -142,12 +155,16 @@ export class Firestore {
   updateProjectProfile(id: string, model: Project): Promise<void> {
     // Returns promise of success/failure for updating the project document on Firestore
     return this.firestore.doc(`project_profiles/${id}`).update({
-      description: model.description,
-      images: model.images,
+      name: model.name,
+      image: model.image,
+      website: model.website,
       is_visible: model.is_visible,
-      proj_name: model.proj_name,
       frameworks: model.frameworks,
-      skills: model.skills
+      skills: model.skills,
+      description: model.description,
+      phone_number: model.phone_number,
+      email: model.email,
+      address: model.address
     });
   }
 
@@ -165,9 +182,9 @@ export class Firestore {
 
     return this.firestore.doc(`channels/${id}`).set({
       id: id,
-      last_message_sent: model.last_message_sent,
-      media: model.media,
-      members: [model.chat_member_candidate, model.chat_member_project]
+      chat_member_project_ref: model.chat_member_project_ref,
+      chat_member_candidate_ref: model.chat_member_candidate_ref,
+      last_message_sent_ref: model.last_message_sent_ref
     });
   }
 
@@ -181,9 +198,9 @@ export class Firestore {
   // Update Channel
   updateChannel(id: string, model: Channel): Promise<void> {
     return this.firestore.doc(`channels/${id}`).update({
-      last_message_sent: model.last_message_sent,
-      media: model.media,
-      members: [model.chat_member_candidate, model.chat_member_project]
+      chat_member_project_ref: model.chat_member_project_ref,
+      chat_member_candidate_ref: model.chat_member_candidate_ref,
+      last_message_sent_ref: model.last_message_sent_ref
     });
   }
 

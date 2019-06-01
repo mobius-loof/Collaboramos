@@ -23,7 +23,7 @@ export class CreateProjectPage{
 
   project: Project = {
       id: null,
-      proj_name: "",
+      name: "",
       image: "",
       description: "",
       is_visible: true,
@@ -36,7 +36,7 @@ export class CreateProjectPage{
       address: "",
       email: "",
       website: "",
-      phone: ""
+      phone_number: ""
     };
 
   @ViewChild('imageInput') imageInput;
