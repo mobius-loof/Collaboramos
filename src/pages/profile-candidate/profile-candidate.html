@@ -12,10 +12,10 @@
         <ion-icon name="create" color="white" class="top-icon-edit"></ion-icon>
       </button>
       <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, false)">
-        <ion-icon name="checkmark" color="secondary" class="top-icon"></ion-icon>
+        <ion-icon name="checkmark" color="white" class="top-icon"></ion-icon>
       </button>
       <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, true)">
-        <ion-icon name="close" color="danger" class="top-icon"></ion-icon>
+        <ion-icon name="close" color="white" class="top-icon"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -35,7 +35,7 @@
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">
           <h3>{{ profile.name }}</h3>
-          <button ion-button icon-start small (click)="presentWebsite()">
+          <button class="website-button" ion-button icon-start small (click)="presentWebsite()">
             <ion-icon name="globe"></ion-icon>
             WEBSITE
           </button>
@@ -74,14 +74,14 @@
     <ion-row>
       <div class="tag-row-container" *ngIf="!isEdit">
         <div class="tag-container" *ngFor="let skill of profile.skills">
-          <ion-item class="tag" no-lines no-padding color="secondary" round>
+          <ion-item class="tag" no-lines no-padding round>
               <p class="tag-content">{{skill}}</p>
           </ion-item>
         </div>
       </div>
       <div class="tag-row-container" *ngIf="isEdit">
         <div class="tag-container" *ngFor="let skill of tempProfile.skills">
-          <ion-item class="tag" no-lines no-padding color="secondary" round>
+          <ion-item class="tag" no-lines no-padding round>
               <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(skill)">
                   <ion-icon name="close-circle"></ion-icon>
               </button>

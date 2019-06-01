@@ -1,6 +1,14 @@
 page-profile-candidate {
     $tag-height:20px;
 
+    .toolbar-title-ios {
+        color: white;
+    }
+
+    .website-button {
+        background-color: $candy_banner;
+    }
+
     .toolbar-background {
         background-color: $candy_banner;
     }
@@ -11,10 +19,6 @@ page-profile-candidate {
 
     .item-ios {
         background-color: transparent;
-    }
-
-    .item-ios.tag {
-        background-color: map-get($colors, secondary);
     }
 
     textarea {
@@ -70,6 +74,8 @@ page-profile-candidate {
     .tag{
         height: $tag-height;
         border-radius: $tag-height*2;
+        background-color: $candy_banner;
+        color: white;
     }
 
     .item {
@@ -80,6 +86,10 @@ page-profile-candidate {
     .item-ios .item-button {
         padding: 0;
         padding-left: 0.5rem;
+    }
+
+    .item-ios p {
+        color: white;
     }
 
     .label-md {
@@ -145,6 +155,7 @@ page-profile-candidate {
         $button-ios-margin-start: 0;
         $button-ios-margin-bottom: 0;
         padding: 0;
+        color: white;
     }
 
     .button-ios.add-tag-btn{
