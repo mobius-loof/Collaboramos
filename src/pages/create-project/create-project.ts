@@ -38,7 +38,7 @@ export class CreateProjectPage{
       images:[],
       description: "",
       is_visible: true,
-      tags: [],
+      // tags: [],
       chats: {},
       interests: {},
       matches: {},
@@ -46,6 +46,8 @@ export class CreateProjectPage{
       address: "",
       email: "",
       website: "",
+      frameworks: [],
+      skills: []
     };
 
   @ViewChild('imageInput') imageInput;
