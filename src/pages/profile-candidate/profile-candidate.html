@@ -82,7 +82,7 @@
       <div class="tag-row-container" *ngIf="isEdit">
         <div class="tag-container" *ngFor="let skill of tempProfile.skills">
           <ion-item class="tag" no-lines no-padding round>
-              <button class="tag-btn" ion-button item-left clear round (click)="deleteTag(skill)">
+              <button class="tag-btn" ion-button item-left clear round (click)="deleteSkill(skill)">
                   <ion-icon name="close-circle"></ion-icon>
               </button>
               <p class="tag-content">{{skill}}</p>
