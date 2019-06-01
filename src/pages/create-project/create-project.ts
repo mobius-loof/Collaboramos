@@ -20,6 +20,9 @@ import { Camera } from '@ionic-native/camera';
 })
 export class CreateProjectPage{
 
+
+    images = []
+
   project: Project = {
       id: null,
       proj_name: "",
@@ -76,10 +79,12 @@ export class CreateProjectPage{
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-      let imageData = (readerEvent.target as any).result;
-      this.project.images.push(imageData);
+      let imageData = (readerEvent.target as any).result;  
+      this.images.push(imageData);
       this.hasPicture = true;
-    };
+      };
+      let image = event.target.files[event.target.files.length - 1];
+      this.project.images.push(image);
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
@@ -88,7 +93,7 @@ export class CreateProjectPage{
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.project.images[this.project.images.length-1] + ')'
+    return 'url(' + this.images[this.images.length-1] + ')'
   }
 
   /**

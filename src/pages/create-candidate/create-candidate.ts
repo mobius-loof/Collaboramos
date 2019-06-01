@@ -15,6 +15,8 @@ export class CreateCandidatePage {
   @ViewChild('imageInput') imageInput;
 
 
+    images = []
+
   candidate: Candidate = {
     id: null,
     name: "",
