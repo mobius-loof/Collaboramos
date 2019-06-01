@@ -219,6 +219,7 @@ export class MyApp {
       this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
       //this.projectVis = true;
+      this.firestore.getProjectProfileReference('GHhA9rhXgDisR0qm0IEh').valueChanges();
 
       this.event.publish('lastProf', 'project');
 
