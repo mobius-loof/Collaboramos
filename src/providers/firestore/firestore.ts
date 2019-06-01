@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Candidate, Project, Account, Channel } from '../../models'
+import { Candidate, Project, Account, Channel, Message } from '../../models'
 import { Observable, Subscribable } from 'rxjs';
 
 /*
@@ -194,7 +194,7 @@ export class Firestore {
   }
 
   // Get Messages in Chat
-  getMessagesForChannel(id: string): AngularFirestoreCollection {
+  getMessagesForChannel(id: string): AngularFirestoreCollection<Message> {
     return this.firestore.collection('messages', ref => ref.where('channel_id', '==', id));
   }
 }

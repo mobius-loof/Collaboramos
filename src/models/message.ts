@@ -1,13 +1,9 @@
 import { Channel } from './'
+import { DocumentReference } from 'angularfire2/firestore';
 
 export interface Message {
-    senderName: string, // idk whether this is sender or receiver?
-    senderId: string,
-    receiverName: string,
-    receiverId: string,
-    channelId: Channel,
-    date: number, // # of ms since UNIX epoch, number returned by Date.now() in JS
-    isText: boolean, 
-    media: string, 
-    text: string
+    channel_id: string,
+    message: string, // # of ms since UNIX epoch, number returned by Date.now() in JS
+    message_date: Date, 
+    sent_by: DocumentReference, 
 }

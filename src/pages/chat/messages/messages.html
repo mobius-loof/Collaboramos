@@ -4,17 +4,29 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-
-	<ul>
-		<li *ngFor="let message of messages | async">
-			{{message.message}}
-		</li>
-	</ul>
-
+		<ul>
+			<li *ngFor="let message of messages | async">
+				{{ message.message }}
+			</li>
+		</ul>
+<!--
+		<ion-content padding>
+			blah blah
+				<ion-card *ngFor="let message of messages | async">
+					joe mama
+				  <ion-card-header>
+					{{ message.message }}
+				  </ion-card-header>
+				  <ion-card-content>
+					Artist Name: {{ message.message }}
+				  </ion-card-content>
+				</ion-card>
+			  </ion-content> -->
+<!--
 	<div *ngFor="let message of messages | async" class="message-wrapper" on-hold="onMessageHold($event, $index, message)">
 		<div *ngIf="user._id !== message.userId">
 			<img (click)="viewProfile(message)" class="profile-pic left" [src]="toUser.pic" onerror="onProfilePicError(this)" />
-			<!--  wave-->
+			 wave
 			<div class="chat-bubble left slide-left">
 
 				<div class="message" autolinker>
@@ -47,8 +59,8 @@
 			</div>
 
 		</div>
-
-		<div class="cf"></div>
+	-->
+		<!-- <div class="cf"></div>
 
 	</div>
 </ion-content>
@@ -59,4 +71,4 @@
 			<button ion-button clear (click)="send(chatBox)" item-end><ion-icon class="footer-btn" name="send"></ion-icon></button>
 		</ion-item>
 	</form>
-</ion-footer>
+</ion-footer> -->
