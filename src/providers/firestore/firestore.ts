@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
 
 /*
@@ -130,6 +130,10 @@ export class Firestore {
     return this.firestore.collection('project_profiles').doc(id).ref.get().then(doc => {
       return doc.data();
     });
+  }
+
+  getProjectProfileReference(id: string): AngularFirestoreDocument <Project> {
+    return this.firestore.collection('project_profiles').doc(id);
   }
   // Read Profile via Reference
   getProjectProfileFromRef(ref: DocumentReference): Promise<any> {
