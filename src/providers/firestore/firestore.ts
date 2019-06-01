@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, DocumentData } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
 
 /*
@@ -190,5 +190,33 @@ export class Firestore {
   // Delete Channel
   deleteChannel(id: string): Promise<void> {
     return this.firestore.collection('channels').doc(id).delete();
+  }
+
+  // Get Project Cards
+  getCards(id: string, amount: number): Promise<any> {
+    return this.firestore.collection('match_queries').doc(id).ref.get().then(doc=> {
+      return doc.data();
+    }).then(data => {
+      var list: string[];
+      list = data.queried_list;
+      list.sort;
+      var greatestId = list[list.length - 1];
+      if (data.list_type == "project")
+        return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId')
+                                      .orderBy('id', 'asc').limit(amount)).ref.get();
+      else
+        return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId')
+                                      .orderBy('id', 'asc').limit(amount)).ref.get();
+    }).then(snapshot => {
+      if (snapshot.empty) {
+        console.log('No Matching Documents');
+        return;
+      }
+
+      var cards = new Map();
+      snapshot.forEach(doc => {
+        cards.set(doc.id, doc.data());
+      })
+    })
   }
 }
