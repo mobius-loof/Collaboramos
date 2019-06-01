@@ -17,24 +17,23 @@ export class Firestore {
 
   // Create Account
   createAccount(model: Account): Promise<void> {
-    const id = this.firestore.createId(); // generate an ID
-
     // create the account in Firestoer
-    return this.firestore.doc(`accounts/${id}`).set({
-      id: model.id,
+    return this.firestore.doc(`accounts/${model.id}`).set({
+      address: model.address,
+      candidate_id: model.candidate_id,
+      email: model.email,
       first_name: model.first_name,
       last_name: model.last_name,
-      email: model.email,
       phone_number: model.phone_number,
       project_ref: model.project_ref,
       candidate_ref: model.candidate_ref,
-      address: model.address
     });
   }
 
   // Read Account
   getAccount(id: string): Promise<any> {
     return this.firestore.collection('accounts').doc(id).ref.get().then(doc => {
+      console.log(doc);
       return doc.data();
     });
   }
@@ -94,8 +93,8 @@ export class Firestore {
   }
 
   // Update Candidate
-  updateCandidateProfile(id: string, model: Candidate): Promise<void> {
-    return this.firestore.doc(`candidate_profiles/${id}`).update({
+  updateCandidateProfile(model: Candidate): Promise<void> {
+    return this.firestore.doc(`candidate_profiles/${model.id}`).update({
       name: model.name,
       image: model.image,
       website: model.website,
@@ -152,9 +151,9 @@ export class Firestore {
   }
 
   // Update Profile
-  updateProjectProfile(id: string, model: Project): Promise<void> {
+  updateProjectProfile(model: Project): Promise<void> {
     // Returns promise of success/failure for updating the project document on Firestore
-    return this.firestore.doc(`project_profiles/${id}`).update({
+    return this.firestore.doc(`project_profiles/${model.id}`).update({
       name: model.name,
       image: model.image,
       website: model.website,

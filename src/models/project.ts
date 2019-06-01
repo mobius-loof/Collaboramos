@@ -15,5 +15,5 @@ export interface Project {
     address: string,
     phone_number: string,
     email: string,
-    website: string
+    website: string,
 }
