@@ -70,6 +70,7 @@ export class LoginPage {
       }
     }).catch((err) => {
       this.showLoginFailure(err.message);
+      loading.dismiss();
     });
   }
 
