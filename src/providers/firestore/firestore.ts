@@ -28,7 +28,6 @@ export class Firestore {
       phone_number: model.phone_number,
       project_ref: model.project_ref,
       candidate_ref: model.candidate_ref,
-      profile_image: model.profile_image,
       address: model.address
     });
   }
@@ -50,7 +49,6 @@ export class Firestore {
       phone_number: model.phone_number,
       project_ref: model.project_ref,
       candidate_ref: model.candidate_ref,
-      profile_image: model.profile_image,
       address: model.address
     });
   }
@@ -71,7 +69,7 @@ export class Firestore {
       name: model.name,
       image: model.image,
       website: model.website,
-      resumeURL: model.resumeURL,
+      resumeURL: model.resume_URL,
       is_visible: model.is_visible,
       skills: model.skills,
       description: model.description,
@@ -101,7 +99,7 @@ export class Firestore {
       name: model.name,
       image: model.image,
       website: model.website,
-      resumeURL: model.resumeURL,
+      resumeURL: model.resume_URL,
       is_visible: model.is_visible,
       skills: model.skills,
       description: model.description,

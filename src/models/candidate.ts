@@ -5,7 +5,7 @@ export interface Candidate {
     name: string,
     image: string,
     website: string,
-    resumeURL: string,
+    resume_URL: string,
     is_visible: boolean,
     skills: string[],
     description: string,
