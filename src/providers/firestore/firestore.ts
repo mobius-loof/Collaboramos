@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
 
 /*
@@ -190,5 +190,10 @@ export class Firestore {
   // Delete Channel
   deleteChannel(id: string): Promise<void> {
     return this.firestore.collection('channels').doc(id).delete();
+  }
+
+  // Get Messages in Chat
+  getMessagesForChannel(id: string): AngularFirestoreCollection {
+    return this.firestore.collection('messages', ref => ref.where('channel_id', '==', id));
   }
 }
