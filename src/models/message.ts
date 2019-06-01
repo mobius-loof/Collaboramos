@@ -3,7 +3,8 @@ import { DocumentReference } from 'angularfire2/firestore';
 
 export interface Message {
     channel_id: string,
+    sender_id: string, 
+    sender_name: string,
     message: string, // # of ms since UNIX epoch, number returned by Date.now() in JS
     message_date: Date, 
-    sent_by: DocumentReference, 
 }

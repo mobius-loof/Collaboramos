@@ -92,12 +92,11 @@ export class MessagesPage {
       message: new FormControl('')
     });
     this.chatBox = '';
-
   }
 
   ngOnInit() {
     
-    console.log("Hello");
+    //console.log("Hello");
   }
 
   send(message) {
@@ -106,13 +105,16 @@ export class MessagesPage {
 
       const messageData =
         {
-          toId: this.toUser._id,
-          _id: 6,
-          date: new Date(),
+          channel_id: this.toUser._id,
+          sender_id: 6,
+          sender_name: 'whatever',
+          message: message,
+          message_date: new Date()
+          /*date: new Date(),
           userId: this.user._id,
           username: this.toUser.username,
           pic: this.toUser.pic,
-          text: message
+          text: message*/
         };
 
       //this.messages.push(messageData);
