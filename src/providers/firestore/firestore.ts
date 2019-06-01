@@ -156,18 +156,9 @@ export class Firestore {
       image: model.image,
       website: model.website,
       is_visible: model.is_visible,
-<<<<<<< HEAD
       proj_name: model.proj_name,
       skills: model.skills,
       frameworks: model.frameworks
-=======
-      frameworks: model.frameworks,
-      skills: model.skills,
-      description: model.description,
-      phone_number: model.phone_number,
-      email: model.email,
-      address: model.address
->>>>>>> 8c5e15586b7a6a9a56fb9260e98ebfc28eacd8eb
     });
   }
 

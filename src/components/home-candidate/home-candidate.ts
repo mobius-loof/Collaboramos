@@ -12,7 +12,7 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 
-import { Items } from '../../providers';
+import { Items, Firestore } from '../../providers';
 /**
  * Generated class for the HomeCandidateComponent component.
  *
@@ -39,10 +39,10 @@ export class HomeCandidateComponent {
   stackConfig: StackConfig;
   recentCard: string = '     ';
 
-  tags = ['tag1', 'tag2'];
-  frameworks = ['f1', 'f2'];
+  tags = [];
+  frameworks = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, public firestore: Firestore) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/4), 1);
@@ -98,20 +98,22 @@ export class HomeCandidateComponent {
       this.addNewCards(5);
     }
     if (like) {
-      this.recentCard = 'You liked: ' + removedCard.email;
+      this.recentCard = 'You liked: ' + removedCard.name;
     } else {
-      this.recentCard = 'You disliked: ' + removedCard.email;
+      this.recentCard = 'You disliked: ' + removedCard.name;
     }
   }
 
   // Add new cards to our array
   addNewCards(count: number) {
-    this.http.get('https://randomuser.me/api/?results=' + count)
-    .map(data => data.json().results)
-    .subscribe(result => {
-      for (let val of result) {
-        this.cards.push(val);
-      }
+    this.firestore.getCards("project_id_1", count).then(map => {
+        console.log(map.entries())
+        map.forEach((value: any, key: id) => {
+            this.cards.push(value)
+            this.tags.push(value.skills)
+            console.log(value)
+
+        })
     })
 
   }
