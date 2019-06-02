@@ -20,7 +20,7 @@ export class Firestore {
     // create the account in Firestoer
     return this.firestore.doc(`accounts/${model.id}`).set({
       address: model.address,
-      candidate_id: model.candidate_id,
+      id: model.id,
       email: model.email,
       first_name: model.first_name,
       last_name: model.last_name,
@@ -65,16 +65,10 @@ export class Firestore {
 
     return this.firestore.doc(`candidate_profiles/${id}`).set({
       id: id,
-<<<<<<< HEAD
-      description: model.description,
-      images: model.images,
-      resumeURL: model.resumeURL,
-=======
       name: model.name,
       image: model.image,
       website: model.website,
       resumeURL: model.resume_URL,
->>>>>>> origin/master
       is_visible: model.is_visible,
       skills: model.skills,
       description: model.description,
@@ -99,20 +93,12 @@ export class Firestore {
   }
 
   // Update Candidate
-<<<<<<< HEAD
-  updateCandidateProfile(id: string, model: Candidate): Promise<void> {
-    return this.firestore.doc(`candidate_profiles/${id}`).update({
-      description: model.description,
-      images: model.images,
-      resumeURL: model.resumeURL,
-=======
   updateCandidateProfile(model: Candidate): Promise<void> {
     return this.firestore.doc(`candidate_profiles/${model.id}`).update({
       name: model.name,
       image: model.image,
       website: model.website,
       resumeURL: model.resume_URL,
->>>>>>> origin/master
       is_visible: model.is_visible,
       skills: model.skills,
       description: model.description,

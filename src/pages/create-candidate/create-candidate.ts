@@ -18,28 +18,20 @@ export class CreateCandidatePage {
   candidate: Candidate = {
     id: null,
     name: "",
-<<<<<<< HEAD
-    images: [],
-=======
     image: "",
->>>>>>> origin/master
     description: "",
     resume_URL: "",
     is_visible: true,
-    tags: ["UCSD"],
+    //tags: ["UCSD"],
     chats: {},
     interests: {},
     matches: {},
     waitlist: [],
-    phone: "",
+    phone_number: "",
     address: "",
-<<<<<<< HEAD
-    skills: ["js","python"]
-=======
-    skills: [],
+    skills: ["js", "python"],
     email: "",
     website: ""
->>>>>>> origin/master
   };
 
   isReadyToSave: boolean;
@@ -65,13 +57,8 @@ export class CreateCandidatePage {
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-<<<<<<< HEAD
-          this.candidate.images.push('data:image/jpg;base64,' + data);
-          this.hasPicture = true;
-=======
         //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
         this.candidate.image = ('data:image/jpg;base64,' + data);
->>>>>>> origin/master
       }, (err) => {
         alert('Unable to take photo');
       })
@@ -93,11 +80,7 @@ export class CreateCandidatePage {
   }
 
   getProfileImageStyle() {
-<<<<<<< HEAD
-      return 'url(' + this.candidate.images[this.candidate.images.length - 1] + ')'
-=======
     return 'url(' + this.candidate.image+ ')'
->>>>>>> origin/master
   }
 
 // Get size for picture
@@ -171,14 +154,14 @@ export class CreateCandidatePage {
                 }
             }
             this.candidate.skills = newTags;
-        } else if (type === "tags") {
+        } /*else if (type === "tags") {
             for (var i = 0; i < this.candidate.tags.length; i++) {
                 if (this.candidate.tags[i] != t) {
                     newTags.push(this.candidate.tags[i]);
                 }
             }
             this.candidate.tags = newTags;
-        }
+        }*/
 
     }
 
@@ -203,7 +186,7 @@ export class CreateCandidatePage {
                         if (type === "skills") {
                             this.candidate.skills.push(data.tag);
                         } else if (type === "tags") {
-                            this.candidate.tags.push(data.tag);
+                            //this.candidate.tags.push(data.tag);
                         }
                     }
                 }

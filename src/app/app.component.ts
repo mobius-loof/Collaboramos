@@ -7,7 +7,7 @@ import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
 
 import { Firestore } from '../providers/firestore/firestore';
-import { Project } from '../models';
+import { Project, Candidate } from '../models';
 import { Subscription } from 'rxjs';
 //import { CreateProjectPage } from '../pages/create-project/create-project';
 
@@ -66,7 +66,9 @@ export class MyApp {
 
   private PROJECT_COLOR: string = 'project_button';
   private CANDIDATE_COLOR: string = 'candy_button';
-  //private projProf: Project;
+  private projProf: Project;
+  private candProf: Candidate;
+  private account: Account;
 
   constructor(private platform: Platform,
               settings: Settings,
@@ -81,14 +83,39 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.projectVis = projectPage.getProject().is_visible;
+      this.projectVis = false;
     });
   }
 
   public notify(check: boolean) {
     //need to interface with Firebase for this to remember last toggled setting
+    check = !check;
+    this.checked = !check;
     if(this.lastProf === this.PROJECT) {
       this.isToggled = this.projectVis;
+
+      console.log("Toggle: " + this.checked);
+      var dumProfile: Project;
+      dumProfile = {
+        id: 'VpomGCkP4vpZ3HYNoEta',
+        name: 'Henlo',
+        image: 'Henlo',
+        description: 'THAOS',
+        is_visible: true,
+        frameworks: null,
+        skills: null,
+        chats: {},
+        interests: {},
+        matches: {},
+        waitlist: null,
+        address: '123 Gamer',
+        email: 'henlo@henlo.com',
+        website: 'Google',
+        phone_number: '12'
+      };
+
+      this.firestore.updateProjectProfile(dumProfile);
+      //this.projectSettings();
     } else if(this.lastProf === this.CANDIDATE) {
       this.isToggled = false;
     }
@@ -222,12 +249,11 @@ export class MyApp {
       this.projectColor = this.PROJECT_COLOR;
       this.checked = false;
       //this.projectVis = true;
-      this.firestore.getProjectProfileReference('GHhA9rhXgDisR0qm0IEh').valueChanges().subscribe(myData => {
-        console.log("FK " + myData.description);
-        this.projectVis = myData.is_visible;
+      this.firestore.getProjectProfileReference('VpomGCkP4vpZ3HYNoEta').valueChanges().subscribe(myData => {
+        return myData;
       });
 
-      var projProf: Project;
+      console.log(this.projectVis + " worked?");
 
       this.event.publish('lastProf', 'project');
 
@@ -302,6 +328,30 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  copyProjectProfile(profile: Project) {
+    this.projProf =  {
+      id: profile.id,
+      name: profile.name,
+      image: profile.image,
+      description: profile.description,
+      is_visible: profile.is_visible,
+      frameworks: Object.assign([], profile.frameworks),
+      skills: Object.assign([], profile.skills),
+      chats: profile.chats,
+      interests: profile.interests,
+      matches: profile.matches,
+      waitlist: Object.assign([], profile.waitlist),
+      address: profile.address,
+      email: profile.email,
+      website: profile.website,
+      phone_number: profile.phone_number
+    };
+  }
+
+  getBoolean(project: Project) {
+    this.projectVis = project.is_visible;
   }
 }
 

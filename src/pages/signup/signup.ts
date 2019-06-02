@@ -36,8 +36,10 @@ export class SignupPage {
         last_name: "Pang",
         email: "gypang@ucsd.edu",
         phone_number: "123456789",
-        project_id: null,
-        candidate_id: null,
+        project_ref: null,
+        candidate_ref: null,
+        project: null,
+        candidate: null,
         address: "my home"
       }
       return this.firestore.createAccount(a).then((_) => {

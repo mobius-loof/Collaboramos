@@ -36,22 +36,18 @@ export class ProfileProjectPage {
               private menuCtrl: MenuController,
               public appCom: MyApp) {
     this.isEdit = false;
-<<<<<<< HEAD
-    this.menuCtrl.swipeEnable(false);
-=======
     this.account = navParams.get('account');
     this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.populateProfileFromAccount(this.profile, this.account);
     this.populateProfileFromAccount(this.tempProfile, this.account);
->>>>>>> origin/master
   }
 
   copyProjectProfile(profile: Project): Project {
     return {
       id: profile.id,
-      proj_name: profile.proj_name,
-      images: Object.assign([], profile.images),
+      name: profile.name,
+      image: profile.image,
       description: profile.description,
       is_visible: profile.is_visible,
       frameworks: Object.assign([], profile.frameworks),
