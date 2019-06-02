@@ -15,10 +15,10 @@ import { Project, Account } from '../../models';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile-project',
-  templateUrl: 'profile-project.html',
+  selector: 'page-view-profile',
+  templateUrl: 'view-profile.html',
 })
-export class ProfileProjectPage {
+export class ViewProfilePage {
 
   private account: Account;
   private profile: Project;
