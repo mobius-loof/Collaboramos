@@ -1,4 +1,4 @@
-import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController, ToastController} from 'ionic-angular';
 import { Project, Account } from '../../models';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Channel } from '../../models/channel';
@@ -47,7 +47,10 @@ export class CreateProjectPage {
   account: Account;
   params: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController,
+    public alertController: AlertController, private firestore: Firestore,
+    private navParams: NavParams, private loadingCtrl: LoadingController,
+    public toastCtrl: ToastController, ) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
@@ -104,11 +107,25 @@ export class CreateProjectPage {
     this.navCtrl.setRoot("CreateProfilePage", this.params);
   }
 
+  showFailure(error_msg) {
+    let toast = this.toastCtrl.create({
+      message: error_msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
   /**
   * The user submited, so we return the data object back
   */
   submit() {
     let params = {};
+
+    if (this.project.image == "") {
+      this.showFailure("Please upload an image for your profile!");
+      return;
+    }
 
     let loading = this.loadingCtrl.create({
       content: 'Creating Profile...'

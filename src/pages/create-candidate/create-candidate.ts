@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Candidate, Account } from '../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -41,7 +41,9 @@ export class CreateCandidatePage {
   account: Account;
   params: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController,
+    public viewCtrl: ViewController, public alertController: AlertController,
+    private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
@@ -117,12 +119,29 @@ export class CreateCandidatePage {
     this.navCtrl.setRoot("CreateProfilePage", this.params);
   }
 
+
+  showFailure(error_msg) {
+    let toast = this.toastCtrl.create({
+      message: error_msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
   /**
   * The user submited, so we return the data object back
   */
   submit() {
     let params = {};
-
+    if (this.candidate.image == "") {
+      this.showFailure("Please upload an image for your profile!");
+      return;
+    }
+    if (this.candidate.resume_URL == "") {
+      this.showFailure("Please upload a resume for your profile!");
+      return;
+    }
     let loading = this.loadingCtrl.create({
       content: 'Creating Profile...'
     });
