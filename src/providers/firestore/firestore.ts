@@ -15,7 +15,7 @@ export class Firestore {
   account;
 
   constructor(public firestore: AngularFirestore,
-    public filestorage: AngularFireStorage) {}
+              public filestorage: AngularFireStorage) {}
   // Account CRUD
 
   // Create Account
