@@ -114,7 +114,7 @@ export class HomeCandidateComponent {
   }
 
   // Add new cards to our array
-  addNewCards(count: number) {
+  addNewCards(count: number) {/*
     this.firestore.getCards(this.id, count).then(map => {
         console.log(map.entries())
         map.forEach((value: any, key: id) => {
@@ -123,7 +123,7 @@ export class HomeCandidateComponent {
             console.log(value)
 
         })
-    })
+    })*/
 
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference, DocumentData } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, DocumentData, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
+import { Subscribable, Subscription } from 'rxjs';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -130,7 +131,7 @@ export class Firestore {
       image: model.image,
       website: model.website,
       is_visible: model.is_visible,
-      proj_name: model.proj_name,
+      proj_name: model.name,
       skills: model.skills,
       frameworks: model.frameworks
     });
@@ -162,7 +163,7 @@ export class Firestore {
       image: model.image,
       website: model.website,
       is_visible: model.is_visible,
-      proj_name: model.proj_name,
+      proj_name: model.name,
       skills: model.skills,
       frameworks: model.frameworks
     });
@@ -211,12 +212,19 @@ export class Firestore {
 
   // Get Project Cards
   getCards(id: string, amount: number): Promise<any> {
-      //console.log("Hello");
-    return this.firestore.collection('match_queries').doc(id).ref.get().then(doc=> {
-        //console.log("Hello from inside");
-        //console.log("Hello data" + doc.data());
-      return doc.data();
-    }).then(data => {
+    return this.firestore.collection('match_queries').doc(id).ref.get().then(doc => {
+      var list: string[];
+      list = doc.data().queried_list;
+      list.sort;
+
+      if (doc.data().list_type == "project") {
+        console.log("hello mama");
+        return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId').orderBy('id', 'asc').limit(amount));
+      } else {
+        return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId').orderBy('id', 'asc').limit(amount));
+      }
+    });
+    /*.then(data => {
       var list: string[];
       list = data.queried_list;
       list.sort;
@@ -224,7 +232,7 @@ export class Firestore {
       if (data.list_type == "project") {
           console.log("Hello");
         return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId')
-                                      .orderBy('id', 'asc').limit(amount)).ref.get();}
+                                      .orderBy('id', 'asc').limit(amount))}
       else
         return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId')
                                       .orderBy('id', 'asc').limit(amount)).ref.get();
@@ -240,6 +248,6 @@ export class Firestore {
       })
       
       return cards;
-    })
+    })*/
   }
 }

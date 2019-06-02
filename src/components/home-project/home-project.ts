@@ -14,6 +14,7 @@ import {
 } from 'angular2-swing';
 
 import { Items, Firestore } from '../../providers';
+import { resolveDefinition } from '@angular/core/src/view/util';
 /**
  * Generated class for the HomeProjectComponent component.
  *
@@ -121,11 +122,18 @@ export class HomeProjectComponent {
         }
 
     }
-
+    public tempCards;
     // Add new cards to our array
     addNewCards(count: number) {
         console.log("Added new cards");
-        this.firestore.getCards("candidate_id_1", count).then(map => {
+        this.firestore.getCards("candidate_id_1", count).then(collection => {
+            this.tempCards = collection.valueChanges();
+            Promise.resolve(this.tempCards);
+        }).then(_ => {
+            console.log("hello, promise resolved");
+            console.log(this.tempCards);
+        });
+        /*.then(map => {
             console.log(map.entries())
             map.forEach((value: any, key: id) => {
                 this.cards.push(value)
@@ -133,7 +141,7 @@ export class HomeProjectComponent {
                 console.log(value)
 
             })
-        })
+        })*/
     }
 
     getImage(i: number) {

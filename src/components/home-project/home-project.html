@@ -7,6 +7,10 @@
   id="card-stack"
   style="background-color: white; height: 80%;"
 >
+<ul>
+  hello from html
+  <li *ngFor="let tempCard of tempCards | async">{{ tempCard.id }} </li>
+  </ul>
   <ion-card
     #mycards1
     swing-card
