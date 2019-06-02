@@ -1,19 +1,52 @@
 <ion-content class="content">
+  <div class="splash-info">
+    <img src="../assets/img/icon.png" width=250px/>
+    <div class="splash-intro">
+      Collaboramos
+    </div>
+  </div>
   <form (submit)="doLogin()" class="form">
     <ion-list>
       <ion-item>
         <ion-label fixed>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="credentials.email" name="email"></ion-input>
+        <ion-input
+          type="email"
+          [(ngModel)]="credentials.email"
+          name="email"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
+        <ion-input
+          type="password"
+          [(ngModel)]="credentials.password"
+          name="password"
+        ></ion-input>
       </ion-item>
     </ion-list>
     <div class="btn-container">
-      <button ion-button color="primary" type="submit" size="large" full class="login-btn">Login</button>
-      <button ion-button color="light" type="button" size="large" full class="cancel-btn" (click)="cancel()">Cancel</button>
+      <button
+        ion-button
+        color="primary"
+        type="submit"
+        size="large"
+        full
+        class="login-btn"
+      >
+        Login
+      </button>
+      <button
+        ion-button
+        color="light"
+        type="button"
+        size="large"
+        full
+        class="cancel-btn"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
     </div>
   </form>
 </ion-content>
