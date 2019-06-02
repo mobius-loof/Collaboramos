@@ -36,6 +36,6 @@ export class MatchesPage {
   }
 
   viewMessages(chat) {
-    this.navCtrl.push('MessagesPage', { chatId: chat.id });
+    this.navCtrl.push('ViewProfilePage', { chatId: chat.id });
   }
 }

@@ -1,4 +1,4 @@
-page-profile-candidate {
+page-view-profile {
   $tag-height: 20px;
 
   .toolbar-title-ios {
@@ -6,27 +6,15 @@ page-profile-candidate {
   }
 
   .website-button {
-    background-color: $candy_banner;
-  }
-
-  .resume-button {
-    background-color: white;
-    color: $candy_banner;
-    border-color: $candy_banner;
-    border-width: 1px;
-    border-style: solid;
-  }
-
-  .resume-icon {
-    color: $candy_banner;
+    background-color: $project_banner;
   }
 
   .toolbar-background {
-    background-color: $candy_banner;
+    background-color: $project_banner;
   }
 
   .content {
-    background-color: $candy_background;
+    background-color: $project_background;
   }
 
   .item-ios {
@@ -54,10 +42,13 @@ page-profile-candidate {
     height: 100px;
     width: 100px;
     overflow: hidden;
+    border-radius: 50%;
     padding: 0px;
   }
 
   .project-img {
+    box-shadow: 5px 10px;
+    border-radius: 50%;
     width: 100%;
     height: 100%;
     z-index: 0;
@@ -89,7 +80,7 @@ page-profile-candidate {
   .tag {
     height: $tag-height;
     border-radius: $tag-height*2;
-    background-color: $candy_banner;
+    background-color: $project_banner;
     color: white;
   }
 
@@ -118,6 +109,7 @@ page-profile-candidate {
   .tag-container {
     margin-right: 2px;
     padding: 2px;
+    display: inline-flex;
   }
 
   .tag-row-container {
@@ -170,7 +162,8 @@ page-profile-candidate {
     $button-ios-margin-start: 0;
     $button-ios-margin-bottom: 0;
     padding: 0;
-    color: $candy_banner;
+    display: inline-flex;
+    color: $project_banner;
   }
 
   .button-ios.add-tag-btn {
