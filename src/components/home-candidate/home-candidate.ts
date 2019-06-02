@@ -41,6 +41,7 @@ export class HomeCandidateComponent {
 
   tags = [];
   frameworks = [];
+  id = "project_id_1";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, public firestore: Firestore) {
     this.stackConfig = {
@@ -57,6 +58,14 @@ export class HomeCandidateComponent {
 
     this.cards = [];
     this.addNewCards(3);
+    try{
+      this.id = navParams.get("profiles").get("projectProfile").get("id");
+    }
+    catch(error){
+      this.id = "project_id_1";
+    }
+
+    console.log(this.id);
 
   }
 
@@ -106,7 +115,7 @@ export class HomeCandidateComponent {
 
   // Add new cards to our array
   addNewCards(count: number) {
-    this.firestore.getCards("project_id_1", count).then(map => {
+    this.firestore.getCards(this.id, count).then(map => {
         console.log(map.entries())
         map.forEach((value: any, key: id) => {
             this.cards.push(value)
