@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -27,6 +27,10 @@ export class ProfileCandidatePage {
 
   private isEdit: boolean;
 
+  @ViewChild('imageInput') imageInput;
+  hasImage: boolean;
+  image = "";
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private alertCtrl: AlertController,
@@ -34,6 +38,7 @@ export class ProfileCandidatePage {
               private inAppBrowser: InAppBrowser,
               private firestore: Firestore) {
     this.isEdit = false;
+    this.hasImage = false;
     this.account = navParams.get('account');
     this.profile = this.copyCandidateProfile(navParams.get('candidateProfile'));
     this.tempProfile = this.copyCandidateProfile(navParams.get('candidateProfile'));
@@ -90,18 +95,37 @@ export class ProfileCandidatePage {
   }
 
   pickImage() {
-    let options = {
+    /*let options = {
       maximumImagesCount: 1,
       outputType: 0,
       width: 800,
       height: 800
-    }
+    }*/
+    this.imageInput.nativeElement.click();
 
-    this.imagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        console.log(results[i]);
-      }
-    })
+  }
+
+  processWebImage(event) {
+    let reader = new FileReader();
+    reader.onload = (readerEvent) => {
+
+      let imageData = (readerEvent.target as any).result;
+      this.image = imageData;
+      this.hasImage = true;
+    };
+    let imageD = event.target.files[event.target.files.length - 1];
+    //this.tempProfile.image = imageD;
+    console.log(imageD);
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  getSize() {
+    return '100px 100px';
+  }
+
+  getProfileImageStyle() {
+    //return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.image + ')';
   }
 
   presentWebsite() {

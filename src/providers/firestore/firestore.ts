@@ -20,7 +20,7 @@ export class Firestore {
     // create the account in Firestoer
     return this.firestore.doc(`accounts/${model.id}`).set({
       address: model.address,
-      candidate_id: model.candidate_id,
+      id: model.id,
       email: model.email,
       first_name: model.first_name,
       last_name: model.last_name,
