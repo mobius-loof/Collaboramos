@@ -38,7 +38,7 @@ export class CreateCandidatePage {
   isReadyToSave: boolean;
   hasPicture: boolean;
   hasFile: boolean;
-  acccount: Account;
+  account: Account;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
     this.hasPicture = false;
