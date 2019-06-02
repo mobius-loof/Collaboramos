@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
-import { Candidate } from '../../models/candidate';
+import { Candidate, Account } from '../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController } from 'ionic-angular';
 
@@ -46,6 +46,9 @@ export class CreateCandidatePage {
     this.account = navParams.get('account');
     this.hasPicture = false;
     this.hasFile = false;
+    this.candidate.email = this.account.email;
+    this.candidate.address = this.account.address;
+    this.candidate.phone_number = this.account.phone_number;
   }
 
   // Picture upload functions

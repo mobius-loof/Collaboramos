@@ -1,5 +1,5 @@
 import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
-import { Project } from '../../models/project';
+import { Project, Account } from '../../models';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Channel } from '../../models/channel';
 import { Component, ViewChild } from '@angular/core';
@@ -43,7 +43,7 @@ export class CreateProjectPage {
 
   isReadyToSave: boolean;
   hasPicture: boolean;
-  //form: FormGroup;
+
   account: Account;
   params: any;
 
@@ -51,6 +51,9 @@ export class CreateProjectPage {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
+    this.project.email = this.account.email;
+    this.project.address = this.account.address;
+    this.project.phone_number = this.account.phone_number;
   }
 
   getPicture() {
