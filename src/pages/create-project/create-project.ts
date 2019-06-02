@@ -45,8 +45,10 @@ export class CreateProjectPage {
   hasPicture: boolean;
   //form: FormGroup;
   account: Account;
+  params: any;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
+    this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
   }
@@ -96,7 +98,7 @@ export class CreateProjectPage {
    * The user cancelled, so we dismiss without sending data back.
    */
   return() {
-    this.navCtrl.setRoot("CreateProfilePage");
+    this.navCtrl.setRoot("CreateProfilePage", this.params);
   }
 
   /**

@@ -16,18 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class CreateProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  params: any;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateProfilePage');
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.params = navParams;
   }
 
   toProject() {
-      this.navCtrl.setRoot("CreateProjectPage");
-    }
+    this.navCtrl.setRoot("CreateProjectPage", this.params);
+  }
 
   toCandidate() {
-      this.navCtrl.setRoot("CreateCandidatePage");
-    }
+    this.navCtrl.setRoot("CreateCandidatePage", this.params);
+  }
 }
