@@ -40,7 +40,9 @@ export class SignupPage {
         candidate_id: null,
         address: "my home",
         project_ref: null,
-        candidate_ref: null
+        candidate_ref: null,
+        project: null,
+        candidate: null
       }
       return this.firestore.createAccount(a).then((_) => {
         this.showSignupSuccess();
