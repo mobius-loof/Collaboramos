@@ -39,7 +39,7 @@ export class MyApp {
     {title: 'ProfileCandidate', component: 'ProfileCandidatePage'},
     {title: 'Chats', component: 'ChatsPage'},
     {title: 'Messages', component: 'MessagesPage'},
-    {title: 'Matches', component: 'MatchesPage'}
+    {title: 'Matches', component: 'MatchesPage'},
   ]
 
   //boolean value for ion-toggle to set
