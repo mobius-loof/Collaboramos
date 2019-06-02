@@ -63,8 +63,8 @@ export class Firestore {
 
   // Create Candidate
   createCandidate(accountId: string, model: Candidate): Promise<void> {
-    const id = this.firestore.createId();
 
+    const id = this.firestore.createId();
     const fileId = this.firestore.createId(); // generate a file ID
     console.log(fileId); // debugging purposes
 
@@ -74,7 +74,7 @@ export class Firestore {
         name: model.name,
         image: fileId,
         website: model.website,
-        resumeURL: model.resume_URL,
+        resume_URL: model.resume_URL,
         is_visible: model.is_visible,
         skills: model.skills,
         description: model.description,
