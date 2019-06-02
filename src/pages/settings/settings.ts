@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
 
 import { Settings } from '../../providers';
-import { ChangePassPage } from '../change-pass/change-pass';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -89,8 +88,11 @@ export class SettingsPage {
     this.menuCtrl.open();
   }
 
+  changeEmail() {
+    this.navCtrl.push("ChangeEmailPage");
+  }
+
   changePass() {
-    console.log("yes");
     this.navCtrl.push("ChangePassPage");
   }
 

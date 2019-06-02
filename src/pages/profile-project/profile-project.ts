@@ -5,6 +5,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Firestore } from '../../providers/firestore/firestore'
 import { Project, Account } from '../../models';
+import { MyApp } from '../../app/app.component';
 
 /**
  * Generated class for the ProfilePage page.
@@ -35,7 +36,9 @@ export class ProfileProjectPage {
               private alertCtrl: AlertController,
               private imagePicker: ImagePicker,
               private inAppBrowser: InAppBrowser,
-              private firestore: Firestore) {
+              private firestore: Firestore,
+              private menuCtrl: MenuController,
+              public appCom: MyApp) {
     this.isEdit = false;
     this.hasImage = false;
     this.account = navParams.get('account');
@@ -183,5 +186,13 @@ export class ProfileProjectPage {
       ]
     });
     alert.present();
+  }
+
+  openMenu() {
+    //have a variable that checks if edit was tapped; if was then would want to undo and reset colors
+    if(!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
+      this.appCom.toggleProfileSettings();
+    }
+    this.menuCtrl.open();
   }
 }

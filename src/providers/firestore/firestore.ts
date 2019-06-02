@@ -160,6 +160,10 @@ export class Firestore {
       return doc.data();
     });
   }
+
+  getProjectProfileReference(id: string): AngularFirestoreDocument <Project> {
+    return this.firestore.collection('project_profiles').doc(id);
+  }
   // Read Profile via Reference
   getProjectProfileFromRef(ref: DocumentReference): Promise<any> {
     return ref.get().then(doc=> {

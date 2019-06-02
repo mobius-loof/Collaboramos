@@ -50,9 +50,17 @@ export class ProfileCandidatePage {
     return {
       id: profile.id,
       name: profile.name,
+<<<<<<< HEAD
       image: profile.image,
       resume_URL: profile.resume_URL,
       is_visible: profile.is_visible,
+=======
+      //files: Object.assign([], profile.files),
+      image: profile.image,
+      resume_URL: profile.resume_URL,
+      is_visible: profile.is_visible,
+      //tags: Object.assign([], profile.tags),
+>>>>>>> int-menu
       description: profile.description,
       chats: profile.chats,
       interests: profile.interests,
