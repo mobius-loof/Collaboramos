@@ -63,7 +63,7 @@ export class HomeProjectPage {
   }
 
   viewMessages() {
-    this.navCtrl.push('MessagePage');
+    this.navCtrl.push('ChatsPage');
   }
 
   // Called whenever we drag an element

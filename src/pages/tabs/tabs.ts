@@ -15,7 +15,7 @@ export class TabsPage {
 
   tab1Title = 'Items';
   tab2Title = 'Home';
-  tab3Title = 'Settings';
+  tab3Title = 'Matches';
 
   params: any
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
-import { Candidate, Project, Account, Channel } from '../../models'
+import { AngularFirestore, DocumentReference, AngularFirestoreCollection} from 'angularfire2/firestore';
+import * as firebase from 'firebase';
+import { Candidate, Project, Account, Channel, Message } from '../../models';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 /*
@@ -197,9 +198,10 @@ export class Firestore {
 
     return this.firestore.doc(`channels/${id}`).set({
       id: id,
-      chat_member_project_ref: model.chat_member_project_ref,
-      chat_member_candidate_ref: model.chat_member_candidate_ref,
-      last_message_sent_ref: model.last_message_sent_ref
+      last_message_sent: model.last_message_sent,
+      last_message_sender: model.last_message_sender,
+      last_message_date: model.last_message_date,
+      members: model.members
     });
   }
 
@@ -210,17 +212,50 @@ export class Firestore {
     });
   }
 
+  getChannelsFromProfile(profileId: string): AngularFirestoreCollection {
+    return this.firestore.collection('channels', ref => 
+    ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
+  }
+
   // Update Channel
   updateChannel(id: string, model: Channel): Promise<void> {
     return this.firestore.doc(`channels/${id}`).update({
-      chat_member_project_ref: model.chat_member_project_ref,
-      chat_member_candidate_ref: model.chat_member_candidate_ref,
-      last_message_sent_ref: model.last_message_sent_ref
+      last_message_sent: model.last_message_sent,
+      last_message_sender: model.last_message_sender,
+      last_message_date: model.last_message_date,
+      members: model.members
     });
   }
 
   // Delete Channel
   deleteChannel(id: string): Promise<void> {
     return this.firestore.collection('channels').doc(id).delete();
+  }
+
+  // Get Messages in Chat
+  getMessagesForChannel(id: string): AngularFirestoreCollection {
+    return this.firestore.collection('messages', ref => ref.where('channel_id', '==', id).orderBy('message_date', 'asc'));
+  }
+
+  // CR for Messages
+  createMessage(model: Message): Promise<void> {
+    var id = this.firestore.createId(); // create new id
+    var dateFromFirestore = firebase.firestore.FieldValue.serverTimestamp(); // get time at server
+
+    // update last message sent for the channel
+    this.firestore.collection('channels').doc(model.channel_id).update({
+      last_message_sent: model.message,
+      last_message_sender: model.sender_name,
+      last_message_date: dateFromFirestore
+    });
+
+    // create new message and push to firestore
+    return this.firestore.doc(`messages/${id}`).set({
+      channel_id: model.channel_id,
+      sender_id: model.sender_id,
+      sender_name: model.sender_name,
+      message: model.message,
+      message_date: dateFromFirestore
+    });
   }
 }
