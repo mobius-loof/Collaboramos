@@ -43,8 +43,8 @@ export class ProfileProjectPage {
   copyProjectProfile(profile: Project): Project {
     return {
       id: profile.id,
-      proj_name: profile.proj_name,
-      images: Object.assign([], profile.images),
+      name: profile.name,
+      image: profile.image,
       description: profile.description,
       is_visible: profile.is_visible,
       frameworks: Object.assign([], profile.frameworks),
