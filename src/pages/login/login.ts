@@ -63,6 +63,8 @@ export class LoginPage {
     }).then( _ => {
       loading.dismiss();
       if (params['candidateProfile'] == null && params['projectProfile'] == null) {
+        this.navCtrl.setRoot("CreateProfilePage");
+        this.showLoginSuccess();
         // take them to the profile creation page
       } else {
         this.navCtrl.setRoot(MainPage, params);
