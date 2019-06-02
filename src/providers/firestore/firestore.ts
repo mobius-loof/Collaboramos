@@ -67,24 +67,27 @@ export class Firestore {
 
     const id = this.firestore.createId();
     const fileId = this.firestore.createId(); // generate a file ID
+    const resumeId = this.firestore.createId(); // generate a file ID
     console.log(fileId); // debugging purposes
 
     return this.filestorage.ref(fileId).put(model.image).then(ref => {
-      this.firestore.doc(`candidate_profiles/${id}`).set({
-        id: id,
-        name: model.name,
-        image: fileId,
-        website: model.website,
-        resume_URL: model.resume_URL,
-        is_visible: model.is_visible,
-        skills: model.skills,
-        description: model.description,
-        phone_number: model.phone_number,
-        email: model.email,
-        address: model.address
-      });
-      return this.firestore.doc(`accounts/${id}`).update({
-        candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
+      this.filestorage.ref(resumeId).put(model.resume_URL).then(ref => {
+        this.firestore.doc(`candidate_profiles/${id}`).set({
+          id: id,
+          name: model.name,
+          image: fileId,
+          website: model.website,
+          resume_URL: resumeId,
+          is_visible: model.is_visible,
+          skills: model.skills,
+          description: model.description,
+          phone_number: model.phone_number,
+          email: model.email,
+          address: model.address
+        });
+        return this.firestore.doc(`accounts/${accountId}`).update({
+          candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
+        });
       });
     });
   }

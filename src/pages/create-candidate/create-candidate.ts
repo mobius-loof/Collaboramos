@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
-import { Candidate } from '../../models/candidate';
+import { Candidate, Account } from '../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -41,11 +41,16 @@ export class CreateCandidatePage {
   account: Account;
   params: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController,
+    public viewCtrl: ViewController, public alertController: AlertController,
+    private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
     this.hasFile = false;
+    this.candidate.email = this.account.email;
+    this.candidate.address = this.account.address;
+    this.candidate.phone_number = this.account.phone_number;
   }
 
   // Picture upload functions
@@ -84,11 +89,11 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
-      this.candidate.resume_URL = fileData;
+      //this.candidate.resume_URL = fileData;
       this.presentAlert();
       this.hasFile = true;
     };
-
+    this.candidate.resume_URL = event.target.files[event.target.files.length - 1];
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
@@ -114,41 +119,65 @@ export class CreateCandidatePage {
     this.navCtrl.setRoot("CreateProfilePage", this.params);
   }
 
+
+  showFailure(error_msg) {
+    let toast = this.toastCtrl.create({
+      message: error_msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
   /**
   * The user submited, so we return the data object back
   */
   submit() {
     let params = {};
-
+    if (this.candidate.image == "") {
+      this.showFailure("Please upload an image for your profile!");
+      return;
+    }
+    if (this.candidate.resume_URL == "") {
+      this.showFailure("Please upload a resume for your profile!");
+      return;
+    }
     let loading = this.loadingCtrl.create({
       content: 'Creating Profile...'
     });
     loading.present();
 
-    this.firestore.createCandidate(this.account.id, this.candidate).then(_ =>{
+    this.firestore.createCandidate(this.account.id, this.candidate).then(_ => {
+      console.log(this.account.id);
       return this.firestore.getAccount(this.account.id);
     }).then(acc => {
       params['account'] = acc;
-      params['candidateProfileRef'] = acc.candidate_id;
-      params['projectProfileRef'] = acc.project_id;
-      if (acc.project_id == null) {
+      params['candidateProfileRef'] = acc.candidate_ref;
+      params['projectProfileRef'] = acc.project_ref;
+      console.log("1");
+      if (acc.project_ref == null) {
         return null;
       } else {
-        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+        return this.firestore.getProjectProfileFromID(acc.project_ref.id);
       }
+      console.log("2");
     }).then(projectProfile => {
       params['projectProfile'] = projectProfile;
       let acc = params['account'];
-      if (acc.candidate_id == null) {
+      console.log("3");
+      if (acc.candidate_ref == null) {
         return null;
       } else {
-        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+        return this.firestore.getCandidateProfileFromID(acc.candidate_ref.id);
       }
+      console.log("4");
     }).then(candidateProfile => {
+      console.log("5");
       params['candidateProfile'] = candidateProfile;
     }).then(_ => {
       loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
+      console.log("6");
     });
   }
 
