@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, MenuController } from 'ionic-angular';
 import { Firestore } from '../../providers/firestore/firestore';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -31,11 +32,19 @@ export class MatchesPage {
 
   public chats
 
-  constructor(public navCtrl: NavController, private firestore: Firestore) {
+  constructor(public navCtrl: NavController, private firestore: Firestore, public appCom: MyApp, private menuCtrl: MenuController) {
     this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
   }
 
   viewMessages(chat) {
     this.navCtrl.push('ViewProfilePage', { chatId: chat.id });
+  }
+
+  openMenu() {
+    //have a variable that checks if edit was tapped; if was then would want to undo and reset colors
+    if(!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
+      this.appCom.toggleProfileSettings();
+    }
+    this.menuCtrl.open();
   }
 }

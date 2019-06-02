@@ -116,7 +116,7 @@ export class CreateCandidatePage {
   * The user cancelled, so we dismiss without sending data back.
   */
   return() {
-    this.navCtrl.setRoot("CreateProfilePage", this.params);
+    this.navCtrl.pop();
   }
 
 

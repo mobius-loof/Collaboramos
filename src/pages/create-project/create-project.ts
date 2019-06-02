@@ -57,6 +57,8 @@ export class CreateProjectPage {
     this.project.email = this.account.email;
     this.project.address = this.account.address;
     this.project.phone_number = this.account.phone_number;
+
+    console.log(navCtrl.getViews());
   }
 
   getPicture() {
@@ -104,7 +106,7 @@ export class CreateProjectPage {
    * The user cancelled, so we dismiss without sending data back.
    */
   return() {
-    this.navCtrl.setRoot("CreateProfilePage", this.params);
+    this.navCtrl.pop();
   }
 
   showFailure(error_msg) {
