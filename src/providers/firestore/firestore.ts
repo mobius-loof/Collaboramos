@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, DocumentData } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
+import { AngularFireStorage } from 'angularfire2/storage';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -12,7 +13,8 @@ import { Candidate, Project, Account, Channel } from '../../models'
 export class Firestore {
   account;
 
-  constructor(public firestore: AngularFirestore) { }
+  constructor(public firestore: AngularFirestore,
+              public filestorage: AngularFireStorage) { }
   // Account CRUD
 
   // Create Account
@@ -65,13 +67,18 @@ export class Firestore {
   createCandidate(model: Candidate): Promise<void> {
     const id = this.firestore.createId();
 
-    return this.firestore.doc(`candidate_profiles/${id}`).set({
-      id: id,
-      description: model.description,
-      files: model.files,
-      images: model.images,
-      is_visible: model.is_visible,
-      tags: model.tags
+    const fileId = this.firestore.createId(); // generate a file ID
+    console.log(fileId); // debugging purposes
+
+    return this.filestorage.ref(fileId).put(model.images[0]).then(ref => {
+      return this.firestore.doc(`candidate_profiles/${id}`).set({
+        id: id,
+        description: model.description,
+        files: model.files,
+        images: fileId,
+        is_visible: model.is_visible,
+        tags: model.tags
+      });
     });
   }
 
@@ -111,17 +118,21 @@ export class Firestore {
   createProjectProfile(model: Project): Promise<void> {
     const id = this.firestore.createId(); // generate an ID
 
-    // Returns promise of success/failure for creating the project document on Firestore
-    return this.firestore.doc(`project_profiles/${id}`).set({
-      description: model.description,
-      id: id,
-      images: model.images,
-      is_visible: model.is_visible,
-      proj_name: model.proj_name,
-      frameworks: model.frameworks,
-      skills: model.skills
-    });
+    const fileId = this.firestore.createId(); // generate a file ID
+    console.log(fileId); // debugging purposes
 
+    // Returns promise of success/failure for creating the project document on Firestore
+    return this.filestorage.ref(fileId).put(model.images[0]).then(ref => {
+      return this.firestore.doc(`project_profiles/${id}`).set({
+        description: model.description,
+        id: id,
+        images: fileId,
+        is_visible: model.is_visible,
+        proj_name: model.proj_name,
+        frameworks: model.frameworks,
+        skills: model.skills
+      });
+    });
   }
 
   // Read Profile via ID
