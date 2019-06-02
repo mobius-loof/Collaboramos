@@ -20,7 +20,7 @@
 				  </ion-card-content>
 				</ion-card>
 		</ion-content>-->
-
+	
 	<div *ngFor="let message of messages | async" class="message-wrapper" on-hold="onMessageHold($event, $index, message)">
 		<div *ngIf="user._id !== message.userId">
 			<img (click)="viewProfile(message)" class="profile-pic left" [src]="toUser.pic" onerror="onProfilePicError(this)" />
@@ -32,7 +32,6 @@
 
 				<div class="message-detail">
 					<span (click)="viewProfile(message)" class="bold">{{toUser.username}}</span>,
-					<!---<span>{{message.date | moment:"ago" | lowercase}}</span>-->
 				</div>
 
 			</div>
@@ -50,7 +49,6 @@
 
 				<div class="message-detail">
 					<span (click)="viewProfile(message)" class="bold">{{user.username}}</span>,
-					<!---<span>{{message.date | moment:"ago" | lowercase}}</span>-->
 				</div>
 
 			</div>

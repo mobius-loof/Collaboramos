@@ -105,11 +105,11 @@ export class MessagesPage {
 
       const messageData =
         {
-          channel_id: this.toUser._id,
-          sender_id: 6,
+          channel_id: "mW9tYce7xxIgg9jwqsmp",
+          sender_id: "L4wTy2ApbjJEzSavgXIL",
           sender_name: 'whatever',
           message: message,
-          message_date: new Date()
+          message_date: null
           /*date: new Date(),
           userId: this.user._id,
           username: this.toUser.username,
@@ -117,7 +117,7 @@ export class MessagesPage {
           text: message*/
         };
 
-      //this.messages.push(messageData);
+      this.firestore.createMessage(messageData);
       this.scrollToBottom();
 
       /*setTimeout(() => {

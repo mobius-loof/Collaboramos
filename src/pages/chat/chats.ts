@@ -8,7 +8,7 @@ import { NavController, IonicPage } from 'ionic-angular';
 
 export class ChatsPage {
 
-  chats = [{
+  /*chats = [{
     imageUrl: 'assets/img/marty-avatar.png',
     title: 'McFly',
     lastMessage: 'Hey, what happened yesterday?',
@@ -26,7 +26,9 @@ export class ChatsPage {
     title: 'Sarah Mcconnor',
     lastMessage: 'You still ow me that pizza.',
     timestamp: new Date()
-  }];
+  }];*/
+
+  public chats;
 
   constructor(public navCtrl: NavController) {}
 
