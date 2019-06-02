@@ -18,10 +18,18 @@
         {{pages[1].title}}
       </button>
 
-      <ion-item>
-        <ion-label>Invisible</ion-label>
-        <ion-toggle checked="{{this.checked}}" [(ngModel)]="isToggled" (ionChange)="notify(this.checked)"></ion-toggle>
+      <ion-item *ngIf="projectCreated && (lastProf === PROJECT)">
+        <ion-label>Invisible Project</ion-label>
+        <ion-toggle checked="{{this.checked}}" [(ngModel)]="projectVis" (ionChange)="notify(this.checked)"></ion-toggle>
       </ion-item>
+
+      <ion-item *ngIf="candidateCreated && (lastProf === CANDIDATE)">
+        <ion-label>Invisible Candidate</ion-label>
+        <ion-toggle checked="{{this.checked}}" [(ngModel)]="candidateVis" (ionChange)="notify(this.checked)"></ion-toggle>
+      </ion-item>
+      
+      <div *ngIf="(tempVar | async)?.is_visible">hello 1{{ (tempVar | async)?.is_visible }}</div>
+      <div *ngIf="!(tempVar | async)?.is_visible">hello 2{{ (tempVar | async)?.is_visible }}</div>
 
       <button ion-item detail-none (click) = "changePage(pages[2])">
         {{pages[2].title}}

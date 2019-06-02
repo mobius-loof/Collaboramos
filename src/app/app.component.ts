@@ -9,6 +9,7 @@ import { Settings } from '../providers';
 import { Firestore } from '../providers/firestore/firestore';
 import { Project, Candidate } from '../models';
 import { Subscription } from 'rxjs';
+import { DocumentReference } from 'angularfire2/firestore';
 //import { CreateProjectPage } from '../pages/create-project/create-project';
 
 // SET SIDEBAR STATE TO WAIT FOR ACCOUNT
@@ -55,7 +56,7 @@ export class MyApp {
   private candidateColor: string = 'nop';
 
   //boolean value to check if ion-toggle is set
-  private checked: boolean;
+  //private checked: boolean;
 
   //variables related to edit button status
   private editButton: string = 'Edit';
@@ -69,6 +70,8 @@ export class MyApp {
   private projProf: Project;
   private candProf: Candidate;
   private account: Account;
+  private projRef: DocumentReference;
+  private candRef: DocumentReference;
 
   constructor(private platform: Platform,
               settings: Settings,
@@ -77,44 +80,67 @@ export class MyApp {
               private menuCtrl: MenuController,
               private alertCtrl: AlertController,
               private firestore: Firestore,
-              private event: Events) {
+              private events: Events) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.projectVis = false;
     });
   }
 
   public notify(check: boolean) {
     //need to interface with Firebase for this to remember last toggled setting
-    check = !check;
-    this.checked = !check;
+    //this.checked = !check;
+    this.isToggled = !check;
+    //console.log("Toggle: " + this.isToggled);
+
     if(this.lastProf === this.PROJECT) {
-      this.isToggled = this.projectVis;
+      console.log(this.projProf.description);
 
-      console.log("Toggle: " + this.checked);
-      var dumProfile: Project;
-      dumProfile = {
-        id: 'VpomGCkP4vpZ3HYNoEta',
-        name: 'Henlo',
-        image: 'Henlo',
-        description: 'THAOS',
-        is_visible: true,
-        frameworks: null,
-        skills: null,
-        chats: {},
-        interests: {},
-        matches: {},
-        waitlist: null,
-        address: '123 Gamer',
-        email: 'henlo@henlo.com',
-        website: 'Google',
-        phone_number: '12'
-      };
+      if(this.projectVis) {
+        var dumProfile: Project;
+        dumProfile = {
+          id: 'VpomGCkP4vpZ3HYNoEta',
+          name: 'Henlo',
+          image: 'Henlo',
+          description: 'THANOS',
+          is_visible: true,
+          frameworks: null,
+          skills: null,
+          chats: {},
+          interests: {},
+          matches: {},
+          waitlist: null,
+          address: '123 Gamer',
+          email: 'henlo@henlo.com',
+          website: 'Google',
+          phone_number: '12'
+        };
 
-      this.firestore.updateProjectProfile(dumProfile);
+        this.firestore.updateProjectProfile(dumProfile);
+      } else {
+        var dumProfile: Project;
+        dumProfile = {
+          id: 'VpomGCkP4vpZ3HYNoEta',
+          name: 'Henlo',
+          image: 'Henlo',
+          description: 'THANOS',
+          is_visible: false,
+          frameworks: null,
+          skills: null,
+          chats: {},
+          interests: {},
+          matches: {},
+          waitlist: null,
+          address: '123 Gamer',
+          email: 'henlo@henlo.com',
+          website: 'Google',
+          phone_number: '12'
+        };
+
+        this.firestore.updateProjectProfile(dumProfile);
+      }
       //this.projectSettings();
     } else if(this.lastProf === this.CANDIDATE) {
       this.isToggled = false;
@@ -203,6 +229,12 @@ export class MyApp {
         this.promptDelete(this.PROJECT);
       }
 
+      /*var proj_ref = this.firestore.getAccount(this.account.id).then(myData => {
+        return myData.project_ref;
+      });*/
+
+      //console.log(this.projProf.description);
+
     //if candidate button tapped, then create/delete settings
     } else if(profileType === this.CANDIDATE) {
       this.candidateCreate();
@@ -211,6 +243,10 @@ export class MyApp {
       if(this.editMode && this.candidateCreated) {
         this.promptDelete(this.CANDIDATE);
       }
+
+      /*this.candProf = this.firestore.getAccount(this.account.id).then(myData => {
+        return myData.candidate_ref;
+      });*/
     }
   }
 
@@ -222,18 +258,38 @@ export class MyApp {
 
   projectCreate() {
     if(!this.projectCreated && !this.editMode) {
-      this.nav.setRoot('CreateProjectPage');
+      this.nav.setRoot('CreateProjectPage', {
+        account: this.account,
+        candidateProfile: this.candProf,
+        projectProfile: this.candProf,
+        candidateProfileRef: null,
+        projectProfileRef: null
+      });
+
       this.projectCreated = true;
 
       //CHANGE THE NAME BASED ON FIRESTORE
       this.pages[0].title = 'Collaboramos';
+
+      /*this.tempVar = this.firestore.getProjectProfileReference('VpomGCkP4vpZ3HYNoEta').valueChanges();
+      this.tempVar.subscribe(myData => {
+        this.projProf = myData;
+      });*/
+
       this.closeMenu();
     }
   }
 
   candidateCreate() {
     if(!this.candidateCreated && !this.editMode) {
-      this.nav.setRoot('CreateCandidatePage');
+      this.nav.setRoot('CreateCandidatePage', {
+        account: this.account,
+        candidateProfile: this.candProf,
+        projectProfile: this.candProf,
+        candidateProfileRef: null,
+        projectProfileRef: null
+      });
+
       this.candidateCreated = true;
 
       //CHANGE THE NAME BASED ON FIRESTORE
@@ -241,26 +297,27 @@ export class MyApp {
       this.closeMenu();
     }
   }
+  public tempVar;
 
   projectSettings() {
     //set the defaults for the project profile once it is created
     if(!this.editMode) {
       this.lastProf = 'project';
       this.projectColor = this.PROJECT_COLOR;
-      this.checked = false;
-      //this.projectVis = true;
-      this.firestore.getProjectProfileReference('VpomGCkP4vpZ3HYNoEta').valueChanges().subscribe(myData => {
-        return myData;
-      });
-
-      console.log(this.projectVis + " worked?");
-
-      this.event.publish('lastProf', 'project');
+      //this.checked = false;
+      this.projectVis = true;
 
       if(this.candidateColor !== 'nop') {
         this.candidateColor = 'baby_powder';
       }
+
+      this.projectPublishEvents();
     }
+  }
+
+  projectPublishEvents() {
+    this.events.publish('lastProf', 'project');
+    this.events.publish('project', this.projProf);
   }
 
   candidateSettings() {
@@ -268,10 +325,10 @@ export class MyApp {
     if(!this.editMode) {
       this.lastProf = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
-      this.checked = false;
-      //this.candidateVis = true;
+      //this.checked = false;
+      this.candidateVis = true;
 
-      this.event.publish('lastProf', 'candidate');
+      this.events.publish('lastProf', 'candidate');
 
       if(this.projectColor !== 'nop') {
         this.projectColor = 'baby_powder';
@@ -331,7 +388,7 @@ export class MyApp {
   }
 
   copyProjectProfile(profile: Project) {
-    this.projProf =  {
+    return {
       id: profile.id,
       name: profile.name,
       image: profile.image,
@@ -352,6 +409,26 @@ export class MyApp {
 
   getBoolean(project: Project) {
     this.projectVis = project.is_visible;
+  }
+
+  setAccount(acc: Account) {
+    this.account = acc;
+  }
+
+  setCandidateProfile(candy: Candidate) {
+    this.candProf = candy;
+  }
+
+  setProjectProfile(proj: Project) {
+    this.projProf = proj;
+  }
+
+  setCandidateProfileRef(ref: DocumentReference) {
+    this.projRef = ref;
+  }
+
+  setProjectProfileRef(ref: DocumentReference) {
+    this.candRef = ref;
   }
 }
 
