@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { Firestore } from '../../providers/firestore/firestore';
 
 @IonicPage()
 @Component({
@@ -8,7 +9,7 @@ import { NavController, IonicPage } from 'ionic-angular';
 
 export class MatchesPage {
 
-  matches = [{
+  /*matches = [{
     imageUrl: 'assets/img/marty-avatar.png',
     title: 'McFly',
     lastMessage: 'Hey, what happened yesterday?',
@@ -26,11 +27,15 @@ export class MatchesPage {
     title: 'Sarah Mcconnor',
     lastMessage: 'You still ow me that pizza.',
     timestamp: new Date()
-  }];
+  }];*/
 
-  constructor(public navCtrl: NavController) {}
+  public chats
+
+  constructor(public navCtrl: NavController, private firestore: Firestore) {
+    this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
+  }
 
   viewMessages(chat) {
-    this.navCtrl.push('MatchesPage', { chatId: chat.id });
+    this.navCtrl.push('MessagesPage', { chatId: chat.id });
   }
 }

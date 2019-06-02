@@ -185,6 +185,11 @@ export class Firestore {
     ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
   }
 
+  getMatchesFromProfile(profileId: string): AngularFirestoreCollection {
+    return this.firestore.collection('matches', ref => 
+    ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
+  }
+
   // Update Channel
   updateChannel(id: string, model: Channel): Promise<void> {
     return this.firestore.doc(`channels/${id}`).update({
