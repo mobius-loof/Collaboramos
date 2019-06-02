@@ -112,6 +112,7 @@ export class HomeProjectComponent {
 
         if (this.cards.length <= 2) {
             this.addNewCards(5);
+            console.log("Voted on cards and added");
         }
         if (like) {
             this.recentCard = 'You liked: ' + removedCard.proj_name;
@@ -123,7 +124,7 @@ export class HomeProjectComponent {
 
     // Add new cards to our array
     addNewCards(count: number) {
-
+        console.log("Added new cards");
         this.firestore.getCards("candidate_id_1", count).then(map => {
             console.log(map.entries())
             map.forEach((value: any, key: id) => {
@@ -133,7 +134,10 @@ export class HomeProjectComponent {
 
             })
         })
+    }
 
+    getImage(i: number) {
+        return "url(https://firebasestorage.googleapis.com/v0/b/collaboramos.appspot.com/o/862lg6wjnjd?alt=media&token=6c1025c4-8756-439a-9b36-a5d8ea35f7fd)";
     }
 
     // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
