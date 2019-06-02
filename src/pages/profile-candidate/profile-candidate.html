@@ -29,7 +29,7 @@
         <div class="project-img-container">
           <div *ngIf="!isEdit">
             <img *ngIf="!hasImage" class="project-img" src="../assets/img/marty-avatar.png">
-            <div *ngIf="hasImage" class="project-img" (click)="pickImage()" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            <div *ngIf="hasImage" class="project-img"  [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
             </div>
           </div>
           <div *ngIf="isEdit">
