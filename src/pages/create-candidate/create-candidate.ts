@@ -138,9 +138,31 @@ export class CreateCandidatePage {
   * The user submited, so we return the data object back
   */
   submit() {
-    this.firestore.createCandidate(this.account.id, this.candidate);
-    this.navCtrl.setRoot("TabsPage")
-    return this.candidate;
+    let params = {};
+    this.firestore.createCandidate(this.account.id, this.candidate).then(_ =>{
+      return this.firestore.getAccount(this.account.id);
+    }).then(acc => {
+      params['account'] = acc;
+      params['candidateProfileRef'] = acc.candidate_id;
+      params['projectProfileRef'] = acc.project_id;
+      if (acc.project_id == null) {
+        return null;
+      } else {
+        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+      }
+    }).then(projectProfile => {
+      params['projectProfile'] = projectProfile;
+      let acc = params['account'];
+      if (acc.candidate_id == null) {
+        return null;
+      } else {
+        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+      }
+    }).then(candidateProfile => {
+      params['candidateProfile'] = candidateProfile;
+    }).then(_ => {
+      this.navCtrl.setRoot("TabsPage", params);
+    });
   }
 
   /**
