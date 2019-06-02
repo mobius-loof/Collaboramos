@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Candidate } from '../../models/candidate';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, AlertController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,7 +14,7 @@ export class CreateCandidatePage {
   @ViewChild('imageInput') imageInput;
 
 
-    image = ""
+  image = ""
 
 
   candidate: Candidate = {
@@ -38,8 +38,9 @@ export class CreateCandidatePage {
   isReadyToSave: boolean;
   hasPicture: boolean;
   hasFile: boolean;
+  account: Account;
 
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
     this.hasPicture = false;
     this.hasFile = false;
   }
@@ -48,7 +49,7 @@ export class CreateCandidatePage {
     console.log('ionViewDidLoad CreateCandidatePage');
   }
 
-// Picture upload functions
+  // Picture upload functions
   getPicture() {
     /*
     console.log("getting picture");
@@ -65,7 +66,7 @@ export class CreateCandidatePage {
       })
     } else {
       */
-      this.imageInput.nativeElement.click();
+    this.imageInput.nativeElement.click();
     //}
   }
 
@@ -78,20 +79,20 @@ export class CreateCandidatePage {
     };
     let imageD = event.target.files[event.target.files.length - 1];
     this.candidate.image = imageD;
-    reader.readAsDataURL(event.target.files[event.target.files.length-1]);
+    reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
     this.hasPicture = true;
   }
 
   getProfileImageStyle() {
-      return 'url(' + this.image + ')'
+    return 'url(' + this.image + ')'
   }
 
-// Get size for picture
+  // Get size for picture
   getSize() {
     return '140px 180px'
   }
 
-// Upload file functinos
+  // Upload file functinos
   getFile() {
     console.log("getting file");
     this.fileInput.nativeElement.click();
@@ -109,82 +110,82 @@ export class CreateCandidatePage {
       this.hasFile = true;
     };
 
-      reader.readAsDataURL(event.target.files[event.target.files.length-1]);
-    }
+    reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
+  }
 
-// Alert upload success
-    async presentAlert() {
-        const alert = await this.alertController.create({
-            message: 'Upload Success!',
-            buttons: [{
-                    text: 'Confirm',
-                    handler: () => {
-                        console.log('Confirm Okay');
-                    }
-                }
-            ]
-        });
-        await alert.present();
-    }
+  // Alert upload success
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      message: 'Upload Success!',
+      buttons: [{
+        text: 'Confirm',
+        handler: () => {
+          console.log('Confirm Okay');
+        }
+      }
+      ]
+    });
+    await alert.present();
+  }
 
   /**
   * The user cancelled, so we dismiss without sending data back.
   */
   return() {
-      this.navCtrl.setRoot("CreateProfilePage");
+    this.navCtrl.setRoot("CreateProfilePage");
   }
 
   /**
   * The user submited, so we return the data object back
   */
   submit() {
-      this.firestore.createCandidate(this.candidate);
-      this.navCtrl.setRoot("TabsPage")
-      return this.candidate;
-    }
+    this.firestore.createCandidate(this.account.id, this.candidate);
+    this.navCtrl.setRoot("TabsPage")
+    return this.candidate;
+  }
 
-    /**
-    * 
-    *Tag
-   **/
-    deleteTag(t: string, type: string) {
-        var newTags = []
-        for (var i = 0; i < this.candidate.skills.length; i++) {
-            if (this.candidate.skills[i] != t) {
-                newTags.push(this.candidate.skills[i]);
-            }
+  /**
+  * 
+  *Tag
+ **/
+  deleteTag(t: string, type: string) {
+    var newTags = []
+    for (var i = 0; i < this.candidate.skills.length; i++) {
+      if (this.candidate.skills[i] != t) {
+        newTags.push(this.candidate.skills[i]);
+      }
+    }
+    this.candidate.skills = newTags;
+
+  }
+
+  presentPrompt(type: string) {
+    let alert = this.alertController.create({
+      title: 'Add ' + type.substring(0, type.length),
+      inputs: [
+        {
+          name: 'tag',
+          placeholder: 'Add a new ' + type.substring(0, type.length - 1)
         }
-        this.candidate.skills = newTags;
-
-    }
-
-    presentPrompt(type: string) {
-        let alert = this.alertController.create({
-            title: 'Add ' + type.substring(0, type.length),
-            inputs: [
-                {
-                    name: 'tag',
-                    placeholder: 'Add a new ' + type.substring(0, type.length - 1)
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: () => { }
-                },
-                {
-                    text: 'Ok',
-                    handler: data => {
-                        if (type === "skills") {
-                            this.candidate.skills.push(data.tag);
-                        } else if (type === "tags") {
-                        }
-                    }
-                }
-            ]
-        });
-        alert.present();
-    }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => { }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            if (type === "skills") {
+              this.candidate.skills.push(data.tag);
+            } else if (type === "tags") {
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }
 

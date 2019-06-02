@@ -16,44 +16,41 @@ import { Component, ViewChild } from '@angular/core';
   selector: 'page-create-project',
   templateUrl: 'create-project.html',
 })
-export class CreateProjectPage{
+export class CreateProjectPage {
 
 
-    image = "";
+  image = "";
 
   project: Project = {
-      id: "",
-      name: "",
-      image: "",
-      description: "",
-      is_visible: true,
-      skills: [],
-      frameworks: [],
-      chats: {},
-      interests: {},
-      matches: {},
-      waitlist: [],
-      address: "",
-      email: "",
-      website: "",
-      phone_number: ""
-    };
+    id: "",
+    name: "",
+    image: "",
+    description: "",
+    is_visible: true,
+    skills: [],
+    frameworks: [],
+    chats: {},
+    interests: {},
+    matches: {},
+    waitlist: [],
+    address: "",
+    email: "",
+    website: "",
+    phone_number: ""
+  };
 
   @ViewChild('imageInput') imageInput;
 
   isReadyToSave: boolean;
   hasPicture: boolean;
   //form: FormGroup;
+  account: Account;
 
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
+    this.account = navParams.get('account');
     this.hasPicture = false;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateProjectPage');
-  }
-
-  
   getPicture() {
     /*
     if (Camera['installed']()) {
@@ -70,7 +67,7 @@ export class CreateProjectPage{
       })
     } else {
       */
-      this.imageInput.nativeElement.click();
+    this.imageInput.nativeElement.click();
     //}
   }
 
@@ -78,10 +75,10 @@ export class CreateProjectPage{
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-      let imageData = (readerEvent.target as any).result;  
+      let imageData = (readerEvent.target as any).result;
       this.image = imageData;
       this.hasPicture = true;
-      };
+    };
     let imageD = event.target.files[event.target.files.length - 1];
     this.project.image = imageD;
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
@@ -106,63 +103,63 @@ export class CreateProjectPage{
   * The user submited, so we return the data object back
   */
   submit() {
-    this.firestore.createProjectProfile(this.project);
+    this.firestore.createProjectProfile(this.account.id, this.project);
     this.navCtrl.setRoot("TabsPage")
     return this.project;
-    }
+  }
 
-    /**
-     * 
-     *Tag
-    **/
-    deleteTag(t: string, type:string) {
-        var newTags = []
-        if (type === "skills") {
-            for (var i = 0; i < this.project.skills.length; i++) {
-                if (this.project.skills[i] != t) {
-                    newTags.push(this.project.skills[i]);
-                }
-            }
-            this.project.skills = newTags;
-        } else if (type === "frameworks") {
-            for (var i = 0; i < this.project.frameworks.length; i++) {
-                if (this.project.frameworks[i] != t) {
-                    newTags.push(this.project.frameworks[i]);
-                }
-            }
-            this.project.frameworks = newTags;
+  /**
+   * 
+   *Tag
+  **/
+  deleteTag(t: string, type: string) {
+    var newTags = []
+    if (type === "skills") {
+      for (var i = 0; i < this.project.skills.length; i++) {
+        if (this.project.skills[i] != t) {
+          newTags.push(this.project.skills[i]);
         }
-        
+      }
+      this.project.skills = newTags;
+    } else if (type === "frameworks") {
+      for (var i = 0; i < this.project.frameworks.length; i++) {
+        if (this.project.frameworks[i] != t) {
+          newTags.push(this.project.frameworks[i]);
+        }
+      }
+      this.project.frameworks = newTags;
     }
 
-    presentPrompt(type: string) {
-        let alert = this.alertController.create({
-            title: 'Add ' + type.substring(0, type.length),
-            inputs: [
-                {
-                    name: 'tag',
-                    placeholder: 'Add a new ' + type.substring(0, type.length-1)
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: () => { }
-                },
-                {
-                    text: 'Ok',
-                    handler: data => {
-                        if (type === "skills") {
-                            this.project.skills.push(data.tag);
-                        } else if (type === "frameworks") {
-                            this.project.frameworks.push(data.tag);
-                        }
-                    }
-                }
-            ]
-        });
-        alert.present();
-    }
+  }
+
+  presentPrompt(type: string) {
+    let alert = this.alertController.create({
+      title: 'Add ' + type.substring(0, type.length),
+      inputs: [
+        {
+          name: 'tag',
+          placeholder: 'Add a new ' + type.substring(0, type.length - 1)
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => { }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            if (type === "skills") {
+              this.project.skills.push(data.tag);
+            } else if (type === "frameworks") {
+              this.project.frameworks.push(data.tag);
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
 }
