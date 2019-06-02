@@ -167,8 +167,9 @@ export class Firestore {
     return this.firestore.doc(`channels/${id}`).set({
       id: id,
       last_message_sent: model.last_message_sent,
-      media: model.media,
-      members: [model.chat_member_candidate, model.chat_member_project]
+      last_message_sender: model.last_message_sender,
+      last_message_date: model.last_message_date,
+      members: model.members
     });
   }
 
@@ -179,12 +180,17 @@ export class Firestore {
     });
   }
 
+  getChannelsFromProfile(profileId: string): AngularFirestoreCollection {
+    return this.firestore.collection('channels', ref => ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
+  }
+
   // Update Channel
   updateChannel(id: string, model: Channel): Promise<void> {
     return this.firestore.doc(`channels/${id}`).update({
       last_message_sent: model.last_message_sent,
-      media: model.media,
-      members: [model.chat_member_candidate, model.chat_member_project]
+      last_message_sender: model.last_message_sender,
+      last_message_date: model.last_message_date,
+      members: model.members
     });
   }
 
@@ -205,7 +211,9 @@ export class Firestore {
 
     // update last message sent for the channel
     this.firestore.collection('channels').doc(model.channel_id).update({
-      last_message_sent: model.message
+      last_message_sent: model.message,
+      last_message_sender: model.sender_name,
+      last_message_date: model.message_date
     });
 
     // create new message and push to firestore
