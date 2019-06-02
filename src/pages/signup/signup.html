@@ -3,15 +3,45 @@
 <ion-content class="content">
   <form (submit)="doSignup()" class="form">
     <ion-list>
+
+      
+      <ion-item>
+        <ion-label fixed>First Name</ion-label>
+        <ion-input type="text"  [(ngModel)]="account.first_name" name="first_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Last Name</ion-label>
+        <ion-input type="text"  [(ngModel)]="account.last_name" name="first_name"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-label fixed>Phone Number</ion-label>
+          <ion-input type="text"  [(ngModel)]="account.phone_number" name="phone_number"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+          <ion-label fixed>Address</ion-label>
+          <ion-input type="text"  [(ngModel)]="account.address" name="address"></ion-input>
+      </ion-item>
+
+      
+
+    
+
+    
+
       <ion-item>
         <ion-label fixed>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="credentials.email" name="email"></ion-input>
+        <ion-input type="email" [(ngModel)]="credentials.email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label fixed>Password</ion-label>
         <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
       </ion-item>
+
     </ion-list>
     <div class="btn-container">
       <button ion-button color="primary" type="submit" size="large" full class="signup-btn">REGISTER</button>
