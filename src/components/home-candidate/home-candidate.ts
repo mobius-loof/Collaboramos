@@ -81,6 +81,10 @@ export class HomeCandidateComponent {
     this.navCtrl.push('MessagePage');
   }
 
+  getSize() {
+    return '100px 100px'
+  }
+
   // Called whenever we drag an element
   onItemMove(element, x, y, r) {
     var color = '';

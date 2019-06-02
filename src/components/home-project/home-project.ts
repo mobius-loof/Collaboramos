@@ -140,6 +140,10 @@ export class HomeProjectComponent {
         return "url(https://firebasestorage.googleapis.com/v0/b/collaboramos.appspot.com/o/862lg6wjnjd?alt=media&token=6c1025c4-8756-439a-9b36-a5d8ea35f7fd)";
     }
 
+  getSize() {
+    return '84px 108px'
+  }
+
     // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
     decimalToHex(d, padding) {
         var hex = Number(d).toString(16);
