@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar primary>
-    <ion-title style="background-color: #518dc7;">
+  <ion-navbar>
+    <ion-title>
       Messages
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content class="chats" style="background-color: #e5eef6">
+<ion-content class="chats" style="background-color: #e5eef6;">
   <ion-list>
     <ion-list-header>Today</ion-list-header>
     <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)" style="background-color: #e5eef6">
