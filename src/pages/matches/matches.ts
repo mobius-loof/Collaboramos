@@ -35,7 +35,7 @@ export class MatchesPage {
     this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
   }
 
-  viewMessages(chat) {
-    this.navCtrl.push('MessagesPage', { chatId: chat.id });
+  viewProfile(chat) {
+    this.navCtrl.push('ViewProfile', { chatId: chat.id });
   }
 }
