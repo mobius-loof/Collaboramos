@@ -5,42 +5,49 @@
     <ion-list>
 
       
-      <ion-item>
+      <ion-item class = "title">
+        <h1 >Collaboramos</h1>
+      </ion-item>
+
+
+      <div class = "fields">
+      <ion-item class = "first_name">
         <ion-label fixed>First Name</ion-label>
         <ion-input type="text"  [(ngModel)]="account.first_name" name="first_name"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item class = "last_name">
         <ion-label fixed>Last Name</ion-label>
         <ion-input type="text"  [(ngModel)]="account.last_name" name="first_name"></ion-input>
       </ion-item>
       
-      <ion-item>
-          <ion-label fixed>Phone Number</ion-label>
-          <ion-input type="text"  [(ngModel)]="account.phone_number" name="phone_number"></ion-input>
+      <ion-item class = "phone_number">
+          <ion-label >Phone Number</ion-label>
+          <ion-input type="number"  [(ngModel)]="account.phone_number" name="phone_number"></ion-input>
       </ion-item>
 
 
-      <ion-item>
+      <ion-item class = "address">
           <ion-label fixed>Address</ion-label>
           <ion-input type="text"  [(ngModel)]="account.address" name="address"></ion-input>
       </ion-item>
 
-      
-
-    
-
-    
-
-      <ion-item>
+      <ion-item class="email">
         <ion-label fixed>Email</ion-label>
         <ion-input type="email" [(ngModel)]="credentials.email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item class = "password">
         <ion-label fixed>Password</ion-label>
         <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
       </ion-item>
+
+      <ion-item class = "reenterpassword">
+          <ion-label >Re-enter Password</ion-label>
+          <ion-input type="password" [(ngModel)]="repassword.repassword" name="repassword"></ion-input>
+        </ion-item>
+
+      </div>
 
     </ion-list>
     <div class="btn-container">
