@@ -3,10 +3,24 @@ page-login {
         position: relative;
     }
 
+    .splash-info {
+        position: relative;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
     .btn-container {
         bottom: 0;
         position: absolute;
         width: 100%;
+    }
+
+    .cancel-btn {
+        margin-bottom: -3px;
+    }
+
+    .login-btn {
+        margin-bottom: -3px;
     }
 
     button {
