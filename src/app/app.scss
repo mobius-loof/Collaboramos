@@ -22,3 +22,20 @@
 .candidate {
     height: 60px;
 }
+
+ion-menu {
+    --ion-background-color: $ham_bg;
+    --ion-text-color: $ham_bg;
+
+    ion-toolbar {
+        --background: $ham_bg;
+    }
+
+    ion-list {/* optional, but it needs when you use gradient as a background color.*/
+        background: transparent;
+    }
+}
+
+.menu-color {
+    background-color: 'ham_bg';
+}
