@@ -19,8 +19,8 @@ export class Firestore {
   createAccount(model: Account): Promise<void> {
     // create the account in Firestoer
     return this.firestore.doc(`accounts/${model.id}`).set({
+      id: model.id,
       address: model.address,
-      candidate_id: model.candidate_id,
       email: model.email,
       first_name: model.first_name,
       last_name: model.last_name,
@@ -60,10 +60,10 @@ export class Firestore {
   // Candidate Profile CRUD
 
   // Create Candidate
-  createCandidate(model: Candidate): Promise<void> {
+  createCandidate(accountId: string, model: Candidate): Promise<void> {
     const id = this.firestore.createId();
 
-    return this.firestore.doc(`candidate_profiles/${id}`).set({
+    this.firestore.doc(`candidate_profiles/${id}`).set({
       id: id,
       name: model.name,
       image: model.image,
@@ -75,6 +75,10 @@ export class Firestore {
       phone_number: model.phone_number,
       email: model.email,
       address: model.address
+    });
+
+    return this.firestore.doc(`accounts/${id}`).update({
+      candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
     });
   }
 
@@ -116,11 +120,11 @@ export class Firestore {
   // Project Profile CRUD
 
   // Create Profile
-  createProjectProfile(model: Project): Promise<void> {
+  createProjectProfile(accountId: string, model: Project): Promise<void> {
     const id = this.firestore.createId(); // generate an ID
 
     // Returns promise of success/failure for creating the project document on Firestore
-    return this.firestore.doc(`project_profiles/${id}`).set({
+    this.firestore.doc(`project_profiles/${id}`).set({
       id: id,
       name: model.name,
       image: model.image,
@@ -133,6 +137,10 @@ export class Firestore {
       email: model.email,
       address: model.address
     });
+
+    return this.firestore.doc(`accounts/${accountId}`).update({
+      project_ref: this.firestore.doc(`project_profiles/${id}`).ref
+    })
   }
 
   // Read Profile via ID
