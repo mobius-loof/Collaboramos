@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { Firestore } from '../../providers/firestore/firestore';
 
 @IonicPage()
 @Component({
@@ -30,7 +31,9 @@ export class ChatsPage {
 
   public chats;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private firestore: Firestore) {
+    this.chats = this.firestore.getMessagesForChannel("mW9tYce7xxIgg9jwqsmp").valueChanges();
+  }
 
   viewMessages(chat) {
     this.navCtrl.push('MessagesPage', { chatId: chat.id });
