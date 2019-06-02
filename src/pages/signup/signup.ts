@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-
-import { User, Auth } from '../../providers';
+import { Account } from '../../models/account';
+import { User, Auth, Firestore } from '../../providers';
 import { MainPage } from '../';
+import { nullLiteral } from 'babel-types';
 
 @IonicPage()
 @Component({
@@ -18,36 +19,69 @@ export class SignupPage {
     password: ''
   };
 
-  private signupErrorString = 'Unable to create account. Please check your account information and try again.';
+  account: Account = {
+    id: null,
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    project_ref: null,
+    candidate_ref: null,
+    project: null,
+    candidate: null,
+    address: ""
+  };
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    private auth: Auth) {}
+    private auth: Auth,
+    private firestore: Firestore) {}
 
   cancel() {
     this.navCtrl.pop()
   }
 
   doSignup() {
-    console.log(this.credentials)
-    this.auth.signup(this.credentials).then((resp) => {
-      this.navCtrl.setRoot(MainPage);
-      let toast = this.toastCtrl.create({
-        message: 'You have successfully signed up!',
-        duration: 3000,
-        position: 'bottom'
+    this.auth.signup(this.credentials).then((user) => {
+      let a = {
+        id: user.user.uid,
+        first_name: this.account.first_name,
+        last_name: this.account.last_name,
+        email: this.account.email,
+        phone_number: this.account.phone_number,
+        project_id: null,
+        candidate_id: null,
+        address: this.account.address,
+        project_ref: null,
+        candidate_ref: null,
+        project: null,
+        candidate: null
+      }
+      return this.firestore.createAccount(a).then((_) => {
+        this.showSignupSuccess();
+        this.navCtrl.pop();
       });
-      toast.present();
     }).catch((err) => {
-      console.log(err)
-      // Unable to sign up
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present(); 
+      this.showSignupFailure(err.message)
     });
+  }
+
+  showSignupSuccess() {
+    let toast = this.toastCtrl.create({
+      message: 'You have successfully signed up!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  showSignupFailure(error_msg) {
+    let toast = this.toastCtrl.create({
+      message: error_msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }

@@ -19,10 +19,9 @@ export interface Account {
   last_name: string,
   email: string,
   phone_number: string,
-  project_id: DocumentReference,
-  candidate_id: DocumentReference,
+  project_ref: DocumentReference,
+  candidate_ref: DocumentReference,
   project: Project,
   candidate: Candidate,
-  profile_image: string,
   address: string
 }

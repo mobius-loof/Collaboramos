@@ -9,33 +9,34 @@
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
       <button ion-button *ngIf="!isEdit" (click)="setIsEdit(true, false)">
-        <ion-icon name="create" color="primary" class="top-icon-edit"></ion-icon>
+        <ion-icon name="create" color="white" class="top-icon-edit"></ion-icon>
       </button>
       <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, false)">
-        <ion-icon name="checkmark" color="secondary" class="top-icon"></ion-icon>
+        <ion-icon name="checkmark" color="white" class="top-icon"></ion-icon>
       </button>
       <button ion-button *ngIf="isEdit" (click)="setIsEdit(false, true)">
-        <ion-icon name="close" color="danger" class="top-icon"></ion-icon>
+        <ion-icon name="close" color="white" class="top-icon"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="content">
   <ion-grid>
     <ion-row class="title-row">
       <ion-col col-5>
         <div class="project-img-container">
-          <img class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+          <img *ngIf="!isEdit" class="project-img" src="../assets/img/marty-avatar.png">
+          <img *ngIf="isEdit" class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
           <div id="circle"></div>
           <h6 *ngIf="isEdit" class="photo-edit">Edit</h6>
         </div>
       </ion-col>
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">
-          <h3>{{ (project_profile | async)?.proj_name }}</h3>
-          <button ion-button icon-start small (click)="presentWebsite()">
+          <h3>{{ profile.proj_name }}</h3>
+          <button class="website-button" ion-button icon-start small (click)="presentWebsite()">
             <ion-icon name="globe"></ion-icon>
             WEBSITE
           </button>
@@ -43,10 +44,10 @@
 
         <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
-            <ion-input class="input-from-label" value="project name"></ion-input>
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.proj_name"></ion-input> 
           </ion-item>
           <ion-item>
-            <ion-input class="input-from-label" value="website.com"></ion-input>
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>
           </ion-item>
         </div>
       </ion-col>
@@ -54,13 +55,13 @@
 
     <ion-row *ngIf="!isEdit" class="description-container">
       <ion-col>
-        <p>{{ (project_profile | async)?.description }}</p>
+        <p>{{ profile.description }}</p>
       </ion-col>
     </ion-row>
 
     <ion-row *ngIf="isEdit" class="text-area-container">
       <ion-col>
-        <textarea class="textarea">{{ (project_profile | async)?.description }}</textarea>
+        <textarea class="textarea" [(ngModel)]="tempProfile.description"></textarea>
       </ion-col>
     </ion-row>
 
@@ -68,13 +69,23 @@
       <p><b>Required Skills</b></p>
     </ion-row>
     <ion-row>
-      <div class="tag-container" *ngFor="let t of (project_profile | async)?.skills">
-        <ion-item class="tag" no-lines no-padding color="secondary" round>
-            <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteTag(t)">
-                <ion-icon name="close-circle"></ion-icon>
-            </button>
-            <p class="tag-content">{{t}}</p>
-        </ion-item>
+      <div class="tag-row-container" *ngIf="!isEdit">
+        <div class="tag-container" *ngFor="let skill of profile.skills">
+          <ion-item class="tag" no-lines no-padding round>
+              <p class="tag-content">{{skill}}</p>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="tag-row-container" *ngIf="isEdit">
+        <div class="tag-container" *ngFor="let skill of tempProfile.skills">
+          <ion-item class="tag" no-lines no-padding round>
+              <button class="tag-btn" ion-button item-left clear round (click)="deleteSkill(skill)">
+                  <ion-icon name="close-circle"></ion-icon>
+              </button>
+              <p class="tag-content">{{skill}}</p>
+          </ion-item>
+        </div>
       </div>
       <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('skills')">
         <ion-icon name="add-circle"></ion-icon>
@@ -86,13 +97,22 @@
     </ion-row>
 
     <ion-row>
-      <div class="tag-container" *ngFor="let f of (project_profile | async)?.frameworks">
-        <ion-item class="tag" no-lines no-padding color="secondary" round>
-           <button *ngIf="isEdit" class="tag-btn" ion-button item-left clear round (click)="deleteFramework(f)">
-                <ion-icon name="close-circle"></ion-icon>
-            </button> 
-            <p class="tag-content">{{f}}</p>
-        </ion-item>
+      <div class="tag-row-container" *ngIf="!isEdit">
+          <div class="tag-container" *ngFor="let framework of profile.frameworks">
+            <ion-item class="tag" no-lines no-padding round>
+                <p class="tag-content">{{framework}}</p>
+            </ion-item>
+          </div>
+      </div>
+      <div class="tag-row-container" *ngIf="isEdit">
+        <div class="tag-container" *ngFor="let framework of tempProfile.frameworks">
+          <ion-item class="tag" no-lines no-padding round>
+            <button class="tag-btn" ion-button item-left clear round (click)="deleteFramework(framework)">
+                  <ion-icon name="close-circle"></ion-icon>
+              </button> 
+              <p class="tag-content">{{framework}}</p>
+          </ion-item>
+        </div>
       </div>
       <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt('frameworks')">
         <ion-icon name="add-circle"></ion-icon>
@@ -104,9 +124,9 @@
           <p><b>Phone</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit" class="info-label">{{ (account | async)?.phone_number }}</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.phone_number }}</ion-label>
         <ion-item *ngIf="isEdit" >
-          <ion-input class="input-from-label" placeholder="your phone number" type="tel"></ion-input>
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.phone_number" type="tel"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -116,9 +136,9 @@
           <p><b>Email</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit" class="info-label">{{ (account | async)?.email }}</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.email }}</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input class="input-from-label" placeholder="email" type="email"></ion-input>
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.email" type="email"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -128,9 +148,9 @@
         <p><b>Address</b></p>
       </ion-col>
       <ion-col>
-        <ion-label *ngIf="!isEdit" class="info-label">{{ (account | async)?.address }}</ion-label>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.address }}</ion-label>
         <ion-item *ngIf="isEdit">
-          <ion-input class="input-from-label" placeholder="address"></ion-input>
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.address"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
