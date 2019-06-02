@@ -19,16 +19,24 @@
       <ion-row style="height: 30%; background: white">
         <ion-col col-6>
           <ion-row style="margin-top: 10px; width: 210%;">
-            <h1  class="card-headers" style="margin-left: 40%; text-align: center;">
+            <h1  class="card-headers name">
               {{cards[i].name}}
             </h1>
           </ion-row>
           <ion-row
-            style="margin-top: 10px; margin-left: -10%; width: 230%; height: 50%; background-color: rgb(129, 129, 180);"
+            class="img-row"
+            style="background-color: #FEBDBE;"
           >
-            <p class="card-headers" style="margin-top: 3%; margin-left: 55%; color: white;">
+            <button
+              ion-button
+              expand="block"
+              size="small"
+              class="img-row-info img-row-buttons"
+              (click)="clickWebsite()"
+              style="background-color: #FF6B6C; margin-left: 52%;"
+            >
               website
-            </p>
+            </button>
           </ion-row>
         </ion-col>
 
@@ -37,7 +45,7 @@
             <img
               class="img"
               src="../assets/img/dio.png"
-              style="margin-top: -3%; margin-left: 4%; width: 85px; height: 85px; border-radius: 50%;"
+              style="margin-top: -3%; margin-left: 4%; border-radius: 50%;"
             />
           </ion-avatar>
         </ion-col>
@@ -52,7 +60,8 @@
     </ion-row> -->
       <ion-row>
         <p
-          style="width: 200%; text-align: left; padding-left: 10px; padding-right: 10px; padding-top: 12px; padding-bottom: 10px;"
+          class="description"
+          style="width: 200%; padding-top: 12px;"
         >
           {{cards[i].description}}
         </p>
@@ -63,8 +72,8 @@
           style="text-align: left; background-color: white;"
         >
           <h1
-            class="expanding-tabs"
-            style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;"
+            class="description"
+            style=""
           >
             Skills
           </h1>
@@ -83,8 +92,8 @@
           style="text-align: left; background-color: white;"
         >
           <h1
-            class="expanding-tabs"
-            style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;"
+            class="description"
+            style=""
           >
             Frameworks
           </h1>
