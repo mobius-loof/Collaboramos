@@ -17,7 +17,7 @@ $background-color : #fff;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-//$colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4f4f4, dark : #222);
+$colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4f4f4, dark : #222, white: #ffffff);
 
 
 /* These are the 5 main color in the color Scheme that we voted */
@@ -99,6 +99,57 @@ $colors: (
 3) Home/Swipe
 4) Matches/Messages
 */
+
+/* 1) ----- Hamburger ----- */ 
+
+/*for unselected name font color = black
+for the rest use light fonts color and edit button
+use $baby_powder,*/
+
+$ham_bg: #AAABDC; //background of hamburger
+$project_button: #FF8F90; //button of project when seleted
+$candy_button: #FFD88B; //button of candy when selected
+$unselect_icon: #FFFFFB; //button of either when unselected
+$switch: #7E7EA7; //the color of switch button 
+
+/* 2) ----- Profile Tab ----- */
+
+// Candy
+//color for banner on top of profile tab and profile button
+$candy_banner: #FFC145;  
+//color for background of profile tab
+$candy_background: #FFF1D4;
+
+// Project
+//color for banner on top of profile tab and profile button
+$project_banner: #FF6B6C; 
+//color for background of profile tab
+$project_background: #FFE8E8;
+
+/* 3) ----- Home/Swipe ----- */
+
+//background of banner for top banner 
+$home_main_banner : #9191D7;
+//background of banner for bottom banner
+$home_2nd_banner : #BCBCFF;
+//font color for name of profile on card
+$home_fw_skills_font : #6100FF;
+//font color of description 
+$home_description_font : #757575;
+//color for banner of tab icons (at bottom)
+$home_bottom_banner : #FDFDFD;
+
+// the gray background for home tab
+$home_background : #E7E7E7;
+$home_unselected_icon : #8E8E8E;
+
+/* 4) ----- Matches/Messages ----- */
+
+//color for banner at top of matches and messages tab
+//same as color for matches tab button 
+$matches_banner :#518DC7;
+//color for background of matches and messages tab
+$matches_background : #E5EEF6;
 
 
 // Check git

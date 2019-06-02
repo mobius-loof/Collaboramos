@@ -1,6 +1,42 @@
 page-profile-candidate {
     $tag-height:20px;
 
+    .toolbar-title-ios {
+        color: white;
+    }
+
+    .website-button {
+        background-color: $candy_banner;
+    }
+
+    .resume-button {
+        background-color: white;
+        color: $candy_banner;
+        border-color: $candy_banner;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .resume-icon {
+        color: $candy_banner;
+    }
+
+    .toolbar-background {
+        background-color: $candy_banner;
+    }
+
+    .content {
+        background-color: $candy_background;
+    }
+
+    .item-ios {
+        background-color: transparent;
+    }
+
+    textarea {
+        background-color: transparent;
+    }
+
     .title-row {
         position: relative;
     }
@@ -17,12 +53,10 @@ page-profile-candidate {
         height: 100px;
         width: 100px;
         overflow: hidden;
-        border-radius: 50%;
         padding: 0px;
     }
 
     .project-img {
-        border-radius: 50%;
         width: 100%;
         z-index: 0;
         position: absolute;
@@ -35,6 +69,7 @@ page-profile-candidate {
         $button-ios-margin-bottom: 0;
         $button-ios-margin-start: 0;
         padding: 0;
+        color: white;
     }
 
     .item-ios [item-left], .item-ios [item-start] {
@@ -52,6 +87,8 @@ page-profile-candidate {
     .tag{
         height: $tag-height;
         border-radius: $tag-height*2;
+        background-color: $candy_banner;
+        color: white;
     }
 
     .item {
@@ -62,6 +99,10 @@ page-profile-candidate {
     .item-ios .item-button {
         padding: 0;
         padding-left: 0.5rem;
+    }
+
+    .item-ios p {
+        color: white;
     }
 
     .label-md {
@@ -75,6 +116,10 @@ page-profile-candidate {
     .tag-container {
         margin-right: 2px;
         padding: 2px;
+    }
+
+    .tag-row-container {
+        display: inline-flex;
     }
 
     .tag-content {
@@ -123,6 +168,7 @@ page-profile-candidate {
         $button-ios-margin-start: 0;
         $button-ios-margin-bottom: 0;
         padding: 0;
+        color: $candy_banner;
     }
 
     .button-ios.add-tag-btn{

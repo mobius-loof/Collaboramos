@@ -16,5 +16,4 @@ export interface Project {
     phone_number: string,
     email: string,
     website: string,
-    tags: string[],
 }

@@ -1,28 +1,41 @@
 $create-color: #518DC7;
 $cancel-color: #DDDDDD;
+$colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4f4f4, dark : #222);
 
 page-create-candidate {
-  background-color: white;
+
+  $tag-height: 10px;
+
+  .toolbar-background {
+    background-color: $candy_banner;
+  }
+
+  .toolbar-title-ios {
+    color: white;
+  }
+
+  .content {
+    background-color: $candy_background;
+  }
 
   .create {
-    background-color: $create-color;
+    background-color: $candy_banner;
     height: 50px;
     margin-bottom: -4px;
   }
 
   .cancel {
-    color: black;
     height: 50px;
-    background-color: $cancel-color;
+    background-color: #DDDDDD;
     margin-bottom: 0px;
   }
 
   .candidate-pic {
     justify-content: center;
-    height: 100px;
-    width: 100px;
+    height: 180px;
+    width: 140px;
     margin-bottom: 30px;
-    margin-top: -10px;
+    margin-top: 10px;
   }
 
   .profile-image {
@@ -30,34 +43,48 @@ page-create-candidate {
     height: 180px;
     width: 140px;
     //margin-bottom: -10px;
-    margin-left: -1px;
-    margin-top: -23px;
+    //margin-right: 10px;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+
+  .success {
+    vertical-align: middle;
+    justify-content: center;
+    height: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.4em;
+    color: map-get($colors, secondary);
+    border: 1px solid map-get($colors, secondary);
+    width: 350px;
+    margin-bottom: 10px;
   }
 
   .resume {
     vertical-align: middle;
     justify-content: center;
     height: 40px;
-    color: $create-color;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1.4em;
-    border: 1px solid $create-color;
-    width: 350px;
+    color: $candy_banner;
+    border: 1px solid $candy_banner;
+    width: 340px;
     margin-bottom: 10px;
   }
 
   .candidate-img-container {
-    position: relative;
+    background-color: white;
+    justify-content: center;
     border: 1px solid gray;
-    height: 100px;
-    width: 100px;
+    height: 180px;
+    width: 140px;
     overflow: hidden;
-    border-radius: 50%;
     padding: 0px;
   }
 
   .resume-text {
     margin-bottom: 30px;
+    margin-top: -20px;
   }
 
   .text-area {
@@ -66,13 +93,101 @@ page-create-candidate {
   }
 
   .add-icon {
-    margin-top: 40px;
+    margin-top: 80px;
     justify-content: center;
   }
 
   .title {
-    color: gray;
-    margin-bottom: 30px;
+    color: map-get($colors, primary);
+  }
+
+  .tag-container {
+    margin-right: 2px;
+    padding: 2px;
+  }
+
+  .tag-content {
+    padding-left: 0.7rem;
+  }
+
+  .tag {
+    height: $tag-height;
+    border-radius: $tag-height*2;
+    background-color: $candy_banner !important;
+    color: white;
+  }
+
+  button.tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-bottom: 0;
+    $button-ios-margin-start: 0;
+    color: white;
+    padding: 0;
+  }
+
+  .add-tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-start: 0;
+    $button-ios-margin-bottom: 0;
+    color: $candy_banner;
+    padding: 0;
+  }
+
+  .button-ios.add-tag-btn {
+    height: 1.5em;
+  }
+
+  .item-ios [item-left], .item-ios [item-start] {
+    margin: 0;
+  }
+
+  .item-ios {
+    padding-left: 0;
+  }
+
+  .item {
+    min-height: 3rem;
+    min-width: 3rem;
+  }
+
+  .item-ios .item-button {
+    padding: 0;
+    padding-left: 0.5rem;
+  }
+
+  .item-ios p {
+    color: white;
+  }
+
+  .label-md {
+    margin: 0;
+  }
+
+  .label-ios {
+    margin: 0;
+  }
+
+  ion-input {
+    font-size: 20px;
+  }
+
+  ion-row {
+    textarea {
+      width: 100%;
+      padding-left: 0px;
+      border-width: 1px;
+    }
+  }
+
+  ion-item {
+    background-color: transparent !important;
+  }
+
+
+  .label {
+    text-align: left;
   }
 }
 
