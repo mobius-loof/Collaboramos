@@ -136,7 +136,7 @@ export class CreateCandidatePage {
   * The user submited, so we return the data object back
   */
   submit() {
-      this.firestore.createCandidate(this.candidate);
+      //this.firestore.createCandidate(this.candidate);
       this.navCtrl.setRoot("TabsPage")
       return this.candidate;
     }
