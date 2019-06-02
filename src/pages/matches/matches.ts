@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { Firestore } from '../../providers/firestore/firestore';
 
 @IonicPage()
@@ -31,8 +31,11 @@ export class MatchesPage {
 
   public chats
 
-  constructor(public navCtrl: NavController, private firestore: Firestore) {
-    this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
+  constructor(public navCtrl: NavController, private firestore: Firestore, public navParams: NavParams) {
+    //console.log(this.navParams);
+    let id = this.navParams.get('projectProfile').id;
+    //console.log(id);
+    this.chats = this.firestore.getChannelsFromProfile(id).valueChanges();
   }
 
   viewMessages(chat) {
