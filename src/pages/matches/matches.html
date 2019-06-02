@@ -8,7 +8,7 @@
   <ion-content class="chats">
     <ion-list>
       <ion-list-header>Today</ion-list-header>
-      <ion-item *ngFor="let chat of chats | async" (click)="viewProfile(chat)">
+      <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)">
         <ion-avatar item-start>
           <img [src]="chat.imageUrl">
         </ion-avatar>
