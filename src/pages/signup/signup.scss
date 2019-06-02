@@ -9,6 +9,49 @@ page-signup {
         width: 100%;
     }
 
+    .title{
+
+        top: 30px;
+        text-align: center;
+
+    }
+
+
+
+    .fields{
+        
+        position: fixed;
+        bottom: 160px;
+
+    }
+
+    .first_name{
+        
+        bottom: 100px;
+    }
+
+    .last_name{
+        bottom: 90px;
+    }
+
+    .phone_number{
+        bottom: 80px;
+    }
+
+    .address{
+        bottom: 70px;
+    }
+
+    .email{
+        bottom: 60px;
+    }
+
+    .password{
+        bottom: 50px;
+    }
+    .reenterpassword{
+        bottom: 40px;
+    }
     button {
         left: 0;
     }
