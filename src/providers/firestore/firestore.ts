@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, AngularFirestoreCollection} from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import { Candidate, Project, Account, Channel, Message } from '../../models';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -13,7 +14,8 @@ import { Candidate, Project, Account, Channel, Message } from '../../models';
 export class Firestore {
   account;
 
-  constructor(public firestore: AngularFirestore) { }
+  constructor(public firestore: AngularFirestore,
+    public filestorage: AngularFireStorage) {}
   // Account CRUD
 
   // Create Account
@@ -62,24 +64,28 @@ export class Firestore {
 
   // Create Candidate
   createCandidate(accountId: string, model: Candidate): Promise<void> {
+
     const id = this.firestore.createId();
+    const fileId = this.firestore.createId(); // generate a file ID
+    console.log(fileId); // debugging purposes
 
-    this.firestore.doc(`candidate_profiles/${id}`).set({
-      id: id,
-      name: model.name,
-      image: model.image,
-      website: model.website,
-      resumeURL: model.resume_URL,
-      is_visible: model.is_visible,
-      skills: model.skills,
-      description: model.description,
-      phone_number: model.phone_number,
-      email: model.email,
-      address: model.address
-    });
-
-    return this.firestore.doc(`accounts/${id}`).update({
-      candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
+    return this.filestorage.ref(fileId).put(model.image).then(ref => {
+      this.firestore.doc(`candidate_profiles/${id}`).set({
+        id: id,
+        name: model.name,
+        image: fileId,
+        website: model.website,
+        resume_URL: model.resume_URL,
+        is_visible: model.is_visible,
+        skills: model.skills,
+        description: model.description,
+        phone_number: model.phone_number,
+        email: model.email,
+        address: model.address
+      });
+      return this.firestore.doc(`accounts/${id}`).update({
+        candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
+      });
     });
   }
 
@@ -123,25 +129,28 @@ export class Firestore {
   // Create Profile
   createProjectProfile(accountId: string, model: Project): Promise<void> {
     const id = this.firestore.createId(); // generate an ID
+    const fileId = this.firestore.createId(); // generate a file ID
+    console.log(fileId); // debugging purposes
 
     // Returns promise of success/failure for creating the project document on Firestore
-    this.firestore.doc(`project_profiles/${id}`).set({
-      id: id,
-      name: model.name,
-      image: model.image,
-      website: model.website,
-      is_visible: model.is_visible,
-      frameworks: model.frameworks,
-      skills: model.skills,
-      description: model.description,
-      phone_number: model.phone_number,
-      email: model.email,
-      address: model.address
+    return this.filestorage.ref(fileId).put(model.image).then(ref => {
+      this.firestore.doc(`project_profiles/${id}`).set({
+        id: id,
+        name: model.name,
+        image: fileId,
+        website: model.website,
+        is_visible: model.is_visible,
+        frameworks: model.frameworks,
+        skills: model.skills,
+        description: model.description,
+        phone_number: model.phone_number,
+        email: model.email,
+        address: model.address
+      });
+      return this.firestore.doc(`accounts/${accountId}`).update({
+        project_ref: this.firestore.doc(`project_profiles/${id}`).ref
+      });
     });
-
-    return this.firestore.doc(`accounts/${accountId}`).update({
-      project_ref: this.firestore.doc(`project_profiles/${id}`).ref
-    })
   }
 
   // Read Profile via ID

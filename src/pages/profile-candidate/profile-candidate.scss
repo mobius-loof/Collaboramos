@@ -1,191 +1,192 @@
 page-profile-candidate {
-    $tag-height:20px;
+  $tag-height: 20px;
 
-    .toolbar-title-ios {
-        color: white;
-    }
+  .toolbar-title-ios {
+    color: white;
+  }
 
-    .website-button {
-        background-color: $candy_banner;
-    }
+  .website-button {
+    background-color: $candy_banner;
+  }
 
-    .resume-button {
-        background-color: white;
-        color: $candy_banner;
-        border-color: $candy_banner;
-        border-width: 1px;
-        border-style: solid;
-    }
+  .resume-button {
+    background-color: white;
+    color: $candy_banner;
+    border-color: $candy_banner;
+    border-width: 1px;
+    border-style: solid;
+  }
 
-    .resume-icon {
-        color: $candy_banner;
-    }
+  .resume-icon {
+    color: $candy_banner;
+  }
 
-    .toolbar-background {
-        background-color: $candy_banner;
-    }
+  .toolbar-background {
+    background-color: $candy_banner;
+  }
 
-    .content {
-        background-color: $candy_background;
-    }
+  .content {
+    background-color: $candy_background;
+  }
 
-    .item-ios {
-        background-color: transparent;
-    }
+  .item-ios {
+    background-color: transparent;
+  }
 
+  textarea {
+    background-color: transparent;
+  }
+
+  .title-row {
+    position: relative;
+  }
+
+  .project-detail-col {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .project-img-container {
+    box-shadow: 5px 5px #DDDDDD;
+    position: relative;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    padding: 0px;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    position: absolute;
+    display: inline-block;
+  }
+
+  button.tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-bottom: 0;
+    $button-ios-margin-start: 0;
+    padding: 0;
+    color: white;
+  }
+
+  .item-ios [item-left], .item-ios [item-start] {
+    margin: 0;
+  }
+
+  .item-ios {
+    padding-left: 0;
+  }
+
+  .text-input-ios {
+    margin-left: 0;
+  }
+
+  .tag {
+    height: $tag-height;
+    border-radius: $tag-height*2;
+    background-color: $candy_banner;
+    color: white;
+  }
+
+  .item {
+    min-height: 3rem;
+    min-width: 3rem;
+  }
+
+  .item-ios .item-button {
+    padding: 0;
+    padding-left: 0.5rem;
+  }
+
+  .item-ios p {
+    color: white;
+  }
+
+  .label-md {
+    margin: 0;
+  }
+
+  .label-ios {
+    margin: 0;
+  }
+
+  .tag-container {
+    margin-right: 2px;
+    padding: 2px;
+  }
+
+  .tag-row-container {
+    display: inline-flex;
+  }
+
+  .tag-content {
+    padding-left: 0.7rem;
+  }
+
+  .top-icon {
+    font-size: 40px;
+  }
+
+  .top-icon-edit {
+    font-size: 30px;
+  }
+
+  ion-row {
     textarea {
-        background-color: transparent;
+      width: 100%;
+      padding-left: 0px;
+      border-width: 0px;
     }
+  }
 
-    .title-row {
-        position: relative;
-    }
+  .text-area-container {
+    padding-top: 3px;
+    border: solid 1px lightgrey;
+    height: 75px;
+  }
 
-    .project-detail-col {
-        position: absolute;
-        margin: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+  .description-container {
+    height: 75px;
+  }
 
-    .project-img-container {
-        position: relative;
-        height: 100px;
-        width: 100px;
-        overflow: hidden;
-        padding: 0px;
-    }
+  .info-row {
+    position: relative;
+  }
 
-    .project-img {
-        width: 100%;
-        z-index: 0;
-        position: absolute;
-        display: inline-block;
-    }
+  .info-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-    button.tag-btn {
-        $button-ios-margin-top: 0;
-        $button-ios-margin-end: 0;
-        $button-ios-margin-bottom: 0;
-        $button-ios-margin-start: 0;
-        padding: 0;
-        color: white;
-    }
+  .add-tag-btn {
+    $button-ios-margin-top: 0;
+    $button-ios-margin-end: 0;
+    $button-ios-margin-start: 0;
+    $button-ios-margin-bottom: 0;
+    padding: 0;
+    color: $candy_banner;
+  }
 
-    .item-ios [item-left], .item-ios [item-start] {
-        margin: 0;
-    }
+  .button-ios.add-tag-btn {
+    height: 1.5em;
+  }
 
-    .item-ios {
-        padding-left: 0;
-    }
-
-    .text-input-ios {
-        margin-left: 0;
-    }
-
-    .tag{
-        height: $tag-height;
-        border-radius: $tag-height*2;
-        background-color: $candy_banner;
-        color: white;
-    }
-
-    .item {
-        min-height: 3rem;
-        min-width: 3rem;
-    }
-
-    .item-ios .item-button {
-        padding: 0;
-        padding-left: 0.5rem;
-    }
-
-    .item-ios p {
-        color: white;
-    }
-
-    .label-md {
-        margin: 0;
-    }
-
-    .label-ios {
-        margin: 0;
-    }
-
-    .tag-container {
-        margin-right: 2px;
-        padding: 2px;
-    }
-
-    .tag-row-container {
-        display: inline-flex;
-    }
-
-    .tag-content {
-        padding-left: 0.7rem;
-    }
- 
-    .top-icon {
-        font-size: 40px;
-    }
-
-    .top-icon-edit {
-        font-size: 30px;
-    }
-
-    ion-row{
-        textarea{
-            width: 100%;
-            padding-left: 0px;
-            border-width: 0px;
-        }
-    }
-
-    .text-area-container {
-        padding-top: 3px;
-        border: solid 1px lightgrey;
-        height: 75px;
-    }
-
-    .description-container {
-        height: 75px;
-    }
-
-    .info-row {
-        position: relative;
-    }
-
-    .info-label {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .add-tag-btn {
-        $button-ios-margin-top: 0;
-        $button-ios-margin-end: 0;
-        $button-ios-margin-start: 0;
-        $button-ios-margin-bottom: 0;
-        padding: 0;
-        color: $candy_banner;
-    }
-
-    .button-ios.add-tag-btn{
-        height: 1.5em;
-    }
-
-    .photo-edit {
-        height: 26%;
-        z-index: 10;
-        position: absolute;
-        background-color: grey;
-        opacity: 0.8;
-        color: white;
-        margin: auto;
-        text-align: center;
-        bottom: 0;
-        width: 100%;
-    }
-
+  .photo-edit {
+    height: 26%;
+    z-index: 10;
+    position: absolute;
+    background-color: grey;
+    opacity: 0.8;
+    color: white;
+    margin: auto;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+  }
 }
