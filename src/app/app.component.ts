@@ -455,10 +455,20 @@ export class MyApp {
 
   setCandidateProfile(candy: Candidate) {
     this.candProf = candy;
+    if (candy == null) {
+      this.candidateCreated = false;
+    } else {
+      this.candidateCreated = true;
+    }
   }
 
   setProjectProfile(proj: Project) {
     this.projProf = proj;
+    if (proj == null) {
+      this.projectCreated = false;
+    } else {
+      this.projectCreated = true;
+    }
   }
 
   setCandidateProfileRef(ref: DocumentReference) {

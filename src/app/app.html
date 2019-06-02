@@ -16,7 +16,7 @@
       </button>
 
       <button *ngIf="!projectCreated" id = "project" ion-button text-center block color = "nop" (click) = "projectCreate(this.PROJECT)">
-        {{pages[0].title}}
+        Create Project
       </button>
 
       <button *ngIf="candidateCreated" id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
@@ -25,7 +25,7 @@
       </button>
 
       <button *ngIf="!candidateCreated" id = "candidate" ion-button text-right block color = "nop" (click) = "candidateCreate(this.CANDIDATE)">
-        {{pages[1].title}}
+        Create Candidate
       </button>
 
       <ion-item *ngIf="!editMode && projectCreated && (lastProf === PROJECT)">
