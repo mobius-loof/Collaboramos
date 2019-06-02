@@ -3,7 +3,7 @@
 		<ion-title center>Chat</ion-title>
 	</ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content style="background-color: #e7e7e7">
 		<!---<ul>
 			<li *ngFor="let message of messages | async">
 				{{ message.message }}
@@ -20,7 +20,7 @@
 				  </ion-card-content>
 				</ion-card>
 		</ion-content>-->
-	
+
 	<div *ngFor="let message of messages | async" class="message-wrapper" on-hold="onMessageHold($event, $index, message)">
 		<div *ngIf="user._id !== message.userId">
 			<img (click)="viewProfile(message)" class="profile-pic left" [src]="toUser.pic" onerror="onProfilePicError(this)" />
@@ -54,7 +54,7 @@
 			</div>
 
 		</div>
-	
+
 		<div class="cf"></div>
 
 	</div>
@@ -66,4 +66,4 @@
 			<button ion-button clear (click)="send(chatBox)" item-end><ion-icon class="footer-btn" name="send"></ion-icon></button>
 		</ion-item>
 	</form>
-</ion-footer> 
+</ion-footer>

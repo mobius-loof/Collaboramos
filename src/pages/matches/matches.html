@@ -1,14 +1,14 @@
-<ion-header>
+  <ion-header>
     <ion-navbar>
-      <ion-title center>
+      <ion-title center style="background-color: #518dc7;">
         Matches
       </ion-title>
     </ion-navbar>
   </ion-header>
-  <ion-content class="matches">
+  <ion-content class="matches" style="background-color: #e5eef6;">
     <ion-list>
       <ion-list-header>Today</ion-list-header>
-      <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)">
+      <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)" style="background-color: #e5eef6;">
         <ion-avatar item-start>
           <img [src]="chat.imageUrl">
         </ion-avatar>
@@ -56,4 +56,3 @@
       </ion-item>
     </ion-list>-->
   </ion-content>
-  
