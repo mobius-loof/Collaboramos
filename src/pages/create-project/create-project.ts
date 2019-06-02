@@ -1,4 +1,4 @@
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import { Project } from '../../models/project';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Channel } from '../../models/channel';
@@ -47,7 +47,7 @@ export class CreateProjectPage {
   account: Account;
   params: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
@@ -105,9 +105,39 @@ export class CreateProjectPage {
   * The user submited, so we return the data object back
   */
   submit() {
-    this.firestore.createProjectProfile(this.account.id, this.project);
-    this.navCtrl.setRoot("TabsPage")
-    return this.project;
+    let params = {};
+
+    let loading = this.loadingCtrl.create({
+      content: 'Creating Profile...'
+    });
+    loading.present();
+
+    this.firestore.createProjectProfile(this.account.id, this.project).then(_ => {
+      return this.firestore.getAccount(this.account.id);
+    }).then(acc => {
+      params['account'] = acc;
+      params['candidateProfileRef'] = acc.candidate_id;
+      params['projectProfileRef'] = acc.project_id;
+      if (acc.project_id == null) {
+        return null;
+      } else {
+        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+      }
+    }).then(projectProfile => {
+      params['projectProfile'] = projectProfile;
+      let acc = params['account'];
+      if (acc.candidate_id == null) {
+        return null;
+      } else {
+        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+      }
+    }).then(candidateProfile => {
+      params['candidateProfile'] = candidateProfile;
+    }).then(_ => {
+      loading.dismiss();
+      this.navCtrl.setRoot("TabsPage", params);
+      console.log(params);
+    });
   }
 
   /**

@@ -82,10 +82,9 @@ export class Firestore {
         email: model.email,
         address: model.address
       });
-    });
-
-    return this.firestore.doc(`accounts/${id}`).update({
-      candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
+      return this.firestore.doc(`accounts/${id}`).update({
+        candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
+      });
     });
   }
 
@@ -147,11 +146,10 @@ export class Firestore {
         email: model.email,
         address: model.address
       });
+      return this.firestore.doc(`accounts/${accountId}`).update({
+        project_ref: this.firestore.doc(`project_profiles/${id}`).ref
+      });
     });
-
-    return this.firestore.doc(`accounts/${accountId}`).update({
-      project_ref: this.firestore.doc(`project_profiles/${id}`).ref
-    })
   }
 
   // Read Profile via ID
