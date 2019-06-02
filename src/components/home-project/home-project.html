@@ -19,10 +19,10 @@
       <ion-row style="height: 30%; background: white">
         <ion-col col-6>
           <ion-row class="img-row" style="background-color: white;">
-            <h1 class="img-row-info">
-              {{ c.name }}
+            <h1 class="img-row-info name">
+              {{ cards[i].proj_name }}
             </h1>
-            <p class="img-row-info" style="font-size: 70%">
+            <p class="img-row-info name" style="font-size: 70%">
               Software Developer
             </p>
           </ion-row>
@@ -70,7 +70,7 @@
       </ion-row>
       <ion-row>
         <div class="tag-container" *ngFor="let t of tags[i]">
-          <ion-item class="tag" no-lines no-padding color="secondary" round>
+          <ion-item class="tag" no-lines no-padding round>
             <p class="tag-content">{{ t }}</p>
           </ion-item>
         </div>

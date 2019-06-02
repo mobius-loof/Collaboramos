@@ -99,6 +99,14 @@ home-project {
         padding-left: 0.7rem;
     }
 
+    .tag{
+        background-color: $candy_button;
+    }
+
+    .img-row-info.name {
+        margin-left: 58%;
+    }
+
     .img-row {
         width: 300%;
         margin-left: -30%;
@@ -112,6 +120,7 @@ home-project {
         font-variant: small-caps;
         font-size: 150%;
         height: 20%;
+        text-align: left;
     }
 
     .img-row.img-row-buttons {
