@@ -87,11 +87,11 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
-      this.candidate.resume_URL = fileData;
+      //this.candidate.resume_URL = fileData;
       this.presentAlert();
       this.hasFile = true;
     };
-
+    this.candidate.resume_URL = event.target.files[event.target.files.length - 1];
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
@@ -128,30 +128,37 @@ export class CreateCandidatePage {
     });
     loading.present();
 
-    this.firestore.createCandidate(this.account.id, this.candidate).then(_ =>{
+    this.firestore.createCandidate(this.account.id, this.candidate).then(_ => {
+      console.log(this.account.id);
       return this.firestore.getAccount(this.account.id);
     }).then(acc => {
       params['account'] = acc;
-      params['candidateProfileRef'] = acc.candidate_id;
-      params['projectProfileRef'] = acc.project_id;
-      if (acc.project_id == null) {
+      params['candidateProfileRef'] = acc.candidate_ref;
+      params['projectProfileRef'] = acc.project_ref;
+      console.log("1");
+      if (acc.project_ref == null) {
         return null;
       } else {
-        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+        return this.firestore.getProjectProfileFromID(acc.project_ref.id);
       }
+      console.log("2");
     }).then(projectProfile => {
       params['projectProfile'] = projectProfile;
       let acc = params['account'];
-      if (acc.candidate_id == null) {
+      console.log("3");
+      if (acc.candidate_ref == null) {
         return null;
       } else {
-        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+        return this.firestore.getCandidateProfileFromID(acc.candidate_ref.id);
       }
+      console.log("4");
     }).then(candidateProfile => {
+      console.log("5");
       params['candidateProfile'] = candidateProfile;
     }).then(_ => {
       loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
+      console.log("6");
     });
   }
 
