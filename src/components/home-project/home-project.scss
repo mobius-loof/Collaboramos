@@ -28,12 +28,17 @@ home-project {
         margin-bottom: 10px;
     }
 
+    .imgRow {
+        margin-left: -50%;
+        margin-top: -5%;
+    }
+
     ion-list {
         display: block;
     }
 
     ion-card {
-        margin-bottom: 500px;
+        margin-bottom: 700px;
     }
 
     .card-title1 {
@@ -50,8 +55,9 @@ home-project {
         box-shadow: 0 5px 3px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         display: block;
         margin-top: 5%;
-        height: 100px;
-        width: 125px;
+        margin-left: 10px;
+        height: 108px;
+        width: 84px;
 
     }
 

@@ -40,6 +40,7 @@ export class LoginPage {
     loading.present();
 
     this.auth.login(this.credentials).then((user) => {
+      console.log(user.user.uid);
       return this.firestore.getAccount(user.user.uid);
     }).then( acc => {
       params['account'] = acc;
@@ -63,9 +64,8 @@ export class LoginPage {
     }).then( _ => {
       loading.dismiss();
       if (params['candidateProfile'] == null && params['projectProfile'] == null) {
-        this.navCtrl.setRoot("CreateProfilePage");
+        this.navCtrl.setRoot("CreateProfilePage", params);
         this.showLoginSuccess();
-        // take them to the profile creation page
       } else {
         this.navCtrl.setRoot(MainPage, params);
         this.showLoginSuccess();     

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-
+import { Account } from '../../models/account';
 import { User, Auth, Firestore } from '../../providers';
 import { MainPage } from '../';
+import { nullLiteral } from 'babel-types';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,19 @@ export class SignupPage {
   credentials: { email: string, password: string } = {
     email: '',
     password: ''
+  };
+
+  account: Account = {
+    id: null,
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    project_ref: null,
+    candidate_ref: null,
+    project: null,
+    candidate: null,
+    address: ""
   };
 
   constructor(public navCtrl: NavController,
@@ -32,13 +46,13 @@ export class SignupPage {
     this.auth.signup(this.credentials).then((user) => {
       let a = {
         id: user.user.uid,
-        first_name: "Godwin",
-        last_name: "Pang",
-        email: "gypang@ucsd.edu",
-        phone_number: "123456789",
+        first_name: this.account.first_name,
+        last_name: this.account.last_name,
+        email: this.account.email,
+        phone_number: this.account.phone_number,
         project_id: null,
         candidate_id: null,
-        address: "my home",
+        address: this.account.address,
         project_ref: null,
         candidate_ref: null,
         project: null,

@@ -5,7 +5,7 @@
   (throwoutleft)="voteUp(false)"
   (throwoutright)="voteUp(true)"
   id="card-stack"
-  style="background-color: white; height: 80%;"
+  style="background-color: white; height: 100%;"
 >
 <ul>
   hello from html
@@ -30,46 +30,36 @@
               Software Developer
             </p>
           </ion-row>
-          <ion-row
-            class="img-row"
-            style="background-color: #FFF1D4;"
-          >
-            <button
-              ion-button
-              expand="block"
-              size="small"
-              class="img-row-info img-row-buttons"
-              (click)="clickResume()"
-              style="background-color: #FFC145; margin-left: 58%"
-            >
+          <ion-row class="img-row"
+                   style="background-color: #FFF1D4;">
+            <button ion-button
+                    expand="block"
+                    size="small"
+                    class="img-row-info img-row-buttons"
+                    (click)="clickResume()"
+                    style="background-color: #FFC145; margin-left: 58%">
               resume
             </button>
           </ion-row>
-          <ion-row
-            class="img-row"
-            style="background-color: #FFF1D4;"
-          >
-            <button
-              ion-button
-              expand="block"
-              size="small"
-              class="img-row-info img-row-buttons"
-              (click)="clickWebsite()"
-              style="background-color: #FFC145; margin-left: 58%"
-            >
+          <ion-row class="img-row"
+                   style="background-color: #FFF1D4;">
+            <button ion-button
+                    expand="block"
+                    size="small"
+                    class="img-row-info img-row-buttons"
+                    (click)="clickWebsite()"
+                    style="background-color: #FFC145; margin-left: 58%">
               website
             </button>
           </ion-row>
         </ion-col>
 
-        <ion-col col-6 style="margin-left: -50%;">
-            <div class="img" [style.backgroundImage]="getImage(i)"></div>
+        <ion-col class="imgRow" col-6>
+          <div class="img" [style.backgroundImage]="getImage(i)" [style.backgroundSize]="getSize()"></div>
         </ion-col>
       </ion-row>
 
-      <ion-row
-        style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%"
-      >
+      <ion-row style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%">
         <p style="margin: 15px 15px 15px;">
           {{cards[i].description}}
         </p>
@@ -93,8 +83,10 @@
   </ion-card>
 </div>
 
-<!--<p class="statusBar">{{ recentCard }}</p>-->
+<!--<p class="statusBar">{{ recentCard }}</p>
 
+<!--<p class="statusBar">{{ recentCard }}</p>-->
+<!--
 <ion-row class="likeDislikeRow">
   <ion-col class="likeDislikeButton" col-6>
     <button
@@ -125,4 +117,5 @@
       Yes
     </button>
   </ion-col>
-</ion-row>
+<<<<<<< Updated upstream
+</ion-row>-->
