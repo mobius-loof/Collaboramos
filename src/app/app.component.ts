@@ -56,12 +56,12 @@ export class MyApp {
 
   //variables related to project profile
   private projectCreated: boolean;
-  private projectVis: boolean;
+  private projectInvis: boolean;
   private projectColor: string = this.PROJECT_COLOR;
 
   //variables related to candidate profile
   private candidateCreated: boolean;
-  private candidateVis: boolean;
+  private candidateInvis: boolean;
   private candidateColor: string = this.CANDIDATE_COLOR;
 
   //boolean value to check if ion-toggle is set
@@ -96,6 +96,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.menuCtrl.swipeEnable(false);
     });
   }
 
@@ -113,7 +114,7 @@ export class MyApp {
           name: 'Henlo',
           image: 'Henlo',
           description: 'THANOS',
-          is_visible: true,
+          is_visible: false,
           frameworks: null,
           skills: null,
           chats: {},
@@ -134,7 +135,7 @@ export class MyApp {
           name: 'Henlo',
           image: 'Henlo',
           description: 'THANOS',
-          is_visible: false,
+          is_visible: true,
           frameworks: null,
           skills: null,
           chats: {},
@@ -275,6 +276,7 @@ export class MyApp {
       };
 
       this.projectCreated = true;
+      this.projectInvis = false;
 
       //CHANGE THE NAME BASED ON FIRESTORE
       this.projectColor = this.PROJECT_COLOR;
@@ -317,6 +319,8 @@ export class MyApp {
       };
 
       this.candidateCreated = true;
+      this.candidateInvis = false;
+
       this.candidateColor = this.CANDIDATE_COLOR;
       this.lastProf = this.CANDIDATE;
 
@@ -371,7 +375,7 @@ export class MyApp {
     //if tap delete on prompt for project profile, then delete
     if(profileType === this.PROJECT) {
       this.projectCreated = false;
-      this.projectVis = false;
+      this.projectInvis = false;
 
       if(this.candidateCreated) {
         this.lastProf = 'candidate';
@@ -382,7 +386,7 @@ export class MyApp {
     //if tap delete on prompt for candidate profile, then delete
     } else if(profileType === this.CANDIDATE) {
       this.candidateCreated = false;
-      this.candidateVis = false;
+      this.candidateInvis = false;
 
       if(this.projectCreated) {
         this.lastProf = 'project';
@@ -422,6 +426,9 @@ export class MyApp {
     if(!this.projectCreated && !this.candidateCreated) {
       this.editMode = false;
       this.editButton = 'Edit';
+
+      // NAVPARAMS?
+      this.nav.setRoot('CreateProfilePage');
     }
   }
 
@@ -443,10 +450,6 @@ export class MyApp {
       website: profile.website,
       phone_number: profile.phone_number
     };
-  }
-
-  getBoolean(project: Project) {
-    this.projectVis = project.is_visible;
   }
 
   setAccount(acc: Account) {
