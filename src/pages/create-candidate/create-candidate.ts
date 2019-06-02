@@ -39,14 +39,13 @@ export class CreateCandidatePage {
   hasPicture: boolean;
   hasFile: boolean;
   account: Account;
+  params: any;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
+    this.params = navParams;
+    this.account = navParams.get('account');
     this.hasPicture = false;
     this.hasFile = false;
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateCandidatePage');
   }
 
   // Picture upload functions
@@ -132,7 +131,7 @@ export class CreateCandidatePage {
   * The user cancelled, so we dismiss without sending data back.
   */
   return() {
-    this.navCtrl.setRoot("CreateProfilePage");
+    this.navCtrl.setRoot("CreateProfilePage", this.params);
   }
 
   /**
