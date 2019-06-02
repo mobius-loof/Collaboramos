@@ -114,7 +114,7 @@ export class ProfileCandidatePage {
       this.hasImage = true;
     };
     let imageD = event.target.files[event.target.files.length - 1];
-    //this.tempProfile.image = imageD;
+    this.tempProfile.image = imageD;
     console.log(imageD);
     reader.readAsDataURL(event.target.files[0]);
   }
