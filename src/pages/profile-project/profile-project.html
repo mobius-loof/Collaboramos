@@ -44,7 +44,7 @@
       </ion-col>
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">
-          <h3>{{ profile.proj_name }}</h3>
+          <h3>{{ profile.name }}</h3>
           <button class="website-button" ion-button icon-start small (click)="presentWebsite()">
             <ion-icon name="globe"></ion-icon>
             WEBSITE
@@ -53,7 +53,7 @@
 
         <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
-            <ion-input class="input-from-label" [(ngModel)]="tempProfile.proj_name"></ion-input> 
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.name"></ion-input> 
           </ion-item>
           <ion-item>
             <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>

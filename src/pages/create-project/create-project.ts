@@ -116,20 +116,20 @@ export class CreateProjectPage {
       return this.firestore.getAccount(this.account.id);
     }).then(acc => {
       params['account'] = acc;
-      params['candidateProfileRef'] = acc.candidate_id;
-      params['projectProfileRef'] = acc.project_id;
-      if (acc.project_id == null) {
+      params['candidateProfileRef'] = acc.candidate_ref;
+      params['projectProfileRef'] = acc.project_ref;
+      if (acc.project_ref == null) {
         return null;
       } else {
-        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+        return this.firestore.getProjectProfileFromID(acc.project_ref.id);
       }
     }).then(projectProfile => {
       params['projectProfile'] = projectProfile;
       let acc = params['account'];
-      if (acc.candidate_id == null) {
+      if (acc.candidate_ref == null) {
         return null;
       } else {
-        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+        return this.firestore.getCandidateProfileFromID(acc.candidate_ref.id);
       }
     }).then(candidateProfile => {
       params['candidateProfile'] = candidateProfile;
