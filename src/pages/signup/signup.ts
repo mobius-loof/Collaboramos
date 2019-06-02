@@ -3,7 +3,6 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { Account } from '../../models/account';
 import { User, Auth, Firestore } from '../../providers';
 import { MainPage } from '../';
-import { nullLiteral } from 'babel-types';
 
 @IonicPage()
 @Component({

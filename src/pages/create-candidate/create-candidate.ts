@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Candidate } from '../../models/candidate';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, ViewController, AlertController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -41,7 +41,7 @@ export class CreateCandidatePage {
   account: Account;
   params: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
@@ -50,23 +50,7 @@ export class CreateCandidatePage {
 
   // Picture upload functions
   getPicture() {
-    /*
-    console.log("getting picture");
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
-      }).then((data) => {
-          this.candidate.images.push('data:image/jpg;base64,' + data);
-          this.hasPicture = true;
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
-      */
     this.imageInput.nativeElement.click();
-    //}
   }
 
   processWebImage(event) {
@@ -74,7 +58,6 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
       this.image = imageData;
-      console.log("Received Picture");
     };
     let imageD = event.target.files[event.target.files.length - 1];
     this.candidate.image = imageD;
@@ -93,7 +76,6 @@ export class CreateCandidatePage {
 
   // Upload file functinos
   getFile() {
-    console.log("getting file");
     this.fileInput.nativeElement.click();
   }
 
@@ -103,8 +85,6 @@ export class CreateCandidatePage {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
       this.candidate.resume_URL = fileData;
-      console.log("Received Resume");
-      console.log(fileData);
       this.presentAlert();
       this.hasFile = true;
     };
@@ -139,6 +119,12 @@ export class CreateCandidatePage {
   */
   submit() {
     let params = {};
+
+    let loading = this.loadingCtrl.create({
+      content: 'Creating Profile...'
+    });
+    loading.present();
+
     this.firestore.createCandidate(this.account.id, this.candidate).then(_ =>{
       return this.firestore.getAccount(this.account.id);
     }).then(acc => {
@@ -161,6 +147,7 @@ export class CreateCandidatePage {
     }).then(candidateProfile => {
       params['candidateProfile'] = candidateProfile;
     }).then(_ => {
+      loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
     });
   }
