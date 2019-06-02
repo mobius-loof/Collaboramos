@@ -181,7 +181,8 @@ export class Firestore {
   }
 
   getChannelsFromProfile(profileId: string): AngularFirestoreCollection {
-    return this.firestore.collection('channels', ref => ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
+    return this.firestore.collection('channels', ref => 
+    ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
   }
 
   // Update Channel
@@ -213,7 +214,7 @@ export class Firestore {
     this.firestore.collection('channels').doc(model.channel_id).update({
       last_message_sent: model.message,
       last_message_sender: model.sender_name,
-      last_message_date: model.message_date
+      last_message_date: dateFromFirestore
     });
 
     // create new message and push to firestore

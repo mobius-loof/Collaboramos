@@ -32,7 +32,7 @@ export class ChatsPage {
   public chats;
 
   constructor(public navCtrl: NavController, private firestore: Firestore) {
-    this.chats = this.firestore.getMessagesForChannel("mW9tYce7xxIgg9jwqsmp").valueChanges();
+    this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
   }
 
   viewMessages(chat) {

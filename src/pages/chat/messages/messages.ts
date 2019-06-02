@@ -105,7 +105,7 @@ export class MessagesPage {
 
       const messageData =
         {
-          channel_id: "mW9tYce7xxIgg9jwqsmp",
+          channel_id: "eYwcAELbXc0Xbs93sBws",
           sender_id: "L4wTy2ApbjJEzSavgXIL",
           sender_name: 'whatever',
           message: message,
