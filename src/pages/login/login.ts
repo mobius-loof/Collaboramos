@@ -64,14 +64,8 @@ export class LoginPage {
     }).then( _ => {
       loading.dismiss();
       if (params['candidateProfile'] == null && params['projectProfile'] == null) {
-<<<<<<< HEAD
         this.navCtrl.setRoot("CreateProfilePage", params);
         this.showLoginSuccess();
-=======
-        // take them to the profile creation page
-
-        //this.navCtrl.push(MainPage);
->>>>>>> SignUp
       } else {
         this.navCtrl.setRoot(MainPage, params);
         this.showLoginSuccess();     
