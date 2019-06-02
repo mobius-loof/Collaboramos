@@ -34,7 +34,7 @@ export class SignupPage {
         id: user.user.uid,
         first_name: "Godwin",
         last_name: "Pang",
-        email: "gypang@ucsd.edu",
+        email: "test@ucsd.edu",
         phone_number: "123456789",
         project_id: null,
         candidate_id: null,
