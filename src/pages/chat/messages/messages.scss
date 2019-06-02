@@ -182,4 +182,17 @@ a.autolinker {
 .loader .ion-loading-c {
   font-size: 64px;
 }
+
+.toolbar-background {
+  background-color: $matches_banner ;
+}
+
+.toolbar-title{
+  color: white;
+}
+
+ion-header ion-icon.back-button-icon.icon {
+  color: white;
+}
+
 }
