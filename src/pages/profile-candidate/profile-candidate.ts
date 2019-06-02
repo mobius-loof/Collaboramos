@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -50,17 +50,9 @@ export class ProfileCandidatePage {
     return {
       id: profile.id,
       name: profile.name,
-<<<<<<< HEAD
       image: profile.image,
       resume_URL: profile.resume_URL,
       is_visible: profile.is_visible,
-=======
-      //files: Object.assign([], profile.files),
-      image: profile.image,
-      resume_URL: profile.resume_URL,
-      is_visible: profile.is_visible,
-      //tags: Object.assign([], profile.tags),
->>>>>>> int-menu
       description: profile.description,
       chats: profile.chats,
       interests: profile.interests,

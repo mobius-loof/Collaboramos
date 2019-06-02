@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference, AngularFirestoreCollection} from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 import { Candidate, Project, Account, Channel, Message } from '../../models';
 import { AngularFireStorage } from 'angularfire2/storage';
