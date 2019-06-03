@@ -77,7 +77,7 @@ export class Firestore {
     const resumeId = this.firestore.createId(); // generate a file ID
     console.log(fileId); // debugging purposes
 
-    return this.filestorage.ref(fileId).put(model.image).then(ref => {
+    this.filestorage.ref(fileId).put(model.image).then(ref => {
       this.filestorage.ref(resumeId).put(model.resume_URL).then(ref => {
         this.firestore.doc(`candidate_profiles/${id}`).set({
           id: id,
@@ -96,6 +96,18 @@ export class Firestore {
           candidate_ref: this.firestore.doc(`candidate_profiles/${id}`).ref
         });
       });
+    });
+
+    var emptyMap: {[key: string]: string} = {};
+
+    this.firestore.doc(`matches/${fileId}`).set({
+      matched: emptyMap
+    });
+
+    return this.firestore.doc(`match_queries/${fileId}`).set({
+      id: fileId,
+      list_type: "candidate",
+      queried_list: []
     });
   }
 
@@ -177,7 +189,7 @@ export class Firestore {
 
     return this.firestore.doc(`match_queries/${fileId}`).set({
       id: fileId,
-      list_type: "candidate",
+      list_type: "project",
       queried_list: []
     });
   }
