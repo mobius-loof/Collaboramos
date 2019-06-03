@@ -44,9 +44,6 @@ export class HomePage {
     }
 
     openMenu() {
-        if (!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
-            this.appCom.toggleProfileSettings();
-        }
         this.menuCtrl.open();
     }
 
