@@ -245,10 +245,20 @@ export class Firestore {
       } else {
         this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
           snapshot.forEach(doc => {
-            //console.log("hello at doc2");
-            //documents.concat(doc.data());
-            documents.push(doc.data());
+            
+            var isQueried = false;
+            list.forEach(id => {
+              if (id == doc.id) {
+                isQueried = true;
+              }
+            });
+            if (!isQueried){
+              //console.log(doc.data());
+              documents.push(doc.data());
+            }            
           });
+          //console.log(documents);
+          return [documents, list];
         });
       }
     }).then(documentsAndList => {
