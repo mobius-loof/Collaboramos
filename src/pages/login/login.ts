@@ -71,6 +71,7 @@ export class LoginPage {
       params['candidateProfile'] = candidateProfile;
       this.appCom.setCandidateProfile = candidateProfile;
     }).then( _ => {
+      params['currentProfile'] = this.getSelectedProfile(params);
       loading.dismiss();
 
       if (params['candidateProfile'] == null && params['projectProfile'] == null) {
@@ -84,6 +85,16 @@ export class LoginPage {
       this.showLoginFailure(err.message);
       loading.dismiss();
     });
+  }
+
+  getSelectedProfile(params) {
+    if (params['candidateProfile'] != null) {
+      return 'candidate';
+    } else if (params['projectProfile'] != null) {
+      return 'project';
+    } else {
+      return '';
+    }
   }
 
   showLoginSuccess() {
