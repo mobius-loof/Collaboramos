@@ -27,9 +27,18 @@
     <ion-row class="title-row">
       <ion-col col-5>
         <div class="project-img-container">
-          <img *ngIf="!isEdit" class="project-img" src="../assets/img/marty-avatar.png">
-          <img *ngIf="isEdit" class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+          <div *ngIf="!isEdit">
+            <img *ngIf="!hasImage" class="project-img" src="../assets/img/marty-avatar.png">
+            <div *ngIf="hasImage" class="project-img"  [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            </div>
+          </div>
+          <div *ngIf="isEdit">
+            <img *ngIf="!hasImage" class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+            <div *ngIf="hasImage" class="project-img" (click)="pickImage()" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            </div>
+          </div>
           <h6 *ngIf="isEdit" class="photo-edit">Edit</h6>
+          <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
         </div>
       </ion-col>
       <ion-col>
@@ -52,6 +61,11 @@
           <ion-item>
             <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>
           </ion-item>
+            <button class="resume-button" ion-button icon-start small (click)="uploadResume()">
+              <ion-icon class="resume-icon" name="attach"></ion-icon>
+              RESUME
+            </button>
+            <input type="file" #fileInput style="visibility: hidden; " name="files[]" (change)="processWebFile($event)" />
         </div>
       </ion-col>
     </ion-row>

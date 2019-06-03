@@ -3,10 +3,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Nav, Platform, MenuController, AlertController, Events } from 'ionic-angular';
 
-import { FirstRunPage, Tab1Root, Tab2Root, Tab3Root } from '../pages';
+import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
 
 import { Firestore } from '../providers/firestore/firestore';
+import { Project, Candidate } from '../models';
+import { Subscription } from 'rxjs';
+import { DocumentReference } from 'angularfire2/firestore';
+//import { CreateProjectPage } from '../pages/create-project/create-project';
+
+// SET SIDEBAR STATE TO WAIT FOR ACCOUNT
+  // account only exists after login
+
+// Oberservable and Listener to get the is_visible boolean from Firestore
+  // listen for changes from Firestore; get tutorial from Thomas
 
 @Component({
   templateUrl: 'app.html'
@@ -25,38 +35,54 @@ export class MyApp {
 
     {title: 'ProfileProject', component: 'ProfileProjectPage'},
     {title: 'ProfileCandidate', component: 'ProfileCandidatePage'},
+    {title: 'Chats', component: 'ChatsPage'},
+    {title: 'Messages', component: 'MessagesPage'},
+    {title: 'Matches', component: 'MatchesPage'},
+    {title: 'ViewProfile', component: 'ViewProfilePage'},
     { title: 'HomeProject', component: 'HomeProjectPage' },
     { title: 'HomeCandidate', component: 'HomeCandidatePage' },
   ]
 
-  protected PROJECT = 'project';
-  protected CANDIDATE = 'candidate';
+  private PROJECT = 'project';
+  private CANDIDATE = 'candidate';
+  private PROJECT_COLOR: string = 'project_button';
+  private CANDIDATE_COLOR: string = 'candy_button';
+  private SWITCH: string = 'switch';
+
+  private NON_COLOR: string = 'baby_powder';
+  private NON_CREATE: string = 'nop';
 
   //boolean value for ion-toggle to set
   protected isToggled: boolean;
 
   //variables related to project profile
-  protected projectCreated: boolean;
-  protected projectVis: boolean;
-  protected projectColor: string = 'nop';
+  private projectCreated: boolean;
+  private projectInvis: boolean;
+  private projectColor: string = this.PROJECT_COLOR;
 
   //variables related to candidate profile
-  protected candidateCreated: boolean;
-  protected candidateVis: boolean;
-  protected candidateColor: string = 'nop';
+  private candidateCreated: boolean;
+  private candidateInvis: boolean;
+  private candidateColor: string = this.CANDIDATE_COLOR;
 
   //boolean value to check if ion-toggle is set
-  protected checked: boolean;
+  //private checked: boolean;
 
   //variables related to edit button status
   protected editButton: string = 'Edit';
   protected editMode: boolean = false;
 
   //variable to tell what was last profile
-  protected lastProf: string;
+  private currentProfile: string;
 
-  protected PROJECT_COLOR: string = 'project_button';
-  protected CANDIDATE_COLOR: string = 'candy_button';
+  private project: Project;
+  private candidate: Candidate;
+  private account: Account;
+  private projectRef: DocumentReference;
+  private candidateRef: DocumentReference;
+
+  private projToggled: boolean;
+  private candToggled: boolean;
 
   constructor(private platform: Platform,
               settings: Settings,
@@ -71,27 +97,38 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.isToggled = false;
+      this.menuCtrl.swipeEnable(false);
     });
   }
 
   public notify(check: boolean) {
     //need to interface with Firebase for this to remember last toggled setting
-    console.log("Toggled: "+ this.isToggled);
-    check = !check
+    //this.checked = !check;
+    this.isToggled = !check;
 
-    if(this.candidateCreated) {
-      //check candidateVis
-    } else if(this.projectCreated) {
-      //check projectVis
+    if(this.currentProfile === this.PROJECT) {
+
+      if(this.projToggled) {
+        this.project = this.switchProjectVisibleModel(this.project, false);
+
+        this.firestore.updateProjectProfile(this.project);
+      } else if(!this.projToggled) {
+
+        this.project = this.switchProjectVisibleModel(this.project, true);
+
+        this.firestore.updateProjectProfile(this.project);
+      }
+      //this.projectSettings();
+    } else if(this.currentProfile === this.CANDIDATE) {
+      this.isToggled = false;
     }
   }
 
-  openPage(page) {
+  /*openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
-  }
+  }*/
 
   closeMenu() {
     //closes the left side menu
@@ -102,26 +139,18 @@ export class MyApp {
     }
   }
 
-  openMenu() {
+  /*openMenu() {
     //open the menu
     this.menuCtrl.open();
-  }
+  }*/
 
-  /*
-   * Setter for the edit button name
-   */
-  setEdit(editName: string) {
-    this.editButton = editName;
-  }
-
-  isEdit() {
-    //return the status of the editMode
-    return this.editMode;
+  toggleEditSettings() {
+    this.editMode = !this.editMode;
+    this.toggleProfileSettings();
   }
 
   toggleProfileSettings() {
     //change the editMode boolean, meaning pressed button
-    this.editMode = !this.editMode;
 
     //if in edit mode, then change the profile tabs to red indicating delete
     if(this.editMode) {
@@ -134,35 +163,33 @@ export class MyApp {
     } else if(!this.editMode) {
       this.editButton = 'Edit';
 
-      if(this.lastProf === 'project') {
+      if(this.projectCreated && !this.candidateCreated) {
+        this.currentProfile = this.PROJECT;
+      } else if(!this.projectCreated && this.candidateCreated) {
+        this.currentProfile = this.CANDIDATE;
+      }
+
+      if(this.currentProfile === this.PROJECT) {
         this.projectColor = this.PROJECT_COLOR;
 
         if(this.candidateCreated) {
-          this.candidateColor = 'baby_powder';
-        } else {
-          this.candidateColor = 'nop';
+          this.candidateColor = this.NON_COLOR;
         }
-      } else if(this.lastProf === 'candidate') {
+      } else if(this.currentProfile === this.CANDIDATE) {
         this.candidateColor = this.CANDIDATE_COLOR;
 
         if(this.projectCreated) {
-          this.projectColor = 'baby_powder';
-        } else {
-          this.projectColor = 'nop';
+          this.projectColor = this.NON_COLOR;
         }
 
-      //if profiles have not been created yet, set to grey color indicating need to create
-      } else {
-        this.projectColor = 'nop';
-        this.candidateColor = 'nop';
       }
+
     }
   }
 
-  makeProfile(profileType) {
+  clickedProfile(profileType) {
     //if project button tapped, then create/delete settings
     if(profileType === this.PROJECT) {
-      this.projectCreate();
       this.projectSettings();
 
       if(this.editMode && this.projectCreated) {
@@ -171,7 +198,6 @@ export class MyApp {
 
     //if candidate button tapped, then create/delete settings
     } else if(profileType === this.CANDIDATE) {
-      this.candidateCreate();
       this.candidateSettings();
 
       if(this.editMode && this.candidateCreated) {
@@ -188,22 +214,68 @@ export class MyApp {
 
   projectCreate() {
     if(!this.projectCreated && !this.editMode) {
-      this.nav.setRoot('CreateProjectPage');
+
+      this.nav.push('CreateProjectPage', {
+        account: this.account //,
+      });
+
       this.projectCreated = true;
+      this.projectInvis = false;
 
       //CHANGE THE NAME BASED ON FIRESTORE
-      this.pages[0].title = 'Collaboramos';
+      this.projectColor = this.PROJECT_COLOR;
+      this.currentProfile = this.PROJECT;
+
+      if(this.candidateCreated) {
+        this.candidateColor = this.NON_COLOR;
+      }
+
       this.closeMenu();
     }
   }
 
   candidateCreate() {
     if(!this.candidateCreated && !this.editMode) {
-      this.nav.setRoot('CreateCandidatePage');
+      this.nav.push('CreateCandidatePage', {
+        account: this.account //,
+      });
+      /*this.nav.setRoot('CreateCandidatePage', {
+        account: this.account,
+        candidateProfile: this.candidate,
+        projectProfile: this.candidate,
+        candidateProfileRef: null,
+        projectProfileRef: null
+      });
+
+      this.candidate = {
+        id: '32kul1tAw9FJRUC98hhg',
+        name: 'Gary Bary',
+        image: '',
+        website: 'google',
+        resume_URL: '',
+        is_visible: true,
+        skills: [],
+        description: '',
+        chats: {},
+        interests: {},
+        matches: {},
+        waitlist: [],
+        phone_number: '',
+        email: '',
+        address: ''
+      };*/
+
       this.candidateCreated = true;
+      this.candidateInvis = false;
+
+      this.candidateColor = this.CANDIDATE_COLOR;
+      this.currentProfile = this.CANDIDATE;
 
       //CHANGE THE NAME BASED ON FIRESTORE
-      this.pages[1].title = 'Gary G.';
+
+      if(this.projectCreated) {
+        this.projectColor = this.NON_COLOR;
+      }
       this.closeMenu();
     }
   }
@@ -211,32 +283,28 @@ export class MyApp {
   projectSettings() {
     //set the defaults for the project profile once it is created
     if(!this.editMode) {
-      this.lastProf = 'project';
+      this.currentProfile = 'project';
       this.projectColor = this.PROJECT_COLOR;
-      this.checked = false;
-      this.projectVis = true;
 
-      this.events.publish('lastProf', 'project')
-
-      if(this.candidateColor !== 'nop') {
-        this.candidateColor = 'baby_powder';
+      if(this.candidateCreated) {
+        this.candidateColor = this.NON_COLOR;
       }
+
+      this.projectPublishEvents();
     }
   }
 
   candidateSettings() {
     //set defaults for candidate profile once it has been created
     if(!this.editMode) {
-      this.lastProf = 'candidate';
+      this.currentProfile = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
-      this.checked = false;
-      this.candidateVis = true;
 
-      this.events.publish('lastProf', 'candidate')
-
-      if(this.projectColor !== 'nop') {
-        this.projectColor = 'baby_powder';
+      if(this.projectCreated) {
+        this.projectColor = this.NON_COLOR;
       }
+
+      this.candidatePublishEvents();
     }
   }
 
@@ -244,27 +312,27 @@ export class MyApp {
     //if tap delete on prompt for project profile, then delete
     if(profileType === this.PROJECT) {
       this.projectCreated = false;
-      this.pages[0].title = 'Create Project';
-      this.projectVis = false;
+      this.projectInvis = false;
 
       if(this.candidateCreated) {
-        this.lastProf = 'candidate';
+        this.currentProfile = 'candidate';
       } else {
-        this.lastProf = '';
+        this.currentProfile = '';
       }
 
     //if tap delete on prompt for candidate profile, then delete
     } else if(profileType === this.CANDIDATE) {
       this.candidateCreated = false;
-      this.pages[1].title = 'Create Candidate';
-      this.candidateVis = false;
+      this.candidateInvis = false;
 
       if(this.projectCreated) {
-        this.lastProf = 'project';
+        this.currentProfile = 'project';
       } else {
-        this.lastProf = '';
+        this.currentProfile = '';
       }
     }
+
+    this.reset();
   }
 
   promptDelete(profileType) {
@@ -290,6 +358,95 @@ export class MyApp {
     });
     alert.present();
   }
+
+  reset() {
+    if(!this.projectCreated && !this.candidateCreated) {
+      this.editMode = false;
+      this.editButton = 'Edit';
+
+      // NAVPARAMS?
+      this.nav.setRoot('CreateProfilePage');
+      this.closeMenu();
+    }
+  }
+
+  setEdit(editName: string) {
+    this.editButton = editName;
+  }
+
+  setAccount(acc: Account) {
+    this.account = acc;
+  }
+
+  setCandidateProfile(candy: Candidate) {
+    this.candidate = candy;
+    if (candy == null) {
+      this.candidateCreated = false;
+    } else {
+      this.candidateCreated = true;
+    }
+  }
+
+  setProjectProfile(proj: Project) {
+    this.project= proj;
+    if (proj == null) {
+      this.projectCreated = false;
+    } else {
+      this.projectCreated = true;
+    }
+  }
+
+  setCandidateProfileRef(ref: DocumentReference) {
+    this.projectRef = ref;
+  }
+
+  setProjectProfileRef(ref: DocumentReference) {
+    this.candidateRef = ref;
+  }
+
+  isEdit() {
+    //return the status of the editMode
+    return this.editMode;
+  }
+
+  setCurrentProfile(prof: string) {
+    this.currentProfile = prof;
+
+    if(prof === this.PROJECT) {
+      this.projectPublishEvents();
+    } else if(prof === this.CANDIDATE) {
+      this.candidatePublishEvents();
+    }
+  }
+
+  candidatePublishEvents() {
+    this.events.publish('currentProfile', 'candidate');
+  }
+
+  projectPublishEvents() {
+    this.events.publish('currentProfile', 'project');
+  }
+
+  switchProjectVisibleModel(model: Project, vis: boolean) {
+    return {
+      id: model.id,
+      name: model.name,
+      image: model.image,
+      description: model.description,
+      is_visible: vis,
+      frameworks: model.frameworks,
+      skills: model.skills,
+      chats: model.chats,
+      interests: model.interests,
+      matches: model.matches,
+      waitlist: model.waitlist,
+      address: model.address,
+      email: model.email,
+      website: model.website,
+      phone_number: model.phone_number
+    };
+  }
+
 }
 
 // can wrap things in ion item; put button and text
