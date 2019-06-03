@@ -72,7 +72,7 @@ export class Firestore {
   }
 
   // Create Candidate
-  createCandidate(accountId: string, model: Candidate) {
+  createCandidate(accountId: string, model: Candidate): Promise<void> {
     const id = this.firestore.createId();
     const fileId = this.firestore.createId(); // generate a file ID
     const resumeId = this.firestore.createId(); // generate a file ID
@@ -113,6 +113,12 @@ export class Firestore {
     this.firestore.doc(`matches/${fileId}`).set({
       matched: emptyMap
     });
+
+    this.firestore.doc(`interests/${fileId}`).set({
+      id: fileId,
+      list_type: "project",
+      interest_list: []
+    })
 
     return this.firestore.doc(`match_queries/${fileId}`).set({
       id: fileId,
@@ -215,6 +221,12 @@ export class Firestore {
     this.firestore.doc(`matches/${fileId}`).set({
       matched: emptyMap
     });
+
+    this.firestore.doc(`interests/${fileId}`).set({
+      id: fileId,
+      list_type: "candidate",
+      interest_list: []
+    })
 
     return this.firestore.doc(`match_queries/${fileId}`).set({
       id: fileId,
