@@ -190,7 +190,7 @@ export class ProfileProjectPage {
 
   openMenu() {
     //have a variable that checks if edit was tapped; if was then would want to undo and reset colors
-    if(!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
+    if(!this.menuCtrl.isOpen() && !this.appCom.isEdit()) {
       this.appCom.toggleProfileSettings();
     }
     this.menuCtrl.open();
