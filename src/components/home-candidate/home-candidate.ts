@@ -13,6 +13,7 @@ import {
   SwingCardComponent} from 'angular2-swing';
 
 import { Items, Firestore } from '../../providers';
+import { Candidate } from '../../models';
 /**
  * Generated class for the HomeCandidateComponent component.
  *
@@ -41,7 +42,7 @@ export class HomeCandidateComponent {
 
   tags = [];
   frameworks = [];
-  id = "project_id_1";
+  private profile: Candidate;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, public firestore: Firestore) {
     this.stackConfig = {
@@ -55,19 +56,11 @@ export class HomeCandidateComponent {
         return 800;
       }
     };
-    
-    try{
-        this.id = navParams.get("profiles").get("projectProfile").get("id");
-    }
-    catch(error){
-        this.id = "project_id_1";
-    }
-      
+
+
+    this.profile = navParams.get("candidateProfiles") 
     this.cards = [];
     this.addNewCards(3);
-
-
-    console.log(this.id);
 
   }
 
@@ -121,7 +114,7 @@ export class HomeCandidateComponent {
 
   // Add new cards to our array
   addNewCards(count: number) {
-    this.firestore.getCards(this.id, count).then(map => {
+    this.firestore.getCards(this.profile.id, count).then(map => {
         console.log(map.entries())
         map.forEach((value: any, key: id) => {
             this.cards.push(value)

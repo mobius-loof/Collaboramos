@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewChildren, QueryList, Renderer } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import 'rxjs/Rx';
 
 import {
@@ -15,6 +16,7 @@ import {
 
 import { Items, Firestore } from '../../providers';
 import { resolveDefinition } from '@angular/core/src/view/util';
+import { Project } from '../../models';
 /**
  * Generated class for the HomeProjectComponent component.
  *
@@ -28,6 +30,7 @@ import { resolveDefinition } from '@angular/core/src/view/util';
 export class HomeProjectComponent {
 
 
+    private profile: Project;
     @ViewChild('myswing1') swingStack: SwingStackComponent;
     @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
@@ -46,13 +49,13 @@ export class HomeProjectComponent {
     frameworks = ['f1', 'f2'];
 
     public account: Promise<any>;
-    public tempCards;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams, 
                 public items: Items, 
                 private http: Http, 
                 public renderer: Renderer, 
                 private firestore: Firestore,
+                private inAppBrowser: InAppBrowser
                 ) {
         this.stackConfig = {
             throwOutConfidence: (offsetX, offsetY, element) => {
@@ -66,6 +69,7 @@ export class HomeProjectComponent {
             }
         };
 
+        this.profile = navParams.get('Profile');
         this.cards = [];
         this.addNewCards(3);
 
@@ -80,12 +84,12 @@ export class HomeProjectComponent {
     }
 
     clickResume() {
-        console.log("resume")
+        this.inAppBrowser.create(this.profile.website);
         
     }
 
     clickWebsite() {
-        console.log("website")
+        this.inAppBrowser.create(this.profile.website);
     }
 
     // Called whenever we drag an element
@@ -126,7 +130,7 @@ export class HomeProjectComponent {
     // Add new cards to our array
     addNewCards(count: number) {
         console.log("Added new cards");
-        this.firestore.getCards("candidate_id_1", count).then(map => {
+        this.firestore.getCards(this.profile.id, count).then(map => {
             map.forEach((value: any, key: any) => {
                 this.cards.push(value)
                 this.tags.push(value.skills)
