@@ -47,17 +47,26 @@ export class TabsPage {
       // user and time are the same arguments passed in `events.publish(user, time)`
       console.log('receive broadcast current profile' + s);
       if (s === "candidate") {
+        console.log('current profile: Candidate');
         this.tab1Root = Tab1RootC;
-        this.tab2Root = Tab1RootC;
+        this.tab2Root = Tab2RootC;
+        this.params["data"]["currentProfile"] = "candidate";
       }
       else if (s === "project") {
+        console.log('current profile: Project');
         this.tab1Root = Tab1RootP;
-        this.tab2Root = Tab1RootP;
+        this.tab2Root = Tab2RootP;
+        this.params["data"]["currentProfile"] = "project";
       }
-        // setRoot
+      // setRoot
       else {
+        this.params["data"]["currentProfile"] = "";
         this.navCtrl.setRoot("CreateProfilePage", this.params);
+        return;
       }
+      console.log(this.tab1Root);
+      console.log(this.params);
+      this.navCtrl.setRoot("TabsPage", this.params);
     });
   }
 
