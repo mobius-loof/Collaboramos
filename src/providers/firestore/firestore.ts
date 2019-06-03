@@ -220,40 +220,53 @@ export class Firestore {
       list = doc.data().queried_list;
       list.sort;
 
-      var documents = new Map();
-
+      //var documents: {[key: string]: DocumentData;} = {}; 
+      var documents = [];
       if (doc.data().list_type == "project") {
-        this.firestore.collection('project_profiles').ref.get().then(snapshot => {
+        return this.firestore.collection('project_profiles').ref.get().then(snapshot => {
           snapshot.forEach(doc => {
-            console.log("hello at doc1");
-            documents.set(doc.id, doc.data());
+            //console.log("hello at doc1");
+            //console.log(doc.data());
+            //documents.push(doc.data());
+            var isQueried = false;
+            list.forEach(id => {
+              if (id == doc.id) {
+                isQueried = true;
+              }
+            });
+            if (!isQueried){
+              //console.log(doc.data());
+              documents.push(doc.data());
+            }            
           });
+          //console.log(documents);
+          return [documents, list];
         });
       } else {
         this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
           snapshot.forEach(doc => {
-            console.log("hello at doc2");
-            documents.set(doc.id, doc.data());
+            //console.log("hello at doc2");
+            //documents.concat(doc.data());
+            documents.push(doc.data());
           });
         });
       }
-
-      list.forEach(id => {
-        console.log("hello at delete");
-        documents.delete('id');
-      });
+    }).then(documentsAndList => {
+      //console.log(documents.length);
       //console.log(documents);
+      var newDocuments = documentsAndList[0].splice(0, amount);
 
-      var returnDoc = [];
-      var i: number;
-      var iterator = documents.entries();
-      for(i = 0; i < amount; i++) {
-        returnDoc.push(iterator.next().value);
-      }
+      newDocuments.forEach(doc => {
+        documentsAndList[1].push(doc.id);
+      })
 
-      console.log("hello from ret");
-      console.log(returnDoc);
-      return returnDoc;
+      //console.log(documentsAndList[1]);
+      this.firestore.collection('match_queries').doc(id).update({
+        queried_list: documentsAndList[1]
+      })
+
+      //console.log(newDocuments);
+      return newDocuments;
     });
   }
 }
