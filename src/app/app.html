@@ -1,41 +1,40 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="ham_bg">
       <button ion-button float-right small clear (click) = "toggleProfileSettings()">
         {{editButton}}
       </button>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content id="menu-color">
     <ion-list no-lines inset>
 
-      <button *ngIf="projectCreated" id = "project" ion-button text-right block color = "{{this.projectColor}}" (click) = "clickedProfile(this.PROJECT)">
-        <!--Collaboramos-->
-        {{projProf.name}}
+        <button *ngIf="projectCreated" ion-button text-right block color = "{{this.projectColor}}" (click) = "clickedProfile(this.PROJECT)">
+          {{project.name}}
+        </button>
+
+      <button *ngIf="!projectCreated" ion-button text-center block color = "nop" (click) = "projectCreate(this.PROJECT)">
+        Create Project
       </button>
 
-      <button *ngIf="!projectCreated" id = "project" ion-button text-center block color = "nop" (click) = "projectCreate(this.PROJECT)">
-        {{pages[0].title}}
-      </button>
-
-      <button *ngIf="candidateCreated" id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
+      <button *ngIf="candidateCreated" ion-button text-right block color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
         <!--Gary G.-->
-        {{candProf.name}}
+        {{candidate.name}}
       </button>
 
-      <button *ngIf="!candidateCreated" id = "candidate" ion-button text-right block color = "nop" (click) = "candidateCreate(this.CANDIDATE)">
-        {{pages[1].title}}
+      <button *ngIf="!candidateCreated" ion-button text-right block color = "nop" (click) = "candidateCreate(this.CANDIDATE)">
+        Create Candidate
       </button>
 
       <ion-item *ngIf="!editMode && projectCreated && (lastProf === PROJECT)">
         <ion-label>Invisible Project</ion-label>
-        <ion-toggle checked="{{this.projectVis}}" [(ngModel)]="projToggled" (ionChange)="notify(this.projectVis)"></ion-toggle>
+        <ion-toggle id="projectTogg" [(ngModel)]="this.projectInvis" [color]="this.projectColor" [(ngModel)]="projToggled" (ionChange)="notify(this.projectInvis)"></ion-toggle>
       </ion-item>
 
       <ion-item *ngIf="!editMode && candidateCreated && (lastProf === CANDIDATE)">
         <ion-label>Invisible Candidate</ion-label>
-        <ion-toggle checked="{{this.candidateVis}}" [(ngModel)]="candToggled" (ionChange)="notify(this.projectVis)"></ion-toggle>
+        <ion-toggle id="candidateTogg" [(ngModel)]="this.candidateInvis" [color]="this.candidateColor" [(ngModel)]="candToggled" (ionChange)="notify(this.candidateInvis)"></ion-toggle>
       </ion-item>
       
       <!--<div *ngIf="(tempVar | async)?.is_visible">hello 1{{ (tempVar | async)?.is_visible }}</div>
