@@ -55,15 +55,17 @@ export class HomeCandidateComponent {
         return 800;
       }
     };
-
-    this.cards = [];
-    this.addNewCards(3);
+    
     try{
-      this.id = navParams.get("profiles").get("projectProfile").get("id");
+        this.id = navParams.get("profiles").get("projectProfile").get("id");
     }
     catch(error){
-      this.id = "project_id_1";
+        this.id = "project_id_1";
     }
+      
+    this.cards = [];
+    this.addNewCards(3);
+
 
     console.log(this.id);
 
@@ -118,7 +120,7 @@ export class HomeCandidateComponent {
   }
 
   // Add new cards to our array
-  addNewCards(count: number) {/*
+  addNewCards(count: number) {
     this.firestore.getCards(this.id, count).then(map => {
         console.log(map.entries())
         map.forEach((value: any, key: id) => {
@@ -127,7 +129,7 @@ export class HomeCandidateComponent {
             console.log(value)
 
         })
-    })*/
+    })
 
   }
 

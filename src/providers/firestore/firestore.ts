@@ -243,7 +243,7 @@ export class Firestore {
           return [documents, list];
         });
       } else {
-        this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
+        return this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
           snapshot.forEach(doc => {
             
             var isQueried = false;
@@ -257,6 +257,7 @@ export class Firestore {
               documents.push(doc.data());
             }            
           });
+          //console.log(list);
           //console.log(documents);
           return [documents, list];
         });
@@ -264,6 +265,9 @@ export class Firestore {
     }).then(documentsAndList => {
       //console.log(documents.length);
       //console.log(documents);
+      //console.log(documentsAndList[0]);
+      //console.log(amount);
+      //console.log(documentsAndList[0].splice(0, amount));
       var newDocuments = documentsAndList[0].splice(0, amount);
 
       newDocuments.forEach(doc => {

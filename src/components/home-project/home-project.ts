@@ -109,7 +109,7 @@ export class HomeProjectComponent {
 
     // Connected through HTML
     voteUp(like: boolean) {
-        let removedCard = this.tempCards.pop();
+        let removedCard = this.cards.pop();
 
         if (this.cards.length <= 2) {
             this.addNewCards(5);
@@ -126,26 +126,23 @@ export class HomeProjectComponent {
     // Add new cards to our array
     addNewCards(count: number) {
         console.log("Added new cards");
-        this.firestore.getCards("candidate_id_1", count);/*.then( collection => {
-            this.tempCards = collection.valueChanges();
-            Promise.resolve(this.tempCards);
-        }).then(_ => {
-            
-        });
-        /*.then(map => {
-            console.log(map.entries())
+        this.firestore.getCards("candidate_id_1", count).then(map => {
             map.forEach((value: any, key: any) => {
                 this.cards.push(value)
                 this.tags.push(value.skills)
-                console.log(value)
+                console.log("key: " + key)
 
             })
-        })*/
+        })
     }
 
     getImage(i: number) {
         return "url(https://firebasestorage.googleapis.com/v0/b/collaboramos.appspot.com/o/862lg6wjnjd?alt=media&token=6c1025c4-8756-439a-9b36-a5d8ea35f7fd)";
     }
+
+    getSize() {
+        return '84px 108px'
+      }
 
     // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
     decimalToHex(d, padding) {
