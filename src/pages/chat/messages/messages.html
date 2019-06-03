@@ -22,7 +22,7 @@
 		</ion-content>-->
 
 	<div *ngFor="let message of messages | async" class="message-wrapper" on-hold="onMessageHold($event, $index, message)">
-		<div *ngIf="user._id !== message.userId">
+		<div *ngIf="user._id !== message.sender_id">
 			<img (click)="viewProfile(message)" class="profile-pic left" [src]="toUser.pic" onerror="onProfilePicError(this)" />
 			<div class="chat-bubble left slide-left">
 
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 
-		<div *ngIf="user._id === message.userId">
+		<div *ngIf="user._id === message.sender_id">
 
 			<img (click)="viewProfile(message)" class="profile-pic right" [src]="user.pic" onerror="onProfilePicError(this)" />
 

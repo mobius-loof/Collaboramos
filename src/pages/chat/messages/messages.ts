@@ -1,6 +1,6 @@
 import { FormControl, FormBuilder } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Content } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams} from 'ionic-angular';
 import { Firestore } from '../../../providers/firestore/firestore';
 import { map } from 'rxjs/operators'
 import { Message } from '../../../models/message'
@@ -77,6 +77,7 @@ export class MessagesPage {
     }
   ];*/
   public messages;
+  public channel;
   
   //.valueChanges().subscribe(data => {console.log(data)});
 
@@ -86,7 +87,9 @@ export class MessagesPage {
   chatBox: any;
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
-    private firestore: Firestore) {
+    private firestore: Firestore,  public navParams: NavParams) {
+      //get channel id??
+      //this.channel = this.navParams.get('id');
       this.messages = this.firestore.getMessagesForChannel("eYwcAELbXc0Xbs93sBws").valueChanges();
     this.messageForm = formBuilder.group({
       message: new FormControl('')
