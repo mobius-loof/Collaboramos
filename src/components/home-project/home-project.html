@@ -7,14 +7,10 @@
   id="card-stack"
   style="background-color: white; height: 100%;"
 >
-<ul>
-  hello from html
-  <li *ngFor="let tempCard of tempCards | async">{{ tempCard.id }} </li>
-  </ul>
   <ion-card
     #mycards1
     swing-card
-    *ngFor="let c of cards; let i = index"
+    *ngFor="let c of tempCards | async; let i = index"
     [class]="'td-card card card-md ' + 'card-title' + i"
     swing-card=""
     style="background-color: white; z-index: 100;"
@@ -23,10 +19,10 @@
       <ion-row style="height: 30%; background: white">
         <ion-col col-6>
           <ion-row class="img-row" style="background-color: white;">
-            <h1 class="img-row-info">
+            <h1 class="img-row-info name">
               {{ cards[i].proj_name }}
             </h1>
-            <p class="img-row-info" style="font-size: 70%">
+            <p class="img-row-info name" style="font-size: 70%">
               Software Developer
             </p>
           </ion-row>
@@ -61,7 +57,7 @@
 
       <ion-row style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%">
         <p style="margin: 15px 15px 15px;">
-          {{cards[i].description}}
+          {{c.description}}
         </p>
       </ion-row>
 
@@ -74,7 +70,7 @@
       </ion-row>
       <ion-row>
         <div class="tag-container" *ngFor="let t of tags[i]">
-          <ion-item class="tag" no-lines no-padding color="secondary" round>
+          <ion-item class="tag" no-lines no-padding round>
             <p class="tag-content">{{ t }}</p>
           </ion-item>
         </div>

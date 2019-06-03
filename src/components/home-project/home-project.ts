@@ -46,7 +46,7 @@ export class HomeProjectComponent {
     frameworks = ['f1', 'f2'];
 
     public account: Promise<any>;
-
+    public tempCards;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams, 
                 public items: Items, 
@@ -109,32 +109,32 @@ export class HomeProjectComponent {
 
     // Connected through HTML
     voteUp(like: boolean) {
-        let removedCard = this.cards.pop();
+        let removedCard = this.tempCards.pop();
 
         if (this.cards.length <= 2) {
             this.addNewCards(5);
             console.log("Voted on cards and added");
         }
         if (like) {
-            this.recentCard = 'You liked: ' + removedCard.proj_name;
+            this.recentCard = 'You liked: ' + removedCard.name;
         } else {
-            this.recentCard = 'You disliked: ' + removedCard.proj_name;
+            this.recentCard = 'You disliked: ' + removedCard.name;
         }
 
     }
-    public tempCards;
+
     // Add new cards to our array
     addNewCards(count: number) {
         console.log("Added new cards");
         this.firestore.getCards("candidate_id_1", count);/*.then( collection => {
             this.tempCards = collection.valueChanges();
             Promise.resolve(this.tempCards);
-        });*/
-        console.log("hello,");
-        console.log(this.tempCards);
+        }).then(_ => {
+            
+        });
         /*.then(map => {
             console.log(map.entries())
-            map.forEach((value: any, key: id) => {
+            map.forEach((value: any, key: any) => {
                 this.cards.push(value)
                 this.tags.push(value.skills)
                 console.log(value)
