@@ -136,7 +136,7 @@ export class Firestore {
     console.log(fileId); // debugging purposes
 
     // Returns promise of success/failure for creating the project document on Firestore
-    return this.filestorage.ref(fileId).put(model.image).then(ref => {
+    this.filestorage.ref(fileId).put(model.image).then(ref => {
       this.firestore.doc(`project_profiles/${id}`).set({
         id: id,
         name: model.name,
@@ -153,6 +153,18 @@ export class Firestore {
       return this.firestore.doc(`accounts/${accountId}`).update({
         project_ref: this.firestore.doc(`project_profiles/${id}`).ref
       });
+    });
+
+    var emptyMap: {[key: string]: string} = {};
+
+    this.firestore.doc(`matches/${fileId}`).set({
+      matched: emptyMap
+    });
+
+    return this.firestore.doc(`match_queries/${fileId}`).set({
+      id: fileId,
+      list_type: "candidate",
+      queried_list: []
     });
   }
 
