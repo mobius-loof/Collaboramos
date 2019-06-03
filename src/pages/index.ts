@@ -6,6 +6,11 @@ export const FirstRunPage = 'WelcomePage';
 export const MainPage = 'TabsPage';
 
 // The initial root pages for our tabs (remove if not using tabs)
-export const Tab1Root = 'ProfileProjectPage';
-export const Tab2Root = 'ProfileProjectPage';
-export const Tab3Root = 'ProfileProjectPage';
+export const Tab1RootC = 'ProfileCandidatePage';
+export const Tab1RootP = 'ProfileProjectPage';
+
+export const Tab2RootP = 'HomeProjectPage';
+export const Tab2RootC = 'HomeCandidatePage';
+
+export const Tab3Root = 'MatchesPage';
+

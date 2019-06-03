@@ -177,7 +177,7 @@ export class CreateCandidatePage {
       params['candidateProfile'] = candidateProfile;
       this.appCom.setCandidateProfile = candidateProfile;
     }).then(_ => {
-      params['currentProfile'] = 'candidate';
+      params['currentProfile'] = "candidate";
       loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
     });

@@ -150,6 +150,7 @@ export class CreateProjectPage {
     }).then(_ => {
       params['currentProfile'] = 'project';
       loading.dismiss();
+      console.log(params);
       this.navCtrl.setRoot("TabsPage", params);
     });
   }
