@@ -39,6 +39,9 @@ export class TabsPage {
       this.tab1Root = Tab1RootP;
       this.tab2Root = Tab2RootP;
     }
+    else {
+      this.navCtrl.setRoot("CreateProfilePage", this.params);
+    }
 
     events.subscribe('currentProfile', (s) => {
       // user and time are the same arguments passed in `events.publish(user, time)`

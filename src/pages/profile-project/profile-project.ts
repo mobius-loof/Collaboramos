@@ -40,10 +40,7 @@ export class ProfileProjectPage {
               private menuCtrl: MenuController,
               public appCom: MyApp) {
     this.isEdit = false;
-<<<<<<< HEAD
-=======
     this.hasImage = false;
->>>>>>> 5b8af815b2def883a05d14e970bc49ddb8876e2e
     this.account = navParams.get('account');
     this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
