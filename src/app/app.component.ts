@@ -149,6 +149,10 @@ export class MyApp {
     this.toggleProfileSettings();
   }
 
+  setEditFalse() {
+    this.editMode = false;
+  }
+
   toggleProfileSettings() {
     //change the editMode boolean, meaning pressed button
 
