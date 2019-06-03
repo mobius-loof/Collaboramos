@@ -28,8 +28,10 @@ export class ProfileCandidatePage {
   private isEdit: boolean;
 
   @ViewChild('imageInput') imageInput;
+  @ViewChild('fileInput') fileInput;
   hasImage: boolean;
   image = "";
+  file = ""
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -116,6 +118,30 @@ export class ProfileCandidatePage {
     let imageD = event.target.files[event.target.files.length - 1];
     this.tempProfile.image = imageD;
     console.log(imageD);
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  uploadResume() {
+    /*let options = {
+      maximumImagesCount: 1,
+      outputType: 0,
+      width: 800,
+      height: 800
+    }*/
+    this.fileInput.nativeElement.click();
+
+  }
+
+  processWebFile(event) {
+    let reader = new FileReader();
+    reader.onload = (readerEvent) => {
+
+      let fileData = (readerEvent.target as any).result;
+      this.file = fileData;
+    };
+    let fileD = event.target.files[event.target.files.length - 1];
+    this.tempProfile.resume_URL = fileD;
+    console.log(fileD);
     reader.readAsDataURL(event.target.files[0]);
   }
 

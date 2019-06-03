@@ -61,6 +61,11 @@
           <ion-item>
             <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>
           </ion-item>
+            <button class="resume-button" ion-button icon-start small (click)="uploadResume()">
+              <ion-icon class="resume-icon" name="attach"></ion-icon>
+              RESUME
+            </button>
+            <input type="file" #fileInput style="visibility: hidden; " name="files[]" (change)="processWebFile($event)" />
         </div>
       </ion-col>
     </ion-row>
