@@ -106,7 +106,7 @@ export class Firestore {
 
     return this.firestore.doc(`match_queries/${fileId}`).set({
       id: fileId,
-      list_type: "candidate",
+      list_type: "project",
       queried_list: []
     });
   }
@@ -189,7 +189,7 @@ export class Firestore {
 
     return this.firestore.doc(`match_queries/${fileId}`).set({
       id: fileId,
-      list_type: "project",
+      list_type: "candidate",
       queried_list: []
     });
   }
