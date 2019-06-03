@@ -29,13 +29,19 @@ export class MatchesPage {
     timestamp: new Date()
   }];*/
 
-  public chats
+  public matchesKeys;
+  public matches;
 
   constructor(public navCtrl: NavController, private firestore: Firestore, public navParams: NavParams) {
     //console.log(this.navParams);
     let id = this.navParams.get('projectProfile').id;
-    //console.log(id);
-    this.chats = this.firestore.getChannelsFromProfile(id).valueChanges();
+    console.log(id);
+    this.firestore.getMatchesFromProfile(id).valueChanges().subscribe( matches => {
+      this.matchesKeys = Object.keys(matches.matched);
+      this.matches = matches.matched;
+      console.log(this.matchesKeys);
+      console.log(this.matches);
+    });
   }
 
   viewMessages(chat) {
