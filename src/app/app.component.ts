@@ -57,11 +57,11 @@ export class MyApp {
   protected isToggled: boolean;
 
   //variables related to project profile
-  private projectInvis: boolean;
+  private projectVis: boolean;
   private projectColor: string = this.PROJECT_COLOR;
 
   //variables related to candidate profile
-  private candidateInvis: boolean;
+  private candidateVis: boolean;
   private candidateColor: string = this.CANDIDATE_COLOR;
 
   private isEdit: boolean = false;
@@ -93,7 +93,7 @@ export class MyApp {
   }
 
   // this should handle input from ion-toggles
-  public notify(check: boolean) {
+  public notify(isProject: boolean) {
     //need to interface with Firebase for this to remember last toggled setting
     // this.isToggled = !check;
 
@@ -113,6 +113,12 @@ export class MyApp {
     // } else if(this.currentProfile === this.CANDIDATE) {
     //   this.isToggled = false;
     // }
+
+    if(isProject) {
+      this.firestore.setProjectVisibility(this.project.id, this.project.is_visible);
+    } else if(!isProject) {
+      this.firestore.setCandidateVisibility(this.candidate.id, this.candidate.is_visible);
+    }
   }
 
   closeMenu() {
@@ -150,6 +156,18 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  public deleteProject() {
+    this.firestore.deleteProjectProfile(this.project.id);
+    this.project = null;
+    this.projectRef = null;
+  }
+
+  public deleteCandidate() {
+    this.firestore.deleteCandidateProfile(this.candidate.id);
+    this.candidate = null;
+    this.candidateRef = null;
   }
 
   reset() {

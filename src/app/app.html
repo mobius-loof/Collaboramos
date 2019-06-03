@@ -1,10 +1,10 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" (ionClose) = "closeMenu()">
   <ion-header no-border>
     <ion-toolbar color="ham_bg">
-      <button *ngIf="!isEdit" ion-button float-right small clear (click) = "setEdit(true)">
+      <button *ngIf="!isEdit" ion-button float-right small clear (click) = "setEdit(true)" class="editButton">
         Edit
       </button>
-      <button *ngIf="isEdit" ion-button float-right small clear (click) = "setEdit(false)">
+      <button *ngIf="isEdit" ion-button float-right small clear (click) = "setEdit(false)" class="editButton">
         Cancel
       </button>
     </ion-toolbar>
@@ -21,45 +21,45 @@
           {{project.name}}
         </button>
 
-        <button *ngIf="!project" ion-item detail-none text-center (click) = "createProject()">
+        <button *ngIf="!project" class="candidateButton" ion-item detail-none text-center (click) = "createProject()">
           Create Project
         </button>
         
-        <ion-item *ngIf="project" style="background-color: #AAABDC" class="font-family">
-          <ion-label>Project Visibility</ion-label>
-          <ion-toggle [(ngModel)]="project.is_visible" (ionChange)="notify(this.projectInvis)"></ion-toggle>
+        <ion-item *ngIf="project" style="background-color: #AAABDC" class="font-family candidateButton">
+          <ion-label class="small-font">Project Visibility</ion-label>
+          <ion-toggle [(ngModel)]="project.is_visible" (ionChange)="notify(true)"></ion-toggle>
         </ion-item>
 
-        <button *ngIf="candidate" ion-item detail-none text-center color=danger (click) = "deleteCandidate()">
+        <button *ngIf="candidate" class="candidateButton" ion-item detail-none text-center color=danger (click) = "deleteCandidate()">
           <ion-icon float-left name="close"></ion-icon>
           {{candidate.name}}
         </button>
 
-        <button *ngIf="!candidate" ion-item detail-none text-center (click) = "createCandidate()">
+        <button *ngIf="!candidate" ion-item detail-none text-center (click) = "createCandidate()" class="candidateButton">
           Create Candidate
         </button>
 
-        <ion-item *ngIf="candidate" class="font-family">
-          <ion-label>Candidate Visibility</ion-label>
-          <ion-toggle [(ngModel)]="candidate.is_visible" (ionChange)="notify(this.candidateInvis)"></ion-toggle>
+        <ion-item *ngIf="candidate" class="font-family candidateButton">
+          <ion-label class="small-font">Candidate Visibility</ion-label>
+          <ion-toggle [(ngModel)]="candidate.is_visible" (ionChange)="notify(false)"></ion-toggle>
         </ion-item>
         
-        <button ion-item detail-none (click) = "changePage(pages[2])" style="background-color: #AAABDC" class="font-family">
+        <!--<button ion-item detail-none (click) = "changePage(pages[2])" style="background-color: #AAABDC" class="font-family">
           {{pages[2].title}}
         </button>
 
-        <button ion-item detail-none (click) = "changePage(pages[3])" style="background-color: #AAABDC" class="font-family">
+        <button ion-item detail-none (click) = "changePage(pages[3])" style="background-color: #AAABDC" class="font-family candidateButton">
           {{pages[3].title}}
-        </button>
+        </button>-->
       </div>
 
       <!-- div to show when not in edit mode -->
-      <div *ngIf="!isEdit" class = "centerParent" style="background-color: #AAABDC">
+      <div *ngIf="!isEdit" class = "centerParent" style="background-color: #AAABDC" class="centerParent">
         <button *ngIf="project" ion-item detail-none text-center color = "{{this.projectColor}}" (click) = "setCurrentProfile('project')" >
           {{project.name}}
         </button>
 
-        <button *ngIf="candidate" ion-item detail-none text-center color = "{{this.candidateColor}}" (click) = "setCurrentProfile('candidate')">
+        <button *ngIf="candidate" class="candidateButton" ion-item detail-none text-center color = "{{this.candidateColor}}" (click) = "setCurrentProfile('candidate')">
           {{candidate.name}}
         </button>
 
@@ -67,7 +67,7 @@
           {{pages[2].title}}
         </button>
 
-        <button *ngIf="!editMode" ion-item detail-none (click) = "changePage(pages[3])" style="background-color: #AAABDC" class="font-family">
+        <button *ngIf="!editMode" class="candidateButton" ion-item detail-none (click) = "changePage(pages[3])" style="background-color: #AAABDC" class="font-family">
           {{pages[3].title}}
         </button>
       </div>
