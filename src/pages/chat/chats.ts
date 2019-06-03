@@ -30,11 +30,16 @@ export class ChatsPage {
   }];*/
 
   public chats;
+  public profileId;
 
   constructor(public navCtrl: NavController, private firestore: Firestore, public navParams: NavParams) {
     console.log(this.navParams);
-    //let id = this.navParams.get('projectProfile').id;
-    this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
+    if(this.navParams.get('currentProfile') == "project"){
+      this.profileId = this.navParams.get('projectProfile').id;
+    }else{
+      this.profileId = this.navParams.get('candidateProfile').id;
+    }
+    this.chats = this.firestore.getChannelsFromProfile(this.profileId).valueChanges();
   }
 
   viewMessages(chat) {
