@@ -126,8 +126,8 @@ export class HomeCandidateComponent {
     })
   }
 
-  clickWebsite() {
-    this.inAppBrowser.create(this.profile.website);
+  clickWebsite(c: any) {
+    this.inAppBrowser.create(c.website);
   }
 
 
