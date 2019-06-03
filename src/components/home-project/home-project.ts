@@ -68,8 +68,8 @@ export class HomeProjectComponent {
                 return 800;
             }
         };
-
-        this.profile = navParams.get('projectProfile');
+        
+        this.profile = this.navParams.get('projectProfile');
         this.cards = [];
         this.addNewCards(3);
 
@@ -113,14 +113,17 @@ export class HomeProjectComponent {
 
     // Connected through HTML
     voteUp(like: boolean) {
+        console.log("profile: " + this.profile)
         let removedCard = this.cards.pop();
 
         if (this.cards.length <= 2) {
-            this.addNewCards(5);
+            this.addNewCards(3);
             console.log("Voted on cards and added");
         }
 
         if (like) {
+            console.log("profile " + this.profile.id);
+            console.log("other " + removedCard.id);
             this.firestore.updateMatches(this.profile.id, this.profile.image, removedCard.id, removedCard.image);
         } else {
           this.recentCard = 'You disliked: ' + removedCard.name;
@@ -130,7 +133,7 @@ export class HomeProjectComponent {
     // Add new cards to our array
     addNewCards(count: number) {
         console.log("Added new cards");
-        this.firestore.getCards("project_id_1", count).then(map => {
+        this.firestore.getCards(this.profile.id, count).then(map => {
             map.forEach((value: any, key: any) => {
                 this.cards.push(value)
                 this.tags.push(value.skills)
