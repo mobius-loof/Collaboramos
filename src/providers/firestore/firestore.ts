@@ -247,6 +247,11 @@ export class Firestore {
     ref.where('members', 'array-contains', profileId).orderBy('last_message_date', 'desc'));
   }
 
+  // Get Messages in Chat
+  getMessagesForChannel(id: string): AngularFirestoreCollection {
+    return this.firestore.collection('messages', ref => ref.where('channel_id', '==', id).orderBy('message_date', 'asc'));
+  }
+
   // Update Channel
   updateChannel(id: string, model: Channel): Promise<void> {
     return this.firestore.doc(`channels/${id}`).update({
@@ -260,6 +265,11 @@ export class Firestore {
   // Delete Channel
   deleteChannel(id: string): Promise<void> {
     return this.firestore.collection('channels').doc(id).delete();
+  }
+
+  // Get Matches for Matches Page
+  getMatchesFromProfile(profileId: string): AngularFirestoreDocument {
+    return this.firestore.collection('matches').doc(profileId);
   }
 
   // Update Matches
@@ -350,6 +360,28 @@ export class Firestore {
 
       //console.log(newDocuments);
       return newDocuments;
+    });
+  }
+
+  // CR for Messages
+  createMessage(model: Message): Promise<void> {
+    var id = this.firestore.createId(); // create new id
+    var dateFromFirestore = firebase.firestore.FieldValue.serverTimestamp(); // get time at server
+
+    // update last message sent for the channel
+    this.firestore.collection('channels').doc(model.channel_id).update({
+      last_message_sent: model.message,
+      last_message_sender: model.sender_name,
+      last_message_date: dateFromFirestore
+    });
+
+    // create new message and push to firestore
+    return this.firestore.doc(`messages/${id}`).set({
+      channel_id: model.channel_id,
+      sender_id: model.sender_id,
+      sender_name: model.sender_name,
+      message: model.message,
+      message_date: dateFromFirestore
     });
   }
 }
