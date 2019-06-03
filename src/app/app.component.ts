@@ -47,6 +47,7 @@ export class MyApp {
   private CANDIDATE = 'candidate';
   private PROJECT_COLOR: string = 'project_button';
   private CANDIDATE_COLOR: string = 'candy_button';
+  private SWITCH: string = 'switch';
 
   private NON_COLOR: string = 'baby_powder';
   private NON_CREATE: string = 'nop';
@@ -72,7 +73,7 @@ export class MyApp {
   private editMode: boolean = false;
 
   //variable to tell what was last profile
-  private lastProf: string;
+  private currentProfile: string;
 
   private project: Project;
   private candidate: Candidate;
@@ -105,62 +106,29 @@ export class MyApp {
     //this.checked = !check;
     this.isToggled = !check;
 
-    if(this.lastProf === this.PROJECT) {
+    if(this.currentProfile === this.PROJECT) {
 
       if(this.projToggled) {
-        var dumProfile: Project;
-        dumProfile = {
-          id: 'VpomGCkP4vpZ3HYNoEta',
-          name: 'Henlo',
-          image: 'Henlo',
-          description: 'THANOS',
-          is_visible: false,
-          frameworks: null,
-          skills: null,
-          chats: {},
-          interests: {},
-          matches: {},
-          waitlist: null,
-          address: '123 Gamer',
-          email: 'henlo@henlo.com',
-          website: 'Google',
-          phone_number: '12'
-        };
+        this.project = this.switchProjectVisibleModel(this.project, false);
 
-        this.firestore.updateProjectProfile(dumProfile);
+        this.firestore.updateProjectProfile(this.project);
       } else if(!this.projToggled) {
-        var dumProfile: Project;
-        dumProfile = {
-          id: 'VpomGCkP4vpZ3HYNoEta',
-          name: 'Henlo',
-          image: 'Henlo',
-          description: 'THANOS',
-          is_visible: true,
-          frameworks: null,
-          skills: null,
-          chats: {},
-          interests: {},
-          matches: {},
-          waitlist: null,
-          address: '123 Gamer',
-          email: 'henlo@henlo.com',
-          website: 'Google',
-          phone_number: '12'
-        };
 
-        this.firestore.updateProjectProfile(dumProfile);
+        this.project = this.switchProjectVisibleModel(this.project, true);
+
+        this.firestore.updateProjectProfile(this.project);
       }
       //this.projectSettings();
-    } else if(this.lastProf === this.CANDIDATE) {
+    } else if(this.currentProfile === this.CANDIDATE) {
       this.isToggled = false;
     }
   }
 
-  openPage(page) {
+  /*openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
-  }
+  }*/
 
   closeMenu() {
     //closes the left side menu
@@ -171,14 +139,18 @@ export class MyApp {
     }
   }
 
-  openMenu() {
+  /*openMenu() {
     //open the menu
     this.menuCtrl.open();
+  }*/
+
+  toggleEditSettings() {
+    this.editMode = !this.editMode;
+    this.toggleProfileSettings();
   }
 
   toggleProfileSettings() {
     //change the editMode boolean, meaning pressed button
-    this.editMode = !this.editMode;
 
     //if in edit mode, then change the profile tabs to red indicating delete
     if(this.editMode) {
@@ -191,13 +163,19 @@ export class MyApp {
     } else if(!this.editMode) {
       this.editButton = 'Edit';
 
-      if(this.lastProf === this.PROJECT) {
+      if(this.projectCreated && !this.candidateCreated) {
+        this.currentProfile = this.PROJECT;
+      } else if(!this.projectCreated && this.candidateCreated) {
+        this.currentProfile = this.CANDIDATE;
+      }
+
+      if(this.currentProfile === this.PROJECT) {
         this.projectColor = this.PROJECT_COLOR;
 
         if(this.candidateCreated) {
           this.candidateColor = this.NON_COLOR;
         }
-      } else if(this.lastProf === this.CANDIDATE) {
+      } else if(this.currentProfile === this.CANDIDATE) {
         this.candidateColor = this.CANDIDATE_COLOR;
 
         if(this.projectCreated) {
@@ -230,7 +208,7 @@ export class MyApp {
 
   changePage(item) {
     //change page and close menu for certain menu actions
-    this.nav.push(item.component);
+    this.nav.setRoot(item.component);
     this.closeMenu();
   }
 
@@ -238,7 +216,7 @@ export class MyApp {
     if(!this.projectCreated && !this.editMode) {
 
       this.nav.push('CreateProjectPage', {
-        account: this.account,
+        account: this.account //,
       });
 
       this.projectCreated = true;
@@ -246,7 +224,7 @@ export class MyApp {
 
       //CHANGE THE NAME BASED ON FIRESTORE
       this.projectColor = this.PROJECT_COLOR;
-      this.lastProf = this.PROJECT;
+      this.currentProfile = this.PROJECT;
 
       if(this.candidateCreated) {
         this.candidateColor = this.NON_COLOR;
@@ -258,7 +236,10 @@ export class MyApp {
 
   candidateCreate() {
     if(!this.candidateCreated && !this.editMode) {
-      this.nav.setRoot('CreateCandidatePage', {
+      this.nav.push('CreateCandidatePage', {
+        account: this.account //,
+      });
+      /*this.nav.setRoot('CreateCandidatePage', {
         account: this.account,
         candidateProfile: this.candidate,
         projectProfile: this.candidate,
@@ -282,13 +263,13 @@ export class MyApp {
         phone_number: '',
         email: '',
         address: ''
-      };
+      };*/
 
       this.candidateCreated = true;
       this.candidateInvis = false;
 
       this.candidateColor = this.CANDIDATE_COLOR;
-      this.lastProf = this.CANDIDATE;
+      this.currentProfile = this.CANDIDATE;
 
       //CHANGE THE NAME BASED ON FIRESTORE
 
@@ -302,7 +283,7 @@ export class MyApp {
   projectSettings() {
     //set the defaults for the project profile once it is created
     if(!this.editMode) {
-      this.lastProf = 'project';
+      this.currentProfile = 'project';
       this.projectColor = this.PROJECT_COLOR;
 
       if(this.candidateCreated) {
@@ -316,10 +297,8 @@ export class MyApp {
   candidateSettings() {
     //set defaults for candidate profile once it has been created
     if(!this.editMode) {
-      this.lastProf = 'candidate';
+      this.currentProfile = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
-
-      this.events.publish('lastProf', 'candidate');
 
       if(this.projectCreated) {
         this.projectColor = this.NON_COLOR;
@@ -336,9 +315,9 @@ export class MyApp {
       this.projectInvis = false;
 
       if(this.candidateCreated) {
-        this.lastProf = 'candidate';
+        this.currentProfile = 'candidate';
       } else {
-        this.lastProf = '';
+        this.currentProfile = '';
       }
 
     //if tap delete on prompt for candidate profile, then delete
@@ -347,9 +326,9 @@ export class MyApp {
       this.candidateInvis = false;
 
       if(this.projectCreated) {
-        this.lastProf = 'project';
+        this.currentProfile = 'project';
       } else {
-        this.lastProf = '';
+        this.currentProfile = '';
       }
     }
 
@@ -387,6 +366,7 @@ export class MyApp {
 
       // NAVPARAMS?
       this.nav.setRoot('CreateProfilePage');
+      this.closeMenu();
     }
   }
 
@@ -430,7 +410,7 @@ export class MyApp {
   }
 
   setCurrentProfile(prof: string) {
-    this.lastProf = prof;
+    this.currentProfile = prof;
 
     if(prof === this.PROJECT) {
       this.projectPublishEvents();
@@ -440,13 +420,32 @@ export class MyApp {
   }
 
   candidatePublishEvents() {
-    this.events.publish('lastProf', 'candidate');
+    this.events.publish('currentProfile', 'candidate');
   }
 
   projectPublishEvents() {
-    this.events.publish('lastProf', 'project');
+    this.events.publish('currentProfile', 'project');
   }
 
+  switchProjectVisibleModel(model: Project, vis: boolean) {
+    return {
+      id: model.id,
+      name: model.name,
+      image: model.image,
+      description: model.description,
+      is_visible: vis,
+      frameworks: model.frameworks,
+      skills: model.skills,
+      chats: model.chats,
+      interests: model.interests,
+      matches: model.matches,
+      waitlist: model.waitlist,
+      address: model.address,
+      email: model.email,
+      website: model.website,
+      phone_number: model.phone_number
+    };
+  }
 
 }
 
