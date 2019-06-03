@@ -27,7 +27,7 @@
         
         <ion-item *ngIf="project" style="background-color: #AAABDC" class="font-family">
           <ion-label>Project Visibility</ion-label>
-          <ion-toggle [(ngModel)]="project.is_visible" (ionChange)="notify(this.projectInvis)"></ion-toggle>
+          <ion-toggle [(ngModel)]="project.is_visible" (ionChange)="notify(true)"></ion-toggle>
         </ion-item>
 
         <button *ngIf="candidate" ion-item detail-none text-center color=danger (click) = "deleteCandidate()">
@@ -41,7 +41,7 @@
 
         <ion-item *ngIf="candidate" class="font-family">
           <ion-label>Candidate Visibility</ion-label>
-          <ion-toggle [(ngModel)]="candidate.is_visible" (ionChange)="notify(this.candidateInvis)"></ion-toggle>
+          <ion-toggle [(ngModel)]="candidate.is_visible" (ionChange)="notify(false)"></ion-toggle>
         </ion-item>
         
         <button ion-item detail-none (click) = "changePage(pages[2])" style="background-color: #AAABDC" class="font-family">
