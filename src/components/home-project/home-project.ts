@@ -117,7 +117,7 @@ export class HomeProjectComponent {
         let removedCard = this.cards.pop();
 
         if (this.cards.length <= 2) {
-            this.addNewCards(3);
+            this.addNewCards(5);
             console.log("Voted on cards and added");
         }
 
