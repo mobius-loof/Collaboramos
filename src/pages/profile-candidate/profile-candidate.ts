@@ -38,7 +38,8 @@ export class ProfileCandidatePage {
               private alertCtrl: AlertController,
               private imagePicker: ImagePicker,
               private inAppBrowser: InAppBrowser,
-              private firestore: Firestore) {
+              private firestore: Firestore,
+              private menuCtrl: MenuController) {
     this.isEdit = false;
     this.hasImage = false;
     this.account = navParams.get('account');
@@ -187,6 +188,10 @@ export class ProfileCandidatePage {
       ]
     });
     alert.present();
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
   }
 
 }
