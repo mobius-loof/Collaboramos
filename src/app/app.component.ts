@@ -126,12 +126,6 @@ export class MyApp {
     this.isEdit = false;
   }
 
-  /*****************/
-  public openMenu() {
-    this.menuCtrl.open();
-    this.isEdit = false;
-  }
-
   changePage(item) {
     //change page and close menu for certain menu actions
     this.nav.setRoot(item.component);
@@ -161,6 +155,18 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  public deleteProject() {
+    this.firestore.deleteProjectProfile(this.project.id);
+    this.project = null;
+    this.projectRef = null;
+  }
+
+  public deleteCandidate() {
+    this.firestore.deleteCandidateProfile(this.candidate.id);
+    this.candidate = null;
+    this.candidateRef = null;
   }
 
   reset() {
