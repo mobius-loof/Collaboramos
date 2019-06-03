@@ -72,7 +72,7 @@ export class MyApp {
   private editMode: boolean = false;
 
   //variable to tell what was last profile
-  private lastProf: string;
+  private currentProfile: string;
 
   private project: Project;
   private candidate: Candidate;
@@ -105,7 +105,7 @@ export class MyApp {
     //this.checked = !check;
     this.isToggled = !check;
 
-    if(this.lastProf === this.PROJECT) {
+    if(this.currentProfile === this.PROJECT) {
 
       if(this.projToggled) {
         var dumProfile: Project;
@@ -151,7 +151,7 @@ export class MyApp {
         this.firestore.updateProjectProfile(dumProfile);
       }
       //this.projectSettings();
-    } else if(this.lastProf === this.CANDIDATE) {
+    } else if(this.currentProfile === this.CANDIDATE) {
       this.isToggled = false;
     }
   }
@@ -191,13 +191,13 @@ export class MyApp {
     } else if(!this.editMode) {
       this.editButton = 'Edit';
 
-      if(this.lastProf === this.PROJECT) {
+      if(this.currentProfile === this.PROJECT) {
         this.projectColor = this.PROJECT_COLOR;
 
         if(this.candidateCreated) {
           this.candidateColor = this.NON_COLOR;
         }
-      } else if(this.lastProf === this.CANDIDATE) {
+      } else if(this.currentProfile === this.CANDIDATE) {
         this.candidateColor = this.CANDIDATE_COLOR;
 
         if(this.projectCreated) {
@@ -246,7 +246,7 @@ export class MyApp {
 
       //CHANGE THE NAME BASED ON FIRESTORE
       this.projectColor = this.PROJECT_COLOR;
-      this.lastProf = this.PROJECT;
+      this.currentProfile = this.PROJECT;
 
       if(this.candidateCreated) {
         this.candidateColor = this.NON_COLOR;
@@ -288,7 +288,7 @@ export class MyApp {
       this.candidateInvis = false;
 
       this.candidateColor = this.CANDIDATE_COLOR;
-      this.lastProf = this.CANDIDATE;
+      this.currentProfile = this.CANDIDATE;
 
       //CHANGE THE NAME BASED ON FIRESTORE
 
@@ -302,7 +302,7 @@ export class MyApp {
   projectSettings() {
     //set the defaults for the project profile once it is created
     if(!this.editMode) {
-      this.lastProf = 'project';
+      this.currentProfile = 'project';
       this.projectColor = this.PROJECT_COLOR;
 
       if(this.candidateCreated) {
@@ -316,10 +316,10 @@ export class MyApp {
   candidateSettings() {
     //set defaults for candidate profile once it has been created
     if(!this.editMode) {
-      this.lastProf = 'candidate';
+      this.currentProfile = 'candidate';
       this.candidateColor = this.CANDIDATE_COLOR;
 
-      this.events.publish('lastProf', 'candidate');
+      this.events.publish('currentProfile', 'candidate');
 
       if(this.projectCreated) {
         this.projectColor = this.NON_COLOR;
@@ -336,9 +336,9 @@ export class MyApp {
       this.projectInvis = false;
 
       if(this.candidateCreated) {
-        this.lastProf = 'candidate';
+        this.currentProfile = 'candidate';
       } else {
-        this.lastProf = '';
+        this.currentProfile = '';
       }
 
     //if tap delete on prompt for candidate profile, then delete
@@ -347,9 +347,9 @@ export class MyApp {
       this.candidateInvis = false;
 
       if(this.projectCreated) {
-        this.lastProf = 'project';
+        this.currentProfile = 'project';
       } else {
-        this.lastProf = '';
+        this.currentProfile = '';
       }
     }
 
@@ -430,7 +430,7 @@ export class MyApp {
   }
 
   setCurrentProfile(prof: string) {
-    this.lastProf = prof;
+    this.currentProfile = prof;
 
     if(prof === this.PROJECT) {
       this.projectPublishEvents();
@@ -440,11 +440,11 @@ export class MyApp {
   }
 
   candidatePublishEvents() {
-    this.events.publish('lastProf', 'candidate');
+    this.events.publish('currentProfile', 'candidate');
   }
 
   projectPublishEvents() {
-    this.events.publish('lastProf', 'project');
+    this.events.publish('currentProfile', 'project');
   }
 
 
