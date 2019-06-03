@@ -69,7 +69,7 @@ export class LoginPage {
       }
     }).then ( candidateProfile => {
       params['candidateProfile'] = candidateProfile;
-      this.appCom.setCandidateProfile = candidateProfile;
+      this.appCom.setCandidateProfile(candidateProfile);
     }).then( _ => {
       params['currentProfile'] = this.getSelectedProfile(params);
       loading.dismiss();
