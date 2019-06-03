@@ -73,10 +73,6 @@ export class HomeCandidateComponent {
 
   }
 
-  viewMessages() {
-    this.navCtrl.push('MessagePage');
-  }
-
   getSize() {
     return '100px 100px'
   }

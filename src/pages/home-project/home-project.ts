@@ -21,10 +21,12 @@ import { Items } from '../../providers';
   templateUrl: 'home-project.html'
 })
 export class HomeProjectPage {
+  params;
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer) {
+    this.params = navParams;
     };
 
-  viewMessages() {
-    this.navCtrl.push('ChatsPage');
-  }
+    viewMessages() {
+      this.navCtrl.push("ChatsPage", this.params['data'])
+    }
 }

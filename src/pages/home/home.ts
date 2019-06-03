@@ -40,7 +40,8 @@ export class HomePage {
     };
 
     viewMessages() {
-        this.navCtrl.push('MessagePage');
+        console.log(this.navParams);
+        this.navCtrl.push('ChatsPage', this.navParams['data']);
     }
 
     openMenu() {
