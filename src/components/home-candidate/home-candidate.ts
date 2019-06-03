@@ -59,7 +59,7 @@ export class HomeCandidateComponent {
     };
 
 
-    this.profile = navParams.get("candidateProfiles") 
+    this.profile = navParams.get("candidateProfile") 
     this.cards = [];
     this.addNewCards(3);
 

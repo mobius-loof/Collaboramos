@@ -38,7 +38,8 @@ export class MyApp {
     {title: 'Chats', component: 'ChatsPage'},
     {title: 'Messages', component: 'MessagesPage'},
     {title: 'Matches', component: 'MatchesPage'},
-    {title: 'ViewProfile', component: 'ViewProfilePage'},
+    {title: 'ViewCandidateProfile', component: 'ViewCandidateProfilePage'},
+    {title: 'ViewProjectProfile', component: 'ViewProjectProfilePage'},
     { title: 'HomeProject', component: 'HomeProjectPage' },
     { title: 'HomeCandidate', component: 'HomeCandidatePage' },
   ]

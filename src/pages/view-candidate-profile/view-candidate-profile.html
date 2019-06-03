@@ -1,0 +1,131 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar text-center>
+    <ion-title>Candidate Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="content">
+  <ion-grid>
+    <ion-row class="title-row">
+      <ion-col col-5>
+        <div class="project-img-container">
+          <div *ngIf="!isEdit">
+            <img *ngIf="!hasImage" class="project-img" src="../assets/img/marty-avatar.png">
+            <div *ngIf="hasImage" class="project-img"  [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            </div>
+          </div>
+          <div *ngIf="isEdit">
+            <img *ngIf="!hasImage" class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+            <div *ngIf="hasImage" class="project-img" (click)="pickImage()" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            </div>
+          </div>
+          <h6 *ngIf="isEdit" class="photo-edit">Edit</h6>
+          <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
+        </div>
+      </ion-col>
+      <ion-col>
+        <div *ngIf="!isEdit" class="project-detail-col">
+          <h3>{{ profile.name }}</h3>
+          <button class="website-button" ion-button icon-start small (click)="presentWebsite()">
+            <ion-icon name="globe"></ion-icon>
+            WEBSITE
+          </button>
+          <button class="resume-button" ion-button icon-start small (click)="presentResume()">
+            <ion-icon class="resume-icon" name="attach"></ion-icon>
+            RESUME
+          </button>
+        </div>
+
+        <div *ngIf="isEdit" class="project-detail-col">
+          <ion-item>
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="!isEdit" class="description-container">
+      <ion-col>
+        <p>{{ profile.description }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isEdit" class="text-area-container">
+      <ion-col>
+        <textarea class="textarea" [(ngModel)]="tempProfile.description"></textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <p><b>Skills</b></p>
+    </ion-row>
+    <ion-row>
+      <div class="tag-row-container" *ngIf="!isEdit">
+        <div class="tag-container" *ngFor="let skill of profile.skills">
+          <ion-item class="tag" no-lines no-padding round>
+              <p class="tag-content">{{skill}}</p>
+          </ion-item>
+        </div>
+      </div>
+      <div class="tag-row-container" *ngIf="isEdit">
+        <div class="tag-container" *ngFor="let skill of tempProfile.skills">
+          <ion-item class="tag" no-lines no-padding round>
+              <button class="tag-btn" ion-button item-left clear round (click)="deleteSkill(skill)">
+                  <ion-icon name="close-circle"></ion-icon>
+              </button>
+              <p class="tag-content">{{skill}}</p>
+          </ion-item>
+        </div>
+      </div>
+      <button *ngIf="isEdit" class="add-tag-btn" ion-button item-left clear round (click)="presentPrompt()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-row>
+
+    <ion-row class="info-row">
+      <ion-col col-3>
+          <p><b>Phone</b></p>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.phone }}</ion-label>
+        <ion-item *ngIf="isEdit" >
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.phone" type="tel"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="info-row">
+      <ion-col col-3>
+          <p><b>Email</b></p>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.email }}</ion-label>
+        <ion-item *ngIf="isEdit">
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.email" type="email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="info-row">
+      <ion-col col-3>
+        <p><b>Address</b></p>
+      </ion-col>
+      <ion-col>
+        <ion-label *ngIf="!isEdit" class="info-label">{{ profile.address }}</ion-label>
+        <ion-item *ngIf="isEdit">
+          <ion-input class="input-from-label" [(ngModel)]="tempProfile.address"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
