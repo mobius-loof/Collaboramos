@@ -31,7 +31,7 @@ export class MatchesPage {
     timestamp: new Date()
   }];*/
 
-  public matchesKeys;
+  public matchesKeys: any[];
   public matches;
   public profileId;
   public names = new Map();
@@ -47,10 +47,23 @@ export class MatchesPage {
     this.firestore.getMatchesFromProfile(this.profileId).valueChanges().subscribe( matches => {
       this.matchesKeys = Object.keys(matches.matched);
       this.matches = matches.matched;
+
+      if(this.navParams.get('currentProfile') == "project"){
+        this.matchesKeys.forEach(element => {
+          this.firestore.getCandidateProfileFromID(element).then(candidate =>
+            {this.names.set(element, candidate.name)});
+        });  
+      }else{
+        this.matchesKeys.forEach(element => {
+          this.firestore.getProjectProfileFromID(element).then(project =>
+            {this.names.set(element, project.name)});
+        });
+      }
       //console.log(this.matchesKeys);
       //console.log(this.matches);
+      console.log(this.names);
     });
-
+    
     //get names
     /*var i;
     if(this.navParams.get('currentProfile') == "project"){
