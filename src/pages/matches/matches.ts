@@ -32,21 +32,36 @@ export class MatchesPage {
 
   public matchesKeys;
   public matches;
+  public profileId;
 
   constructor(public navCtrl: NavController, private firestore: Firestore, public navParams: NavParams, public appCom: MyApp, private menuCtrl: MenuController) {
-    //console.log(this.navParams);
-    let id = this.navParams.get('projectProfile').id;
-    console.log(id);
-    this.firestore.getMatchesFromProfile(id).valueChanges().subscribe( matches => {
+    console.log(this.navParams);
+    /*if(this.navParams.get('currentProfile') == "project"){
+      this.id = this.navParams.get('projectProfile').id;
+    }else{*/
+      this.profileId = this.navParams.get('candidateProfile').id;
+    //}
+    //console.log(id);
+    this.firestore.getMatchesFromProfile(this.profileId).valueChanges().subscribe( matches => {
       this.matchesKeys = Object.keys(matches.matched);
       this.matches = matches.matched;
-      console.log(this.matchesKeys);
-      console.log(this.matches);
+      //console.log(this.matchesKeys);
+      //console.log(this.matches);
     });
   }
 
-  viewMessages(chat) {
-    this.navCtrl.push('ViewProfilePage', { chatId: chat.id });
+  viewProfile(key) {
+    //need to know which function to call (get Project from ID or get Candidate from ID)
+    if(this.navParams.get('currentProfile') == "project"){
+      this.firestore.getCandidateProfileFromID(key).then(candidate => {
+        this.navCtrl.push('ViewCandidateProfilePage', {'candidateProfile': candidate});
+      });
+    }else{
+      this.firestore.getProjectProfileFromID(key).then(project => {
+        this.navCtrl.push('ViewProjectProfilePage', {'projectProfile': project});
+      });
+    }
+    //this.navCtrl.push('ViewProfilePage', { chatId: chat.id });
   }
 
   openMenu() {

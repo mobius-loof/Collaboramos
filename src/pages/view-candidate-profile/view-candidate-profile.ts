@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { FirebaseApp } from 'angularfire2';
 import { Firestore } from '../../providers/firestore/firestore'
-import { Project, Account } from '../../models';
+import { Candidate, Account } from '../../models';
 
 /**
  * Generated class for the ProfilePage page.
@@ -15,14 +16,14 @@ import { Project, Account } from '../../models';
 
 @IonicPage()
 @Component({
-  selector: 'page-view-profile',
-  templateUrl: 'view-profile.html',
+  selector: 'page-view-candidate-profile',
+  templateUrl: 'view-candidate-profile.html',
 })
-export class ViewProfilePage {
+export class ViewCandidateProfilePage {
 
   private account: Account;
-  private profile: Project;
-  private tempProfile: Project;
+  private profile: Candidate;
+  private tempProfile: Candidate;
 
   private isEdit: boolean;
 
@@ -39,33 +40,34 @@ export class ViewProfilePage {
     this.isEdit = false;
     this.hasImage = false;
     this.account = navParams.get('account');
-    this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
-    this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
-    this.populateProfileFromAccount(this.profile, this.account);
-    this.populateProfileFromAccount(this.tempProfile, this.account);
+    this.profile = this.copyCandidateProfile(navParams.get('candidateProfile'));
+    this.tempProfile = this.copyCandidateProfile(navParams.get('candidateProfile'));
+    //this.populateProfileFromAccount(this.profile, this.account);
+    //this.populateProfileFromAccount(this.tempProfile, this.account);
   }
 
-  copyProjectProfile(profile: Project): Project {
+  
+  copyCandidateProfile(profile: Candidate): Candidate {
     return {
       id: profile.id,
       name: profile.name,
       image: profile.image,
-      description: profile.description,
+      resume_URL: profile.resume_URL,
       is_visible: profile.is_visible,
-      frameworks: Object.assign([], profile.frameworks),
-      skills: Object.assign([], profile.skills),
+      description: profile.description,
       chats: profile.chats,
       interests: profile.interests,
       matches: profile.matches,
       waitlist: Object.assign([], profile.waitlist),
+      phone_number: profile.phone_number,
       address: profile.address,
+      skills: Object.assign([], profile.skills),
       email: profile.email,
-      website: profile.website,
-      phone_number: profile.phone_number
+      website: profile.website
     };
   }
-
-  populateProfileFromAccount(profile: Project, account: Account) {
+/*
+  populateProfileFromAccount(profile: Candidate, account: Account) {
     profile.email = account.email;
     profile.phone_number = account.phone_number;
     profile.address = account.address;
@@ -75,11 +77,10 @@ export class ViewProfilePage {
     this.isEdit = isEdit;
     if (!isEdit) {
       if (!discard){
-        // actually upload stuff
-        this.profile = this.copyProjectProfile(this.tempProfile);
-        this.firestore.updateProjectProfile(this.profile);
+        this.profile = this.copyCandidateProfile(this.tempProfile);
+        this.firestore.updateCandidateProfile(this.profile);
       } else {
-        this.tempProfile = this.copyProjectProfile(this.profile);
+        this.tempProfile = this.copyCandidateProfile(this.profile);
       }
     }
   }
@@ -94,27 +95,17 @@ export class ViewProfilePage {
     this.tempProfile.skills = newSkills;
   }
 
-  deleteFramework(framework: string){
-    var newFrameworks=[];
-    for(var i=0;i<this.tempProfile.frameworks.length;i++){
-      if(this.tempProfile.frameworks[i] != framework){
-        newFrameworks.push(this.tempProfile.frameworks[i]);
-      }
-    }
-    this.tempProfile.frameworks = newFrameworks;
-  }
-
   pickImage() {
     /*let options = {
       maximumImagesCount: 1,
       outputType: 0,
       width: 800,
       height: 800
-    }*/
+    }
     this.imageInput.nativeElement.click();
 
   }
-   
+
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
@@ -130,39 +121,31 @@ export class ViewProfilePage {
   }
 
   getSize() {
-    return '100px 100px'
+    return '100px 100px';
   }
 
   getProfileImageStyle() {
     //return 'url(' + this.form.controls['profilePic'].value + ')'
     return 'url(' + this.image + ')';
   }
-
-
+*/
   presentWebsite() {
     this.inAppBrowser.create(this.profile.website);
   }
 
-  presentPrompt(type: string){
-    let input: any
-    if (type === "skills") {
-      input = {
-        name: 'skill',
-        placeholder: 'e.g. Webscraping, iOS Dev'
-      }
-    } else {
-      input = {
-        name: 'framework',
-        placeholder: 'e.g. Ionic, React'
-      }
-    }
+  presentResume() { 
 
-    let title_str: string
-    title_str = (type === "skills") ? 'Add Skill' : 'Add Framework';
+  }
+/*
+  presentPrompt(){
+    let myString: string = ""
     let alert = this.alertCtrl.create({
-      title: title_str,
+      title: 'Add Skill',
       inputs: [
-        input
+        {
+          name: 'skill',
+          placeholder: 'e.g. Webscraping, Python'
+        }
       ],
       buttons: [
         {
@@ -173,15 +156,12 @@ export class ViewProfilePage {
         {
           text: 'Ok',
           handler: data => {
-            if (type === "skills") {
-              this.tempProfile.skills.push(data.skill);
-            } else if (type === "frameworks") {
-              this.tempProfile.frameworks.push(data.framework);
-            }
+            this.tempProfile.skills.push(data.skill);
           }
         }
       ]
     });
     alert.present();
-  }
+  }*/
+
 }
