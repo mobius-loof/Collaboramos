@@ -74,11 +74,11 @@ export class MyApp {
   //variable to tell what was last profile
   private lastProf: string;
 
-  private projProf: Project;
-  private candProf: Candidate;
+  private project: Project;
+  private candidate: Candidate;
   private account: Account;
-  private projRef: DocumentReference;
-  private candRef: DocumentReference;
+  private projectRef: DocumentReference;
+  private candidateRef: DocumentReference;
 
   private projToggled: boolean;
   private candToggled: boolean;
@@ -176,18 +176,6 @@ export class MyApp {
     this.menuCtrl.open();
   }
 
-  /*
-   * Setter for the edit button name
-   */
-  setEdit(editName: string) {
-    this.editButton = editName;
-  }
-
-  isEdit() {
-    //return the status of the editMode
-    return this.editMode;
-  }
-
   toggleProfileSettings() {
     //change the editMode boolean, meaning pressed button
     this.editMode = !this.editMode;
@@ -242,38 +230,16 @@ export class MyApp {
 
   changePage(item) {
     //change page and close menu for certain menu actions
-    this.nav.setRoot(item.component);
+    this.nav.push(item.component);
     this.closeMenu();
   }
 
   projectCreate() {
     if(!this.projectCreated && !this.editMode) {
 
-      this.nav.setRoot('CreateProjectPage', {
+      this.nav.push('CreateProjectPage', {
         account: this.account,
-        candidateProfile: this.candProf,
-        projectProfile: this.candProf,
-        candidateProfileRef: null,
-        projectProfileRef: null
       });
-
-      this.projProf = {
-        id: 'VpomGCkP4vpZ3HYNoEta',
-        name: 'Vamos',
-        image: 'Henlo',
-        description: 'THANOS',
-        is_visible: true,
-        frameworks: null,
-        skills: null,
-        chats: {},
-        interests: {},
-        matches: {},
-        waitlist: null,
-        address: '123 Gamer',
-        email: 'henlo@henlo.com',
-        website: 'Google',
-        phone_number: '12'
-      };
 
       this.projectCreated = true;
       this.projectInvis = false;
@@ -294,13 +260,13 @@ export class MyApp {
     if(!this.candidateCreated && !this.editMode) {
       this.nav.setRoot('CreateCandidatePage', {
         account: this.account,
-        candidateProfile: this.candProf,
-        projectProfile: this.candProf,
+        candidateProfile: this.candidate,
+        projectProfile: this.candidate,
         candidateProfileRef: null,
         projectProfileRef: null
       });
 
-      this.candProf = {
+      this.candidate = {
         id: '32kul1tAw9FJRUC98hhg',
         name: 'Gary Bary',
         image: '',
@@ -347,10 +313,6 @@ export class MyApp {
     }
   }
 
-  projectPublishEvents() {
-    this.events.publish('lastProf', 'project');
-  }
-
   candidateSettings() {
     //set defaults for candidate profile once it has been created
     if(!this.editMode) {
@@ -365,10 +327,6 @@ export class MyApp {
 
       this.candidatePublishEvents();
     }
-  }
-
-  candidatePublishEvents() {
-    this.events.publish('lastProf', 'candidate');
   }
 
   profileDelete(profileType) {
@@ -432,24 +390,8 @@ export class MyApp {
     }
   }
 
-  copyProjectProfile(profile: Project) {
-    return {
-      id: profile.id,
-      name: profile.name,
-      image: profile.image,
-      description: profile.description,
-      is_visible: profile.is_visible,
-      frameworks: Object.assign([], profile.frameworks),
-      skills: Object.assign([], profile.skills),
-      chats: profile.chats,
-      interests: profile.interests,
-      matches: profile.matches,
-      waitlist: Object.assign([], profile.waitlist),
-      address: profile.address,
-      email: profile.email,
-      website: profile.website,
-      phone_number: profile.phone_number
-    };
+  setEdit(editName: string) {
+    this.editButton = editName;
   }
 
   setAccount(acc: Account) {
@@ -457,7 +399,7 @@ export class MyApp {
   }
 
   setCandidateProfile(candy: Candidate) {
-    this.candProf = candy;
+    this.candidate = candy;
     if (candy == null) {
       this.candidateCreated = false;
     } else {
@@ -466,7 +408,7 @@ export class MyApp {
   }
 
   setProjectProfile(proj: Project) {
-    this.projProf = proj;
+    this.project= proj;
     if (proj == null) {
       this.projectCreated = false;
     } else {
@@ -475,11 +417,16 @@ export class MyApp {
   }
 
   setCandidateProfileRef(ref: DocumentReference) {
-    this.projRef = ref;
+    this.projectRef = ref;
   }
 
   setProjectProfileRef(ref: DocumentReference) {
-    this.candRef = ref;
+    this.candidateRef = ref;
+  }
+
+  isEdit() {
+    //return the status of the editMode
+    return this.editMode;
   }
 
   setCurrentProfile(prof: string) {
@@ -491,6 +438,16 @@ export class MyApp {
       this.candidatePublishEvents();
     }
   }
+
+  candidatePublishEvents() {
+    this.events.publish('lastProf', 'candidate');
+  }
+
+  projectPublishEvents() {
+    this.events.publish('lastProf', 'project');
+  }
+
+
 }
 
 // can wrap things in ion item; put button and text

@@ -10,21 +10,20 @@
   <ion-content id="menu-color">
     <ion-list no-lines inset>
 
-      <button *ngIf="projectCreated" id = "project" ion-button text-right block color = "{{this.projectColor}}" (click) = "clickedProfile(this.PROJECT)">
-        <!--Collaboramos-->
-        {{projProf.name}}
-      </button>
+        <button *ngIf="projectCreated" ion-button text-right block color = "{{this.projectColor}}" (click) = "clickedProfile(this.PROJECT)">
+          {{project.name}}
+        </button>
 
-      <button *ngIf="!projectCreated" id = "project" ion-button text-center block color = "nop" (click) = "projectCreate(this.PROJECT)">
+      <button *ngIf="!projectCreated" ion-button text-center block color = "nop" (click) = "projectCreate(this.PROJECT)">
         Create Project
       </button>
 
-      <button *ngIf="candidateCreated" id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
+      <button *ngIf="candidateCreated" ion-button text-right block color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
         <!--Gary G.-->
-        {{candProf.name}}
+        {{candidate.name}}
       </button>
 
-      <button *ngIf="!candidateCreated" id = "candidate" ion-button text-right block color = "nop" (click) = "candidateCreate(this.CANDIDATE)">
+      <button *ngIf="!candidateCreated" ion-button text-right block color = "nop" (click) = "candidateCreate(this.CANDIDATE)">
         Create Candidate
       </button>
 
