@@ -62,6 +62,13 @@ export class Firestore {
 
   // Candidate Profile CRUD
 
+  // Set Candidate Visibility
+  setCandidateVisibility(id: string, is_visible: boolean): Promise<void> {
+    return this.firestore.collection('candidate_profiles').doc(id).update({
+      is_visible: is_visible
+    });
+  }
+
   // Create Candidate
   createCandidate(accountId: string, model: Candidate): Promise<void> {
 
@@ -129,6 +136,13 @@ export class Firestore {
 
   // Project Profile CRUD
 
+  // Set Project Visibility
+  setProjectVisibility(id: string, is_visible: boolean): Promise<void> {
+    return this.firestore.collection('project_profiles').doc(id).update({
+      is_visible: is_visible
+    });
+  }
+  
   // Create Profile
   createProjectProfile(accountId: string, model: Project): Promise<void> {
     const id = this.firestore.createId(); // generate an ID
@@ -136,7 +150,7 @@ export class Firestore {
     console.log(fileId); // debugging purposes
 
     // Returns promise of success/failure for creating the project document on Firestore
-    return this.filestorage.ref(fileId).put(model.image).then(ref => {
+    this.filestorage.ref(fileId).put(model.image).then(ref => {
       this.firestore.doc(`project_profiles/${id}`).set({
         id: id,
         name: model.name,
@@ -153,6 +167,18 @@ export class Firestore {
       return this.firestore.doc(`accounts/${accountId}`).update({
         project_ref: this.firestore.doc(`project_profiles/${id}`).ref
       });
+    });
+
+    var emptyMap: {[key: string]: string} = {};
+
+    this.firestore.doc(`matches/${fileId}`).set({
+      matched: emptyMap
+    });
+
+    return this.firestore.doc(`match_queries/${fileId}`).set({
+      id: fileId,
+      list_type: "candidate",
+      queried_list: []
     });
   }
 
