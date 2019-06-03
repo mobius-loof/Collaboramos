@@ -1,14 +1,14 @@
 <ion-header>
-  <ion-navbar primary>
+  <ion-navbar>
     <ion-title>
       Messages
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content class="chats">
+<ion-content class="chats" style="background-color: #e5eef6;">
   <ion-list>
     <ion-list-header>Today</ion-list-header>
-    <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)">
+    <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)" style="background-color: #e5eef6">
       <ion-avatar item-start>
         <img [src]="chat.imageUrl">
       </ion-avatar>
@@ -19,7 +19,7 @@
   </ion-list>
   <ion-list>
     <ion-list-header>Yesterday</ion-list-header>
-    <ion-item>
+    <ion-item style="background-color: #e5eef6">
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
       </ion-avatar>
@@ -27,7 +27,7 @@
       <p>Lorem ipsum dolor sit amet..</p>
       <ion-note item-end>11:11 pm</ion-note>
     </ion-item>
-    <ion-item>
+    <ion-item style="background-color: #e5eef6">
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
       </ion-avatar>
@@ -35,7 +35,7 @@
       <p>Lorem ipsum dolor sit amet..</p>
       <ion-note item-end>11:11 pm</ion-note>
     </ion-item>
-    <ion-item>
+    <ion-item style="background-color: #e5eef6">
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
       </ion-avatar>
@@ -46,7 +46,7 @@
   </ion-list>
   <ion-list>
     <ion-list-header>Last Week</ion-list-header>
-    <ion-item>
+    <ion-item style="background-color: #e5eef6">
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
       </ion-avatar>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, MenuController } from 'ionic-angular';
+import { NavController, IonicPage, MenuController, NavParams } from 'ionic-angular';
 import { Firestore } from '../../providers/firestore/firestore';
 import { MyApp } from '../../app/app.component';
 
@@ -30,10 +30,19 @@ export class MatchesPage {
     timestamp: new Date()
   }];*/
 
-  public chats
+  public matchesKeys;
+  public matches;
 
-  constructor(public navCtrl: NavController, private firestore: Firestore, public appCom: MyApp, private menuCtrl: MenuController) {
-    this.chats = this.firestore.getChannelsFromProfile("L4wTy2ApbjJEzSavgXIL").valueChanges();
+  constructor(public navCtrl: NavController, private firestore: Firestore, public navParams: NavParams, public appCom: MyApp, private menuCtrl: MenuController) {
+    //console.log(this.navParams);
+    let id = this.navParams.get('projectProfile').id;
+    console.log(id);
+    this.firestore.getMatchesFromProfile(id).valueChanges().subscribe( matches => {
+      this.matchesKeys = Object.keys(matches.matched);
+      this.matches = matches.matched;
+      console.log(this.matchesKeys);
+      console.log(this.matches);
+    });
   }
 
   viewMessages(chat) {

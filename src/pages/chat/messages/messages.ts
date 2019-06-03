@@ -87,7 +87,7 @@ export class MessagesPage {
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder,
     private firestore: Firestore) {
-      this.messages = this.firestore.getMessagesForChannel("mW9tYce7xxIgg9jwqsmp").valueChanges();
+      this.messages = this.firestore.getMessagesForChannel("eYwcAELbXc0Xbs93sBws").valueChanges();
     this.messageForm = formBuilder.group({
       message: new FormControl('')
     });
@@ -106,7 +106,7 @@ export class MessagesPage {
       const messageData =
         {
           channel_id: "eYwcAELbXc0Xbs93sBws",
-          sender_id: "L4wTy2ApbjJEzSavgXIL",
+          sender_id: "mBHkeP2NNHvMvLi7TYyH",
           sender_name: 'whatever',
           message: message,
           message_date: null
