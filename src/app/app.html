@@ -1,7 +1,7 @@
 <ion-menu [content]="content">
   <ion-header no-border>
     <ion-toolbar color="ham_bg">
-      <button ion-button float-right small clear (click) = "toggleEditSettings()">
+      <button ion-button float-right small clear (click) = "toggleEditSettings()" class="editButton">
         {{editButton}}
       </button>
     </ion-toolbar>
@@ -21,12 +21,12 @@
         Create Project
       </button>
 
-      <button *ngIf="candidateCreated" ion-item detail-none text-center color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
+      <button *ngIf="candidateCreated" ion-item detail-none text-center color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)" class="candidateButton">
         <ion-icon *ngIf="editMode" float-left name="close"></ion-icon>
         {{candidate.name}}
       </button>
 
-      <button *ngIf="!candidateCreated" ion-item detail-none text-center color = "nop" (click) = "candidateCreate(this.CANDIDATE)" style="color: #FFFFFF">
+      <button *ngIf="!candidateCreated" ion-item detail-none text-center color = "nop" (click) = "candidateCreate(this.CANDIDATE)" style="color: #FFFFFF" class="candidateButton">
         Create Candidate
       </button>
 
