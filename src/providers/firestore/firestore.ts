@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, DocumentData, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
+import * as admin from "firebase-admin";
 import { Subscribable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CardsPage } from '../../pages/cards/cards';
@@ -212,6 +213,29 @@ export class Firestore {
     return this.firestore.collection('channels').doc(id).delete();
   }
 
+  // Update Matches
+  updateMatches(id1: string, image1: string, id2: string, image2: string) {
+    this.firestore.collection('matches').doc(id1).ref.get().then(doc => {
+      return doc.data().matched;
+    }).then(matched => {
+      console.log(matched);
+      matched[id2] = image2;
+      console.log(matched);
+      return this.firestore.collection('matches').doc(id1).update({
+        matched: matched
+      });
+    });
+    
+    this.firestore.collection('matches').doc(id2).ref.get().then(doc => {
+      return doc.data().matched;
+    }).then(matched => {
+      matched[id1] = image1;
+      return this.firestore.collection('matches').doc(id2).update({
+        matched: matched
+      });
+    });
+  }
+
   // Get Project Cards
   getCards(id: string, amount: number): Promise<any> {
     var cards: any[];
@@ -243,7 +267,7 @@ export class Firestore {
           return [documents, list];
         });
       } else {
-        return this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
+        this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
           snapshot.forEach(doc => {
             
             var isQueried = false;
@@ -257,7 +281,6 @@ export class Firestore {
               documents.push(doc.data());
             }            
           });
-          //console.log(list);
           //console.log(documents);
           return [documents, list];
         });
@@ -265,9 +288,6 @@ export class Firestore {
     }).then(documentsAndList => {
       //console.log(documents.length);
       //console.log(documents);
-      //console.log(documentsAndList[0]);
-      //console.log(amount);
-      //console.log(documentsAndList[0].splice(0, amount));
       var newDocuments = documentsAndList[0].splice(0, amount);
 
       newDocuments.forEach(doc => {
