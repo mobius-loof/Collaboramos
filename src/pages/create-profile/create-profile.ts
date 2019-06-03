@@ -23,10 +23,10 @@ export class CreateProfilePage {
   }
 
   toProject() {
-    this.navCtrl.setRoot("CreateProjectPage", this.params);
+    this.navCtrl.push("CreateProjectPage", this.params);
   }
 
   toCandidate() {
-    this.navCtrl.setRoot("CreateCandidatePage", this.params);
+    this.navCtrl.push("CreateCandidatePage", this.params);
   }
 }

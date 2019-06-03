@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Firestore } from '../../providers/firestore/firestore';
-import { Candidate } from '../../models/candidate';
+import { Candidate, Account } from '../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, ViewController, AlertController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -13,9 +14,7 @@ export class CreateCandidatePage {
   @ViewChild('fileInput') fileInput;
   @ViewChild('imageInput') imageInput;
 
-
   image = ""
-
 
   candidate: Candidate = {
     id: null,
@@ -41,32 +40,22 @@ export class CreateCandidatePage {
   account: Account;
   params: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public alertController: AlertController, private firestore: Firestore, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController,
+    public viewCtrl: ViewController, public alertController: AlertController,
+    private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController,
+    private appCom: MyApp) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
     this.hasFile = false;
+    this.candidate.email = this.account.email;
+    this.candidate.address = this.account.address;
+    this.candidate.phone_number = this.account.phone_number;
   }
 
   // Picture upload functions
   getPicture() {
-    /*
-    console.log("getting picture");
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
-      }).then((data) => {
-          this.candidate.images.push('data:image/jpg;base64,' + data);
-          this.hasPicture = true;
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
-      */
     this.imageInput.nativeElement.click();
-    //}
   }
 
   processWebImage(event) {
@@ -74,7 +63,6 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
       this.image = imageData;
-      console.log("Received Picture");
     };
     let imageD = event.target.files[event.target.files.length - 1];
     this.candidate.image = imageD;
@@ -93,7 +81,6 @@ export class CreateCandidatePage {
 
   // Upload file functinos
   getFile() {
-    console.log("getting file");
     this.fileInput.nativeElement.click();
   }
 
@@ -102,13 +89,11 @@ export class CreateCandidatePage {
     reader.onload = (readerEvent) => {
       let fileData = (readerEvent.target as any).result;
       //this.form.patchValue({ 'profilePic': imageData });
-      this.candidate.resume_URL = fileData;
-      console.log("Received Resume");
-      console.log(fileData);
+      //this.candidate.resume_URL = fileData;
       this.presentAlert();
       this.hasFile = true;
     };
-
+    this.candidate.resume_URL = event.target.files[event.target.files.length - 1];
     reader.readAsDataURL(event.target.files[event.target.files.length - 1]);
   }
 
@@ -131,7 +116,17 @@ export class CreateCandidatePage {
   * The user cancelled, so we dismiss without sending data back.
   */
   return() {
-    this.navCtrl.setRoot("CreateProfilePage", this.params);
+    this.navCtrl.pop();
+  }
+
+
+  showFailure(error_msg) {
+    let toast = this.toastCtrl.create({
+      message: error_msg,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   /**
@@ -139,28 +134,50 @@ export class CreateCandidatePage {
   */
   submit() {
     let params = {};
-    this.firestore.createCandidate(this.account.id, this.candidate).then(_ =>{
+    if (this.candidate.image == "") {
+      this.showFailure("Please upload an image for your profile!");
+      return;
+    }
+    if (this.candidate.resume_URL == "") {
+      this.showFailure("Please upload a resume for your profile!");
+      return;
+    }
+    let loading = this.loadingCtrl.create({
+      content: 'Creating Profile...'
+    });
+    loading.present();
+
+    this.firestore.createCandidate(this.account.id, this.candidate).then(_ => {
       return this.firestore.getAccount(this.account.id);
     }).then(acc => {
       params['account'] = acc;
-      params['candidateProfileRef'] = acc.candidate_id;
-      params['projectProfileRef'] = acc.project_id;
-      if (acc.project_id == null) {
+      params['candidateProfileRef'] = acc.candidate_ref;
+      params['projectProfileRef'] = acc.project_ref;
+
+      this.appCom.setAccount(acc);
+      this.appCom.setProjectProfileRef(acc.project_ref);
+      this.appCom.setCandidateProfileRef(acc.candidate_ref);
+
+      if (acc.project_ref == null) {
         return null;
       } else {
-        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+        return this.firestore.getProjectProfileFromID(acc.project_ref.id);
       }
     }).then(projectProfile => {
       params['projectProfile'] = projectProfile;
+      this.appCom.setProjectProfile(projectProfile);
+
       let acc = params['account'];
-      if (acc.candidate_id == null) {
+      if (acc.candidate_ref == null) {
         return null;
       } else {
-        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+        return this.firestore.getCandidateProfileFromID(acc.candidate_ref.id);
       }
     }).then(candidateProfile => {
       params['candidateProfile'] = candidateProfile;
+      this.appCom.setCandidateProfile = candidateProfile;
     }).then(_ => {
+      loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
     });
   }

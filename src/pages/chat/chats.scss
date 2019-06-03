@@ -1,0 +1,19 @@
+page-chats {
+    ion-note {
+        font-size: 12px;
+        align-self: flex-start;
+        margin-top: 14px;
+    }
+    ion-header ion-icon.back-button-icon.icon {
+        color: white;
+    }
+
+    .chats-nav-bar{
+        color: white;
+    }
+
+    .content{
+        background-color: #e5eef6;
+    }
+
+}

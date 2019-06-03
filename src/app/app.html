@@ -1,35 +1,56 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <button ion-button float-right small clear (click) = "toggleProfileSettings()">
+  <ion-header no-border>
+    <ion-toolbar color="ham_bg">
+      <button ion-button float-right small clear (click) = "toggleEditSettings()">
         {{editButton}}
       </button>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
-    <ion-list no-lines inset>
 
-      <button id = "project" ion-button text-center block color = "{{this.projectColor}}" (click) = "makeProfile(this.PROJECT)">
-        {{pages[0].title}}
+  <ion-content id="menu-color" style="background-color: #AAABDC">
+    <ion-list no-lines inset style="background-color: #AAABDC">
+
+      <div class = "centerParent" style="background-color: #AAABDC">
+      <button *ngIf="projectCreated" ion-item detail-none text-center color = "{{this.projectColor}}" (click) = "clickedProfile(this.PROJECT)" >
+        <ion-icon *ngIf="editMode" float-left name="close"></ion-icon>
+        {{project.name}}
       </button>
 
-      <button id = "candidate" ion-button text-right block color = "{{this.candidateColor}}" (click) = "makeProfile(this.CANDIDATE)">
-        {{pages[1].title}}
+      <button *ngIf="!projectCreated" ion-item detail-none text-center color = "nop" (click) = "projectCreate(this.PROJECT)" style="color: #FFFFFF">
+        Create Project
       </button>
 
-      <ion-item>
-        <ion-label>Invisible</ion-label>
-        <ion-toggle checked="{{this.checked}}" [(ngModel)]="isToggled" (ionChange)="notify(this.checked)"></ion-toggle>
+      <button *ngIf="candidateCreated" ion-item detail-none text-center color = "{{this.candidateColor}}" (click) = "clickedProfile(this.CANDIDATE)">
+        <ion-icon *ngIf="editMode" float-left name="close"></ion-icon>
+        {{candidate.name}}
+      </button>
+
+      <button *ngIf="!candidateCreated" ion-item detail-none text-center color = "nop" (click) = "candidateCreate(this.CANDIDATE)" style="color: #FFFFFF">
+        Create Candidate
+      </button>
+
+      <ion-item *ngIf="editMode && projectCreated" style="background-color: #AAABDC" class="font-family">
+        <ion-label>Project Invisible</ion-label>
+        <ion-toggle id="projectTogg" [(ngModel)]="this.projectInvis" [color]="this.SWITCH" [(ngModel)]="projToggled" (ionChange)="notify(this.projectInvis)"></ion-toggle>
       </ion-item>
 
-      <button ion-item detail-none (click) = "changePage(pages[2])">
+      <ion-item *ngIf="editMode && candidateCreated" class="font-family">
+        <ion-label>Candidate Invisible</ion-label>
+        <ion-toggle id="candidateTogg" [(ngModel)]="this.candidateInvis" [color]="this.SWITCH" [(ngModel)]="candToggled" (ionChange)="notify(this.candidateInvis)"></ion-toggle>
+      </ion-item>
+      
+      <!--<div *ngIf="(tempVar | async)?.is_visible">hello 1{{ (tempVar | async)?.is_visible }}</div>
+      <div *ngIf="!(tempVar | async)?.is_visible">hello 2{{ (tempVar | async)?.is_visible }}</div>-->
+
+      <button *ngIf="!editMode" ion-item detail-none (click) = "changePage(pages[2])" style="background-color: #AAABDC" class="font-family">
         {{pages[2].title}}
       </button>
 
-      <button ion-item detail-none (click) = "changePage(pages[3])">
+      <button *ngIf="!editMode" ion-item detail-none (click) = "changePage(pages[3])" style="background-color: #AAABDC" class="font-family">
         {{pages[3].title}}
       </button>
+      </div>
 
     </ion-list>
   </ion-content>

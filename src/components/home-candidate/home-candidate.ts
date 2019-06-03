@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewChildren, QueryList, Renderer} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import 'rxjs/Rx';
 
 import {
@@ -44,7 +45,7 @@ export class HomeCandidateComponent {
   frameworks = [];
   private profile: Candidate;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, public firestore: Firestore) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items, private http: Http, public renderer: Renderer, public firestore: Firestore, private inAppBrowser: InAppBrowser) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/4), 1);
@@ -123,8 +124,12 @@ export class HomeCandidateComponent {
 
         })
     })
-
   }
+
+  clickWebsite(c: any) {
+    this.inAppBrowser.create(c.website);
+  }
+
 
   // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
   decimalToHex(d, padding) {

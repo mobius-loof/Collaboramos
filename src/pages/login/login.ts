@@ -3,6 +3,7 @@ import { IonicPage, NavController, ToastController, LoadingController } from 'io
 
 import { User, Auth, Firestore } from '../../providers';
 import { MainPage } from '../';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -23,7 +24,8 @@ export class LoginPage {
     public toastCtrl: ToastController,
     private auth: Auth,
     private firestore: Firestore,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private appCom: MyApp
   ) {}
 
   cancel() {
@@ -40,29 +42,38 @@ export class LoginPage {
     loading.present();
 
     this.auth.login(this.credentials).then((user) => {
-      console.log(user.user.uid);
       return this.firestore.getAccount(user.user.uid);
     }).then( acc => {
       params['account'] = acc;
-      params['candidateProfileRef'] = acc.candidate_id;
-      params['projectProfileRef'] = acc.project_id;
-      if (acc.project_id == null) {
+      params['candidateProfileRef'] = acc.candidate_ref;
+      params['projectProfileRef'] = acc.project_ref;
+
+      this.appCom.setAccount(acc);
+      this.appCom.setProjectProfileRef(acc.project_ref);
+      this.appCom.setCandidateProfileRef(acc.candidate_ref);
+
+      if (acc.project_ref == null) {
         return null;
       } else {
-        return this.firestore.getProjectProfileFromID(acc.project_id.id);
+        return this.firestore.getProjectProfileFromID(acc.project_ref.id);
       }
     }).then( projectProfile => {
       params['projectProfile'] = projectProfile;
+      this.appCom.setProjectProfile(projectProfile);
+
       let acc = params['account'];
-      if (acc.candidate_id == null) {
+      if (acc.candidate_ref == null) {
         return null;
       } else {
-        return this.firestore.getCandidateProfileFromID(acc.candidate_id.id);
+        return this.firestore.getCandidateProfileFromID(acc.candidate_ref.id);
       }
     }).then ( candidateProfile => {
       params['candidateProfile'] = candidateProfile;
+      this.appCom.setCandidateProfile(candidateProfile);
     }).then( _ => {
+      params['currentProfile'] = this.getSelectedProfile(params);
       loading.dismiss();
+
       if (params['candidateProfile'] == null && params['projectProfile'] == null) {
         this.navCtrl.setRoot("CreateProfilePage", params);
         this.showLoginSuccess();
@@ -74,6 +85,16 @@ export class LoginPage {
       this.showLoginFailure(err.message);
       loading.dismiss();
     });
+  }
+
+  getSelectedProfile(params) {
+    if (params['candidateProfile'] != null) {
+      return 'candidate';
+    } else if (params['projectProfile'] != null) {
+      return 'project';
+    } else {
+      return '';
+    }
   }
 
   showLoginSuccess() {

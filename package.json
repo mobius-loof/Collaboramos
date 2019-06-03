@@ -39,6 +39,8 @@
     "firebase-admin": "^8.0.0",
     "ionic-angular": "3.9.5",
     "ionicons": "3.0.0",
+    "moment": "^2.14.1",
+    "moments": "0.0.2",
     "promise-polyfill": "^8.1.0",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",

@@ -69,7 +69,7 @@ export class HomeProjectComponent {
             }
         };
 
-        this.profile = navParams.get('Profile');
+        this.profile = navParams.get('projectProfile');
         this.cards = [];
         this.addNewCards(3);
 
@@ -83,13 +83,13 @@ export class HomeProjectComponent {
 
     }
 
-    clickResume() {
-        this.inAppBrowser.create(this.profile.website);
+    clickResume(c: any) {
+        this.inAppBrowser.create(c.website);
         
     }
 
-    clickWebsite() {
-        this.inAppBrowser.create(this.profile.website);
+    clickWebsite(c: any) {
+        this.inAppBrowser.create(c.resume_URL);
     }
 
     // Called whenever we drag an element

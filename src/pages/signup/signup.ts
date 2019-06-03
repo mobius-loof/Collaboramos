@@ -18,6 +18,9 @@ export class SignupPage {
     password: ''
   };
 
+  repassword: {repassword: string } = {
+      repassword: ''
+  };
   account: Account = {
     id: null,
     first_name: "",
@@ -41,7 +44,16 @@ export class SignupPage {
     this.navCtrl.pop()
   }
 
+  checkPasswords(){
+    return this.repassword.repassword == this.credentials.password;
+  }
+
   doSignup() {
+
+    if(!this.checkPasswords()){
+      this.showSignupFailure("Passwords do not match");
+            return;
+    }
     this.auth.signup(this.credentials).then((user) => {
       let a = {
         id: user.user.uid,

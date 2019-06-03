@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Tab1Root, Tab2Root, Tab3Root } from '../';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ export class TabsPage {
 
   tab1Title = 'Items';
   tab2Title = 'Home';
-  tab3Title = 'Settings';
+  tab3Title = 'Matches';
 
   params: any
 

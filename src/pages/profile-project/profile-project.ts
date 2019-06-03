@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -27,6 +27,10 @@ export class ProfileProjectPage {
 
   private isEdit: boolean;
 
+  @ViewChild('imageInput') imageInput;
+  hasImage: boolean;
+  image = "";
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private alertCtrl: AlertController,
@@ -36,6 +40,10 @@ export class ProfileProjectPage {
               private menuCtrl: MenuController,
               public appCom: MyApp) {
     this.isEdit = false;
+<<<<<<< HEAD
+=======
+    this.hasImage = false;
+>>>>>>> 5b8af815b2def883a05d14e970bc49ddb8876e2e
     this.account = navParams.get('account');
     this.profile = this.copyProjectProfile(navParams.get('projectProfile'));
     this.tempProfile = this.copyProjectProfile(navParams.get('projectProfile'));
@@ -103,19 +111,39 @@ export class ProfileProjectPage {
   }
 
   pickImage() {
-    let options = {
+    /*let options = {
       maximumImagesCount: 1,
       outputType: 0,
       width: 800,
       height: 800
-    }
+    }*/
+    this.imageInput.nativeElement.click();
 
-    this.imagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        console.log(results[i]);
-      }
-    })
   }
+   
+  processWebImage(event) {
+    let reader = new FileReader();
+    reader.onload = (readerEvent) => {
+
+      let imageData = (readerEvent.target as any).result;
+      this.image = imageData;
+      this.hasImage = true;
+    };
+    let imageD = event.target.files[event.target.files.length - 1];
+    this.tempProfile.image = imageD;
+    console.log(imageD);
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  getSize() {
+    return '100px 100px'
+  }
+
+  getProfileImageStyle() {
+    //return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.image + ')';
+  }
+
 
   presentWebsite() {
     this.inAppBrowser.create(this.profile.website);
@@ -165,7 +193,7 @@ export class ProfileProjectPage {
 
   openMenu() {
     //have a variable that checks if edit was tapped; if was then would want to undo and reset colors
-    if(!this.menuCtrl.isOpen() && this.appCom.isEdit()) {
+    if(!this.menuCtrl.isOpen() && !this.appCom.isEdit()) {
       this.appCom.toggleProfileSettings();
     }
     this.menuCtrl.open();

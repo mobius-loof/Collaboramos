@@ -7,7 +7,7 @@
 <ion-header>
   <ion-navbar text-center>
     <button ion-button float-left clear (click) = "openMenu()">
-        <ion-icon name="menu"></ion-icon>
+        <ion-icon name="menu" color="white"></ion-icon>
     </button>
     <ion-title>My Profile</ion-title>
     <ion-buttons end>
@@ -30,15 +30,24 @@
     <ion-row class="title-row">
       <ion-col col-5>
         <div class="project-img-container">
-          <img *ngIf="!isEdit" class="project-img" src="../assets/img/marty-avatar.png">
-          <img *ngIf="isEdit" class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+          <div *ngIf="!isEdit">
+            <img *ngIf="!hasImage" class="project-img" src="../assets/img/marty-avatar.png">
+            <div *ngIf="hasImage" class="project-img" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            </div>
+          </div>
+          <div *ngIf="isEdit">
+            <img *ngIf="!hasImage" class="project-img" (click)="pickImage()" src="../assets/img/marty-avatar.png">
+            <div *ngIf="hasImage" class="project-img" (click)="pickImage()" [style.backgroundImage]="getProfileImageStyle()" [style.backgroundSize]="getSize()">
+            </div>
+          </div>
           <div id="circle"></div>
           <h6 *ngIf="isEdit" class="photo-edit">Edit</h6>
+          <input type="file" #imageInput style="visibility: hidden; " name="files[]" (change)="processWebImage($event)" />
         </div>
       </ion-col>
       <ion-col>
         <div *ngIf="!isEdit" class="project-detail-col">
-          <h3>{{ profile.proj_name }}</h3>
+          <h3>{{ profile.name }}</h3>
           <button class="website-button" ion-button icon-start small (click)="presentWebsite()">
             <ion-icon name="globe"></ion-icon>
             WEBSITE
@@ -47,7 +56,7 @@
 
         <div *ngIf="isEdit" class="project-detail-col">
           <ion-item>
-            <ion-input class="input-from-label" [(ngModel)]="tempProfile.proj_name"></ion-input> 
+            <ion-input class="input-from-label" [(ngModel)]="tempProfile.name"></ion-input> 
           </ion-item>
           <ion-item>
             <ion-input class="input-from-label" [(ngModel)]="tempProfile.website"></ion-input>
