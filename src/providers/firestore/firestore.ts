@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference, DocumentData, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Candidate, Project, Account, Channel } from '../../models'
 import { Subscribable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CardsPage } from '../../pages/cards/cards';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -212,42 +214,46 @@ export class Firestore {
 
   // Get Project Cards
   getCards(id: string, amount: number): Promise<any> {
+    var cards: any[];
     return this.firestore.collection('match_queries').doc(id).ref.get().then(doc => {
       var list: string[];
       list = doc.data().queried_list;
       list.sort;
 
+      var documents = new Map();
+
       if (doc.data().list_type == "project") {
-        console.log("hello mama");
-        return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId').orderBy('id', 'asc').limit(amount));
+        this.firestore.collection('project_profiles').ref.get().then(snapshot => {
+          snapshot.forEach(doc => {
+            console.log("hello at doc1");
+            documents.set(doc.id, doc.data());
+          });
+        });
       } else {
-        return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId').orderBy('id', 'asc').limit(amount));
-      }
-    });
-    /*.then(data => {
-      var list: string[];
-      list = data.queried_list;
-      list.sort;
-      var greatestId = list[list.length - 1];
-      if (data.list_type == "project") {
-          console.log("Hello");
-        return this.firestore.collection('project_profiles', ref => ref.where('id', '>', 'greatestId')
-                                      .orderBy('id', 'asc').limit(amount))}
-      else
-        return this.firestore.collection('candidate_profiles', ref => ref.where('id', '>', 'greatestId')
-                                      .orderBy('id', 'asc').limit(amount)).ref.get();
-    }).then(snapshot => {
-      if (snapshot.empty) {
-        console.log('No Matching Documents');
-        return;
+        this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
+          snapshot.forEach(doc => {
+            console.log("hello at doc2");
+            documents.set(doc.id, doc.data());
+          });
+        });
       }
 
-      var cards = new Map();
-      snapshot.forEach(doc => {
-        cards.set(doc.id, doc.data());
-      })
-      
-      return cards;
-    })*/
+      list.forEach(id => {
+        console.log("hello at delete");
+        documents.delete('id');
+      });
+      //console.log(documents);
+
+      var returnDoc = [];
+      var i: number;
+      var iterator = documents.entries();
+      for(i = 0; i < amount; i++) {
+        returnDoc.push(iterator.next().value);
+      }
+
+      console.log("hello from ret");
+      console.log(returnDoc);
+      return returnDoc;
+    });
   }
 }
