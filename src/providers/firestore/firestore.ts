@@ -62,6 +62,13 @@ export class Firestore {
 
   // Candidate Profile CRUD
 
+  // Set Candidate Visibility
+  setCandidateVisibility(id: string, is_visible: boolean): Promise<void> {
+    return this.firestore.collection('candidate_profiles').doc(id).update({
+      is_visible: is_visible
+    });
+  }
+
   // Create Candidate
   createCandidate(accountId: string, model: Candidate): Promise<void> {
 
@@ -129,6 +136,13 @@ export class Firestore {
 
   // Project Profile CRUD
 
+  // Set Project Visibility
+  setProjectVisibility(id: string, is_visible: boolean): Promise<void> {
+    return this.firestore.collection('project_profiles').doc(id).update({
+      is_visible: is_visible
+    });
+  }
+  
   // Create Profile
   createProjectProfile(accountId: string, model: Project): Promise<void> {
     const id = this.firestore.createId(); // generate an ID
