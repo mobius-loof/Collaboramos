@@ -138,6 +138,7 @@ export class Firestore {
   // Update Candidate
   updateCandidateProfile(model: Candidate) {
     const fileId = this.firestore.createId(); // generate a file ID
+    const resumeId= this.firestore.createId(); // generate a file ID
 
     this.filestorage.upload(fileId, model.image).then(() => {
       return this.filestorage.ref(fileId).getDownloadURL();
