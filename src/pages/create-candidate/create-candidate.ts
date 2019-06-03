@@ -3,6 +3,7 @@ import { Firestore } from '../../providers/firestore/firestore';
 import { Candidate, Account } from '../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, ViewController, AlertController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -13,9 +14,7 @@ export class CreateCandidatePage {
   @ViewChild('fileInput') fileInput;
   @ViewChild('imageInput') imageInput;
 
-
   image = ""
-
 
   candidate: Candidate = {
     id: null,
@@ -43,7 +42,8 @@ export class CreateCandidatePage {
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController,
     public viewCtrl: ViewController, public alertController: AlertController,
-    private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController) {
+    private firestore: Firestore, private navParams: NavParams, private loadingCtrl: LoadingController,
+    private appCom: MyApp) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
@@ -148,36 +148,37 @@ export class CreateCandidatePage {
     loading.present();
 
     this.firestore.createCandidate(this.account.id, this.candidate).then(_ => {
-      console.log(this.account.id);
       return this.firestore.getAccount(this.account.id);
     }).then(acc => {
       params['account'] = acc;
       params['candidateProfileRef'] = acc.candidate_ref;
       params['projectProfileRef'] = acc.project_ref;
-      console.log("1");
+
+      this.appCom.setAccount(acc);
+      this.appCom.setProjectProfileRef(acc.project_ref);
+      this.appCom.setCandidateProfileRef(acc.candidate_ref);
+
       if (acc.project_ref == null) {
         return null;
       } else {
         return this.firestore.getProjectProfileFromID(acc.project_ref.id);
       }
-      console.log("2");
     }).then(projectProfile => {
       params['projectProfile'] = projectProfile;
+      this.appCom.setProjectProfile(projectProfile);
+
       let acc = params['account'];
-      console.log("3");
       if (acc.candidate_ref == null) {
         return null;
       } else {
         return this.firestore.getCandidateProfileFromID(acc.candidate_ref.id);
       }
-      console.log("4");
     }).then(candidateProfile => {
-      console.log("5");
       params['candidateProfile'] = candidateProfile;
+      this.appCom.setCandidateProfile = candidateProfile;
     }).then(_ => {
       loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
-      console.log("6");
     });
   }
 

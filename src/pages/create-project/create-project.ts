@@ -3,6 +3,7 @@ import { Project, Account } from '../../models';
 import { Firestore } from '../../providers/firestore/firestore';
 import { Channel } from '../../models/channel';
 import { Component, ViewChild } from '@angular/core';
+import { MyApp } from '../../app/app.component';
 
 /**
  * Generated class for the CreateProjectPage page.
@@ -50,7 +51,7 @@ export class CreateProjectPage {
   constructor(public navCtrl: NavController, public viewCtrl: ViewController,
     public alertController: AlertController, private firestore: Firestore,
     private navParams: NavParams, private loadingCtrl: LoadingController,
-    public toastCtrl: ToastController, ) {
+    public toastCtrl: ToastController, private appCom: MyApp) {
     this.params = navParams;
     this.account = navParams.get('account');
     this.hasPicture = false;
@@ -58,27 +59,10 @@ export class CreateProjectPage {
     this.project.address = this.account.address;
     this.project.phone_number = this.account.phone_number;
 
-    console.log(navCtrl.getViews());
   }
 
   getPicture() {
-    /*
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
-      }).then((data) => {
-          this.project.images.push('data:image/jpg;base64,' + data);
-          this.hasPicture = true;
-        //this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
-      */
     this.imageInput.nativeElement.click();
-    //}
   }
 
 
@@ -140,6 +124,11 @@ export class CreateProjectPage {
       params['account'] = acc;
       params['candidateProfileRef'] = acc.candidate_ref;
       params['projectProfileRef'] = acc.project_ref;
+
+      this.appCom.setAccount(acc);
+      this.appCom.setProjectProfileRef(acc.project_ref);
+      this.appCom.setCandidateProfileRef(acc.candidate_ref);
+
       if (acc.project_ref == null) {
         return null;
       } else {
@@ -147,6 +136,8 @@ export class CreateProjectPage {
       }
     }).then(projectProfile => {
       params['projectProfile'] = projectProfile;
+      this.appCom.setProjectProfile(projectProfile);
+
       let acc = params['account'];
       if (acc.candidate_ref == null) {
         return null;
@@ -155,10 +146,10 @@ export class CreateProjectPage {
       }
     }).then(candidateProfile => {
       params['candidateProfile'] = candidateProfile;
+      this.appCom.setCandidateProfile = candidateProfile;
     }).then(_ => {
       loading.dismiss();
       this.navCtrl.setRoot("TabsPage", params);
-      console.log(params);
     });
   }
 
