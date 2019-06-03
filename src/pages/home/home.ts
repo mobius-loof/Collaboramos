@@ -34,7 +34,7 @@ export class HomePage {
         private events: Events) {
         this.menuCtrl.swipeEnable(false);
 
-        events.subscribe('lastProf', project => {
+        events.subscribe('currentProfile', project => {
             this.mode = project;
         })
     };
