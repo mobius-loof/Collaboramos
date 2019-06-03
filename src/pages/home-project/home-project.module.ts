@@ -4,6 +4,7 @@ import { HomeProjectPage } from './home-project';
 
 import { HttpModule } from '@angular/http';
 import { SwingModule } from 'angular2-swing';
+import { HomeProjectModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SwingModule } from 'angular2-swing';
     IonicPageModule.forChild(HomeProjectPage),
     HttpModule,
     SwingModule,
+    HomeProjectModule
   ],
   exports: [
     HomeProjectPage

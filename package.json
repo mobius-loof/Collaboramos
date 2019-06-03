@@ -36,6 +36,7 @@
     "cordova-plugin-inappbrowser": "3.0.0",
     "cordova-plugin-telerik-imagepicker": "2.3.2",
     "firebase": "^5.11.1",
+    "firebase-admin": "^8.0.0",
     "ionic-angular": "3.9.5",
     "ionicons": "3.0.0",
     "moment": "^2.14.1",
