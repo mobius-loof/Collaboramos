@@ -103,7 +103,7 @@ export class HomeCandidateComponent {
       this.addNewCards(5);
     }
     if (like) {
-        this.firestore.updateMatches(this.profile.id, this.profile.image, removedCard.id, removedCard.image);
+        //this.firestore.updateMatches(this.profile.id, this.profile.image, removedCard.id, removedCard.image);
     } else {
       this.recentCard = 'You disliked: ' + removedCard.name;
     }

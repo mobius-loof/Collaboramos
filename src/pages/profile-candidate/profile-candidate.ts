@@ -80,7 +80,7 @@ export class ProfileCandidatePage {
     if (!isEdit) {
       if (!discard){
         this.profile = this.copyCandidateProfile(this.tempProfile);
-        this.firestore.updateCandidateProfile(this.profile);
+        //this.firestore.updateCandidateProfile(this.profile);
       } else {
         this.tempProfile = this.copyCandidateProfile(this.profile);
       }

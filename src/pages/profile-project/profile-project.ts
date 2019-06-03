@@ -80,7 +80,7 @@ export class ProfileProjectPage {
       if (!discard){
         // actually upload stuff
         this.profile = this.copyProjectProfile(this.tempProfile);
-        this.firestore.updateProjectProfile(this.profile);
+        //this.firestore.updateProjectProfile(this.profile);
       } else {
         this.tempProfile = this.copyProjectProfile(this.profile);
       }

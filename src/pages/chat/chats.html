@@ -10,7 +10,7 @@
     <ion-list-header>Today</ion-list-header>
     <ion-item *ngFor="let chat of chats | async" (click)="viewMessages(chat)" style="background-color: #e5eef6">
       <ion-avatar item-start>
-        <img [src]="chat.imageUrl">
+        <img src="assets/img/marty-avatar.png">
       </ion-avatar>
       <h2>{{chat.last_message_sender}}</h2>
       <p>{{chat.last_message_sent}}</p>

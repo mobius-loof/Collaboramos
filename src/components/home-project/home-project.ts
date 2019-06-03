@@ -122,9 +122,7 @@ export class HomeProjectComponent {
         }
 
         if (like) {
-            console.log("profile " + this.profile.id);
-            console.log("other " + removedCard.id);
-            this.firestore.updateMatches(this.profile.id, this.profile.image, removedCard.id, removedCard.image);
+            //this.firestore.updateMatches(this.profile.id, this.profile.image, removedCard.id, removedCard.image);
         } else {
           this.recentCard = 'You disliked: ' + removedCard.name;
         }
