@@ -1,0 +1,156 @@
+page-home {
+    $tag-height: 20px;
+
+    ion-content {
+        text-align: center;
+    }
+    
+    ion-card-content {
+        background-color: #F4F4F8;
+    }
+    
+    #card-stack {
+        width: 90%;
+        height: 90%;
+        margin: 0px auto 0;
+        position: relative;
+    
+    }
+    
+    #card-stack ion-card {
+        border-radius: 5px;
+        position: absolute;
+        text-align: center;
+        top: 3%;
+        height: 90%;
+    }
+    
+    ion-list {
+        display: block;
+    }
+    
+    ion-card {
+        margin-bottom: 500px;
+    }
+    
+    .card-title1 {
+        box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.5);
+        max-height: 10000px;
+    }
+    
+    .card-title0 {
+        max-height: 0px;
+    }
+    
+    .img {
+        border-radius: 5%;
+        box-shadow: 0 5px 3px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        display: block;
+        margin-top: 10%;
+    
+    }
+    
+    .likeDislikeRow {
+        height: 10%;
+        margin-top: -20px;
+        z-index: -1;
+    }
+    
+    .likeDislikeButton {
+        z-index: 0;
+    }
+    
+    .col {
+        text-align: center;
+        line-height: 50%;
+        position: relative;
+        justify-content: center;
+    }
+    
+    .scroll-content {
+        overflow-y: hidden !important;
+    }
+    
+    .statusBar {
+        text-align: center;
+        position: relative;
+        z-index: -1;
+    }
+    
+    button.tag-btn {
+        $button-ios-margin-top: 0;
+        $button-ios-margin-end: 0;
+        $button-ios-margin-bottom: 0;
+        $button-ios-margin-start: 0;
+        padding: 0;
+    }
+
+    .item-ios [item-left], .item-ios [item-start] {
+        margin: 0;
+    }
+
+    .item-ios {
+        padding-left: 0;
+    }
+
+    .text-input-ios {
+        margin-left: 0;
+    }
+
+    .tag{
+        height: $tag-height;
+        border-radius: $tag-height*2;
+    }
+
+    .item {
+        min-height: 3rem;
+        min-width: 3rem;
+    }
+
+    .item-ios .item-button {
+        padding: 0;
+        padding-left: 0.5rem;
+    }
+
+    .label-md {
+        margin: 0;
+    }
+
+    .label-ios {
+        margin: 0;
+    }
+
+    .tag-container {
+        margin-right: 5px;
+        margin-left: 5px;
+        padding: 2px;
+    }
+
+    .tag-content {
+        padding-left: 0.7rem;
+    }
+ 
+    .top-icon {
+        font-size: 40px;
+    }
+
+    .top-icon-edit {
+        font-size: 30px;
+    }
+    
+    .img-row {
+        width: 230%;
+        margin-left: -10%;
+        border-radius: 5px;
+    }
+    
+    .img-row-info {
+        margin-left: 65%;
+        font-family: 'PT Sans Caption';
+        font-style: normal;
+        font-weight: normal;
+        font-variant: small-caps;
+    }
+
+    
+}

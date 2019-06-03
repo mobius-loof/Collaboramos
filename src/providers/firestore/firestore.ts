@@ -194,12 +194,9 @@ export class Firestore {
       image: model.image,
       website: model.website,
       is_visible: model.is_visible,
-      frameworks: model.frameworks,
+      proj_name: model.name,
       skills: model.skills,
-      description: model.description,
-      phone_number: model.phone_number,
-      email: model.email,
-      address: model.address
+      frameworks: model.frameworks
     });
   }
 
@@ -251,35 +248,94 @@ export class Firestore {
     return this.firestore.collection('channels').doc(id).delete();
   }
 
-  // Get Matches for Matches Page
-  getMatchesFromProfile(profileId: string): AngularFirestoreDocument {
-    return this.firestore.collection('matches').doc(profileId);
-  }
-
-  // Get Messages in Chat
-  getMessagesForChannel(id: string): AngularFirestoreCollection {
-    return this.firestore.collection('messages', ref => ref.where('channel_id', '==', id).orderBy('message_date', 'asc'));
-  }
-
-  // CR for Messages
-  createMessage(model: Message): Promise<void> {
-    var id = this.firestore.createId(); // create new id
-    var dateFromFirestore = firebase.firestore.FieldValue.serverTimestamp(); // get time at server
-
-    // update last message sent for the channel
-    this.firestore.collection('channels').doc(model.channel_id).update({
-      last_message_sent: model.message,
-      last_message_sender: model.sender_name,
-      last_message_date: dateFromFirestore
+  // Update Matches
+  updateMatches(id1: string, image1: string, id2: string, image2: string) {
+    this.firestore.collection('matches').doc(id1).ref.get().then(doc => {
+      return doc.data().matched;
+    }).then(matched => {
+      console.log(matched);
+      matched[id2] = image2;
+      console.log(matched);
+      return this.firestore.collection('matches').doc(id1).update({
+        matched: matched
+      });
     });
+    
+    this.firestore.collection('matches').doc(id2).ref.get().then(doc => {
+      return doc.data().matched;
+    }).then(matched => {
+      matched[id1] = image1;
+      return this.firestore.collection('matches').doc(id2).update({
+        matched: matched
+      });
+    });
+  }
 
-    // create new message and push to firestore
-    return this.firestore.doc(`messages/${id}`).set({
-      channel_id: model.channel_id,
-      sender_id: model.sender_id,
-      sender_name: model.sender_name,
-      message: model.message,
-      message_date: dateFromFirestore
+  // Get Project Cards
+  getCards(id: string, amount: number): Promise<any> {
+    var cards: any[];
+    return this.firestore.collection('match_queries').doc(id).ref.get().then(doc => {
+      var list: string[];
+      list = doc.data().queried_list;
+      list.sort;
+
+      //var documents: {[key: string]: DocumentData;} = {}; 
+      var documents = [];
+      if (doc.data().list_type == "project") {
+        return this.firestore.collection('project_profiles').ref.get().then(snapshot => {
+          snapshot.forEach(doc => {
+            //console.log("hello at doc1");
+            //console.log(doc.data());
+            //documents.push(doc.data());
+            var isQueried = false;
+            list.forEach(id => {
+              if (id == doc.id) {
+                isQueried = true;
+              }
+            });
+            if (!isQueried){
+              //console.log(doc.data());
+              documents.push(doc.data());
+            }            
+          });
+          //console.log(documents);
+          return [documents, list];
+        });
+      } else {
+        return this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
+          snapshot.forEach(doc => {
+            
+            var isQueried = false;
+            list.forEach(id => {
+              if (id == doc.id) {
+                isQueried = true;
+              }
+            });
+            if (!isQueried){
+              //console.log(doc.data());
+              documents.push(doc.data());
+            }            
+          });
+          //console.log(documents);
+          return [documents, list];
+        });
+      }
+    }).then(documentsAndList => {
+      //console.log(documents.length);
+      //console.log(documents);
+      var newDocuments = documentsAndList[0].splice(0, amount);
+
+      newDocuments.forEach(doc => {
+        documentsAndList[1].push(doc.id);
+      })
+
+      //console.log(documentsAndList[1]);
+      this.firestore.collection('match_queries').doc(id).update({
+        queried_list: documentsAndList[1]
+      })
+
+      //console.log(newDocuments);
+      return newDocuments;
     });
   }
 }

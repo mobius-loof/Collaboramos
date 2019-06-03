@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { HomeCandidatePage } from './home-candidate';
+import { HomePage } from './home';
 
 import { HttpModule } from '@angular/http';
 import { SwingModule } from 'angular2-swing';
 import { HomeCandidateModule } from '../../components/components.module'
+import { HomeProjectModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
-    HomeCandidatePage,
+    HomePage,
   ],
   imports: [
-    IonicPageModule.forChild(HomeCandidatePage),
+    IonicPageModule.forChild(HomePage),
     HttpModule,
     SwingModule,
     HomeCandidateModule,
+    HomeProjectModule,
   ],
   exports: [
-    HomeCandidatePage
+    HomePage
   ]
 })
-export class HomeCandidatePageModule {}
+export class HomePageModule {}
