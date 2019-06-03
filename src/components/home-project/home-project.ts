@@ -119,18 +119,18 @@ export class HomeProjectComponent {
             this.addNewCards(5);
             console.log("Voted on cards and added");
         }
-        if (like) {
-            this.recentCard = 'You liked: ' + removedCard.name;
-        } else {
-            this.recentCard = 'You disliked: ' + removedCard.name;
-        }
 
+        if (like) {
+            this.firestore.updateMatches(this.profile.id, this.profile.image, removedCard.id, removedCard.image);
+        } else {
+          this.recentCard = 'You disliked: ' + removedCard.name;
+        }
     }
 
     // Add new cards to our array
     addNewCards(count: number) {
         console.log("Added new cards");
-        this.firestore.getCards(this.profile.id, count).then(map => {
+        this.firestore.getCards("project_id_1", count).then(map => {
             map.forEach((value: any, key: any) => {
                 this.cards.push(value)
                 this.tags.push(value.skills)
@@ -141,7 +141,7 @@ export class HomeProjectComponent {
     }
 
     getImage(i: number) {
-        return "url(https://firebasestorage.googleapis.com/v0/b/collaboramos.appspot.com/o/862lg6wjnjd?alt=media&token=6c1025c4-8756-439a-9b36-a5d8ea35f7fd)";
+        return "url(" + this.cards[i].image + ")";
     }
 
     getSize() {

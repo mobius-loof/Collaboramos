@@ -290,7 +290,7 @@ export class Firestore {
           return [documents, list];
         });
       } else {
-        this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
+        return this.firestore.collection('candidate_profiles').ref.get().then(snapshot => {
           snapshot.forEach(doc => {
             
             var isQueried = false;
