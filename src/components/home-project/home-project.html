@@ -1,0 +1,117 @@
+<div
+  swing-stack
+  #myswing1
+  [stackConfig]="stackConfig"
+  (throwoutleft)="voteUp(false)"
+  (throwoutright)="voteUp(true)"
+  id="card-stack"
+  style="background-color: white; height: 100%;"
+>
+  <ion-card
+    #mycards1
+    swing-card
+    *ngFor="let c of cards; let i = index"
+    [class]="'td-card card card-md ' + 'card-title' + i"
+    swing-card=""
+    style="background-color: white; z-index: 100;"
+  >
+    <ion-grid>
+      <ion-row style="height: 30%; background: white">
+        <ion-col col-6>
+          <ion-row class="img-row" style="background-color: white;">
+            <h1 class="img-row-info name">
+              {{ c.name }}
+            </h1>
+            <p class="img-row-info name" style="font-size: 70%">
+              Software Developer
+            </p>
+          </ion-row>
+          <ion-row class="img-row"
+                   style="background-color: #FFF1D4;">
+            <button ion-button
+                    expand="block"
+                    size="small"
+                    class="img-row-info img-row-buttons"
+                    (click)="clickResume(c)"
+                    style="background-color: #FFC145; margin-left: 58%">
+              resume
+            </button>
+          </ion-row>
+          <ion-row class="img-row"
+                   style="background-color: #FFF1D4;">
+            <button ion-button
+                    expand="block"
+                    size="small"
+                    class="img-row-info img-row-buttons"
+                    (click)="clickWebsite(c)"
+                    style="background-color: #FFC145; margin-left: 58%">
+              website
+            </button>
+          </ion-row>
+        </ion-col>
+
+        <ion-col class="imgRow" col-6>
+          <div class="img" [style.backgroundImage]="getImage(i)" [style.backgroundSize]="getSize()"></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-bottom: 10%; text-align: left; background-color: white; margin-top: -5px; height: 30%">
+        <p style="margin: 15px 15px 15px;">
+          {{c.description}}
+        </p>
+      </ion-row>
+
+      <ion-row>
+        <ion-col align-self-center>
+          <div style="background-color: white; text-align: center;">
+            <h1 class="skills">Skills</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="tag-container" *ngFor="let t of tags[i]">
+          <ion-item class="tag" no-lines no-padding round>
+            <p class="tag-content">{{ t }}</p>
+          </ion-item>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</div>
+
+<!--<p class="statusBar">{{ recentCard }}</p>
+
+<!--<p class="statusBar">{{ recentCard }}</p>-->
+<!--
+<ion-row class="likeDislikeRow">
+  <ion-col class="likeDislikeButton" col-6>
+    <button
+      ion-button
+      clear
+      default
+      icon-right
+      expand="full"
+      color="primary"
+      (click)="voteUp(false)"
+      class="buttons"
+    >
+      <ion-icon name="thumbs-down"></ion-icon>
+      No
+    </button>
+  </ion-col>
+  <ion-col class="likeDislikeButton" col-6>
+    <button
+      ion-button
+      clear
+      default
+      icon-left
+      color="primary"
+      (click)="voteUp(true)"
+      class="buttons"
+    >
+      <ion-icon name="thumbs-up"></ion-icon>
+      Yes
+    </button>
+  </ion-col>
+<<<<<<< Updated upstream
+</ion-row>-->

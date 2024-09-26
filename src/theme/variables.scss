@@ -17,8 +17,10 @@ $background-color : #fff;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
+$colors: ( primary : #488aff, secondary : #32db64, danger : #f53d3d, light : #f4f4f4, dark : #222, white: #ffffff);
 
-/* These are the 5 main color in the color Scheme that we voted */ 
+
+/* These are the 5 main color in the color Scheme that we voted */
 
 $celestial_blue: rgba(81, 141, 199, 1);
 $lavender: rgba(184, 184, 209, 1);
@@ -26,7 +28,8 @@ $pastel_orange: rgba(255, 193, 69, 1);
 $baby_powder: rgba(255, 255, 251, 1);
 $pastel_red: rgba(255, 107, 108, 1);
 
-//COLORS Divided by Tab 
+//COLORS Divided by Tab
+
 $colors: (
   primary:    #488aff,
   secondary:  #32db64,
@@ -40,8 +43,7 @@ $colors: (
   candidate: #ff6b6c,
   nop: #D3D3D3,
 
-
-    /* 1) ----- Hamburger ----- */ 
+  /* 1) ----- Hamburger ----- */
 
   /*for unselected name font color = black
   for the rest use light fonts color and edit button
@@ -51,13 +53,13 @@ $colors: (
   project_button: #FF8F90, //button of project when seleted
   candy_button: #FFD88B, //button of candy when selected
   unselect_icon: #FFFFFB, //button of either when unselected
-  switch: #7E7EA7, //the color of switch button 
+  switch: #7E7EA7, //the color of switch button
 
   /* 2) ----- Profile Tab ----- */
 
   // Candy
   //color for banner on top of profile tab and profile button
-  candy_banner: #FFC145, 
+  candy_banner: #FFC145,
   //color for background of profile tab
   candy_background: #FFF1D4,
 
@@ -69,13 +71,13 @@ $colors: (
 
   /* 3) ----- Home/Swipe ----- */
 
-  //background of banner for top banner 
+  //background of banner for top banner
   home_main_banner : #9191D7,
   //background of banner for bottom banner
   home_2nd_banner : #BCBCFF,
   //font color for name of profile on card
   home_fw_skills_font : #6100FF,
-  //font color of description 
+  //font color of description
   home_description_font : #757575,
   //color for banner of tab icons (at bottom)
   home_bottom_banner : #FDFDFD,
@@ -87,7 +89,7 @@ $colors: (
   /* 4) ----- Matches/Messages ----- */
 
   //color for banner at top of matches and messages tab
-  //same as color for matches tab button 
+  //same as color for matches tab button
   matches_banner :#518DC7,
   //color for background of matches and messages tab
   matches_background : #E5EEF6
@@ -201,10 +203,4 @@ $matches_background : #E5EEF6;
 
 * {
     font-family: 'Quicksand', sans-serif;
-}
-
-:export {
-  project_button: $project_button;
-  candy_button: $candy_button;
-  switch: $switch;
 }

@@ -53,7 +53,7 @@ export class MyApp {
   private NON_CREATE: string = 'nop';
 
   //boolean value for ion-toggle to set
-  private isToggled: boolean;
+  protected isToggled: boolean;
 
   //variables related to project profile
   private projectCreated: boolean;
@@ -69,8 +69,8 @@ export class MyApp {
   //private checked: boolean;
 
   //variables related to edit button status
-  private editButton: string = 'Edit';
-  private editMode: boolean = false;
+  protected editButton: string = 'Edit';
+  protected editMode: boolean = false;
 
   //variable to tell what was last profile
   private currentProfile: string;

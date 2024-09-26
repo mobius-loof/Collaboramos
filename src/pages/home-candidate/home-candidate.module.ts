@@ -4,6 +4,7 @@ import { HomeCandidatePage } from './home-candidate';
 
 import { HttpModule } from '@angular/http';
 import { SwingModule } from 'angular2-swing';
+import { HomeCandidateModule } from '../../components/components.module'
 
 @NgModule({
   declarations: [
@@ -13,9 +14,10 @@ import { SwingModule } from 'angular2-swing';
     IonicPageModule.forChild(HomeCandidatePage),
     HttpModule,
     SwingModule,
+    HomeCandidateModule,
   ],
   exports: [
     HomeCandidatePage
   ]
 })
-export class HomeCandidatePageModule { }
+export class HomeCandidatePageModule {}
